@@ -1,5 +1,5 @@
 {
-  "name": "react-frame",
+  "name": "dot-thumbs-up",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -54,6 +54,12 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom"
   },
+  "devDependencies": {
+    "babel-plugin-import": "^1.7.0",
+    "node-sass": "^4.9.2",
+    "prettier": "^1.13.7",
+    "sass-loader": "^7.0.3"
+  },
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
@@ -91,9 +97,28 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "import",
+        [
+          {
+            "libraryName": "antd",
+            "style": "css"
+          },
+          {
+            "libraryName": "antd-mobile",
+            "style": "css"
+          }
+        ]
+      ]
     ]
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "rules": {
+      "eqeqeq": ["off"],
+      "no-script-url": ["off"]
+    }
   }
 }

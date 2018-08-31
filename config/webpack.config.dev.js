@@ -119,6 +119,16 @@ module.exports = {
             },
             loader: require.resolve('eslint-loader'),
           },
+          {
+            // @remove-on-eject-begin
+            // Point ESLint to our predefined config.
+            options: {
+              //configFile: path.join(__dirname, '../.eslintrc'),
+              useEslintrc: true
+            },
+            // @remove-on-eject-end
+            loader: 'eslint-loader'
+          }
         ],
         include: paths.appSrc,
       },
@@ -163,7 +173,7 @@ module.exports = {
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                  importLoaders: 1
                 },
               },
               {
@@ -198,12 +208,17 @@ module.exports = {
             // its runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+            exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/, /\.scss$/],
             loader: require.resolve('file-loader'),
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          //sass配置
+          {
+            test: /\.scss$/,
+            loaders: ['style-loader', 'css-loader', 'sass-loader'],
+          }
         ],
       },
       // ** STOP ** Are you adding a new loader?
@@ -242,7 +257,7 @@ module.exports = {
     // solution that requires the user to opt into importing specific locales.
     // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     // You can remove this if you don't use Moment.js:
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.
