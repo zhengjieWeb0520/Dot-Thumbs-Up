@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { getChildNode } from './../../common/common'
+import { getChildNode } from './../../utils/utils'
 
 class Footer extends Component{
   componentDidMount(){

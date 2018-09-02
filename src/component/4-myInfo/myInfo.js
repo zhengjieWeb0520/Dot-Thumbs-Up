@@ -1,5 +1,6 @@
 import React from 'react'
 
+//我的组件
 class MyInfo extends React.Component{
   render(){
     return(
