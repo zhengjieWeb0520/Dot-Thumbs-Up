@@ -26,13 +26,17 @@ footer nav ul li{
   justify-content:center;
 }
 footer nav ul li a{
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content:center;
   align-items:center;
 }
-.menuActive a{
+footer nav ul li a p{
+  color: #9E9E9E
+}
+.menuActive p{
   color: #383838
 }
 footer nav ul li span{
