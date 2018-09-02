@@ -1,0 +1,71 @@
+#root, #container, #main{
+  height: 100vh;
+}
+#main{
+  display: flex;
+  flex-direction: column;
+}
+#main section{
+  flex: 1 1;
+  overflow-y: auto
+}
+
+#main footer{
+  height: 10vh;
+  border-top: 1px solid #F1F1F1;
+}
+
+/* 底部菜单 */
+footer nav ul {
+  display: flex;
+  height: 10vh;
+}
+footer nav ul li{
+  flex: 1 1;
+  display: flex;
+  justify-content:center;
+}
+footer nav ul li a{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+}
+.menuActive a{
+  color: #383838
+}
+footer nav ul li span{
+  width: 6.2vw;
+  height: 7.2vw;
+}
+footer nav ul li p{
+  margin-top: 0.5vw;
+}
+footer nav ul #menuActivity .img{
+  background: url(images/icon/acticity@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+footer nav ul #menuParticipate .img{
+  background: url(images/icon/participate@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+footer nav ul #menuMyInfo .img{
+  background: url(images/icon/myinfo@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+footer nav ul #menuActivity.menuActive .img{
+  background: url(images/icon/acticity-active@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+footer nav ul #menuParticipate.menuActive .img{
+  background: url(images/icon/participate-active@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+footer nav ul #menuMyInfo.menuActive .img{
+  background: url(images/icon/myinfo-active@2x.png) no-repeat center;
+  background-size: 100% 100%;
+}
+/* 底部菜单 */
+

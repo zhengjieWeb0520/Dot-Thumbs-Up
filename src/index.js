@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './css/Reset.css';
 import './index.css';
 import Main from './component/main';
 import { HashRouter, Route, Switch } from 'react-router-dom'
