@@ -21,7 +21,6 @@ ReactDOM.render(
   <Provider store={store}>
     <HashRouter>
       <div id = "container">
-      abc
         <Switch>
           <Route path='/index' component ={Main}></Route>
         </Switch>
