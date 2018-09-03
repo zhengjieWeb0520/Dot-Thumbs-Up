@@ -4,15 +4,25 @@
 #main{
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  overflow-y: hidden;
 }
 #main section{
-  flex: 1 1;
-  overflow-y: auto
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 90vh;
+  padding-bottom: 10vh;
+  overflow-y: scroll
 }
 
 #main footer{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   height: 10vh;
   border-top: 1px solid #F1F1F1;
+  background: white;
 }
 
 /* 底部菜单 */
