@@ -12,6 +12,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const px2viewport = require('postcss-px-to-viewport');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -202,6 +203,7 @@ module.exports = {
                             ],
                             flexbox: 'no-2009',
                           }),
+                          px2viewport({viewportWidth: 750})
                         ],
                       },
                     },
@@ -230,7 +232,7 @@ module.exports = {
           //sass配置
           {
             test: /\.scss$/,
-            loaders: ['style-loader', 'css-loader', 'sass-loader'],
+            loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
           }
           // ** STOP ** Are you adding a new loader?
           // Make sure to add the new loader(s) before the "file" loader.
