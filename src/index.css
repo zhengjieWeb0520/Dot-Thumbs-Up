@@ -12,7 +12,6 @@
   flex-direction: column;
   flex: 1;
   height: 90vh;
-  padding-bottom: 10vh;
   overflow-y: scroll
 }
 
