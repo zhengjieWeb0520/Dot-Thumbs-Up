@@ -1,5 +1,196 @@
+@import "../../utils/variblesAndMixins";
+
 .myContainer{
-  height: 100%;
-  background: url(../../images/myInfo/icon_my_bg@2x.png) no-repeat top center;
-  background-size: contain;
+  height: 1236px;
+  
+
+  .userInfo{
+    height: 503px;
+    border-bottom: $grayBorderBottom;
+    padding-top: 128px; 
+    @include bg-image('../../images/myInfo/icon_my_bg');
+    background-position: top center;
+
+    //用户头像和用户名称
+    .userAvatar{
+      width: 132px;
+      height: 181px;
+      margin: 0 auto;
+      text-align: center;
+
+      .img{
+        width: 132px;
+        height: 132px;
+        background: #f7f6f4;
+        border-radius: 50%;
+        position: relative;
+
+        img{
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+        }
+      }
+
+      .userName{
+        font-size: 26px;
+        line-height: 26px;
+        text-align: center;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    }
+
+    //收藏、参与、最近浏览
+    .userAction{
+      margin-top: 50px;
+      ul{
+        display: flex;
+        justify-content: space-between;
+
+        li{
+          width: 33.333%;
+          text-align: center;
+
+          .icon{
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            vertical-align: top;
+          }
+
+          p{
+            font-size: 20px;
+            line-height: 20px;
+            color: #323232;
+            margin-top: 15px;
+          }
+        }
+
+        li:nth-child(1) {
+          .icon{
+            @include bg-image('../../images/myInfo/icon_collection');
+          }
+          box-sizing: border-box;
+          padding-left: 40px;
+        }
+
+        li:nth-child(2) {
+          .icon{
+            @include bg-image('../../images/myInfo/icon_bulb');
+          }
+        }
+
+        li:nth-child(3) {
+          .icon{
+            @include bg-image('../../images/myInfo/icon_resentView');
+          }
+          box-sizing: border-box;
+          padding-right: 40px;
+        }
+      }
+    }
+  }
+
+  //银行卡、钱包、卷
+  .money_related{
+    height: 172px;
+    border-bottom: 20px solid #f6f6f6;
+    
+    ul{
+      display: flex;
+      justify-content: space-between;
+      height: 100%;
+      
+      li{
+        width: 33.333%;
+        height: 100%;
+        text-align: center;
+
+        .icon{
+          display: inline-block;
+          width: 41px;
+          height: 41px;
+          vertical-align: top;
+          margin-top: 18px;
+        }
+
+        p{
+          font-size: 20px;
+          line-height: 20px; 
+        }
+
+        p.title{
+          color: #323232;
+          margin-top: 13px;
+        }
+
+        p.count{
+          color: #999;
+          margin-top: 22px;
+        }
+      }
+
+      li:nth-child(1) .icon{
+        @include bg-image('../../images/myInfo/icon_bankCord');
+      }
+
+      li:nth-child(2) .icon{
+        @include bg-image('../../images/myInfo/icon_currency');
+      }
+
+      li:nth-child(3) .icon{
+        @include bg-image('../../images/myInfo/icon_Voucher');
+      }
+    }
+  }
+
+  //商家认证、员工认证
+  .certification{
+    border-bottom: 20px solid #f6f6f6;
+
+    ul{
+      li{
+        height: 89px;
+        line-height: 88px;
+        padding-left: 34px;
+        font-size: 25px;
+        color: #323232;
+        border-bottom: $grayBorderBottom;
+
+        span{
+          float: right;
+          font-size: 33px;
+          color: #a3a3a3;
+          margin-right: 29px;
+        }
+      }
+
+      li:last-child{
+        border-bottom: none;
+        height: 88px;
+      }
+    }
+  }
+
+  //修改密码、关于我们、用户反馈
+  .otherOperate{
+    @extend .certification;
+  }
+
+  //退出登陆
+  .signOut{
+    height: 76px;
+    text-align: center;
+    line-height: 76px;
+    font-size: 26px;
+    color: #4ca8fb;
+  }
 }

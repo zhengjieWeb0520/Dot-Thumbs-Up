@@ -12,6 +12,7 @@ import thunk from 'redux-thunk'
 //reducer整合
 import reducers from './reducers'
 import registerServiceWorker from './registerServiceWorker';
+import './font/iconfont.css'
 
 export const store = createStore(reducers, compose(
   applyMiddleware(thunk),
