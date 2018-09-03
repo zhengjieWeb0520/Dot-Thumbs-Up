@@ -1,0 +1,85 @@
+#Activity{
+  height: 90vh;
+}
+.activityContent{
+  height: 70vh;
+  overflow-y: auto;
+}
+.activityContent > div{
+  height: 150%
+}
+.activityCondition{
+  height: 24.235vh; 
+}
+#Activity .activityHeader{
+  height: 9.745vh;
+  background: #4AA9F9;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+#Activity .activityHeader > div:last-of-type{
+  width: 70vw;
+  padding-right: 2vw;
+}
+#Activity .activityHeader > div:first-of-type{
+  padding-left: 2vw;
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#Activity .activityHeader > div:first-of-type img{
+  width: 4.5vw;
+}
+#Activity .activityHeader > div:first-of-type span{
+  margin-left: 2vw;
+  color: white;
+}
+#Activity .activityHeader .am-search{
+  background: none;
+}
+.am-search-input{
+  height: 5vh;
+  border-radius: 5vw;
+  background-color: #2287E1
+}
+.am-search-input .am-search-synthetic-ph{
+  height: 5vh;
+  line-height: 5vh;
+}
+.am-search-input .am-search-synthetic-ph-placeholder{
+  color: white;
+}
+.am-search.am-search-start .am-search-input input[type="search"]{
+  color: white;
+}
+.activityLevel{
+  height: 14.49vh;
+}
+.activityLevel .activityLevel1{
+  height: 11vh;
+}
+.activityLevel .activityLevel1 ul{
+  height: 11vh;
+}
+.activityLevel ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.activityLevel ul li{
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column
+}
+.activityLevel ul li:first-of-type img{
+  width: 5vw;
+  height: 7vw;
+}
+.activityLevel ul li img{
+  width: 8vw;
+  height:7vw;
+}

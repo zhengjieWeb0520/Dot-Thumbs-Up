@@ -9,7 +9,6 @@ import './myInfo.scss'
 class MyInfo extends React.Component{
   render(){
     const url = this.props.match.url
-    console.log(url)
     return(
       <div className="myContainer">
         <Switch>

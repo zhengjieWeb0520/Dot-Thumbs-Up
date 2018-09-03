@@ -2,7 +2,6 @@
 
 .myContainer{
   height: 1236px;
-  
 
   .userInfo{
     height: 503px;
@@ -10,6 +9,7 @@
     padding-top: 128px; 
     @include bg-image('../../images/myInfo/icon_my_bg');
     background-position: top center;
+    background-color: #fff;
 
     //用户头像和用户名称
     .userAvatar{
@@ -102,7 +102,8 @@
   //银行卡、钱包、卷
   .money_related{
     height: 172px;
-    border-bottom: 20px solid #f6f6f6;
+    background: #fff;
+    margin-bottom: 20px;
     
     ul{
       display: flex;
@@ -154,7 +155,8 @@
 
   //商家认证、员工认证
   .certification{
-    border-bottom: 20px solid #f6f6f6;
+    margin-bottom: 20px;
+    background: #fff;
 
     ul{
       li{
@@ -187,6 +189,7 @@
 
   //退出登陆
   .signOut{
+    background: #fff;
     height: 76px;
     text-align: center;
     line-height: 76px;

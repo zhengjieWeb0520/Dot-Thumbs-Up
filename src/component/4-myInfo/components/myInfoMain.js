@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 class MyInfoMain extends React.Component {
   render() {
     const url = this.props.match.url
-    console.log(url)
     return (
       <div className="myInfoMain">
         <div className="userInfo">
