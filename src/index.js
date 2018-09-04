@@ -4,6 +4,8 @@ import 'antd-mobile/dist/antd-mobile.css'
 import './css/Reset.css';
 import './index.css';
 import Main from './component/main';
+import ChooseBankCard from './component/4-myInfo/components/chooseBankCard'
+import NewBackCard from './component/4-myInfo/components/newBankCard'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 //引入redux
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -26,6 +28,8 @@ ReactDOM.render(
       <div id = "container">
         <Switch>
           <Route path='/index' component ={Main}></Route>
+          <Route path={`/chooseBankCard`} exact component={ChooseBankCard}></Route>
+          <Route path={`/chooseBankCard/newBankCard`} component={NewBackCard}></Route>
         </Switch>
       </div>
     </HashRouter>

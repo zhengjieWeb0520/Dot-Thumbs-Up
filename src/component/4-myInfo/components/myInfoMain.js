@@ -34,7 +34,7 @@ class MyInfoMain extends React.Component {
         <div className="money_related">
           <ul>
             <li className="bankCard">
-              <Link to={`${url}/chooseBankCard`}>
+              <Link to={`/chooseBankCard`}>
                 <span className="icon"></span>
                 <p className="title">银行卡</p>
                 <p className="count">1张</p>
