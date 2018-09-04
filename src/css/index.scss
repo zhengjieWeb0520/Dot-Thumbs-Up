@@ -1,0 +1,84 @@
+@import './../utils/variblesAndMixins';
+
+#root, #container, #main{
+  height: 100vh;
+}
+//菜单选中
+.menuActive p{
+  color: #383838
+}
+#main{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: hidden;
+  section{
+    height: 1236px;
+    overflow-y: scroll
+  }
+  footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 98px;
+    border-top: $grayBorderBottom;
+    background: white;
+    nav{
+      ul{
+        display: flex;
+        height: 98px;
+        li{
+          flex: 1 1;
+          display: flex;
+          justify-content:center;
+          p{
+            margin-top: 0.5vw;
+          }
+          span{
+            width: 6.2vw;
+            height: 7.2vw;
+          }
+          a{
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content:center;
+            align-items:center;
+            p{
+              color: #9E9E9E;
+              font-size: 26px;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}
+//底部菜单图片自适应
+footer nav ul #menuActivity .img{
+  @include bg-image('../images/icon/acticity');
+  background-size: 100% 100%;
+}
+footer nav ul #menuParticipate .img{
+  @include bg-image('../images/icon/participate');
+  background-size: 100% 100%;
+}
+footer nav ul #menuMyInfo .img{
+  @include bg-image('../images/icon/myinfo');
+  background-size: 100% 100%;
+}
+
+footer nav ul #menuActivity.menuActive .img{
+  @include bg-image('../images/icon/acticity-active');
+  background-size: 100% 100%;
+}
+footer nav ul #menuParticipate.menuActive .img{
+  @include bg-image('../images/icon/participate-active');
+  background-size: 100% 100%;
+}
+footer nav ul #menuMyInfo.menuActive .img{
+  @include bg-image('../images/icon/myinfo-active');
+  background-size: 100% 100%;
+}

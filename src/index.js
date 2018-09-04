@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd-mobile/dist/antd-mobile.css'
 import './css/Reset.css';
-import './index.css';
+import './css/index.scss';
 import Main from './component/main';
 import ChooseBankCard from './component/4-myInfo/components/chooseBankCard'
 import NewBackCard from './component/4-myInfo/components/newBankCard'
