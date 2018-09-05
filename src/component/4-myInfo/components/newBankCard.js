@@ -6,95 +6,134 @@ class NewBankCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			data: [
+			bankList: [
 				{
-					value: 'zj-nb',
-					label: '宁波'
+					value: '中国农业银行',
+					label: '中国农业银行'
 				},
 				{
-					value: 'zj-hz',
-					label: '杭州'
+					value: '中国工商银行',
+					label: '中国工商银行'
+        },
+        {
+					value: '中国招商银行',
+					label: '中国招商银行'
+        },
+        {
+					value: '南京银行',
+					label: '南京银行'
 				}
+      ],
+      bankBranchList: [
+				{
+					value: '雨花台支行',
+					label: '雨花台支行'
+				},
+				{
+					value: '建邺支行',
+					label: '建邺支行'
+        },
+        {
+					value: '玄武支行',
+					label: '玄武支行'
+        },
+        {
+					value: '栖霞支行',
+					label: '栖霞支行'
+        }
 			],
 			cols: 1,
-			pickerValue: [],
-			asyncValue: [],
-			sValue: ['2013', '春'],
-			visible: false,
-			colorValue: ['#00FF00']
+			bankBranchValue: [],
+			bankValue: []
 		}
-	}
+  }
+  
+  onClick = () => {
+    
+  };
+
+  //选择器确定
+  onPickerOk(type, value)  {
+    this.setState({
+      [type]: value
+    })
+  }
+
+  //点击验证码
+  onExtraClick() {
+    console.log("aa")
+  }
+
 	render() {
 		const { getFieldProps } = this.props.form
 		return (
 			<div className="newBankCard">
-				<TopNavBar title="选择银行卡" rightContent={true} />
+				<TopNavBar title="选择银行卡" rightContent={'确认'} />
 				<div className="inputsBox">
 					<List>
 						<InputItem
-							{...getFieldProps('autofocus')}
+							{...getFieldProps('HosterName')}
 							clear
-							placeholder="auto focus"
+							placeholder="请输入持卡人姓名"
 							ref={el => (this.autoFocusInst = el)}
 						>
-							持卡人：
+              <span className="justifyItem">持卡人</span>：
 						</InputItem>
 						<InputItem
-							{...getFieldProps('focus')}
+							{...getFieldProps('HosterNumber')}
 							clear
-							placeholder="click the button below to focus"
+							placeholder="请输入持卡人证件号"
 							ref={el => (this.inputRef = el)}
 						>
-							证件号码：
+              <span className="justifyItem">证件号码</span>：
 						</InputItem>
 						<InputItem
-							{...getFieldProps('focus')}
+							{...getFieldProps('HosteTel')}
 							clear
-							placeholder="click the button below to focus"
+							placeholder="请输入该卡与银行绑定的手机号"
 							ref={el => (this.inputRef = el)}
 						>
-							手机号码：
+							<span className="justifyItem">手机号码</span>：
 						</InputItem>
 						<InputItem
-							{...getFieldProps('focus')}
+							{...getFieldProps('HosterCode')}
 							clear
-							placeholder="click the button below to focus"
-							ref={el => (this.inputRef = el)}
+							placeholder="请输入收到的验证码"
+              ref={el => (this.inputRef = el)}
+              extra="发送验证码"
+              onExtraClick={() => this.onExtraClick()}
 						>
-							验证码：
-							<span className="sendCode">发送验证码</span>
+							<span className="justifyItem">验证码</span>：
 						</InputItem>
 					</List>
 					<List>
 						<Picker
-							data={this.state.data}
+							data={this.state.bankList}
 							cols={this.state.cols}
-							value={this.state.asyncValue}
-							onPickerChange={this.onPickerChange}
-							onOk={v => console.log(v)}
+							value={this.state.bankValue}
+							onOk={(val) => this.onPickerOk('bankValue', val)}
 						>
 							<List.Item arrow="horizontal" onClick={this.onClick}>
-								银行
+                <span className="justifyItem">银行</span>：
 							</List.Item>
 						</Picker>
 						<Picker
-							data={this.state.data}
+              data={this.state.bankBranchList}
 							cols={this.state.cols}
-							value={this.state.asyncValue}
-							onPickerChange={this.onPickerChange}
-							onOk={v => console.log(v)}
+							value={this.state.bankBranchValue}
+              onOk={(val) => this.onPickerOk('bankBranchValue', val)}
 						>
 							<List.Item arrow="horizontal" onClick={this.onClick}>
-								支行
+              <span className="justifyItem">支行</span>：
 							</List.Item>
 						</Picker>
 						<InputItem
-							{...getFieldProps('focus')}
+							{...getFieldProps('HosterCardNum')}
 							clear
-							placeholder="click the button below to focus"
+							placeholder="请填写银行卡号"
 							ref={el => (this.inputRef = el)}
 						>
-							卡号：
+							<span className="justifyItem">卡号</span>：
 						</InputItem>
 					</List>
 				</div>
