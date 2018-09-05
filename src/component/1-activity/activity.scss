@@ -1,0 +1,212 @@
+@import "../../utils/variblesAndMixins";
+
+#Activity{
+  height: 1236px;
+  background: white;
+  .activityCondition{
+    height: 443px; 
+    .activityKb{
+      height: 40px;
+      background: #4AA9F9;
+    }
+    .activityHeader{
+      height: 97px;
+      background: #4AA9F9;
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      > div:first-of-type{
+        padding-left: 2px;
+        flex: 1 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .positionIcon{
+          @include bg-image('../../images/activity/position');
+          width: 25px;
+          height: 36px;
+        }
+        span{
+          font-size: 24px;
+          margin-left: 2vw;
+          color: white;
+        }
+      }
+      > div:last-of-type{
+        width: 540px;
+        height: 60px;
+        padding-right: 22px;
+      }
+    }
+    .activityLevel{
+      height: 196px;
+      margin-top: 20px;
+      background: white;
+      .activityLevel1{
+        height: 124px;
+        border-bottom: $grayBorderBottom;
+        ul{
+          display: flex;
+          height: 124px;
+          justify-content: center;
+          align-items: center;
+          li{
+            flex: 1 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            i{
+              width: 51px;
+              height: 45px;
+            }
+            p{
+              line-height: 55px;
+              margin-top: 14px;
+              font-size: 24px;
+              color: #9E9E9E;
+              height: 55px;
+            }
+          }
+          #foodLevel{
+            i{
+              @include bg-image('../../images/activity/lollipop');             
+            }
+          }
+          #lifeLevel{
+            i{
+              @include bg-image('../../images/activity/bicycle');  
+            }
+          }
+          #enjoyLevel{
+            i{
+              @include bg-image('../../images/activity/babyball');  
+            }
+          }
+          #allLevel{
+            i{
+              @include bg-image('../../images/activity/aerospace');
+            }
+          }
+          #HotelLevel{
+            i{
+              @include bg-image('../../images/activity/hotail');
+            }
+          }
+        }
+      }
+      .activityLevel2{
+        width: 100%;
+        height: 67px;
+        overflow-x: auto;
+        div{
+          width: 1000px; 
+          span{
+            font-size: 24px;
+            color: #9E9E9E;
+            display: inline-block;
+            width: 137px;
+            line-height: 67px;
+            height: 67px;
+            text-align: center
+          }    
+          span:first-of-type{
+            width: 97px;
+          }   
+        }
+      }
+      .activityKbGray{
+        height: 18px;
+        background: #F6F6F6 
+      }
+      .activityLevel3{
+        height: 84px;
+        line-height: 84px;
+        ul{
+          display: flex;
+          li:nth-of-type(2){
+            flex: 1 1;
+            padding-left: 40px;
+          }
+          li:first-of-type{
+            text-align: center;
+            width: 180px;
+          }
+          li:last-of-type{
+            width: 180px;
+          }
+          li{
+            select{
+              border: none;
+              color: black;
+              option{
+                color: black;
+                background: white;
+                border: none;
+                line-height: 20px;
+            }
+            }
+          }
+        }
+      }
+    }
+  }
+  .activityContent{
+    height: 70vh;
+    overflow-y: auto;
+    >div{
+      background: white;
+      height: 150%
+    }
+  }
+}
+
+//搜索框样式
+.am-search{
+  height: 60px;
+  background: none;
+}
+.am-search-input{
+  height: 60px;
+  border-radius: 60px;
+  background-color: #2287E1
+}
+.am-search-input .am-search-synthetic-ph{
+  height: 60px;
+  line-height: 60px;
+}
+.am-search-synthetic-ph-container{
+  display:inline-block;
+  height: 60px;
+}
+.am-search-input .am-search-synthetic-ph-placeholder{
+  display: inline-block;
+  color: white;
+  height: 60px;
+  font-size: 24px;
+  margin-left: 20px;
+  padding-top: 2px;
+}
+.am-search.am-search-start .am-search-input input[type='search']{
+  color: white;
+  font-size: 24px;
+  height: 60px;
+  padding: 0 3.73333vw 0 7.66667vw;
+}
+.am-search-input .am-search-synthetic-ph-icon{
+  width: 30px;
+  height: 30px;
+  background-size: 30px auto;
+  @include bg-image('../../images/activity/magnifier');
+}
+.am-search-cancel-show, .am-search-cancel{
+  font-size: 24px;
+  color: white;
+}
+.am-search-input .am-search-clear{
+  height: 4vw;
+  width: 4vw;
+  background-size: 4vw 4vw;
+  top: 8px;
+  right: 8px;
+}

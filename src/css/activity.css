@@ -1,5 +1,5 @@
 #Activity{
-  height: 90vh;
+  height: 1236px;
 }
 .activityContent{
   height: 70vh;
@@ -9,21 +9,26 @@
   height: 150%
 }
 .activityCondition{
-  height: 24.235vh; 
+  height: 330px; 
+}
+#Activity .activityKb{
+  height: 40px;
+  background: #4AA9F9;
 }
 #Activity .activityHeader{
-  height: 9.745vh;
+  height: 137px;
   background: #4AA9F9;
   display: flex;
   justify-content: center;
   align-items:center;
 }
 #Activity .activityHeader > div:last-of-type{
-  width: 70vw;
-  padding-right: 2vw;
+  width: 540px;
+  height: 60px;
+  padding-right: 22px;
 }
 #Activity .activityHeader > div:first-of-type{
-  padding-left: 2vw;
+  padding-left: 2px;
   flex: 1 1;
   display: flex;
   justify-content: center;
@@ -39,20 +44,37 @@
 #Activity .activityHeader .am-search{
   background: none;
 }
+.am-search{
+  height: 60px;
+}
 .am-search-input{
-  height: 5vh;
-  border-radius: 5vw;
+  height: 60px;
+  border-radius: 60px;
   background-color: #2287E1
 }
 .am-search-input .am-search-synthetic-ph{
-  height: 5vh;
-  line-height: 5vh;
+  height: 60px;
+  line-height: 60px;
 }
 .am-search-input .am-search-synthetic-ph-placeholder{
   color: white;
+  font-size: 24px;
+  margin-left: 20px;
 }
 .am-search.am-search-start .am-search-input input[type="search"]{
   color: white;
+  margin-top: 13px;
+  font-size: 24px;
+  padding: 0 3.73333vw 0 7.66667vw;
+}
+/* .am-search-synthetic-ph-icon{
+  vertical-align: middle;
+} */
+.am-search-input .am-search-synthetic-ph-icon{
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  background-size: 30px auto
 }
 .activityLevel{
   height: 14.49vh;
