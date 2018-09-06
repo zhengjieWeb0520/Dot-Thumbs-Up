@@ -7,7 +7,7 @@ class WithdrawRecord extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      visible: true,
+      visible: false,
       selected: ''
     }
   }
@@ -75,13 +75,67 @@ class WithdrawRecord extends React.Component {
         <ul className="withDrawList">
           <li>
             <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
-            <div className="merchantName">
-              <p className="merchant">提现到 建设银行 <span>8月8日 12：00</span></p>
-              <p className="activity">**** **** **** 7654</p>
+            <div className="content">
+              <div className="bankInfo">
+                <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
+                <p className="cardNumber">**** **** **** 7654</p>
+              </div>
+              <div className="numberProcess">
+                <p className="money"><span>￥</span>400.00</p>
+                <p className="process">已处理</p>
+              </div>
             </div>
-            <div className="numberDate">
-              <p className="money"><span>￥</span>400.00</p>
-              <p className="date">已处理</p>
+          </li>
+          <li>
+            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="content">
+              <div className="bankInfo">
+                <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
+                <p className="cardNumber">**** **** **** 7654</p>
+              </div>
+              <div className="numberProcess">
+                <p className="money"><span>￥</span>400.00</p>
+                <p className="process">已处理</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="content">
+              <div className="bankInfo">
+                <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
+                <p className="cardNumber">**** **** **** 7654</p>
+              </div>
+              <div className="numberProcess">
+                <p className="money"><span>￥</span>400.00</p>
+                <p className="process">已处理</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="content">
+              <div className="bankInfo">
+                <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
+                <p className="cardNumber">**** **** **** 7654</p>
+              </div>
+              <div className="numberProcess">
+                <p className="money"><span>￥</span>400.00</p>
+                <p className="process">已处理</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="content">
+              <div className="bankInfo">
+                <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
+                <p className="cardNumber">**** **** **** 7654</p>
+              </div>
+              <div className="numberProcess">
+                <p className="money"><span>￥</span>400.00</p>
+                <p className="process">已处理</p>
+              </div>
             </div>
           </li>
         </ul>
