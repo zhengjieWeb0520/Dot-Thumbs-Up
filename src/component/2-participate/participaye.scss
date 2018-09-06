@@ -1,0 +1,173 @@
+@import "../../utils/variblesAndMixins";
+#Participate{
+  height: 1236px;
+  background: #F6F6F6;
+  .participateHeader{
+    height: 252px;
+    .participateTitle{
+      height: 128px;
+      background: #4AA9F9;
+      padding-top: 40px;
+      font-size: 36px;
+      text-align: center;
+      line-height: 88px;
+      color: white;
+    }
+    .participateTab{
+      height: 124px;
+      background: white;
+      ul{
+        height: 124px;
+        display: flex;
+        li{
+          flex: 1 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          padding-top: 20px;
+          i{
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+          }
+          p{
+            line-height: 55px;
+            margin-top: 8px;
+            font-size: 24px;
+            color: #9E9E9E;
+            height: 65px;
+            padding: 0 5px 0 5px;
+          }
+        }
+        .processingActive{
+          p{
+            color : #383838;
+            border-bottom: 6px solid #4DA9FA
+          }
+        }
+        #processing{
+          i{
+            @include bg-image('../../images/participate/processing');  
+          }
+        }
+        #haveover{
+          i{
+            @include bg-image('../../images/participate/haveover');  
+          }
+        }
+        #havewon{
+          i{
+            @include bg-image('../../images/participate/havewon');  
+          }
+        }
+        #notwon{
+          i{
+            @include bg-image('../../images/participate/notwon');  
+          }
+        }
+        #allType{
+          i{
+            @include bg-image('../../images/participate/allType');  
+          }
+        }
+      }
+    }
+  }
+  .participateContent{
+    height: 984px;
+    overflow-y: auto;
+    .participateContent{
+      height: auto;
+      >div{
+        background: white;
+        border-radius: 10px;
+        margin: 20px;
+        height: 270px;
+        padding-left: 36px;
+        padding-right: 6px;
+        display: flex;
+        flex-direction: column;
+        .participateItemHeader{
+          height: 94px;
+          border-bottom: $grayBorderBottom;
+          display: flex;
+          >div:first-of-type{
+            flex: 1 1;
+            display: flex;          
+            align-items: center;
+            span:first-of-type{
+              display: inline-block;
+              width:43px;
+              height: 43px;
+              background: #5A5A5A
+            }
+            span:last-of-type{
+              margin-left: 35px;
+              font-size: 26px;
+              color: #4D4D4D;
+              vertical-align: middle;
+              i{
+                display: inline-block;
+                margin-left: 10px;
+                width: 24px;
+                height: 24px;
+                vertical-align: middle;
+                background: url('../../images/participate/more.png');
+                background-size: 100% 100%
+              }
+            }
+          }
+          >div:last-of-type{
+            width: 150px;
+            text-align: center;
+            line-height: 94px;
+            font-size: 24px;
+            color: #9E9E9E
+          }
+        }
+        .participateItemContent{
+          flex: 1 1;
+          >div:first-of-type{
+            height: 70px;
+            display: flex;
+            align-items: center;
+            >span:first-of-type{
+              flex: 1 1;
+              font-size: 26px;
+              color:#4D4D4D            
+            }
+            >span:last-of-type{
+              width: 322px;
+              text-align: center;
+              font-size: 22px;
+              color:#9E9E9E
+            }
+          }
+          >div:nth-of-type(2){
+            height: 36px;
+            line-height: 36px;
+            font-size: 22px;
+            color:#9E9E9E 
+          }
+          >div:last-of-type{
+            height: 70px;
+            line-height: 70px;
+            i{
+              vertical-align: middle;
+              display: inline-block;
+              width: 34px;
+              height: 34px;
+              @include bg-image('../../images/participate/money'); 
+            }
+            span{
+              margin-left: 20px;
+              font-size: 24px;
+              color:#070707
+            }
+          }
+        }
+      }
+    }
+  }
+}
