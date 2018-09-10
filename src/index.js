@@ -10,6 +10,15 @@ import Wallet from './component/4-myInfo/components/wallet'
 import WithdrawCash from './component/4-myInfo/components/withdrawCash'
 import WithdrawRecord from './component/4-myInfo/components/withdrawRecord'
 import SelectBankCard from './component/4-myInfo/components/selectBankCard'
+import BussinessAuthentication from './component/4-myInfo/components/bussinessAuthentication'
+import StaffAuthentication from './component/4-myInfo/components/staffAuthentication'
+import ChangePassword from './component/4-myInfo/components/changePassword'
+import AboutUs from './component/4-myInfo/components/aboutUs'
+import UserFeedBack from './component/4-myInfo/components/userFeedBack'
+import Collection from './component/4-myInfo/components/collection'
+import Involve from './component/4-myInfo/components/involve'
+import RecentView from './component/4-myInfo/components/recentView'
+import Voucher from './component/4-myInfo/components/voucher'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 //引入redux
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -32,12 +41,21 @@ ReactDOM.render(
       <div id = "container">
         <Switch>
           <Route path='/index' component ={Main}></Route>
+          <Route path='/collection' component ={Collection}></Route>
+          <Route path='/involve' component ={Involve}></Route>
+          <Route path='/recentView' component ={RecentView}></Route>
           <Route path={`/chooseBankCard`} exact component={ChooseBankCard}></Route>
           <Route path={`/chooseBankCard/newBankCard`} component={NewBackCard}></Route>
           <Route path={`/wallet`} exact component={Wallet}></Route>
           <Route path={`/wallet/withdraw`} exact component={WithdrawCash}></Route>
           <Route path={`/wallet/withdrawRecord`} component={WithdrawRecord}></Route>
           <Route path={`/wallet/withdraw/selectBankCard`} component={SelectBankCard}></Route>
+          <Route path={`/voucher`} component={Voucher}></Route>
+          <Route path={`/bussinessAuthentication`} component={BussinessAuthentication}></Route>
+          <Route path={`/staffAuthentication`} component={StaffAuthentication}></Route>
+          <Route path={`/changePassword`} component={ChangePassword}></Route>
+          <Route path={`/aboutUs`} component={AboutUs}></Route>
+          <Route path={`/userFeedBack`} component={UserFeedBack}></Route>
         </Switch>
       </div>
     </HashRouter>

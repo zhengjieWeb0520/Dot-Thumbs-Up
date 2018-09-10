@@ -30,6 +30,20 @@
   }
 }
 
+@mixin submitBtn($height: 13.067vw, $lineHeight: 13.067vw, $fontSize: 4vw) {
+  background: #4ba9fa;
+  height: $height;
+  text-align: center;
+  line-height: $lineHeight;
+  font-size: $fontSize;
+  a{
+    color: #fff;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 //1px 灰色底部边框
 $grayBorderBottom: 1px solid #ebebeb;
 

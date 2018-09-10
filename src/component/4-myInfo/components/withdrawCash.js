@@ -1,10 +1,20 @@
 import React from 'react'
 import TopNavBar from './topNavBar'
-import { Icon } from 'antd-mobile'
+import { Icon, InputItem, List } from 'antd-mobile'
 import { Link } from 'react-router-dom'
+import { createForm } from 'rc-form'
+
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+let moneyKeyboardWrapProps;
+if (isIPhone) {
+  moneyKeyboardWrapProps = {
+    onTouchStart: e => e.preventDefault(),
+  };
+}
 
 class WithdrawCash extends React.Component {
   render() {
+    const { getFieldProps } = this.props.form;
     return (
       <div className="withdrawCash">
         <TopNavBar title="提现" rightContent={false} />
@@ -21,15 +31,19 @@ class WithdrawCash extends React.Component {
 
           <div className="withdrawInput">
             <span className="iconRMB">￥</span>
-            <input 
-              className="input" 
-              type="number" 
-              maxlength="6" 
-              pattern="[0-9]*"  
-              name="password" 
-              oninput="if(value.length>6)value=value.slice(0,6)"
-              placeholder="账户余额 298.00元"
-            />
+            <div className="input">
+              <List>
+                <InputItem
+                  {...getFieldProps('money')}
+                  type='money'
+                  defaultValue={100}
+                  placeholder="start from left"
+                  clear
+                  moneyKeyboardAlign="left"
+                  moneyKeyboardWrapProps={moneyKeyboardWrapProps}
+                ></InputItem>
+              </List>
+            </div>
             <span className="withdrawAll">全部提现</span>
           </div>
           <div className="totalAndFee">
@@ -42,5 +56,7 @@ class WithdrawCash extends React.Component {
     )
   }
 }
+
+WithdrawCash = createForm()(WithdrawCash)
 
 export default WithdrawCash

@@ -17,16 +17,22 @@ class MyInfoMain extends React.Component {
           <div className="userAction">
             <ul>
               <li className="collection">
-                <span className="icon"></span>
-                <p>收藏</p>
+                <Link to={`/collection`}>
+                  <span className="icon"></span>
+                  <p>收藏</p>
+                </Link>
               </li>
               <li className="involve">
-                <span className="icon"></span>
-                <p>参与</p>
+                <Link to={`/involve`}>
+                  <span className="icon"></span>
+                  <p>参与</p>
+                </Link>
               </li>
               <li className="recentView">
-                <span className="icon"></span>
-                <p>最近浏览</p>
+                <Link to={`/recentView`}>
+                  <span className="icon"></span>
+                  <p>最近浏览</p>
+                </Link>
               </li>
             </ul>
           </div>
@@ -48,23 +54,45 @@ class MyInfoMain extends React.Component {
               </Link>
             </li>
             <li className="voucher">
-              <span className="icon"></span>
-              <p className="title">卡劵</p>
-              <p className="count">6张</p>
+              <Link to={`/voucher`}>
+                <span className="icon"></span>
+                <p className="title">卡劵</p>
+                <p className="count">6张</p>
+              </Link>
             </li>
           </ul>
         </div>
         <div className="certification">
           <ul>
-            <li>商家认证<span className="icon iconfont icon-jiantou1"></span></li>
-            <li>员工认证<span className="icon iconfont icon-jiantou1"></span></li>
+            <li>
+              <Link to={`/bussinessAuthentication`}>
+                商家认证<span className="icon iconfont icon-jiantou1"></span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/staffAuthentication`}>
+                员工认证<span className="icon iconfont icon-jiantou1"></span>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="otherOperate">
           <ul>
-            <li>修改密码<span className="icon iconfont icon-jiantou1"></span></li>
-            <li>关于我们<span className="icon iconfont icon-jiantou1"></span></li>
-            <li>用户反馈<span className="icon iconfont icon-jiantou1"></span></li>
+            <li>
+              <Link to={`/changePassword`}>
+                修改密码<span className="icon iconfont icon-jiantou1"></span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/aboutUs`}>
+                关于我们<span className="icon iconfont icon-jiantou1"></span>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/userFeedBack`}>
+                用户反馈<span className="icon iconfont icon-jiantou1"></span>
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="signOut">退出登陆</div>
