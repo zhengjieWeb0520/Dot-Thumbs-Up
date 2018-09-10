@@ -22,6 +22,11 @@ class Wallet extends React.Component {
           <div className="remainCash"><i></i><span>钱包余额</span></div>
           <div className="cashNumber">13212.00 <span>RMB</span></div>
         </div>
+        <div className="withdrawBtn">
+          <Link to={`/wallet/withdraw`}>
+            提现
+          </Link>
+        </div>
         <div className="incomeRecord">收入记录</div>
         <ul className="recordList">
           <li>

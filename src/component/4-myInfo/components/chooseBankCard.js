@@ -11,11 +11,11 @@ class ChooseBankCard extends React.Component {
       <div className="chooseBankCard">
         <TopNavBar title="选择银行卡" rightContent={false}/>
         <div className="cardBox">
-          {/* <div className="addCard">
+          <div className="addCard">
             <Link to={`/chooseBankCard/newBankCard`}>
               新增银行卡
             </Link>
-          </div> */}
+          </div>
           <div className="card">
             <List>
               <SwipeAction

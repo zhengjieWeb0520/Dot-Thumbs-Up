@@ -81,7 +81,8 @@ class NewBankCard extends React.Component {
 						</InputItem>
 						<InputItem
 							{...getFieldProps('HosterNumber')}
-							clear
+              clear
+              type="number"
 							placeholder="请输入持卡人证件号"
 							ref={el => (this.inputRef = el)}
 						>

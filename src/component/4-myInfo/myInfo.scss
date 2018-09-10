@@ -1,4 +1,4 @@
-@import "../../utils/variblesAndMixins";
+@import "./../../utils/variblesAndMixins";
 
 .myContainer{
   height: 1236px;
@@ -52,8 +52,7 @@
     .userAction{
       margin-top: 50px;
       ul{
-        display: flex;
-        justify-content: space-between;
+        @include flexHorizen;
 
         li{
           width: 33.333%;
@@ -106,8 +105,7 @@
     margin-bottom: 20px;
     
     ul{
-      display: flex;
-      justify-content: space-between;
+      @include flexHorizen;
       height: 100%;
       
       li{
@@ -168,15 +166,22 @@
         line-height: 88px;
         padding-left: 34px;
         font-size: 26px;
-        color: #323232;
         border-bottom: $grayBorderBottom;
 
-        span{
-          float: right;
-          font-size: 33px;
-          color: #a3a3a3;
-          margin-right: 29px;
+        a{
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+          color: #323232;
+
+          span{
+            float: right;
+            font-size: 33px;
+            color: #a3a3a3;
+            margin-right: 29px;
+          }
         }
+        
       }
 
       li:last-child{
@@ -288,17 +293,7 @@
 
     //新增银行卡
     .addCard{
-      background: #4ba9fa;
-      height: 98px;
-      text-align: center;
-      line-height: 98px;
-      font-size: 30px;
-      a{
-        color: #fff;
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-      }
+      @include submitBtn;
     }
   }
 }
@@ -458,9 +453,7 @@
     //钱包页面底部导航
     .nav{
       @extend .topNavBar;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flexHorizen;
       color: #fff;
       background: transparent;
 
@@ -541,9 +534,7 @@
     li{
       height: 126px;
       border-bottom: 1px solid #e6e6e6;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flexHorizen;
 
       //商家图片
       .img{
@@ -603,17 +594,7 @@
   }
 
   .withdrawBtn{
-    background: #4ba9fa;
-    height: 98px;
-    text-align: center;
-    line-height: 98px;
-    font-size: 30px;
-    a{
-      color: #fff;
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-    }
+    @include submitBtn;
   }
 }
 
@@ -627,8 +608,7 @@
   .totalAndDate{
     height: 60px;
     background: #f6f6f6;
-    display: flex;
-    justify-content: space-between;
+    @include flexHorizen;
     font-size: 26px;
     color: #999;
     line-height: 60px;
@@ -653,71 +633,276 @@
   //提现记录
   .withDrawList{
     background: #fff;
-    height: 764px;
-    padding: 0 20px 0 17px;
     overflow: auto;
-    
+    max-height: 1145px;
+
     li{
       height: 126px;
-      border-bottom: 1px solid #e6e6e6;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include flexHorizen;
 
-      //商家图片
-      .img{
-        width: 74px;
-        height: 74px;
-
-        img{
-          width: 100%;
-          height: 100%;
-          display: block;
+      &:last-child{
+        .content{
+          border-bottom: none;
         }
       }
 
-      //商家、活动名称
-      .merchantName{
-        font-size: 28px;
-        line-height: 28px;
-        position: relative;
-        right: 146px;
+      @include imgSize(8.533vw, 8.533vw, 2.667vw);
 
-        .merchant{
-          color: #333;
-        }
+      .content{
+        width: 636px;
+        height: 100%;
+        @include flexHorizen;
+        padding: 0 20px 0 16px;
+        border-bottom: 1px solid #e6e6e6;
 
-        .activity{
-          color: #999;
-          margin-top: 20px;
-        }
-      }
+        //商家、活动名称
+        .bankInfo{
+          font-size: 26px;
+          line-height: 26px;
 
-      //时间和金钱
-      .numberDate{
-        p{
-          text-align: right;
-          margin-right: 10px;
-        }
+          .whichBank{
+            color: #333;
 
-        .money{
-          font-size: 32px;
-          color: #333;
-          line-height: 32px;
+            span{
+              font-size: 20px;
+              color: #999;
+              margin-left: 10px;
+            }
+          }
 
-          span{
-            font-size: 24px;
-            line-height: 24px;
+          .cardNumber{
+            color: #999;
+            margin-top: 18px;
+            font-size: 18px;
           }
         }
 
-        .date{
-          font-size: 20px;
-          color: #999;
-          line-height: 20px;
-          margin-top: 25px;
+        //时间和金钱
+        .numberProcess{
+          p{
+            text-align: right;
+            margin-right: 10px;
+          }
+
+          .money{
+            font-size: 26px;
+            color: #333;
+            line-height: 26px;
+
+            span{
+              font-size: 24px;
+              line-height: 24px;
+            }
+          }
+
+          .process{
+            font-size: 20px;
+            color: #999;
+            line-height: 20px;
+            margin-top: 20px;
+          }
         }
       }
+    }
+  }
+}
+
+//提现页面
+.withdrawCash{
+  .withdrawInputBox{
+    height: 302px;
+    background: #fff;
+
+    //银行选择
+    .bankChoose{
+      height: 88px;
+      border-bottom: 1px solid #e6e6e6;
+      a{
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        @include flexHorizen;
+
+        .img{
+          width: 45px;
+          height: 45px;
+          margin-left: 35px;
+  
+          img{
+            width: 100%;
+            height: 100%;
+            display: block;
+          }
+        }
+  
+        .bankName{
+          position: relative;
+          right: 153px;
+          font-size: 28px;
+          color: #333;
+        }
+  
+        .am-icon{
+          margin-right: 12px;
+        }
+      }
+    }
+
+    //提现金额输入
+    .withdrawInput{
+      @include flexHorizen;
+      height: 126px;
+      border-bottom: 1px solid #e6e6e6;
+      box-sizing: border-box;
+      padding: 0 20px 0 40px;
+
+      .iconRMB{
+        font-size: 36px;
+        color: #333;
+      }
+
+      .input{
+        font-size: 28px;
+        border: none;
+        height: 100%;
+        line-height: normal;
+        flex: 1;
+        &:focus{
+          color: #8b8791;
+        }
+
+        .am-list, 
+        .am-list-body, 
+        .am-list-item, 
+        .am-input-control, 
+        .fake-input-container, 
+        .fake-input{
+          height: 100%;
+        }
+
+        .am-list-item{
+          padding-right: 15px;
+        }
+
+        .am-list-body::after,
+        .am-list-body::before{
+          height: 0;
+        }
+
+        .fake-input{
+          font-size: 28px;
+        }
+      }
+
+      .withdrawAll{
+        font-size: 24px;
+        color: #ffbf6c;
+      }
+    }
+
+    //总金额和手续费
+    .totalAndFee{
+      height: 88px;
+      line-height: 88px;
+      font-size: 24px;
+      box-sizing: border-box;
+      padding-left: 30px;
+
+      .tips{
+        color: #989898;
+      }
+    }
+  }
+
+  //确认提现按钮
+  .sureWithdraw{
+    width: 690px;
+    height: 90px;
+    background: #4ba9fa;
+    color: #fff;
+    font-size: 36px;
+    line-height: 90px;
+    margin: 0 auto;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 74px;
+  }
+}
+
+//提现选择银行卡
+.selectBankCard{
+  .cardBox{
+    background: #fff;
+    overflow: auto;
+    max-height: 1184px;
+
+    ul{
+      box-sizing: border-box;
+      padding-left: 30px;
+      
+      li{
+        height: 126px;
+        @include flexHorizen(flex-start);
+        @include imgSize(8.533vw, 8.533vw, 0);
+        border-bottom: $grayBorderBottom;
+        position: relative;
+
+        &:last-child{
+          border-bottom: none;
+        }
+
+        .bankInfo{
+          margin-left: 33px;
+          .bankName{
+            font-size: 28px;
+            color: #333;
+          }
+
+          .cardNumber{
+            font-size: 24px;
+            color: #999;
+          }
+        }
+
+        &.active{
+          .onSelect{
+            width: 32px;
+            height: 32px;
+            @include bg-image('../../images/myInfo/icon_onSelect');
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            margin-top: -16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//商家认证
+.bussinessAuthentication{
+  width: 100vw;
+  height: 100vh;
+
+  .AuthenticationBox{
+    height: 1022px;
+
+    .inputs{
+      height: 526px;
+      background: #fff;
+      margin-bottom: 20px;
+    }
+
+    .imgs{
+      height: 476px;
+      background: #fff;
+    }
+
+    .submitBtn{
+      @include submitBtn;
+      color: #fff;
+      margin-top: 66px;
     }
   }
 }
