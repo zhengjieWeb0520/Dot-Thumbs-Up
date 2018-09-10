@@ -18,7 +18,7 @@ class TopNavBar extends React.Component {
           icon={<Arrow />}
           onLeftClick={this.onLeftClick.bind(this)}
           rightContent={[
-            this.props.rightContent ? <span className="sureBtn">确认</span> : null
+            this.props.rightContent ? <span className="sureBtn">{this.props.rightContent}</span> : null
           ]}
         >
           {this.props.title}

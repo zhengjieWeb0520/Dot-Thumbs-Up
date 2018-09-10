@@ -114,7 +114,11 @@
         width: 33.333%;
         height: 100%;
         text-align: center;
-
+        a{
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+        }
         .icon{
           display: inline-block;
           width: 41px;
@@ -312,19 +316,406 @@
         height: 88px;
         padding-left: 44px;
 
-        .am-input-label{
-          font-size: 28px;
-          color: #333;
-          width: 230px;
-          box-sizing: border-box;
+        .am-list-line{
           padding-left: 23px;
-
-          .sendCode{
+          padding-right: 20px;
+          
+          //银行和支行对齐
+          .am-list-extra{
             position: absolute;
-            right: 36px;
-            font-size: 24px;
+            left: 33%;
+            color: #333;
+            font-size: 26px;
+          }
+
+          //验证码
+          &>.am-input-extra{
+            max-height: 40px;
+            color: #333;
+            font-size: 25px;
+          }
+
+          .am-list-content{
+            font-size: 28px;
             color: #333;
           }
+
+          //title文字分散对齐
+          .am-input-label{
+            font-size: 28px;
+            color: #333;
+            width: 140px;
+            box-sizing: border-box;
+            margin-right: 60px;
+
+            .justifyItem{
+              text-align: justify;
+              display: inline-block;
+              width: 120px;
+              white-space: normal;
+              vertical-align:top;
+              height: 26px;
+
+              &::after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+                height:0;
+                overflow: hidden;
+              }
+            }
+          }
+
+          .am-input-control{
+            input{
+              font-size: 26px;
+            }
+          }
+
+          .am-list-content{
+            .justifyItem{
+              text-align: justify;
+              display: inline-block;
+              width: 120px;
+              white-space: normal;
+              vertical-align:top;
+              height: 26px;
+
+              &::after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+                height:0;
+                overflow: hidden;
+              }
+            }
+          }
+        }
+
+        .am-input-clear{
+          width: 26px;
+          height: 26px;
+          background-position: 2px 2px;
+          background-size: 26px auto; 
+        }
+      }
+    }
+  }
+}
+
+.am-picker-popup{
+  height: 478px;
+
+  .am-picker-popup-content, .am-picker-popup-body, .am-picker-popup-body>div{
+    height: 100%;
+  }
+  
+  .am-picker-popup-header{
+    height: 88px;
+    background: #4ba9fa;
+    
+    .am-picker-popup-item{
+      color: #fff;
+      font-size: 33px;
+    }
+  }
+
+
+
+  .am-picker-col-item {
+    font-size: 30px;
+    line-height: 60px;
+    height: 60px;
+    transition: all 0.1s linear;
+  }
+
+  .am-picker-col-indicator {
+    height: 60px;
+  }
+
+  .am-picker-col-item-selected{
+    font-size: 36px;
+  }
+
+  .am-picker-col-mask,
+  .am-picker-col{
+    height: 390px;
+  }
+
+  .am-picker-col-content{
+    height: 500px;
+  }
+}
+
+//钱包
+.walletContainer{
+  height: 1334px;
+
+  .walletTop{
+    height: 436px;
+    background: linear-gradient(top, #6ebcff, #4baafa);
+
+    //钱包页面底部导航
+    .nav{
+      @extend .topNavBar;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      background: transparent;
+
+      .icon-jiantou1{
+        font-size: 30px;
+        color: #fff;
+        transform: rotate(180deg);
+        font-weight: bold;
+        position: relative;
+        left: 14px;
+      }
+
+      .walletTitle{
+        font-size: 34px;
+        margin-left: 55px;
+      }
+
+      .withdrawRecord{
+        font-size: 30px;
+        margin-right: 20px;
+
+        a{
+          color: #fff;
+        }
+      }
+    }
+    
+    .remainCash{
+      font-size: 30px;
+      color: #fff;
+      line-height: 30px;
+      margin-top: 38px;
+
+      i{
+        width: 21px;
+        height: 25px;
+        display: inline-block;
+        @include bg-image('../../images/myInfo/icon_currency_white');
+        vertical-align: middle;
+        margin: 0 16px 0 45px;
+      }
+
+      span{
+        vertical-align: middle;
+      }
+    }
+
+    .cashNumber{
+      font-size: 103px;
+      color: #fff;
+      line-height: 103px;
+      margin-top: 60px;
+      margin-left: 30px;
+
+      span{
+        font-size: 26px;
+      }
+    }
+  }
+
+  //收入记录
+  .incomeRecord{
+    height: 36px;
+    background: #f5f5f5;
+    color: #999;
+    font-size: 20px;
+    line-height: 36px;
+    text-align: center;
+  }
+
+  //收入列表
+  .recordList{
+    background: #fff;
+    height: 764px;
+    padding: 0 20px 0 17px;
+    overflow: auto;
+
+    li{
+      height: 126px;
+      border-bottom: 1px solid #e6e6e6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      //商家图片
+      .img{
+        width: 74px;
+        height: 74px;
+
+        img{
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+
+      //商家、活动名称
+      .merchantName{
+        font-size: 28px;
+        line-height: 28px;
+        position: relative;
+        right: 146px;
+
+        .merchant{
+          color: #333;
+        }
+
+        .activity{
+          color: #999;
+          margin-top: 20px;
+        }
+      }
+
+      //时间和金钱
+      .numberDate{
+        p{
+          text-align: right;
+          margin-right: 10px;
+        }
+
+        .money{
+          font-size: 32px;
+          color: #333;
+          line-height: 32px;
+
+          span{
+            font-size: 24px;
+            line-height: 24px;
+          }
+        }
+
+        .date{
+          font-size: 20px;
+          color: #999;
+          line-height: 20px;
+          margin-top: 25px;
+        }
+      }
+    }
+  }
+
+  .withdrawBtn{
+    background: #4ba9fa;
+    height: 98px;
+    text-align: center;
+    line-height: 98px;
+    font-size: 30px;
+    a{
+      color: #fff;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+//提现记录
+.withdrawRecord{
+  .topNavBar{
+    margin-bottom: 0;
+  }
+
+  //总提现和日期
+  .totalAndDate{
+    height: 60px;
+    background: #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+    font-size: 26px;
+    color: #999;
+    line-height: 60px;
+    padding: 0 20px;
+
+    .totalWithdraw{
+      span{
+        margin-left: 12px;
+      }
+    }
+
+    .date{
+      position: relative;
+      padding-right: 55px;
+
+      .am-icon{
+        margin-top: 20px;
+      }
+    }
+  }
+
+  //提现记录
+  .withDrawList{
+    background: #fff;
+    height: 764px;
+    padding: 0 20px 0 17px;
+    overflow: auto;
+    
+    li{
+      height: 126px;
+      border-bottom: 1px solid #e6e6e6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      //商家图片
+      .img{
+        width: 74px;
+        height: 74px;
+
+        img{
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+
+      //商家、活动名称
+      .merchantName{
+        font-size: 28px;
+        line-height: 28px;
+        position: relative;
+        right: 146px;
+
+        .merchant{
+          color: #333;
+        }
+
+        .activity{
+          color: #999;
+          margin-top: 20px;
+        }
+      }
+
+      //时间和金钱
+      .numberDate{
+        p{
+          text-align: right;
+          margin-right: 10px;
+        }
+
+        .money{
+          font-size: 32px;
+          color: #333;
+          line-height: 32px;
+
+          span{
+            font-size: 24px;
+            line-height: 24px;
+          }
+        }
+
+        .date{
+          font-size: 20px;
+          color: #999;
+          line-height: 20px;
+          margin-top: 25px;
         }
       }
     }

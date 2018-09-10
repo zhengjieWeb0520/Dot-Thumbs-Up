@@ -3,6 +3,7 @@ import './activity.scss'
 import { SearchBar, Popover } from 'antd-mobile'
 import { getChildNode } from './../../utils/utils'
 import goldmedal from './../../images/activity/goldmedal@2x.png'
+import ActivityContent from './../1-activity/activityContent/activityContent'
 
 const Item = Popover.Item;
 // 活动组件
@@ -209,9 +210,7 @@ class Activity extends React.Component{
           </div>   
         </div>
         <div className='activityContent'>
-          <div>
-
-          </div>
+           <ActivityContent />  
         </div>
       </div>
     )

@@ -6,6 +6,11 @@ import './css/index.scss';
 import Main from './component/main';
 import ChooseBankCard from './component/4-myInfo/components/chooseBankCard'
 import NewBackCard from './component/4-myInfo/components/newBankCard'
+import Wallet from './component/4-myInfo/components/wallet'
+import WithdrawCash from './component/4-myInfo/components/withdrawCash'
+import WithdrawRecord from './component/4-myInfo/components/withdrawRecord'
+//引入活动相关组件
+import ActivityInfo from './component/1-activity/activityContent/activityInfo'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 //引入redux
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -30,6 +35,10 @@ ReactDOM.render(
           <Route path='/index' component ={Main}></Route>
           <Route path={`/chooseBankCard`} exact component={ChooseBankCard}></Route>
           <Route path={`/chooseBankCard/newBankCard`} component={NewBackCard}></Route>
+          <Route path={`/wallet`} exact component={Wallet}></Route>
+          <Route path={`/wallet/withdraw`} component={WithdrawCash}></Route>
+          <Route path={`/wallet/withdrawRecord`} component={WithdrawRecord}></Route>
+          <Route path={`/activityInfo`} component={ActivityInfo}></Route>
         </Switch>
       </div>
     </HashRouter>

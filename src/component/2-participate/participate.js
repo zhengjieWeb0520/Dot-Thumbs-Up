@@ -13,7 +13,6 @@ class Participate extends React.Component{
       navListLis.forEach((item, index)=>{
         item.classList.remove('processingActive')
       })
-      console.log(e)
       if(e.target.tagName === 'I' || e.target.tagName === 'P'){
         e.target.parentNode.classList.add('processingActive')
       }else {

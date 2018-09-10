@@ -1,6 +1,6 @@
 @import "../../utils/variblesAndMixins";
 .acticityCommon{
-  height: 1236px;
+  height: auto;
   background: white;
   .activityCondition{
     height: 443px; 
@@ -171,11 +171,584 @@
     }
   }
   .activityContent{
-    height: 70vh;
+    height: 984px;
+    overflow-y: auto;
+    .activityContent{
+      height: auto;
+      .activityItem{
+        margin-left: 20px;
+        height: 218px;
+        display: flex;
+        border-bottom: $grayBorderBottom;
+        padding: 36px 0 36px 0;
+        >div:first-of-type{
+          width: 144px;
+          img{
+            width: 144px;
+          }
+        }
+        >div:nth-of-type(2){
+          flex: 1 1;
+          display: flex;
+          flex-direction: column;
+          padding-left: 32px;
+          p:first-of-type{
+            font-size: 26px;
+            color: #373737;
+            font-weight: 600;
+          }
+          p:nth-of-type(2){
+            font-size: 22px;
+            color: #9E9E9E;
+          }
+          p:nth-of-type(3){
+            i{
+              display: inline-block;
+              width: 28px;
+              height: 20px;
+            }
+            .orangeStar{
+              @include bg-image('../../images/activity/pentagram1');
+            }
+            .grayStar{
+              @include bg-image('../../images/activity/pentagram2');
+            }
+            span{
+              margin-left: 20px;
+              font-size: 22px;
+              color: #9E9E9E;
+            }
+          }
+          p:last-of-type{
+            display: flex;
+            >span{
+              display: inline-block;
+              border-radius: 3px;
+              line-height: 26px;
+              height: 26px;            
+              text-align: center;
+              background: #CCCCCC;
+              color: #FFFFFF;
+              margin-right: 20px;
+              span{
+                display:block;
+                font-size: 20px;
+                -webkit-transform:scale(0.8);
+                display: inline-block;
+                height: 26px;
+                line-height: 30px;
+              }
+              i{
+                display: inline-block;
+                @include bg-image('../../images/activity/goodicon');
+                width: 18px;
+                height: 20px;
+              }
+            }
+            >span:first-of-type{
+              width: 106px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            >span:last-of-type{
+              width:90px;
+            }
+          }
+        }
+        .bonusequal{
+          @include bg-image('../../images/activity/bonusequal');
+          margin-right: 10px;
+          margin-bottom: 20px;
+          margin-left: 20px;
+        }
+        >div:last-of-type{
+          width: 268px;
+          padding-top: 20px;
+          p{
+            i{
+              display: inline-block;
+              vertical-align: middle;
+              width:26px;
+              height:26px;
+              margin-right: 18px;
+            }
+            span{
+              font-size: 22px;
+              color: #797979;
+              span{
+                font-size: 28px;
+                margin: 0 5px 0 5px;
+              }
+              .rmb{
+                display: inline-block;
+                font-size: 24px;
+                margin: 0;
+                -webkit-transform:scale(0.8);
+                color: #797979!important;
+              }
+            }
+          }
+          .radiuOne{
+            i{
+              @include bg-image('../../images/activity/radiuone');
+            }
+            span{
+              span{
+                color: #FFBF6C 
+              }
+            }
+          }
+          .radiuTwo{
+            i{
+              @include bg-image('../../images/activity/radiutwo');
+            }
+            span{
+              span{
+                color: #8AD9CA
+              }
+            }
+          }
+          .radiuThree{
+            i{
+              @include bg-image('../../images/activity/radiuthree');
+            }
+            span{
+              span{
+                color: #EEB1B3
+              }
+            }
+          }
+        }
+      }
+      >div:first-of-type{
+        margin-top: 20px;
+      }
+    }
+  }
+}
+// 活动详情
+.activityInfo{
+  height: 100vh;
+  overflow-y: auto;
+  >div{
     overflow-y: auto;
     >div{
       background: white;
-      height: 150%
+    }
+    >div:first-of-type{
+      height: 444px;
+    }
+    >div:nth-of-type(2){
+      height: 124px;
+      display: flex;
+      padding: 20px 0 12px 20px;
+      >div:first-of-type{
+        width: 550px;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;
+          span:last-of-type{
+            margin-left: 20px;
+          }
+        }
+        p:first-of-type{
+          font-size: 28px;
+          color: black;
+          font-weight: 700;
+        }
+        p:last-of-type{
+          i{
+            display: inline-block;
+            width: 28px;
+            height: 20px;
+          }
+          .orangeStar{
+            @include bg-image('../../images/activity/pentagram1');
+          }
+          .grayStar{
+            @include bg-image('../../images/activity/pentagram2');
+          }
+          span{
+            margin-left: 20px;
+            font-size: 22px;
+            color: #9E9E9E;
+          }          
+        }
+      }
+      >div:last-of-type{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;        
+        }
+        p:first-of-type{
+          >i{
+            display: inline-block;
+            width: 4vw;
+            height: 4vw;
+            margin-right: 10px;
+          }
+          .goldmedal{
+            @include bg-image('../../images/activity/goldmedal');
+          }
+          .silvermedal{
+            @include bg-image('../../images/activity/silvermedal');
+          }
+          .bronzemedal{
+            @include bg-image('../../images/activity/bronzemedal');
+          }
+          span{
+            font-size: 26px;
+          }
+        }
+        p:last-of-type{
+          >i{
+            width: 27px;
+            height: 27px;
+            vertical-align: middle;   
+            margin-right: 10px;
+            @include bg-image('../../images/activity/willpointblue');       
+          }
+          span{
+            font-size: 26px;
+            color: #4DA9FA
+          }
+        }
+      }
+    }
+    >div:nth-of-type(3){
+      height: 76px;
+      margin-top: 20px;
+      padding: 0 100px 0 100px;
+      ul{
+        display: flex;
+        align-items: center;
+        li{
+          flex: 1 1;
+          height: 76px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span{
+            display: inline-block;
+            height: 75px;
+            line-height: 75px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #9E9E9E;
+          }
+        }
+        .tabActive{
+          span{
+            color: #4DA9FA;  
+            border-bottom: 2px solid #4DA9FA;
+          }
+          
+        }
+      }
+    }
+    //活动详情内容
+    .activityInfoContent{
+      background: #F1F1F1;
+      >div{
+        background: white;
+      }
+      >div:nth-of-type(1){
+        height: 178px;
+        margin: 20px; 
+        border-radius: 10px;
+        padding: 20px;
+        p:first-of-type{
+          height: 44px;
+          line-height: 44px;
+        }
+        span:first-of-type{
+          font-size: 24px;
+          color: #9E9E9E;
+          margin-right: 10px;
+        }
+        span:last-of-type{
+          font-size: 24px;
+          color: #363636
+        }
+        p:last-of-type{
+          display: flex;
+          span:first-of-type{
+            width: 120px;
+          }
+          span:last-of-type{
+            flex: 1 1;
+            padding-right: 20px;
+          }
+        }
+      }
+      >div:nth-of-type(2){
+        height: 180px;
+        border-radius: 10px;
+        margin: 22px 20px 0 20px;
+        padding: 20px;
+        display: flex;
+        >div:first-of-type{
+          width: 272px;
+          div{
+            height: 87px;
+            display: flex;
+            justify-content: center;
+            align-items:flex-end;
+            padding-bottom: 10px;
+            span{
+              vertical-align: middle;
+              display: inline-block;
+              width: 52px;
+              height:54px;
+              @include bg-image('../../images/activity/trophy');  
+            }
+          }
+          p{
+            text-align: center;
+            font-size: 24px;
+          }
+        }
+        >div:last-of-type{
+          margin-left: 40px; 
+          p{
+            i{
+              display: inline-block;
+              vertical-align: middle;
+              width:26px;
+              height:26px;
+              margin-right: 18px;
+            }
+            span{
+              font-size: 24px;
+              color: #6C6C6C;
+              span{
+                font-size: 28px;
+                margin: 0 5px 0 5px;
+              }
+              .rmb{
+                display: inline-block;
+                font-size: 24px;
+                margin: 0;
+                -webkit-transform:scale(0.8);
+                color: #6C6C6C!important;
+              }
+            }
+          }
+          .radiuOne{
+            i{
+              @include bg-image('../../images/activity/radiuone');
+            }
+            span{
+              span{
+                color: #FFBF6C 
+              }
+            }
+          }
+          .radiuTwo{
+            i{
+              @include bg-image('../../images/activity/radiutwo');
+            }
+            span{
+              span{
+                color: #8AD9CA
+              }
+            }
+          }
+          .radiuThree{
+            i{
+              @include bg-image('../../images/activity/radiuthree');
+            }
+            span{
+              span{
+                color: #EEB1B3
+              }
+            }
+          }          
+        }
+      }
+      >div:nth-of-type(3){
+        height: 956px;
+        border-radius: 10px;
+        margin: 22px 20px 20px 20px;
+        padding: 20px;
+        padding-right: 40px;
+        >div:first-of-type{
+          display: flex;
+          height: 70px;
+          >div:first-of-type{
+            width: 192px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            i{
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+              @include bg-image('../../images/activity/order');
+              vertical-align: middle;
+            }
+            span{
+              margin-left: 10px;
+              font-size: 30px;
+              color: #363636;
+              font-weight: 700;
+            }
+          }
+          >div:last-of-type{
+            flex: 1 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: #6C6C6C;
+            font-size: 20px;
+          }
+        }
+        >div:last-of-type{
+          table{
+            width: 100%;
+            thead{
+              background: #F3F3F3;
+              height: 40px;                   
+              tr{              
+                th{
+                  text-align: center;
+                  font-size: 20px;
+                  color: #6C6C6C;
+                  line-height: 40px;  
+                }
+                th:first-of-type{
+                  border-top-left-radius: 12px;
+                  border-bottom-left-radius: 12px;
+                  width: 100px;
+                }
+                th:nth-of-type(2){
+                  text-align: left;
+                  padding-left: 40px;
+                }
+                th:last-of-type{
+                  border-top-right-radius: 12px;
+                  border-bottom-right-radius: 12px; 
+                  width: 140px;               
+                }
+              }
+            }
+            tbody{
+              tr{
+                height: 74px;
+                border-bottom: $grayBorderBottom;
+                td{
+                  color: #363636;
+                  font-size: 20px;
+                  font-weight: 600;
+                  text-align: center;
+                }
+                td:nth-of-type(2){
+                  text-align: left;
+                  padding-left: 45px;
+                }
+              } 
+              tr:nth-of-type(2){
+                td:first-of-type{
+                  color: #FFBF6C 
+                }
+              } 
+              tr:nth-of-type(3){
+                td:first-of-type{
+                  color: #8AD9CA
+                }
+              }  
+              tr:nth-of-type(4){
+                td:first-of-type{
+                  color: #EEB1B3 
+                }
+              }            
+            }
+          }
+          div{
+            height: 75px;
+            line-height: 75px;
+            text-align: right;
+            padding-right: 15px;
+            span{
+              color: #4DA9FA;
+              font-size: 24px;
+              font-weight: 600;
+            }
+            i{
+              display: inline-block;
+              width: 9px;
+              height: 18px;
+              @include bg-image('../../images/activity/arrowright');
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+    }
+    //活动详情商家
+    .activityMerchant{
+      background: #F1F1F1;
+      padding: 20px;
+      >div{
+        background: white;
+        border-radius: 10px;
+      }    
+    }
+    //底部点赞
+    >div:last-of-type{
+      height: 100px;
+      >ul{
+        display: flex;
+        height: 100%;
+        li{
+          flex: 1 1;
+          width: 50%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          i{
+            width: 27px;
+            height: 27px;
+            vertical-align: middle;
+          }
+          span{
+            margin-left: 20px;
+            color:#4DA9FA;
+            font-size: 28px;
+          }
+        }
+        li:first-of-type{
+          i{
+            @include bg-image('../../images/activity/willpointblue');
+          }
+        }
+        li:last-of-type{
+          i{
+            @include bg-image('../../images/activity/mypointblue');
+          }
+        }
+        .pointActive{
+          background: #4DA9FA;
+          span{
+            color: white;
+          }
+          .willpointActive{
+            @include bg-image('../../images/activity/willpointwhite');
+          }
+          .mypointActive{
+            @include bg-image('../../images/activity/mypointwhite');
+          }
+        }
+      }
     }
   }
 }

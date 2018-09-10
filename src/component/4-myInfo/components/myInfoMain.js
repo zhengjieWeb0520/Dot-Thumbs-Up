@@ -41,9 +41,11 @@ class MyInfoMain extends React.Component {
               </Link>
             </li>
             <li className="wallet">
-              <span className="icon"></span>
-              <p className="title">钱包</p>
-              <p className="count"><b>¥</b>122.00</p>
+              <Link to={`/wallet`}>
+                <span className="icon"></span>
+                <p className="title">钱包</p>
+                <p className="count"><b>¥</b>122.00</p>
+              </Link>
             </li>
             <li className="voucher">
               <span className="icon"></span>
