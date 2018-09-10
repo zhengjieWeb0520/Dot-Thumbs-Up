@@ -2,6 +2,7 @@ import React from 'react'
 import TopNavBar from './topNavBar'
 import { List, InputItem, Picker } from 'antd-mobile'
 import { createForm } from 'rc-form'
+
 class NewBankCard extends React.Component {
 	constructor(props) {
 		super(props)
