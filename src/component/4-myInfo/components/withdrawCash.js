@@ -36,8 +36,6 @@ class WithdrawCash extends React.Component {
                 <InputItem
                   {...getFieldProps('money')}
                   type='money'
-                  defaultValue={100}
-                  placeholder="start from left"
                   clear
                   moneyKeyboardAlign="left"
                   moneyKeyboardWrapProps={moneyKeyboardWrapProps}

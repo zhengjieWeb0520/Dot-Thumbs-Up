@@ -763,34 +763,20 @@
 
       .input{
         font-size: 28px;
-        border: none;
-        height: 100%;
         line-height: normal;
         flex: 1;
         &:focus{
           color: #8b8791;
         }
 
-        .am-list, 
-        .am-list-body, 
-        .am-list-item, 
-        .am-input-control, 
-        .fake-input-container, 
-        .fake-input{
-          height: 100%;
-        }
-
-        .am-list-item{
-          padding-right: 15px;
-        }
-
         .am-list-body::after,
         .am-list-body::before{
           height: 0;
         }
-
+        
         .fake-input{
-          font-size: 28px;
+          font-size: 40px;
+          height: 40px;
         }
       }
 
@@ -889,9 +875,9 @@
     height: 1022px;
 
     .inputs{
-      height: 526px;
       background: #fff;
       margin-bottom: 20px;
+
     }
 
     .imgs{
@@ -903,6 +889,129 @@
       @include submitBtn;
       color: #fff;
       margin-top: 66px;
+    }
+  }
+}
+
+//商家和个人公用样式
+.bussinessAndStaff{
+  .inputs{
+    height: 528px;
+
+    .am-list{
+
+      .am-list-body::after,
+      .am-list-body::before{
+        height: 0;
+      }
+
+      .am-list-item{
+        height: 88px;
+        border-bottom: $grayBorderBottom;
+        width: 520px;
+        margin: 0 auto;
+
+        input{
+          text-align: center;
+          font-size: 28px;
+        }
+
+        .am-list-line{
+          .am-list-extra{
+            text-align: left;
+            font-size: 28px;
+            flex-basis: 170%;
+          }
+        }
+      }
+
+      .timePick, .regionPicker{
+        div{
+          width: 50%;
+          float: left;
+          
+          &:first-child{
+            .am-list-item{
+              float: right;
+            }
+          }
+
+          .am-list-item{
+            width: 70%;
+
+          }
+        }
+      }
+    }
+  }
+
+  .imgs{
+    .identity{
+      width: 610px;
+      height: 210px;
+      margin: 0 auto;
+      padding-top: 40px;
+      @include flexHorizen;
+
+      .img{
+        width: 276px;
+        height: 100%;
+        position: relative;
+
+        &:last-child{
+          margin-right: 0;
+        }
+
+        input{
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: 2;
+          position: relative;
+        }
+
+        .preview{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+
+        &.positive .preview{
+          @include bg-image('../../images/myInfo/identity_positive');
+        }
+
+        &.reverse .preview{
+          @include bg-image('../../images/myInfo/identity_reverse');
+        }
+      }
+    }
+  }
+}
+
+//antd-mobile数字键盘样式修改
+.am-number-keyboard-wrapper{
+  height: 51.86667vw !important;
+  table{
+    tbody{
+      tr{
+        .am-number-keyboard-item{
+          padding: 2.8vw 0;
+          font-weight: 900;
+          font-size: 5vw !important;
+
+          i{
+            font-weight: 900;
+            font-size: 5vw !important;
+          }
+        }
+
+        .keyboard-delete{
+          background-size: 14.4vw 3.46667vw !important;
+        }
+      }
     }
   }
 }
