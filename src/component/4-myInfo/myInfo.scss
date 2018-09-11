@@ -2,7 +2,13 @@
 
 .myContainer{
   height: 1236px;
-
+  .setting{
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    font-size: 30px;
+    color: #fff;
+  }
   .userInfo{
     height: 503px;
     border-bottom: $grayBorderBottom;
@@ -305,96 +311,7 @@
       margin-bottom: 28px;
     }
 
-    .am-list{
-      .am-list-item{
-        position: relative;
-        height: 88px;
-        padding-left: 44px;
-
-        .am-list-line{
-          padding-left: 23px;
-          padding-right: 20px;
-          
-          //银行和支行对齐
-          .am-list-extra{
-            position: absolute;
-            left: 33%;
-            color: #333;
-            font-size: 26px;
-          }
-
-          //验证码
-          &>.am-input-extra{
-            max-height: 40px;
-            color: #333;
-            font-size: 25px;
-          }
-
-          .am-list-content{
-            font-size: 28px;
-            color: #333;
-          }
-
-          //title文字分散对齐
-          .am-input-label{
-            font-size: 28px;
-            color: #333;
-            width: 140px;
-            box-sizing: border-box;
-            margin-right: 60px;
-
-            .justifyItem{
-              text-align: justify;
-              display: inline-block;
-              width: 120px;
-              white-space: normal;
-              vertical-align:top;
-              height: 26px;
-
-              &::after {
-                content: "";
-                display: inline-block;
-                width: 100%;
-                height:0;
-                overflow: hidden;
-              }
-            }
-          }
-
-          .am-input-control{
-            input{
-              font-size: 26px;
-            }
-          }
-
-          .am-list-content{
-            .justifyItem{
-              text-align: justify;
-              display: inline-block;
-              width: 120px;
-              white-space: normal;
-              vertical-align:top;
-              height: 26px;
-
-              &::after {
-                content: "";
-                display: inline-block;
-                width: 100%;
-                height:0;
-                overflow: hidden;
-              }
-            }
-          }
-        }
-
-        .am-input-clear{
-          width: 26px;
-          height: 26px;
-          background-position: 2px 2px;
-          background-size: 26px auto; 
-        }
-      }
-    }
+    @include formStyle;
   }
 }
 
@@ -872,119 +789,162 @@
   height: 100vh;
 
   .AuthenticationBox{
-    height: 1022px;
-
     .inputs{
-      background: #fff;
+      height: 528px;
       margin-bottom: 20px;
-
     }
 
     .imgs{
       height: 476px;
       background: #fff;
     }
-
-    .submitBtn{
-      @include submitBtn;
-      color: #fff;
-      margin-top: 66px;
-    }
   }
+}
+
+//员工认证
+.staffAuthentication{
+  .inputs{
+    height: 264px;
+    margin-bottom: 20px;
+  }
+  .imgs{
+    background: #fff;
+    padding-bottom: 40px;
+  }
+
 }
 
 //商家和个人公用样式
 .bussinessAndStaff{
-  .inputs{
-    height: 528px;
+  .AuthenticationBox{
+    height: 1186px;
+    position: relative;
 
-    .am-list{
+    .submitBtn{
+      @include submitBtn;
+    }
 
-      .am-list-body::after,
-      .am-list-body::before{
-        height: 0;
-      }
+    .inputs{
+      background: #fff;
 
-      .am-list-item{
-        height: 88px;
-        border-bottom: $grayBorderBottom;
-        width: 520px;
-        margin: 0 auto;
-
-        input{
-          text-align: center;
-          font-size: 28px;
+      .am-list{
+  
+        .am-list-body::after,
+        .am-list-body::before{
+          height: 0;
         }
-
-        .am-list-line{
-          .am-list-extra{
-            text-align: left;
+  
+        .am-list-item{
+          height: 88px;
+          border-bottom: $grayBorderBottom;
+          width: 520px;
+          margin: 0 auto;
+  
+          input{
+            text-align: center;
             font-size: 28px;
-            flex-basis: 170%;
           }
-        }
-      }
-
-      .timePick, .regionPicker{
-        div{
-          width: 50%;
-          float: left;
-          
-          &:first-child{
-            .am-list-item{
-              float: right;
+  
+          .am-list-line{
+            .am-list-extra{
+              text-align: left;
+              font-size: 28px;
+              flex-basis: 170%;
             }
           }
-
-          .am-list-item{
-            width: 70%;
-
+        }
+  
+        .timePick, .regionPicker{
+          div{
+            width: 50%;
+            float: left;
+            
+            &:first-child{
+              .am-list-item{
+                float: right;
+              }
+            }
+  
+            .am-list-item{
+              width: 70%;
+  
+            }
           }
         }
       }
     }
-  }
-
-  .imgs{
-    .identity{
-      width: 610px;
-      height: 210px;
-      margin: 0 auto;
-      padding-top: 40px;
-      @include flexHorizen;
-
-      .img{
-        width: 276px;
-        height: 100%;
-        position: relative;
-
-        &:last-child{
-          margin-right: 0;
-        }
-
-        input{
-          width: 100%;
+  
+    .imgs{
+      .identity{
+        width: 610px;
+        height: 210px;
+        margin: 0 auto;
+        padding-top: 40px;
+        @include flexHorizen;
+  
+        .img{
+          width: 276px;
           height: 100%;
-          opacity: 0;
-          z-index: 2;
           position: relative;
+  
+          &:last-child{
+            margin-right: 0;
+          }
+  
+          input{
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 2;
+            position: relative;
+          }
+  
+          .preview{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+          }
+  
+          &.positive .preview{
+            @include bg-image('../../images/myInfo/identity_positive');
+          }
+  
+          &.reverse .preview{
+            @include bg-image('../../images/myInfo/identity_reverse');
+          }
         }
-
-        .preview{
-          width: 100%;
+      }
+  
+      .bussinessLicence{
+        margin-top: 54px; 
+        height: 170px;
+  
+        .licence{
+          width: 276px;
           height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-        }
-
-        &.positive .preview{
-          @include bg-image('../../images/myInfo/identity_positive');
-        }
-
-        &.reverse .preview{
-          @include bg-image('../../images/myInfo/identity_reverse');
+          margin: 0 auto;
+          position: relative;
+  
+          input{
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 2;
+            position: relative;
+          }
+  
+          .preview{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            @include bg-image('../../images/myInfo/bussiness_lisence');
+          }
         }
       }
     }
@@ -1011,6 +971,156 @@
         .keyboard-delete{
           background-size: 14.4vw 3.46667vw !important;
         }
+      }
+    }
+  }
+}
+
+//antd-mobile图片选择器删除图片按钮样式
+.am-image-picker{
+  .am-image-picker-item-remove{
+
+  }
+}
+
+//修改密码
+.changePassword{
+  @include formStyle;
+
+  .submitBtn{
+    @include submitBtn;
+  }
+}
+
+//关于我们
+.aboutUs{
+  text-align: center;
+  .logo{
+    width: 180px;
+    height: 180px;
+    background: #14daff;
+    border-radius: 30px;
+    margin: 0 auto;
+    margin-top: 100px;
+  }
+
+  .desc{
+    font-size: 38px;
+    margin: 10px 0;
+  }
+  
+  .edition{
+    border: 1px solid #ccc;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 5px 20px;
+    border-radius: 20px;
+  }
+
+  .copyRight{
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 24px;
+  }
+}
+
+//用户反馈
+.userFeedBack{
+  @include formStyle;
+  .am-list {
+    .am-list-item{
+      padding-left: 0
+    }
+  }
+  
+  .inputs{
+    background: #fff;
+    margin-bottom: 20px;
+
+    .textarea{
+      textarea{
+        width: 100%;
+        max-height: 180px;
+        font-size: 30px;
+        border: none;
+        line-height: 1.5;
+        overflow: scroll;
+      }
+    }
+
+    .imagePick{
+      position: relative;
+      .tips{
+        position: absolute;
+        left: 30%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 30px;
+        color: #ccc;
+      }
+    }
+  }
+  
+  .submitBtn{
+    @include submitBtn;
+  }
+}
+
+//设置
+.setting{
+  @include formStyle;
+  .justifyItem{
+    text-align: left !important;
+  }
+  .am-list .am-list-item .am-list-line .am-list-extra{
+    left: auto; 
+    position: static;
+    font-size: 28px;
+  }
+
+  .am-list .am-list-item .am-list-line{
+    padding-left: 0;
+    padding-right: 7px;
+  }
+
+  .am-list-item .am-list-line .am-list-arrow{
+    width: 8vw;
+    height: 4vw;
+    color: #6f6f6f;
+    background-image: url(../../images/myInfo/icon_arrow_left.png)
+  }
+  .item{
+    font-size: 28px;
+    height: 88px;
+    background: #fff;
+    @include flexHorizen;
+    border-bottom: $grayBorderBottom;
+
+    .title{
+      margin-left: 43px;
+    }
+
+    .content{
+      flex: 1;
+      text-align: right;
+      padding-right: 30px;
+    }
+
+    .icon-jiantou1{
+      font-size: 30px;
+      margin-right: 20px;
+    }
+  }
+
+  .avatarBox{
+    height: 150px;
+    margin-bottom: 30px;
+
+    .content{
+      img{
+        width: 80px;
+        height: 80px;
       }
     }
   }

@@ -3,9 +3,6 @@ import { List, InputItem, Picker, DatePicker, ImagePicker } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
 
-const nowTimeStamp = Date.now();
-const now = new Date(nowTimeStamp);
-
 class BussinessAuthentication extends React.Component {
   constructor(props) {
     super(props)
@@ -92,6 +89,7 @@ class BussinessAuthentication extends React.Component {
     const { getFieldProps } = this.props.form
     let positiveStyle = this.state.positive ? this.state.positive : {}
     let reverseStyle = this.state.reverse ? this.state.reverse : {}
+    let licenceStyle = this.state.licence ? this.state.licence : {}
     return (
       <div className="bussinessAuthentication bussinessAndStaff">
         <TopNavBar title="商家认证" rightContent={false} />
@@ -202,7 +200,12 @@ class BussinessAuthentication extends React.Component {
                 <div className="preview" style={reverseStyle}></div>
               </div>
             </div>
-            <div className="bussinessLicence"></div>
+            <div className="bussinessLicence">
+              <div className="licence img">
+                <input type="file" onChange={(val) => this.handleChange('licence', val)}/>
+                <div className="preview" style={licenceStyle}></div>
+              </div>
+            </div>
           </div>
           <div className="submitBtn">提交</div>
         </div>
