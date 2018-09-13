@@ -96,6 +96,9 @@ class MyInfoMain extends React.Component {
           </ul>
         </div>
         <div className="signOut">退出登陆</div>
+        <Link to={'/setting'}>
+          <div className="setting">设置</div>
+        </Link>
       </div>
     )
   }
