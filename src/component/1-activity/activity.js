@@ -209,7 +209,7 @@ class Activity extends React.Component{
             </div>
           </div>   
         </div>
-        <div className='activityContent'>
+        <div className='activityContent wrapper'>
            <ActivityContent />  
         </div>
       </div>

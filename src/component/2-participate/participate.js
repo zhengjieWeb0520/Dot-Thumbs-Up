@@ -51,7 +51,7 @@ class Participate extends React.Component{
             </ul>
           </div>
         </div>
-        <div className='participateContent'>
+        <div className='participateContent participateWrapper'>
             <ParticipateContent />
         </div>
       </div>

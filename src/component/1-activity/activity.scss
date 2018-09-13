@@ -1,6 +1,6 @@
 @import "./../../utils/variblesAndMixins";
 .acticityCommon{
-  height: auto;
+  height: 100%;
   background: white;
   .activityCondition{
     height: 443px; 
@@ -171,10 +171,9 @@
     }
   }
   .activityContent{
-    height: 984px;
-    overflow-y: auto;
-    .activityContent{
-      height: auto;
+    height: 793px;
+    overflow: hidden;
+    .ActivityContent{
       .activityItem{
         margin-left: 20px;
         height: 218px;
@@ -700,7 +699,83 @@
       >div{
         background: white;
         border-radius: 10px;
+        height: 600px;
+        padding: 20px 40px 20px 40px;
+        >div:first-of-type{
+          height: 210px;
+          >div:first-of-type{
+            height: 50px;
+            display: flex;
+            align-items: center;
+            >div:first-of-type{
+              width:170px;
+              display: flex;
+              align-items: center;
+              i{
+                display: inline-block;
+                width: 27px;
+                height: 27px;
+                @include bg-image('../../images/activity/merchantInfo');
+              }
+              span{
+                font-size: 28px;
+                color: #363636;
+                margin-left: 20px;
+                font-weight: 600;
+              }
+            }
+            >div:last-of-type{
+              flex: 1 1;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              i{
+                display: inline-block;
+                width: 24px;
+                height: 22px;
+                @include bg-image('../../images/activity/merchantReport');
+              }
+              span{
+                margin-left: 20px;
+                font-size: 24px;
+                color: #6C6C6C
+              }
+            }
+          }
+        }
+        p{
+          height: 72px;
+          border-bottom: $grayBorderBottom;
+          display: flex;
+          align-items: center;
+          span{
+            flex: 1 1;
+            font-size: 26px;
+          }
+          span:first-of-type{
+            text-align: left;
+            color: #5B5B5B;
+            font-weight: 600;
+          }
+          span:last-of-type{
+            text-align: right;
+            color: #6C6C6C      
+          }
+        }
+        p:last-of-type{
+          border-bottom: none;
+        }
       }    
+    }
+    //活动详情评价
+    .activityEvaluate{
+      height: 640px;
+      overflow: hidden;
+      margin: 20px;
+      margin-bottom: 0;
+      >div{
+        
+      }
     }
     //底部点赞
     >div:last-of-type{

@@ -1,12 +1,17 @@
 import React from 'react'
+import BScroll from 'better-scroll'
 
 class ParticipateContent extends React.Component{
   constructor(props){
     super(props)
   }
+  componentDidMount(){
+    const wrapper = document.querySelector('.participateWrapper')
+    const scroll = new BScroll(wrapper,{click: true})
+  }
   render(){
     return(
-      <div id='ParticipateContent' className='participateContent'>
+      <div id='ParticipateContent' className='ParticipateContent content'>
         <div className='participateItem'>
           <div className='participateItemHeader'>
             <div>

@@ -76,9 +76,8 @@
   }
   .participateContent{
     height: 984px;
-    overflow-y: auto;
-    .participateContent{
-      height: auto;
+    overflow: hidden;
+    .ParticipateContent{
       >div{
         background: white;
         border-radius: 10px;
