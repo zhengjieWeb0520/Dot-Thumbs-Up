@@ -1,0 +1,56 @@
+//搜索框样式
+.am-search{
+  height: 60px;
+  background: none;
+}
+.am-search-input{
+  height: 60px;
+  border-radius: 60px;
+  background-color: #2287E1
+}
+.am-search-input .am-search-synthetic-ph{
+  height: 60px;
+  line-height: 60px;
+}
+.am-search-synthetic-ph-container{
+  display:inline-block;
+  height: 60px;
+}
+.am-search-input .am-search-synthetic-ph-placeholder{
+  display: inline-block;
+  color: white;
+  height: 60px;
+  font-size: 24px;
+  margin-left: 20px;
+  padding-top: 2px;
+}
+.am-search.am-search-start .am-search-input input[type='search']{
+  color: white;
+  font-size: 24px;
+  height: 60px;
+  padding: 0 3.73333vw 0 7.66667vw;
+}
+.am-search-input .am-search-synthetic-ph-icon{
+  width: 30px;
+  height: 30px;
+  background-size: 30px auto;
+  @include bg-image('../../images/activity/magnifier');
+}
+.am-search-cancel-show, .am-search-cancel{
+  font-size: 24px;
+  color: white;
+}
+.am-search-input .am-search-clear{
+  height: 4vw;
+  width: 4vw;
+  background-size: 4vw 4vw;
+  top: 8px;
+  right: 8px;
+}
+//pop
+.am-popover .am-popover-item-container{
+  padding: 5vw 3vw 5vw 3vw
+}
+.am-popover-item span{
+  font-size: 26px;
+}

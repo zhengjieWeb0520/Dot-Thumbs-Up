@@ -1,11 +1,11 @@
-@import './../utils/variblesAndMixins';
+@import '../utils/variblesAndMixins';
 
 #root, #container, #main{
   height: 100vh;
 }
 //菜单选中
 .menuActive p{
-  color: #383838
+  color: #383838 !important
 }
 #main{
   display: flex;
@@ -35,8 +35,8 @@
             margin-top: 0.5vw;
           }
           span{
-            width: 6.2vw;
-            height: 7.2vw;
+            width: 40px;
+            height: 38px;
           }
           a{
             width: 100%;
@@ -48,6 +48,7 @@
             p{
               color: #9E9E9E;
               font-size: 26px;
+              margin-bottom: 0px;
             }
           }
 

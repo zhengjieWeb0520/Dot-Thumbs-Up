@@ -8,6 +8,8 @@ import NewBackCard from './component/4-myInfo/components/newBankCard'
 import Wallet from './component/4-myInfo/components/wallet'
 import WithdrawCash from './component/4-myInfo/components/withdrawCash'
 import WithdrawRecord from './component/4-myInfo/components/withdrawRecord'
+//引入活动相关组件
+import ActivityInfo from './component/1-activity/activityContent/activityInfo'
 import SelectBankCard from './component/4-myInfo/components/selectBankCard'
 import BussinessAuthentication from './component/4-myInfo/components/bussinessAuthentication'
 import StaffAuthentication from './component/4-myInfo/components/staffAuthentication'
@@ -50,6 +52,7 @@ ReactDOM.render(
           <Route path={`/wallet`} exact component={Wallet}></Route>
           <Route path={`/wallet/withdraw`} exact component={WithdrawCash}></Route>
           <Route path={`/wallet/withdrawRecord`} component={WithdrawRecord}></Route>
+          <Route path={`/activityInfo`} component={ActivityInfo}></Route>
           <Route path={`/wallet/withdraw/selectBankCard`} component={SelectBankCard}></Route>
           <Route path={`/voucher`} component={Voucher}></Route>
           <Route path={`/bussinessAuthentication`} component={BussinessAuthentication}></Route>

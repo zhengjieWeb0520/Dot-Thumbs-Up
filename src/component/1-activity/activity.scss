@@ -1,0 +1,903 @@
+@import "./../../utils/variblesAndMixins";
+.acticityCommon{
+  height: 100%;
+  background: white;
+  .activityCondition{
+    height: 443px; 
+    .activityKb{
+      height: 40px;
+      background: #4AA9F9;
+    }
+    .activityHeader{
+      height: 97px;
+      background: #4AA9F9; 
+      display: flex;
+      justify-content: center;
+      align-items:center;
+      > div:first-of-type{
+        padding-left: 2px;
+        flex: 1 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .positionIcon{
+          @include bg-image('../../images/activity/position');
+          width: 25px;
+          height: 36px;
+        }
+        span{
+          font-size: 24px;
+          margin-left: 2vw;
+          color: white;
+        }
+      }
+      > div:last-of-type{
+        width: 540px;
+        height: 60px;
+        padding-right: 22px;
+      }
+    }
+    .activityLevel{
+      height: 196px;
+      margin-top: 20px;
+      background: white;
+      .activityLevel1{
+        height: 124px;
+        border-bottom: $grayBorderBottom;
+        ul{
+          display: flex;
+          height: 124px;
+          justify-content: center;
+          align-items: center;
+          li{
+            flex: 1 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            i{
+              width: 51px;
+              height: 45px;
+            }
+            p{
+              line-height: 55px;
+              margin-top: 8px;
+              font-size: 24px;
+              color: #9E9E9E;
+              height: 65px;
+              padding: 0 5px 0 5px;
+            }
+          }
+          .level1Active{
+            p{
+              color : #383838;
+              border-bottom: 6px solid #4DA9FA
+            }        
+          }
+          #foodLevel{
+            i{
+              @include bg-image('../../images/activity/lollipop');             
+            }
+          }
+          #lifeLevel{
+            i{
+              @include bg-image('../../images/activity/bicycle');  
+            }
+          }
+          #enjoyLevel{
+            i{
+              @include bg-image('../../images/activity/babyball');  
+            }
+          }
+          #allLevel{
+            i{
+              @include bg-image('../../images/activity/aerospace');
+            }
+          }
+          #HotelLevel{
+            i{
+              @include bg-image('../../images/activity/hotail');
+            }
+          }
+        }
+      }
+      .activityLevel2{
+        width: 100%;
+        height: 67px;
+        overflow-x: auto;
+        div{
+          width: 1000px; 
+          span{
+            font-size: 24px;
+            color: #9E9E9E;
+            display: inline-block;
+            width: 137px;
+            line-height: 67px;
+            height: 67px;
+            text-align: center
+          }    
+          span:first-of-type{
+            width: 97px;
+          }   
+        }
+      }
+      .activityKbGray{
+        height: 18px;
+        background: #F6F6F6 
+      }
+      .activityLevel3{
+        height: 84px;
+        line-height: 84px;
+        .downArrow{
+          display: inline-block;
+          width: 24px;
+          height: 15px;
+          @include bg-image('../../images/activity/ArrowImg');
+        }
+        ul{
+          display: flex;
+          li:nth-of-type(2){
+            flex: 1 1;
+            padding-left: 40px;
+          }
+          li:first-of-type{
+            text-align: center;
+            width: 180px;
+          }
+          li:last-of-type{
+            width: 230px;
+          }
+          li{
+            position: relative;
+            font-size: 26px;
+            >i{
+              display: inline-block;
+              width: 4vw;
+              height: 4vw;
+              margin-right: 10px;
+            }
+            .goldmedal{
+              @include bg-image('../../images/activity/goldmedal');
+            }
+            .silvermedal{
+              @include bg-image('../../images/activity/silvermedal');
+            }
+            .bronzemedal{
+              @include bg-image('../../images/activity/bronzemedal');
+            }
+          }
+        }
+      }
+    }
+  }
+  .activityContent{
+    height: 793px;
+    overflow: hidden;
+    .ActivityContent{
+      .activityItem{
+        margin-left: 20px;
+        height: 218px;
+        display: flex;
+        border-bottom: $grayBorderBottom;
+        padding: 36px 0 36px 0;
+        >div:first-of-type{
+          width: 144px;
+          img{
+            width: 144px;
+          }
+        }
+        >div:nth-of-type(2){
+          flex: 1 1;
+          display: flex;
+          flex-direction: column;
+          padding-left: 32px;
+          p:first-of-type{
+            font-size: 26px;
+            color: #373737;
+            font-weight: 600;
+          }
+          p:nth-of-type(2){
+            font-size: 22px;
+            color: #9E9E9E;
+          }
+          p:nth-of-type(3){
+            i{
+              display: inline-block;
+              width: 28px;
+              height: 20px;
+            }
+            .orangeStar{
+              @include bg-image('../../images/activity/pentagram1');
+            }
+            .grayStar{
+              @include bg-image('../../images/activity/pentagram2');
+            }
+            span{
+              margin-left: 20px;
+              font-size: 22px;
+              color: #9E9E9E;
+            }
+          }
+          p:last-of-type{
+            display: flex;
+            >span{
+              display: inline-block;
+              border-radius: 3px;
+              line-height: 26px;
+              height: 26px;            
+              text-align: center;
+              background: #CCCCCC;
+              color: #FFFFFF;
+              margin-right: 20px;
+              span{
+                display:block;
+                font-size: 20px;
+                -webkit-transform:scale(0.8);
+                display: inline-block;
+                height: 26px;
+                line-height: 30px;
+              }
+              i{
+                display: inline-block;
+                @include bg-image('../../images/activity/goodicon');
+                width: 18px;
+                height: 20px;
+              }
+            }
+            >span:first-of-type{
+              width: 106px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+            >span:last-of-type{
+              width:90px;
+            }
+          }
+        }
+        .bonusequal{
+          @include bg-image('../../images/activity/bonusequal');
+          margin-right: 10px;
+          margin-bottom: 20px;
+          margin-left: 20px;
+        }
+        >div:last-of-type{
+          width: 268px;
+          padding-top: 20px;
+          p{
+            i{
+              display: inline-block;
+              vertical-align: middle;
+              width:26px;
+              height:26px;
+              margin-right: 18px;
+            }
+            span{
+              font-size: 22px;
+              color: #797979;
+              span{
+                font-size: 28px;
+                margin: 0 5px 0 5px;
+              }
+              .rmb{
+                display: inline-block;
+                font-size: 24px;
+                margin: 0;
+                -webkit-transform:scale(0.8);
+                color: #797979!important;
+              }
+            }
+          }
+          .radiuOne{
+            i{
+              @include bg-image('../../images/activity/radiuone');
+            }
+            span{
+              span{
+                color: #FFBF6C 
+              }
+            }
+          }
+          .radiuTwo{
+            i{
+              @include bg-image('../../images/activity/radiutwo');
+            }
+            span{
+              span{
+                color: #8AD9CA
+              }
+            }
+          }
+          .radiuThree{
+            i{
+              @include bg-image('../../images/activity/radiuthree');
+            }
+            span{
+              span{
+                color: #EEB1B3
+              }
+            }
+          }
+        }
+      }
+      >div:first-of-type{
+        margin-top: 20px;
+      }
+    }
+  }
+}
+// 活动详情
+.activityInfo{
+  height: 100vh;
+  overflow-y: auto;
+  >div{
+    overflow-y: auto;
+    >div{
+      background: white;
+    }
+    >div:first-of-type{
+      height: 444px;
+    }
+    >div:nth-of-type(2){
+      height: 124px;
+      display: flex;
+      padding: 20px 0 12px 20px;
+      >div:first-of-type{
+        width: 550px;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;
+          span:last-of-type{
+            margin-left: 20px;
+          }
+        }
+        p:first-of-type{
+          font-size: 28px;
+          color: black;
+          font-weight: 700;
+        }
+        p:last-of-type{
+          i{
+            display: inline-block;
+            width: 28px;
+            height: 20px;
+          }
+          .orangeStar{
+            @include bg-image('../../images/activity/pentagram1');
+          }
+          .grayStar{
+            @include bg-image('../../images/activity/pentagram2');
+          }
+          span{
+            margin-left: 20px;
+            font-size: 22px;
+            color: #9E9E9E;
+          }          
+        }
+      }
+      >div:last-of-type{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;        
+        }
+        p:first-of-type{
+          >i{
+            display: inline-block;
+            width: 4vw;
+            height: 4vw;
+            margin-right: 10px;
+          }
+          .goldmedal{
+            @include bg-image('../../images/activity/goldmedal');
+          }
+          .silvermedal{
+            @include bg-image('../../images/activity/silvermedal');
+          }
+          .bronzemedal{
+            @include bg-image('../../images/activity/bronzemedal');
+          }
+          span{
+            font-size: 26px;
+          }
+        }
+        p:last-of-type{
+          >i{
+            width: 27px;
+            height: 27px;
+            vertical-align: middle;   
+            margin-right: 10px;
+            @include bg-image('../../images/activity/willpointblue');       
+          }
+          span{
+            font-size: 26px;
+            color: #4DA9FA
+          }
+        }
+      }
+    }
+    >div:nth-of-type(3){
+      height: 76px;
+      margin-top: 20px;
+      padding: 0 100px 0 100px;
+      ul{
+        display: flex;
+        align-items: center;
+        li{
+          flex: 1 1;
+          height: 76px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span{
+            display: inline-block;
+            height: 75px;
+            line-height: 75px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #9E9E9E;
+          }
+        }
+        .tabActive{
+          span{
+            color: #4DA9FA;  
+            border-bottom: 2px solid #4DA9FA;
+          }
+          
+        }
+      }
+    }
+    //活动详情内容
+    .activityInfoContent{
+      background: #F1F1F1;
+      >div{
+        background: white;
+      }
+      >div:nth-of-type(1){
+        height: 178px;
+        margin: 20px; 
+        border-radius: 10px;
+        padding: 20px;
+        p:first-of-type{
+          height: 44px;
+          line-height: 44px;
+        }
+        span:first-of-type{
+          font-size: 24px;
+          color: #9E9E9E;
+          margin-right: 10px;
+        }
+        span:last-of-type{
+          font-size: 24px;
+          color: #363636
+        }
+        p:last-of-type{
+          display: flex;
+          span:first-of-type{
+            width: 120px;
+          }
+          span:last-of-type{
+            flex: 1 1;
+            padding-right: 20px;
+          }
+        }
+      }
+      >div:nth-of-type(2){
+        height: 180px;
+        border-radius: 10px;
+        margin: 22px 20px 0 20px;
+        padding: 20px;
+        display: flex;
+        >div:first-of-type{
+          width: 272px;
+          div{
+            height: 87px;
+            display: flex;
+            justify-content: center;
+            align-items:flex-end;
+            padding-bottom: 10px;
+            span{
+              vertical-align: middle;
+              display: inline-block;
+              width: 52px;
+              height:54px;
+              @include bg-image('../../images/activity/trophy');  
+            }
+          }
+          p{
+            text-align: center;
+            font-size: 24px;
+          }
+        }
+        >div:last-of-type{
+          margin-left: 40px; 
+          p{
+            i{
+              display: inline-block;
+              vertical-align: middle;
+              width:26px;
+              height:26px;
+              margin-right: 18px;
+            }
+            span{
+              font-size: 24px;
+              color: #6C6C6C;
+              span{
+                font-size: 28px;
+                margin: 0 5px 0 5px;
+              }
+              .rmb{
+                display: inline-block;
+                font-size: 24px;
+                margin: 0;
+                -webkit-transform:scale(0.8);
+                color: #6C6C6C!important;
+              }
+            }
+          }
+          .radiuOne{
+            i{
+              @include bg-image('../../images/activity/radiuone');
+            }
+            span{
+              span{
+                color: #FFBF6C 
+              }
+            }
+          }
+          .radiuTwo{
+            i{
+              @include bg-image('../../images/activity/radiutwo');
+            }
+            span{
+              span{
+                color: #8AD9CA
+              }
+            }
+          }
+          .radiuThree{
+            i{
+              @include bg-image('../../images/activity/radiuthree');
+            }
+            span{
+              span{
+                color: #EEB1B3
+              }
+            }
+          }          
+        }
+      }
+      >div:nth-of-type(3){
+        height: 956px;
+        border-radius: 10px;
+        margin: 22px 20px 20px 20px;
+        padding: 20px;
+        padding-right: 40px;
+        >div:first-of-type{
+          display: flex;
+          height: 70px;
+          >div:first-of-type{
+            width: 192px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            i{
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+              @include bg-image('../../images/activity/order');
+              vertical-align: middle;
+            }
+            span{
+              margin-left: 10px;
+              font-size: 30px;
+              color: #363636;
+              font-weight: 700;
+            }
+          }
+          >div:last-of-type{
+            flex: 1 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            color: #6C6C6C;
+            font-size: 20px;
+          }
+        }
+        >div:last-of-type{
+          table{
+            width: 100%;
+            thead{
+              background: #F3F3F3;
+              height: 40px;                   
+              tr{              
+                th{
+                  text-align: center;
+                  font-size: 20px;
+                  color: #6C6C6C;
+                  line-height: 40px;  
+                }
+                th:first-of-type{
+                  border-top-left-radius: 12px;
+                  border-bottom-left-radius: 12px;
+                  width: 100px;
+                }
+                th:nth-of-type(2){
+                  text-align: left;
+                  padding-left: 40px;
+                }
+                th:last-of-type{
+                  border-top-right-radius: 12px;
+                  border-bottom-right-radius: 12px; 
+                  width: 140px;               
+                }
+              }
+            }
+            tbody{
+              tr{
+                height: 74px;
+                border-bottom: $grayBorderBottom;
+                td{
+                  color: #363636;
+                  font-size: 20px;
+                  font-weight: 600;
+                  text-align: center;
+                }
+                td:nth-of-type(2){
+                  text-align: left;
+                  padding-left: 45px;
+                }
+              } 
+              tr:nth-of-type(2){
+                td:first-of-type{
+                  color: #FFBF6C 
+                }
+              } 
+              tr:nth-of-type(3){
+                td:first-of-type{
+                  color: #8AD9CA
+                }
+              }  
+              tr:nth-of-type(4){
+                td:first-of-type{
+                  color: #EEB1B3 
+                }
+              }            
+            }
+          }
+          div{
+            height: 75px;
+            line-height: 75px;
+            text-align: right;
+            padding-right: 15px;
+            span{
+              color: #4DA9FA;
+              font-size: 24px;
+              font-weight: 600;
+            }
+            i{
+              display: inline-block;
+              width: 9px;
+              height: 18px;
+              @include bg-image('../../images/activity/arrowright');
+              margin-left: 15px;
+            }
+          }
+        }
+      }
+    }
+    //活动详情商家
+    .activityMerchant{
+      background: #F1F1F1;
+      padding: 20px;
+      >div{
+        background: white;
+        border-radius: 10px;
+        height: 600px;
+        padding: 20px 40px 20px 40px;
+        >div:first-of-type{
+          height: 210px;
+          >div:first-of-type{
+            height: 50px;
+            display: flex;
+            align-items: center;
+            >div:first-of-type{
+              width:170px;
+              display: flex;
+              align-items: center;
+              i{
+                display: inline-block;
+                width: 27px;
+                height: 27px;
+                @include bg-image('../../images/activity/merchantInfo');
+              }
+              span{
+                font-size: 28px;
+                color: #363636;
+                margin-left: 20px;
+                font-weight: 600;
+              }
+            }
+            >div:last-of-type{
+              flex: 1 1;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              i{
+                display: inline-block;
+                width: 24px;
+                height: 22px;
+                @include bg-image('../../images/activity/merchantReport');
+              }
+              span{
+                margin-left: 20px;
+                font-size: 24px;
+                color: #6C6C6C
+              }
+            }
+          }
+        }
+        p{
+          height: 72px;
+          border-bottom: $grayBorderBottom;
+          display: flex;
+          align-items: center;
+          span{
+            flex: 1 1;
+            font-size: 26px;
+          }
+          span:first-of-type{
+            text-align: left;
+            color: #5B5B5B;
+            font-weight: 600;
+          }
+          span:last-of-type{
+            text-align: right;
+            color: #6C6C6C      
+          }
+        }
+        p:last-of-type{
+          border-bottom: none;
+        }
+      }    
+    }
+    //活动详情评价
+    .activityEvaluate{
+      height: 640px;
+      overflow: hidden;
+      margin: 20px;
+      margin-bottom: 0;
+      >div{
+        
+      }
+    }
+    //底部点赞
+    >div:last-of-type{
+      height: 100px;
+      >ul{
+        display: flex;
+        height: 100%;
+        li{
+          flex: 1 1;
+          width: 50%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          i{
+            width: 27px;
+            height: 27px;
+            vertical-align: middle;
+          }
+          span{
+            margin-left: 20px;
+            color:#4DA9FA;
+            font-size: 28px;
+          }
+        }
+        li:first-of-type{
+          i{
+            @include bg-image('../../images/activity/willpointblue');
+          }
+        }
+        li:last-of-type{
+          i{
+            @include bg-image('../../images/activity/mypointblue');
+          }
+        }
+        .pointActive{
+          background: #4DA9FA;
+          span{
+            color: white;
+          }
+          .willpointActive{
+            @include bg-image('../../images/activity/willpointwhite');
+          }
+          .mypointActive{
+            @include bg-image('../../images/activity/mypointwhite');
+          }
+        }
+      }
+    }
+  }
+}
+//搜索框样式
+.am-search{
+  height: 60px;
+  background: none;
+}
+.am-search-input{
+  height: 60px;
+  border-radius: 60px;
+  background-color: #2287E1
+}
+.am-search-input .am-search-synthetic-ph{
+  height: 60px;
+  line-height: 60px;
+}
+.am-search-synthetic-ph-container{
+  display:inline-block;
+  height: 60px;
+}
+.am-search-input .am-search-synthetic-ph-placeholder{
+  display: inline-block;
+  color: white;
+  height: 60px;
+  font-size: 24px;
+  margin-left: 20px;
+  padding-top: 2px;
+}
+.am-search.am-search-start .am-search-input input[type='search']{
+  color: white;
+  font-size: 24px;
+  height: 60px;
+  padding: 0 3.73333vw 0 7.66667vw;
+}
+.am-search-input .am-search-synthetic-ph-icon{
+  width: 30px;
+  height: 30px;
+  background-size: 30px auto;
+  @include bg-image('../../images/activity/magnifier');
+}
+.am-search-cancel-show, .am-search-cancel{
+  font-size: 24px;
+  color: white;
+}
+.am-search-input .am-search-clear{
+  height: 4vw;
+  width: 4vw;
+  background-size: 4vw 4vw;
+  top: 8px;
+  right: 8px;
+}
+//pop
+.am-popover .am-popover-item-container{
+  padding: 5vw 3vw 5vw 3vw
+}
+.am-popover-item span{
+  font-size: 26px;
+}
+.am-popover-item-icon img{
+  display: none;
+}
+.am-popover .am-popover-item-icon{
+  width: 4vw;
+  height: 4vw;
+}
+
+
+.goldmedal .am-popover-item-icon{
+  @include bg-image('../../images/activity/goldmedal');
+}
+.silvermedal .am-popover-item-icon{
+  @include bg-image('../../images/activity/silvermedal');
+}
+.bronzemedal .am-popover-item-icon{
+  @include bg-image('../../images/activity/bronzemedal');
+}
