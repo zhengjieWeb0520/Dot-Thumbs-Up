@@ -2,6 +2,7 @@ import React from 'react'
 import { List, InputItem, Picker, DatePicker, ImagePicker } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
+import { previewImg } from '../../../utils/utils'
 
 class StaffAuthentication extends React.Component {
   constructor(props) {

@@ -850,7 +850,15 @@
               text-align: left;
               font-size: 28px;
               flex-basis: 170%;
+              color: #000;
             }
+          }
+
+          .am-input-clear{
+            width: 4.5vw;
+            height: 4.5vw;
+            background-position: 0.46667vw 0.46667vw;
+            background-size: 4.5vw auto; 
           }
         }
   
@@ -867,7 +875,6 @@
   
             .am-list-item{
               width: 70%;
-  
             }
           }
         }
@@ -908,6 +915,7 @@
             z-index: 1;
           }
   
+          /*
           &.positive .preview{
             @include bg-image('../../images/myInfo/identity_positive');
           }
@@ -915,6 +923,7 @@
           &.reverse .preview{
             @include bg-image('../../images/myInfo/identity_reverse');
           }
+          */
         }
       }
   
@@ -943,7 +952,6 @@
             top: 0;
             left: 0;
             z-index: 1;
-            @include bg-image('../../images/myInfo/bussiness_lisence');
           }
         }
       }
@@ -1077,6 +1085,7 @@
     left: auto; 
     position: static;
     font-size: 28px;
+    flex-basis: 50%;
   }
 
   .am-list .am-list-item .am-list-line{
@@ -1094,6 +1103,7 @@
     font-size: 28px;
     height: 88px;
     background: #fff;
+    color: #333;
     @include flexHorizen;
     border-bottom: $grayBorderBottom;
 
@@ -1116,12 +1126,69 @@
   .avatarBox{
     height: 150px;
     margin-bottom: 30px;
+    position: relative;
+
+    #avatarUpload{
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
 
     .content{
-      img{
+      #showAvatar{
         width: 80px;
         height: 80px;
+        border-radius: 50%;
       }
     }
   }
+}
+
+//设置详情
+.settingInput{
+  @include formStyle;
+
+  .tips{
+    color: #999;
+    line-height: 60px;
+    padding-left: 65px;
+    font-size: 24px;
+  }
+
+  .submitBtn{
+    @include submitBtn;
+  }
+
+  .sendCode{
+    background: #1981da;
+    padding: 11px;
+    font-size: 3.33333vw;
+    line-height: 30px;
+  }
+
+  .sendCode.disabled{
+    background: #ccc;
+    pointer-events: none;
+  }
+}
+
+//修改antd-mobie input警告样式
+.am-list-item.am-input-error .am-input-error-extra{
+  height: 4.5vw !important;
+  width: 4.5vw !important;
+  background-size: 4.5vw auto !important;
+}
+
+//修改antd-mobie toast弹出样式
+.am-toast-notice-content .am-toast-text{
+  padding: 3vw 3vw !important;
+  font-size: 20px;
+}
+
+.am-list-item.am-input-error .am-input-control input{
+  color: #000 !important;
 }

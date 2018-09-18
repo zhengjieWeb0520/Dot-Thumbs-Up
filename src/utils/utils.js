@@ -29,20 +29,20 @@ export function getChildNode(dom) {
 * @param type 类型，上一个(1)or下一个(0)
 * @return 返回查找到的元素Dom对象，无则返回null
 */
-// function getNearEle(ele, type) {
-//     type = type === 1 ? "previousSibling" : "nextSibling";
-//     var nearEle = ele[type];
-//     while(nearEle) {
-//       if(nearEle.nodeType === 1) {
-//         return nearEle;
-//       }
-//       nearEle = nearEle[type];
-//       if(!nearEle) {
-//         break;
-//       }
-//     }
-//     return null;
-//   }
+export function getNearEle(ele, type) {
+    type = type === 1 ? "previousSibling" : "nextSibling";
+    var nearEle = ele[type];
+    while(nearEle) {
+      if(nearEle.nodeType === 1) {
+        return nearEle;
+      }
+      nearEle = nearEle[type];
+      if(!nearEle) {
+        break;
+      }
+    }
+    return null;
+  }
 
 //判断两个对象是否相等
 export function ObjectEquals (object1,object2) {
@@ -416,6 +416,22 @@ export function initTime() {
   date.setDate(startDate)
   return date
 }
+
+/*
+预览图片
+@params
+inputId     input[file]的id
+*/
+export function previewImg(inputId) {
+  const inputFiles = document.getElementById(inputId)
+  const imgBox = getNearEle(inputFiles, 0)
+  let imgUrl
+  if(inputFiles.files.item(0)) {
+    imgUrl = window.URL.createObjectURL(inputFiles.files.item(0))
+    imgBox.src = imgUrl
+  }
+}
+
 /*
 服务器本地ip切换
 
