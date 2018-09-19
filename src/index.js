@@ -31,7 +31,9 @@ import thunk from 'redux-thunk'
 //reducer整合
 import reducers from './reducers'
 import registerServiceWorker from './registerServiceWorker';
+import initReactFastclick from 'react-fastclick'
 import './font/iconfont.css'
+initReactFastclick()
 
 export const store = createStore(reducers, compose(
   applyMiddleware(thunk),

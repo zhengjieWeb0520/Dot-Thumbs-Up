@@ -2,9 +2,7 @@ import React from 'react'
 import { List, InputItem, Picker, DatePicker, Toast } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
-import { previewImg } from '../../../utils/utils'
-import axios from 'axios'
-import qs from 'qs'
+import { previewImg, validatorPhone } from '../../../utils/utils'
 
 class BussinessAuthentication extends React.Component {
   constructor(props) {
@@ -63,8 +61,6 @@ class BussinessAuthentication extends React.Component {
 
   //提交表单
   submitForm = () => {
-    let abc = document.forms['fileinfo']
-    console.log(abc)
     const form = this.props.form
     let errors = form.getFieldsError()
     let error = false
@@ -103,9 +99,9 @@ class BussinessAuthentication extends React.Component {
         return
       }
       
-      let positive = document.forms['fileinfo'].positive.files[0]
-      let reverse = document.forms['fileinfo'].reverse.files[0]
-      let licence = document.forms['fileinfo'].licence.files[0]
+      let positive = document.forms['bussinessAuth'].positive.files[0]
+      let reverse = document.forms['bussinessAuth'].reverse.files[0]
+      let licence = document.forms['bussinessAuth'].licence.files[0]
       console.log(positive)
       if(!positive) {
         Toast.info('请选择身份证正面', 1)
@@ -136,14 +132,10 @@ class BussinessAuthentication extends React.Component {
       for(let key in allData) {
         data.append(key, allData[key])
       }
-      axios.post("/index/data", data)
-        .then((res) => {
-          console.log(res)
-        })
+      console.log(data)
     }else {
       Toast.info('填写有误', 1)
     }
-    
   }
 
   //商家名称验证
@@ -168,17 +160,6 @@ class BussinessAuthentication extends React.Component {
     }
   }
 
-  //手机号验证
-  validatorPhone = (rule, value, callback) => {
-    if(value) {
-      if (value.replace(/\s/g, '').length < 11) {
-        callback(new Error('请输入11位手机号'));
-      }else {
-        callback()
-      }
-    }
-  }
-
   
   //错误信息提示
   onErrorClick(type) {
@@ -197,14 +178,13 @@ class BussinessAuthentication extends React.Component {
       <div className="bussinessAuthentication bussinessAndStaff">
         <TopNavBar title="商家认证" rightContent={false} />
         <div className="AuthenticationBox">
-          <form name="fileinfo">
+          <form name="bussinessAuth">
           <div className="inputs">
             <List>
               <InputItem
                 {...getFieldProps('HosterName', {
                   rules: [
-                    { validator: this.validateHosterName
-                    }
+                    { validator: this.validateHosterName }
                   ]
                 })}
                 error={!!getFieldError('HosterName')}
@@ -216,8 +196,7 @@ class BussinessAuthentication extends React.Component {
               <InputItem
                 {...getFieldProps('CrewId', {
                   rules: [
-                    { validator: this.validatorCrewId
-                    }
+                    { validator: this.validatorCrewId }
                   ]
                 })}
                 error={!!getFieldError('CrewId')}
@@ -255,13 +234,13 @@ class BussinessAuthentication extends React.Component {
               <InputItem
                 {...getFieldProps('phone', {
                   rules: [
-                    {validator: this.validatorPhone}
+                    {validator: validatorPhone}
                   ]
                 })}
+                type="phone"
                 error={!!getFieldError('phone')}
                 onErrorClick={() =>this.onErrorClick('phone')}
                 clear
-                type="phone"
                 placeholder="联系电话"
               >
               </InputItem>
@@ -301,7 +280,7 @@ class BussinessAuthentication extends React.Component {
                 <Picker
                   data={this.state.bankBranchList}
                   cols={1}
-                  value={this.state.city}
+                  // value={this.state.city}
                   extra="分类二级"
                   {...getFieldProps('level2')}
                 >

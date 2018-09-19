@@ -1,77 +1,171 @@
 import React from 'react'
-import { List, InputItem, Picker, DatePicker, ImagePicker } from 'antd-mobile'
+import { List, InputItem, Toast, Picker } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
 import { previewImg } from '../../../utils/utils'
+import { sex } from '../settingPickerData/data'
 
 class StaffAuthentication extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       files: [],
-      cols: 1
+      cols: 1,
+      sexValue: ''
     }
   }
 
-  handleChange(type, val) {
-    if(type === 'positive' || type === 'reverse') {
-      this.setState({
-        positive: {'background' : 'url(' + val.target.value + ')'}
-      })
-    }
-    console.log(val)
-    console.log(val.target.value)
-    // this.setState({
-    //   [type]: val
-    // })
+  onPickerOk = (type, value) => {
+    this.setState({
+      sexValue: value
+    })
   }
+
+  //身份证正反面预览图片
+  handleChange = (type, val) => {
+    if(type === 'positive') {
+      previewImg("positive")
+    }else if(type === 'reverse') {
+      previewImg("reverse")
+    }
+  }
+
+  //错误信息提示
+  onErrorClick(type) {
+    if(type === 'HosterName') {
+      Toast.info('请输入5到16位字符', 1)
+    }else if(type === 'CrewId') {
+      Toast.info('请输入0到6位数字', 1)
+    }else if(type === 'phone') {
+      Toast.info('请输入11位手机号', 1)
+    }
+  }
+
+  //手机号验证
+  validatorPhone = (rule, value, callback) => {
+    if(value) {
+      if (value.replace(/\s/g, '').length < 11) {
+        callback(new Error('请输入11位手机号'));
+      }else {
+        callback()
+      }
+    }
+  }
+
+  //员工认证提交
+  submitForm = () => {
+    const form = this.props.form
+    let errors = form.getFieldsError()
+    let error = false
+    for(let key in errors) {
+      if(errors[key]) {
+        error = true
+      }
+    }
+
+    if(!error) {
+      let values = form.getFieldsValue()
+      console.log(values)
+      if(!values.userName) {
+        Toast.info('请填写员工姓名', 1)
+        return
+      }else if(!this.state.sexValue) {
+        Toast.info('请选择员工性别', 1)
+        return
+      }else if(!values.phone) {
+        Toast.info('填写联系电话', 1)
+        return
+      }
+      
+      let positive = document.forms['staffAuth'].positive.files[0]
+      let reverse = document.forms['staffAuth'].reverse.files[0]
+      if(!positive) {
+        Toast.info('请选择身份证正面', 1)
+        return
+      }else if(!reverse) {
+        Toast.info('请选择身份证反面', 1)
+        return
+      }
+      let data = new FormData()
+      let allData = {
+        'userName': values.userName,
+        'userSex': this.state.sexValue,
+        'phone': values.phone,
+        'positive': positive,
+        'reverse': reverse
+      }
+
+      for(let key in allData) {
+        data.append(key, allData[key])
+      }
+      console.log(data)
+    }else {
+      Toast.info('填写有误', 1)
+    }
+  }
+
   render() {
-    const { getFieldProps } = this.props.form
-    let positiveStyle = this.state.positive ? this.state.positive : {}
-    let reverseStyle = this.state.reverse ? this.state.reverse : {}
+    const { getFieldProps, getFieldError } = this.props.form
     return (
       <div className="staffAuthentication bussinessAndStaff">
         <TopNavBar title="员工认证" rightContent={false} />
         <div className="AuthenticationBox">
-          <div className="inputs">
-            <List>
-              <InputItem
-                {...getFieldProps('HosterName')}
-                clear
-                placeholder="姓名"
-                ref={el => (this.autoFocusInst = el)}
-              >
-              </InputItem>
-              <InputItem
-                {...getFieldProps('CrewId')}
-                clear
-                placeholder="性别"
-                ref={el => (this.autoFocusInst = el)}
-              >
-              </InputItem>
-              <InputItem
-                {...getFieldProps('phone')}
-                clear
-                type="number"
-                placeholder="联系电话"
-                ref={el => (this.autoFocusInst = el)}
-              >
-              </InputItem>
-            </List>
-          </div>
-          <div className="imgs">
+          <form name="staffAuth">
+            <div className="inputs">
+              <List>
+                <InputItem
+                  {...getFieldProps('userName')}
+                  clear
+                  placeholder="姓名"
+                >
+                </InputItem>
+                {/* <InputItem
+                  {...getFieldProps('userSex')}
+                  clear
+                  placeholder="性别"
+                >
+                </InputItem> */}
+                <Picker
+                  title="选择性别"
+                  extra="性别"
+                  data={sex}
+                  cols={1}
+                  value={this.state.sexValue}
+                  onOk={v => this.onPickerOk('sexValue', v)}
+                >
+                  <List.Item onClick={this.onClick}>
+                    <span className="justifyItem">性别</span>
+                  </List.Item>
+                </Picker>
+                <InputItem
+                  {...getFieldProps('phone', {
+                    rules: [
+                      {validator: this.validatorPhone}
+                    ]
+                  })}
+                  clear
+                  type="phone"
+                  error={!!getFieldError('phone')}
+                  placeholder="联系电话"
+                  onErrorClick={() =>this.onErrorClick('phone')}
+                >
+                </InputItem>
+              </List>
+            </div>
+            <div className="imgs">
             <div className="identity">
               <div className="positive img">
-                <input type="file" onChange={(val) => this.handleChange('positive', val)}/>
-                <div className="preview" style={positiveStyle}></div>
+              <input id="positive" type="file" name="positive" onChange={() => this.handleChange('positive')}/>
+                <img className="preview" src={require("../../../images/myInfo/identity_positive@2x.png")} alt="身份证正面"/>
               </div>
               <div className="reverse img">
-                <input type="file" onChange={(val) => this.handleChange('reverse', val)}/>
-                <div className="preview" style={reverseStyle}></div>
+              <input id="reverse" type="file" name="reverse" onChange={() => this.handleChange('reverse')}/>
+                <img className="preview" src={require("../../../images/myInfo/identity_reverse@2x.png")} alt="身份证正面"/>
               </div>
             </div>
           </div>
-          <div className="submitBtn">提交</div>
+          </form>
+          <div className="submitBtn" onClick={this.submitForm}>提交</div>
         </div>
       </div>
     )
