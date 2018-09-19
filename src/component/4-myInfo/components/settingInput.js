@@ -103,8 +103,9 @@ class PhoneChange extends React.Component {
 					<InputItem
 						clear
 						type="number"
-						placeholder="请输入收到的验证码"
-						extra={<SendCode />}
+						placeholder="请输入6位的验证码"
+            extra={<SendCode />}
+            maxLength="6"
 						onChange={val => this.handleChange('code', val)}
 						value={this.state.code}
 					/>

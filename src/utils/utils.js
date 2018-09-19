@@ -432,6 +432,28 @@ export function previewImg(inputId) {
   }
 }
 
+//表单手机号验证
+export const validatorPhone = (rule, value, callback) => {
+  if(value) {
+    if (value.replace(/\s/g, '').length < 11) {
+      callback(new Error('请输入11位手机号'))
+    }else {
+      callback()
+    }
+  }
+}
+
+//表单验证码验证
+export const validatorCode = (rule, value, callback) => {
+  if(value) {
+    if (value.replace(/\s/g, '').length < 6) {
+      callback(new Error('请输入6位验证码'))
+    }else {
+      callback()
+    }
+  }
+}
+
 /*
 服务器本地ip切换
 
