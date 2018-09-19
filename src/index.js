@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'antd-mobile/dist/antd-mobile.css'
 import './css/Reset.css';
 import './css/index.scss';
 import Main from './component/main';
@@ -22,6 +21,7 @@ import Involve from './component/4-myInfo/components/involve'
 import RecentView from './component/4-myInfo/components/recentView'
 import Voucher from './component/4-myInfo/components/voucher'
 import Setting from './component/4-myInfo/components/setting'
+import SettingInput from './component/4-myInfo/components/settingInput'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 //引入redux
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -60,7 +60,8 @@ ReactDOM.render(
           <Route path={`/changePassword`} component={ChangePassword}></Route>
           <Route path={`/aboutUs`} component={AboutUs}></Route>
           <Route path={`/userFeedBack`} component={UserFeedBack}></Route>
-          <Route path={`/setting`} component={Setting}></Route>
+          <Route path={`/setting`} exact component={Setting}></Route>
+          <Route path={`/setting/:type`} component={SettingInput}></Route>
         </Switch>
       </div>
     </HashRouter>
