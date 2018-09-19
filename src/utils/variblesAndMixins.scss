@@ -143,7 +143,20 @@
     }
   }
 }
-
+//评价五角星
+@mixin evaluateStar($width, $height) {
+  i{
+    display: inline-block;
+    width: $width;
+    height: $height;
+  }
+  .evaluateAllStar{
+    @include bg-image('../../images/activity/evaluatestar')
+  }
+  .evaluateHalfStar{
+    @include bg-image('../../images/activity/evaluatestar2')
+  }
+}
 //1px 灰色底部边框
 $grayBorderBottom: 1px solid #ebebeb;
 
