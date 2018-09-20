@@ -1,13 +1,20 @@
 import React from 'react'
 import { NavBar } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
+
 function Arrow() {
   return <span className="icon iconfont icon-jiantou1"></span>
 }
 
 class TopNavBar extends React.Component {
-  onLeftClick() {
+  onLeftClick = () => {
     this.props.history.goBack()
+  }
+
+  onRightClick = () => {
+    if(this.props.match.url === '/chooseBankCard/newBankCard') {
+      this.props.submitForm()
+    }
   }
 
   render() {
@@ -16,9 +23,9 @@ class TopNavBar extends React.Component {
         <NavBar
           mode="light"
           icon={<Arrow />}
-          onLeftClick={this.onLeftClick.bind(this)}
+          onLeftClick={this.onLeftClick}
           rightContent={[
-            this.props.rightContent ? <span className="sureBtn">{this.props.rightContent}</span> : null
+            this.props.rightContent ? <span className="sureBtn" key="0" onClick={this.onRightClick}>{this.props.rightContent}</span> : null
           ]}
         >
           {this.props.title}

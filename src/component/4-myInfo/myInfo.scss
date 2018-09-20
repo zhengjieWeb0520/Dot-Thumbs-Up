@@ -269,13 +269,10 @@
         li{
           overflow: hidden;
           width: 850px;
+          border-bottom: $grayBorderBottom;
 
           &:last-child{
-            span{
-              .content{
-                border-bottom: none;
-              }
-            }
+            border-bottom: none;
           }
 
           span{
@@ -292,7 +289,6 @@
               height: 100%;
               box-sizing: border-box;
               padding: 0 30px;
-              border-bottom: $grayBorderBottom;
               @include flexHorizen;
 
               .img{

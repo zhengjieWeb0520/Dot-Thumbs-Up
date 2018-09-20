@@ -11,7 +11,6 @@ class StaffAuthentication extends React.Component {
     this.state = {
       files: [],
       cols: 1,
-      sexValue: ''
     }
   }
 
@@ -56,10 +55,11 @@ class StaffAuthentication extends React.Component {
   submitForm = () => {
     const form = this.props.form
     let errors = form.getFieldsError()
-    let error = false
+    let error = ''
     for(let key in errors) {
       if(errors[key]) {
-        error = true
+        error = errors[key]
+        break
       }
     }
 
@@ -69,7 +69,7 @@ class StaffAuthentication extends React.Component {
       if(!values.userName) {
         Toast.info('请填写员工姓名', 1)
         return
-      }else if(!this.state.sexValue) {
+      }else if(!values.sexValue) {
         Toast.info('请选择员工性别', 1)
         return
       }else if(!values.phone) {
@@ -89,7 +89,7 @@ class StaffAuthentication extends React.Component {
       let data = new FormData()
       let allData = {
         'userName': values.userName,
-        'userSex': this.state.sexValue,
+        'userSex': values.sexValue,
         'phone': values.phone,
         'positive': positive,
         'reverse': reverse
@@ -100,7 +100,7 @@ class StaffAuthentication extends React.Component {
       }
       console.log(data)
     }else {
-      Toast.info('填写有误', 1)
+      Toast.info(error, 1)
     }
   }
 
@@ -119,19 +119,12 @@ class StaffAuthentication extends React.Component {
                   placeholder="姓名"
                 >
                 </InputItem>
-                {/* <InputItem
-                  {...getFieldProps('userSex')}
-                  clear
-                  placeholder="性别"
-                >
-                </InputItem> */}
                 <Picker
                   title="选择性别"
                   extra="性别"
                   data={sex}
                   cols={1}
-                  value={this.state.sexValue}
-                  onOk={v => this.onPickerOk('sexValue', v)}
+                  {...getFieldProps('sexValue')}
                 >
                   <List.Item onClick={this.onClick}>
                     <span className="justifyItem">性别</span>
