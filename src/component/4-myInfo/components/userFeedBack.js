@@ -33,11 +33,12 @@ class UserFeedBack extends React.Component {
     const form = this.props.form
     let errors = form.getFieldsError()
     let values = form.getFieldsValue()
-    let error = false
+    let error = ''
     let files = []
     for(let key in errors) {
       if(errors[key]) {
-        error = true
+        error = errors[key]
+        break
       }
     }
 
@@ -57,7 +58,7 @@ class UserFeedBack extends React.Component {
       console.log(files)
       console.log(values)
     }else {
-      Toast.info('填写有误', 1)
+      Toast.info(error, 1)
     }
   }
 

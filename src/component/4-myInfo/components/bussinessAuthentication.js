@@ -66,7 +66,8 @@ class BussinessAuthentication extends React.Component {
     let error = false
     for(let key in errors) {
       if(errors[key]) {
-        error = true
+        error = errors[key]
+        break
       }
     }
 
@@ -134,7 +135,7 @@ class BussinessAuthentication extends React.Component {
       }
       console.log(data)
     }else {
-      Toast.info('填写有误', 1)
+      Toast.info(error, 1)
     }
   }
 
