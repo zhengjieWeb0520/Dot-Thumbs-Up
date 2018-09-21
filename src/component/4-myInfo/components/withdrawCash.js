@@ -9,7 +9,6 @@ let moneyKeyboardWrapProps
 if (isIPhone) {
 	moneyKeyboardWrapProps = {
 		onTouchStart: e => e.preventDefault(),
-		onTouchEnd: e => e.preventDefault()
 	}
 }
 

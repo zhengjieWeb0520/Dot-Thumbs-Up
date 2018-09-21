@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 //异步中间件
 import thunk from 'redux-thunk'
 import registerServiceWorker from './registerServiceWorker';
-import initReactFastclick from 'react-fastclick'
 import Main from './component/main';
 import ChooseBankCard from './component/4-myInfo/components/chooseBankCard'
 import NewBackCard from './component/4-myInfo/components/newBankCard'
@@ -35,7 +34,6 @@ import './css/index.scss';
 //reducer整合
 import reducers from './reducers'
 import './font/iconfont.css'
-initReactFastclick()
 
 export const store = createStore(reducers, compose(
   applyMiddleware(thunk),

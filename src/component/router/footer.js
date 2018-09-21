@@ -8,7 +8,6 @@ class Footer extends Component{
     let navListLis = getChildNode(navListUl)
     //点击menu切换样式
     navListUl.addEventListener('click', function(e){
-      console.log(e)
       navListLis.forEach((item, index)=>{
         item.classList.remove('menuActive')
       })
