@@ -337,6 +337,43 @@
     }
     >div:first-of-type{
       height: 444px;
+      position: relative;
+      >div:last-of-type{
+        position: absolute;
+        height: 80px;
+        width: 100%;
+        top: 40px;
+        padding: 0 20px 0 20px;
+        display: flex;
+        align-items: center;
+        a{
+          display: inline-block;
+          width: 46px;
+          height: 46px;
+          @include bg-image('../../images/activity/goBack');
+        }
+        span:first-of-type{
+          flex: 1 1;
+        }
+        .collectionCondition{
+          width: 80px;
+        }
+        i{
+          display: inline-block;
+          width: 46px;
+          margin-left: 27px;
+          height: 46px;
+        }
+        .uncollection{
+          @include bg-image('../../images/activity/uncollection');
+        }
+        .collection{
+          @include bg-image('../../images/activity/collection');
+        }
+        .share{
+          @include bg-image('../../images/activity/share');
+        }
+      }
     }
     >div:nth-of-type(2){
       height: 124px;

@@ -1,0 +1,264 @@
+@import "./../../utils/variblesAndMixins";
+// 活动详情
+.merchantActivities{
+  height: 100vh;
+  overflow-y: auto;
+  >div{
+    overflow-y: auto;
+    >div{
+      background: white;
+    }
+    >div:first-of-type{
+      height: 444px;
+      position: relative;
+      >div:last-of-type{
+        position: absolute;
+        height: 80px;
+        width: 100%;
+        top: 40px;
+        padding: 0 20px 0 20px;
+        display: flex;
+        align-items: center;
+        a{
+          display: inline-block;
+          width: 46px;
+          height: 46px;
+          @include bg-image('../../images/activity/goBack');
+        }
+        span:first-of-type{
+          flex: 1 1;
+        }
+        .collectionCondition{
+          width: 80px;
+        }
+        i{
+          display: inline-block;
+          width: 46px;
+          margin-left: 27px;
+          height: 46px;
+        }
+        .uncollection{
+          @include bg-image('../../images/activity/uncollection');
+        }
+        .collection{
+          @include bg-image('../../images/activity/collection');
+        }
+        .share{
+          @include bg-image('../../images/activity/share');
+        }
+      }
+    }
+    >div:nth-of-type(2){
+      height: 124px;
+      display: flex;
+      padding: 20px 0 12px 20px;
+      >div:first-of-type{
+        width: 550px;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;
+          span:last-of-type{
+            margin-left: 20px;
+          }
+        }
+        p:first-of-type{
+          font-size: 28px;
+          color: black;
+          font-weight: 700;
+        }
+        p:last-of-type{
+          i{
+            display: inline-block;
+            width: 28px;
+            height: 20px;
+          }
+          .orangeStar{
+            @include bg-image('../../images/activity/pentagram1');
+          }
+          .grayStar{
+            @include bg-image('../../images/activity/pentagram2');
+          }
+          span{
+            margin-left: 20px;
+            font-size: 22px;
+            color: #9E9E9E;
+          }          
+        }
+      }
+      >div:last-of-type{
+        flex: 1 1;
+        display: flex;
+        flex-direction: column;
+        p{
+          flex: 1 1;
+          display: flex;
+          align-items: center;        
+        }
+        p:first-of-type{
+          >i{
+            display: inline-block;
+            width: 4vw;
+            height: 4vw;
+            margin-right: 10px;
+          }
+          .goldmedal{
+            @include bg-image('../../images/activity/goldmedal');
+          }
+          .silvermedal{
+            @include bg-image('../../images/activity/silvermedal');
+          }
+          .bronzemedal{
+            @include bg-image('../../images/activity/bronzemedal');
+          }
+          span{
+            font-size: 26px;
+          }
+        }
+        p:last-of-type{
+          >i{
+            width: 27px;
+            height: 27px;
+            vertical-align: middle;   
+            margin-right: 10px;
+            @include bg-image('../../images/activity/willpointblue');       
+          }
+          span{
+            font-size: 26px;
+            color: #4DA9FA
+          }
+        }
+      }
+    }
+  }
+}
+.merchantContent{
+  height:720px!important;
+  background: white;
+  border-radius: 10px;
+  margin: 20px;
+  overflow: hidden;
+  .merchantItemContent{
+    margin: 20px;
+    height: auto!important;
+    .merchantItem{
+      display: flex;
+      padding: 10px;
+      border-bottom: $grayBorderBottom;
+      >div:first-of-type{
+        flex: 1 1;
+        padding-top: 10px;
+        p{
+          margin-bottom: 6px;
+        }
+        p:first-of-type{
+          font-size: 26px;
+          color: #363636;
+          font-weight: 600;
+        }
+        p:nth-of-type(2){
+          i{
+            display: inline-block;
+            width: 28px;
+            height: 20px;
+          }
+          .orangeStar{
+            @include bg-image('../../images/activity/pentagram1');
+          }
+          .grayStar{
+            @include bg-image('../../images/activity/pentagram2');
+          }
+          span{
+            margin-left: 20px;
+            font-size: 22px;
+            color: #9E9E9E;
+          }
+        }
+        p:nth-of-type(3){
+          i{
+            display: inline-block;
+            width: 28px;
+            height: 20px;
+            @include bg-image('../../images/activity/willpointblue');
+          }
+          span{
+            margin-left: 16px;
+            font-size: 22px;
+            color: #9E9E9E;
+          }
+        }
+        p:last-of-type{
+          margin-top: 10px;
+          font-size: 22px;
+          color: #9E9E9E;
+        }
+      }
+      >div:nth-of-type(2){
+        width:268px;
+        text-align: right;
+        p{
+          i{
+            display: inline-block;
+            vertical-align: middle;
+            width:26px;
+            height:26px;
+            margin-right: 18px;
+          }
+          span{
+            font-size: 22px;
+            color: #797979;
+            span{
+              font-size: 28px;
+              margin: 0 5px 0 5px;
+            }
+            .rmb{
+              display: inline-block;
+              font-size: 24px;
+              margin: 0;
+              -webkit-transform:scale(0.8);
+              color: #797979!important;
+            }
+          }
+        }
+        p:last-of-type{
+          text-align: right;
+          margin-top: 5px;
+          font-size: 22px;
+          color: #9E9E9E;
+        }
+        .radiuOne{
+          i{
+            @include bg-image('../../images/activity/radiuone');
+          }
+          span{
+            span{
+              color: #FFBF6C 
+            }
+          }
+        }
+        .radiuTwo{
+          i{
+            @include bg-image('../../images/activity/radiutwo');
+          }
+          span{
+            span{
+              color: #8AD9CA
+            }
+          }
+        }
+        .radiuThree{
+          i{
+            @include bg-image('../../images/activity/radiuthree');
+          }
+          span{
+            span{
+              color: #EEB1B3
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { getChildNode } from './../../../utils/utils'
-
+import { Link } from 'react-router-dom'
 import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
@@ -9,7 +9,8 @@ class ActivityInfo extends React.Component{
   constructor(props){
     super(props)
     this.state= {
-      tabFlag: 0
+      tabFlag: 0,
+      collectCondition: ''
     }
   }
   componentDidMount(){
@@ -58,11 +59,50 @@ class ActivityInfo extends React.Component{
         break;
     }
   }
+  //收藏
+  collectClick(e){
+    console.log(e)
+    let _this = this
+    let collectDom = document.querySelector('.collectionCondition')
+    collectDom.style.display = 'block'
+    if(e.target.className === 'uncollection'){
+      e.target.classList.remove('uncollection')
+      e.target.classList.add('collection')
+      _this.setState({
+        collectCondition: '已收藏'
+      },()=>{
+        setTimeout(() => {
+          collectDom.style.display = 'none'
+        }, 1500);
+      })
+    }else if(e.target.className === 'collection'){
+      e.target.classList.remove('collection')
+      e.target.classList.add('uncollection')
+      _this.setState({
+        collectCondition: '已取消'
+      },()=>{
+        setTimeout(() => {
+          collectDom.style.display = 'none'
+        }, 1500);
+      })
+    }
+  }
   render(){
     return(
       <div id='ActivityInfo' className='activityInfo'>
         <div>
-          <div></div>
+          <div>
+            <div>
+              {/* 轮播图 */}
+            </div>
+            <div>
+              <Link to='/index'></Link>
+              <span></span>
+              <span className='collectionCondition'>{this.state.collectCondition}</span>
+              <i className='uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>
+              <i className='share'></i>
+            </div>
+          </div>
           <div>
             <div>
               <p>
