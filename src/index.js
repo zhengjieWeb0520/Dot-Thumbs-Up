@@ -15,6 +15,8 @@ import WithdrawCash from './component/4-myInfo/components/withdrawCash'
 import WithdrawRecord from './component/4-myInfo/components/withdrawRecord'
 //引入活动相关组件
 import ActivityInfo from './component/1-activity/activityContent/activityInfo'
+import MerchantPublish from './component/5-merchant/merchantPublish'
+import MerchantActivities from './component/5-merchant/merchantActivities'
 import SelectBankCard from './component/4-myInfo/components/selectBankCard'
 import BussinessAuthentication from './component/4-myInfo/components/bussinessAuthentication'
 import StaffAuthentication from './component/4-myInfo/components/staffAuthentication'
@@ -46,6 +48,8 @@ ReactDOM.render(
       <div id = "container">
         <Switch>
           <Route path='/index' component ={Main}></Route>
+          <Route path='/merchantPublish' component ={MerchantPublish}></Route>
+          <Route path='/merchantActivities' component ={MerchantActivities}></Route>
           <Route path='/collection' component ={Collection}></Route>
           <Route path='/involve' component ={Involve}></Route>
           <Route path='/recentView' component ={RecentView}></Route>

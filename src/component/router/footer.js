@@ -4,10 +4,11 @@ import { getChildNode } from './../../utils/utils'
 
 class Footer extends Component{
   componentDidMount(){
-    let navListUl = document.querySelector("footer ul")
+    let navListUl = document.querySelector(".footers ul")
     let navListLis = getChildNode(navListUl)
     //点击menu切换样式
     navListUl.addEventListener('click', function(e){
+      console.log(e)
       navListLis.forEach((item, index)=>{
         item.classList.remove('menuActive')
       })
@@ -23,7 +24,7 @@ class Footer extends Component{
   render(){
     const url = this.props.match.url
     return(
-      <footer>
+      <footer className="footers">
         <nav>
           <ul>
             <li id='menuActivity' className='menuActive'>
