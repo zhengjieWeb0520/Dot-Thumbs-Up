@@ -69,6 +69,7 @@ ReactDOM.render(
           <Route path={`/setting`} exact component={Setting}></Route>
           <Route path={`/setting/:type`} component={SettingInput}></Route>
         </Switch>
+        <div className='zhezhao'></div>
       </div>
     </HashRouter>
   </Provider>

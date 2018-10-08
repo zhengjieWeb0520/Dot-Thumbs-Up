@@ -23,6 +23,7 @@
     height: 98px;
     border-top: $grayBorderBottom;
     background: white;
+    z-index:9999;
     nav{
       ul{
         display: flex;
