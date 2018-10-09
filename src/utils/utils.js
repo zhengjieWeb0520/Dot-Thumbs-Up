@@ -458,5 +458,5 @@ export const validatorCode = (rule, value, callback) => {
 服务器本地ip切换
 
 */
-// export const serverIp = 'http://192.168.1.111:8081'
-export const serverIp = ''
+export const serverIp = 'http://jizanbao.com:8080'
+// export const serverIp = ''
