@@ -1,9 +1,8 @@
 import React from 'react'
 import TopNavBar from './topNavBar'
-import { SwipeAction, List } from 'antd-mobile'
+import { Index, getParents } from '../../../utils/utils'
 import { Link } from 'react-router-dom'
-const Item = List.Item
-const Brief = Item.Brief
+import $ from 'zepto'
 
 class ChooseBankCard extends React.Component {
 	constructor(props) {
@@ -29,51 +28,51 @@ class ChooseBankCard extends React.Component {
 	}
 
 	componentDidMount() {
-		let _this = this
-		let container = document.querySelectorAll('.chooseBankCard .card .swipeAction li span')
-		for (var i = 0; i < container.length; i++) {
-			var x, X
-			container[i].addEventListener('touchstart', function(event) {
-        //记录初始触控点横坐标
-				x = event.changedTouches[0].pageX
-      })
-      
-			container[i].addEventListener('touchmove', function(event) {
-        //记录当前触控点横坐标
-				X = event.changedTouches[0].pageX
-				if (_this.expansion) {
-					//判断是否展开，如果展开则收起
-					_this.expansion.className = ''
-        }
-        
-				if (X - x > 10) {
-					//右滑
-					this.className = '' //右滑收起
-				}
-				if (x - X > 10) {
-					//左滑
-					this.className = 'swipeleft' //左滑展开
-					_this.expansion = this
-				}
-			})
-    }
+    let x, X
+    let _this =this
+		$('.chooseBankCard .card .swipeAction').on('touchstart', 'span', function(e) {
+      //记录初始触控点横坐标
+      x = e.changedTouches[0].pageX
+    })
     
-    window.addEventListener('click', this.listRecovery)
+    $('.chooseBankCard .card .swipeAction').on('touchmove', 'span', function(e) {
+      //记录当前触控点横坐标
+      X = e.changedTouches[0].pageX
+      //判断是否展开，如果展开则收起
+      if(_this.expansion) {
+        _this.expansion.className = ''
+      }
+
+      if(x - X > 10) {
+        // 左滑展开
+        this.className = 'swipeleft'
+        _this.expansion = this
+      }
+
+      if(X - x > 10) {
+        //右滑收起
+        this.className = ""
+        _this.expansion = null
+      }
+		})
+
+		$(window).on('touchstart', this.listRecovery)
 	}
 
-  componentWillUnmount() {
-    window.removeEventListener('click', this.listRecovery)
-  }
+	componentWillUnmount() {
+    $(window).off('touchstart', this.listRecovery)
+	}
 
-  //列表恢复
-  listRecovery = () => {
-    if(this.expansion) {
-      this.expansion.className = ''
-    }
-  }
+	//列表恢复
+	listRecovery = () => {
+		if (this.expansion) {
+			this.expansion.className = ''
+		}
+	}
 
-  //侧滑删除当前项
-	handleDelete = id => {
+	//侧滑删除当前项
+	handleDelete = (e, id) => {
+    e.stopPropagation()
 		console.log(id)
 	}
 
@@ -90,18 +89,18 @@ class ChooseBankCard extends React.Component {
 							{this.state.data.map(item => {
 								return (
 									<li key={item.id}>
-										<span>
-                      <div className="content">
-                        <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
-                        <div className="bankInfo">
-                          <p className="bankName">{item.bankName}</p>
-                          <p className="cardNum">{item.cardNum}</p>
-                        </div>
-                        <div className="bankBranch">
-                          {item.bankBranch}
-                        </div>
-                      </div>
-											<i onClick={() => this.handleDelete(item.id)}></i>
+										<span className="wrapper">
+											<div className="content">
+												<div className="img">
+													<img src={require('../../../images/myInfo/icon_jianshe.png')} alt="" />
+												</div>
+												<div className="bankInfo">
+													<p className="bankName">{item.bankName}</p>
+													<p className="cardNum">{item.cardNum}</p>
+												</div>
+												<div className="bankBranch">{item.bankBranch}</div>
+											</div>
+											<i onClick={(e) => this.handleDelete(e, item.id)} />
 										</span>
 									</li>
 								)
