@@ -42,6 +42,33 @@ class ActivityInfo extends React.Component{
         })  
       }
     })
+
+    let navListUl = document.querySelector(".activityInfoFooter ul")
+    let navListLis = getChildNode(navListUl)
+    //点击底部切换样式
+    navListUl.addEventListener('click', function(e){
+      navListLis.forEach((item, index)=>{
+        item.classList.remove('pointActive')
+      })
+      if(e.target.tagName === 'LI'){
+        e.target.classList.add('pointActive')
+        if(e.target.textContent === '我要点赞'){
+          console.log(e.target.firstChild)
+          e.target.firstChild.classList.add('willpointActive')
+        }else if(e.target.textContent === '我的集赞'){
+          e.target.firstChild.classList.add('mypointActive')
+          _this.props.history.push('/index/participate');
+        }
+      }
+      if(e.target.tagName === 'I' || e.target.tagName === 'SPAN'){
+        e.target.parentNode.classList.add('pointActive')
+        if(e.target.parentNode.textContent === '我要点赞'){
+          e.target.parentNode.firstChild.classList.add('willpointActive')
+        }else if(e.target.parentNode.textContent === '我的集赞'){
+          e.target.parentNode.firstChild.classList.add('mypointActive')
+        }      
+      }
+    }, false)
   }
   switchContent(){
     switch(this.state.tabFlag){
