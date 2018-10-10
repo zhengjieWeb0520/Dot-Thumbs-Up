@@ -1,17 +1,18 @@
+// 举报商家
 import React from 'react'
 import { createForm } from 'rc-form'
-import TopNavBar from './topNavBar'
 import { ImagePicker, InputItem, List, Toast } from 'antd-mobile'
-import { validatorPhone } from '../../../utils/utils'
+import { validatorPhone } from '../../../../utils/utils'
+import TopNavBar from './../../../4-myInfo/components/topNavBar'
 
-class UserFeedBack extends React.Component {
-  constructor(props) {
+class ReportMerchant extends React.Component{
+  constructor(props){
     super(props)
-    this.state = {
+    this.submitForm = this.submitForm.bind(this)
+    this.state={
       files: []
     }
   }
-
   //错误信息提示
   onErrorClick(type) {
     if(type === 'phone') {
@@ -22,14 +23,12 @@ class UserFeedBack extends React.Component {
       Toast.info('密码需要大于6位', 1)
     }
   }
-
   onImgChange = (files, type, index) => {
     this.setState({
       files,
     })
   }
-
-  submitForm = () => {
+  submitForm =()=>{
     const form = this.props.form
     let errors = form.getFieldsError()
     let values = form.getFieldsValue()
@@ -61,19 +60,23 @@ class UserFeedBack extends React.Component {
       Toast.info(error, 1)
     }
   }
-
-  render() {
+  render(){
     const { getFieldProps, getFieldError } = this.props.form
-    return (
-      <div className="userFeedBack">
-        <TopNavBar title="用户反馈"/>
+    return(
+      <div id='ReportMerchant' className='reportMerchant userFeedBack'>
+        <TopNavBar title="举报商家"/>
+        <div className="merchantInfo">
+            <span>商家名称</span>
+            <span>重庆烤鱼</span>
+        </div>
         <div className="inputs">
           <div className="textarea">
-            <textarea 
-              cols="30" 
-              rows="10"
-              {...getFieldProps('feedBackText')}
-            ></textarea>
+              <textarea 
+                cols="30" 
+                rows="10"
+                placeholder="请输入举报内容以便我们尽快帮你解决...(必填)"
+                {...getFieldProps('feedBackText')}
+              ></textarea>
           </div>
           <div className="imagePick">
             <ImagePicker
@@ -83,12 +86,18 @@ class UserFeedBack extends React.Component {
               selectable={this.state.files.length < 3}
               accept="image/gif,image/jpeg,image/jpg,image/png"
             />
-            {this.state.files.length > 0 ? null : <span className="tips">添加图片说明</span>}
           </div>
         </div>
-
         <div className="phone">
           <List>
+            <InputItem
+              clear
+              type="name"
+              placeholder="便于我们联系你"
+              {...getFieldProps('name')}
+            >
+              <span className="justifyItem">联系人</span>：
+            </InputItem>
             <InputItem
               clear
               type="phone"
@@ -110,7 +119,5 @@ class UserFeedBack extends React.Component {
     )
   }
 }
-
-UserFeedBack = createForm()(UserFeedBack)
-
-export default UserFeedBack
+ReportMerchant = createForm()(ReportMerchant)
+export default ReportMerchant

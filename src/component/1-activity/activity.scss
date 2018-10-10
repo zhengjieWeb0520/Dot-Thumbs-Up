@@ -761,7 +761,7 @@
                 font-weight: 600;
               }
             }
-            >div:last-of-type{
+            >a:last-of-type{
               flex: 1 1;
               display: flex;
               justify-content: flex-end;
@@ -1001,6 +1001,23 @@
           }
         }
       }
+    }
+  }
+}
+//举报商家
+.reportMerchant{
+  .merchantInfo{
+    height:80px;
+    margin-bottom: 10px;
+    background: white;
+    line-height: 80px;
+    span:first-of-type{
+      font-size: 24px;
+    }
+    span:last-of-type{
+      margin-left: 40px;
+      font-size: 26px;
+      font-weight: 600
     }
   }
 }

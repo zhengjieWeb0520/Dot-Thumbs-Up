@@ -1,6 +1,10 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 class ActivityMerchant extends React.Component{
+  constructor(props){
+    super(props)
+  }
   render(){
     return(
       <div className='activityMerchant'>
@@ -11,10 +15,10 @@ class ActivityMerchant extends React.Component{
                 <i></i>
                 <span>商家信息</span>
               </div>
-              <div>
+              <Link to={'/reportMerchant'}>
                 <i></i>
                 <span>举报</span>
-              </div>
+              </Link>
             </div>
             <div>
               

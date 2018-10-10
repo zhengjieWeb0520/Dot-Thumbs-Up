@@ -36,7 +36,6 @@ class Activity extends React.Component{
           address: _this.loc.addr
         })
       }
-      
      }, false);
   }
   componentDidMount(){
