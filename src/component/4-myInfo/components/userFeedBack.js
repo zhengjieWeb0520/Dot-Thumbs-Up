@@ -3,6 +3,8 @@ import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
 import { ImagePicker, InputItem, List, Toast } from 'antd-mobile'
 import { validatorPhone } from '../../../utils/utils'
+import { connect } from 'react-redux'
+import { feedBackInfo } from './../../../redux/1-activiy/reportMerchantRedux'
 
 class UserFeedBack extends React.Component {
   constructor(props) {
@@ -57,6 +59,8 @@ class UserFeedBack extends React.Component {
       }
       console.log(files)
       console.log(values)
+      let reportPhone = values.phone.replace("%20", "").replace(" ", "").replace(" ", "")
+      this.props.feedBackInfo(values.feedBackText, files, values.name, reportPhone)
     }else {
       Toast.info(error, 1)
     }
@@ -89,6 +93,14 @@ class UserFeedBack extends React.Component {
 
         <div className="phone">
           <List>
+          <InputItem
+              clear
+              type="name"
+              placeholder="便于我们联系你"
+              {...getFieldProps('name')}
+            >
+              <span className="justifyItem">联系人</span>：
+            </InputItem>
             <InputItem
               clear
               type="phone"
@@ -112,5 +124,12 @@ class UserFeedBack extends React.Component {
 }
 
 UserFeedBack = createForm()(UserFeedBack)
+
+UserFeedBack = connect(
+	state => ({
+    reportMerchant: state.reportMerchant
+  }),
+	{ feedBackInfo }
+)(UserFeedBack)
 
 export default UserFeedBack

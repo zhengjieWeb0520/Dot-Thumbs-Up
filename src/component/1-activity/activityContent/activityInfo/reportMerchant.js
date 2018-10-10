@@ -3,6 +3,8 @@ import React from 'react'
 import { createForm } from 'rc-form'
 import { ImagePicker, InputItem, List, Toast } from 'antd-mobile'
 import { validatorPhone } from '../../../../utils/utils'
+import { connect } from 'react-redux'
+import { reportMerchantInfo } from '../../../../redux/1-activiy/reportMerchantRedux'
 import TopNavBar from './../../../4-myInfo/components/topNavBar'
 
 class ReportMerchant extends React.Component{
@@ -17,10 +19,6 @@ class ReportMerchant extends React.Component{
   onErrorClick(type) {
     if(type === 'phone') {
       Toast.info('请输入11位手机号', 1)
-    }else if(type === 'code') {
-      Toast.info('请输入6位验证码', 1)
-    }else if(type === 'password' || type === 'repeatPassword') {
-      Toast.info('密码需要大于6位', 1)
     }
   }
   onImgChange = (files, type, index) => {
@@ -42,7 +40,7 @@ class ReportMerchant extends React.Component{
     }
 
     if(!error) {
-      if(!values.feedBackText) {
+      if(!values.reportText) {
         Toast.info('请输入反馈内容', 1)
         return
       }else if(!values.phone) {
@@ -55,7 +53,9 @@ class ReportMerchant extends React.Component{
         })
       }
       console.log(files)
-      console.log(values)
+      console.log(values.phone)
+      let reportPhone = values.phone.replace("%20", "").replace(" ", "").replace(" ", "")
+      this.props.reportMerchantInfo(values.reportText, files, values.name, reportPhone, '652158')
     }else {
       Toast.info(error, 1)
     }
@@ -75,7 +75,7 @@ class ReportMerchant extends React.Component{
                 cols="30" 
                 rows="10"
                 placeholder="请输入举报内容以便我们尽快帮你解决...(必填)"
-                {...getFieldProps('feedBackText')}
+                {...getFieldProps('reportText')}
               ></textarea>
           </div>
           <div className="imagePick">
@@ -120,4 +120,12 @@ class ReportMerchant extends React.Component{
   }
 }
 ReportMerchant = createForm()(ReportMerchant)
+
+ReportMerchant = connect(
+	state => ({
+    reportMerchant: state.reportMerchant
+  }),
+	{ reportMerchantInfo }
+)(ReportMerchant)
+
 export default ReportMerchant

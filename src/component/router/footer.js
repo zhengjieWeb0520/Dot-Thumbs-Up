@@ -39,6 +39,12 @@ class Footer extends Component{
                 <p>参与</p>
               </Link>
             </li>
+            <li id='menuParticipate'>
+              <Link to={`/publish`}>
+                <span className='img'></span>
+                <p>发布</p>
+              </Link>
+            </li>
             <li id='menuMyInfo'>
               <Link to={`${url}/myInfo`}>
                 <span className='img'></span>
