@@ -86,7 +86,12 @@ class ChangePassword extends React.Component {
 							clear
 							type="number"
 							placeholder="请输入6位的验证码"
-							extra={<SendCode />}
+							extra={
+                <SendCode 
+                  phone={this.props.form.getFieldsValue().phone}
+                  type={'reset_password'}
+                />
+              }
 							maxLength="6"
 							error={!!getFieldError('code')}
 							onErrorClick={() => this.onErrorClick('code')}
