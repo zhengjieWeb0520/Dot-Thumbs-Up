@@ -21,8 +21,8 @@ class Activity extends React.Component{
     }
   }
   componentWillMount(){
-    let tokenStr = 9539
-    let user_id = 652157
+    let tokenStr = '9539'
+    let user_id = '652157'
     window.sessionStorage.setItem('token', tokenStr)
     window.sessionStorage.setItem('user_id', user_id)
     let _this = this  

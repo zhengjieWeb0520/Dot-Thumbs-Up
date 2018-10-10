@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { createForm } from 'rc-form'
 import { List, InputItem, Picker, Toast } from 'antd-mobile'
 import { validatorCode, validatorPhone } from '../../../utils/utils'
 import SendCode from './sendCode'
 import TopNavBar from './topNavBar'
+import { addBankCard } from '../../../redux/4-myinfo/backCardRedux'
 
 class NewBankCard extends React.Component {
 	constructor(props) {
@@ -88,19 +90,20 @@ class NewBankCard extends React.Component {
 
 	//提交新银行卡表单
 	submitForm = () => {
+		this.props.addBankCard()
 		const form = this.props.form
 		let errors = form.getFieldsError()
 		let values = form.getFieldsValue()
-    let error = ''
+		let error = ''
 		for (let key in errors) {
 			if (errors[key]) {
-        error = errors[key]
-        break
+				error = errors[key]
+				break
 			}
 		}
 
 		if (!error) {
-      if (!values.HosterName) {
+			if (!values.HosterName) {
 				Toast.info('请输入持卡人姓名', 1)
 				return
 			} else if (!values.HosterNumber) {
@@ -115,14 +118,16 @@ class NewBankCard extends React.Component {
 			} else if (!values.bankValue) {
 				Toast.info('请选择银行', 1)
 				return
-			} else if (!values.bankBranchValue) {
-				Toast.info('请选择支行', 1)
-				return
-			} else if (!values.HosterCardNum) {
+      } 
+      // else if (!values.bankBranchValue) {
+			// 	Toast.info('请选择支行', 1)
+			// 	return
+      // } 
+      else if (!values.HosterCardNum) {
 				Toast.info('请输入银行卡号', 1)
 				return
-      }
-      console.log(values)
+			}
+			console.log(values)
 		} else {
 			Toast.info(error, 1)
 		}
@@ -185,7 +190,7 @@ class NewBankCard extends React.Component {
 							{...getFieldProps('HosterCode', {
 								rules: [{ validator: validatorCode }]
 							})}
-							extra={<SendCode />}
+							extra={<SendCode phone={this.props.form.getFieldsValue().HosteTel} type={'add_bank_card'} />}
 						>
 							<span className="justifyItem">验证码</span>：
 						</InputItem>
@@ -195,24 +200,24 @@ class NewBankCard extends React.Component {
 							data={this.state.bankList}
 							cols={this.state.cols}
 							value={this.state.bankValue}
-              onOk={val => this.onPickerOk('bankValue', val)}
-              {...getFieldProps('bankValue')}
+							onOk={val => this.onPickerOk('bankValue', val)}
+							{...getFieldProps('bankValue')}
 						>
 							<List.Item arrow="horizontal" onClick={this.onClick}>
 								<span className="justifyItem">银行</span>：
 							</List.Item>
 						</Picker>
-						<Picker
+						{/* <Picker
 							data={this.state.bankBranchList}
 							cols={this.state.cols}
 							value={this.state.bankBranchValue}
-              onOk={val => this.onPickerOk('bankBranchValue', val)}
-              {...getFieldProps('bankBranchValue')}
+							onOk={val => this.onPickerOk('bankBranchValue', val)}
+							{...getFieldProps('bankBranchValue')}
 						>
 							<List.Item arrow="horizontal" onClick={this.onClick}>
 								<span className="justifyItem">支行</span>：
 							</List.Item>
-						</Picker>
+						</Picker> */}
 						<InputItem
 							clear
 							type="bankCard"
@@ -233,5 +238,10 @@ class NewBankCard extends React.Component {
 	}
 }
 NewBankCard = createForm()(NewBankCard)
+
+NewBankCard = connect(
+	state => state.backCard,
+	{ addBankCard }
+)(NewBankCard)
 
 export default NewBankCard

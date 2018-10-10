@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import TopNavBar from './topNavBar'
 import { Index, getParents } from '../../../utils/utils'
 import { Link } from 'react-router-dom'
 import $ from 'zepto'
+import { getBankCardList } from '../../../redux/4-myinfo/backCardRedux'
 
 class ChooseBankCard extends React.Component {
 	constructor(props) {
@@ -27,40 +29,45 @@ class ChooseBankCard extends React.Component {
 		}
 	}
 
+	componentWillMount() {
+		this.props.getBankCardList()
+		console.log(this.props)
+	}
+
 	componentDidMount() {
-    let x, X
-    let _this =this
+		let x, X
+		let _this = this
 		$('.chooseBankCard .card .swipeAction').on('touchstart', 'span', function(e) {
-      //记录初始触控点横坐标
-      x = e.changedTouches[0].pageX
-    })
-    
-    $('.chooseBankCard .card .swipeAction').on('touchmove', 'span', function(e) {
-      //记录当前触控点横坐标
-      X = e.changedTouches[0].pageX
-      //判断是否展开，如果展开则收起
-      if(_this.expansion) {
-        _this.expansion.className = ''
-      }
+			//记录初始触控点横坐标
+			x = e.changedTouches[0].pageX
+		})
 
-      if(x - X > 10) {
-        // 左滑展开
-        this.className = 'swipeleft'
-        _this.expansion = this
-      }
+		$('.chooseBankCard .card .swipeAction').on('touchmove', 'span', function(e) {
+			//记录当前触控点横坐标
+			X = e.changedTouches[0].pageX
+			//判断是否展开，如果展开则收起
+			if (_this.expansion) {
+				_this.expansion.className = ''
+			}
 
-      if(X - x > 10) {
-        //右滑收起
-        this.className = ""
-        _this.expansion = null
-      }
+			if (x - X > 10) {
+				// 左滑展开
+				this.className = 'swipeleft'
+				_this.expansion = this
+			}
+
+			if (X - x > 10) {
+				//右滑收起
+				this.className = ''
+				_this.expansion = null
+			}
 		})
 
 		$(window).on('touchstart', this.listRecovery)
 	}
 
 	componentWillUnmount() {
-    $(window).off('touchstart', this.listRecovery)
+		$(window).off('touchstart', this.listRecovery)
 	}
 
 	//列表恢复
@@ -72,7 +79,7 @@ class ChooseBankCard extends React.Component {
 
 	//侧滑删除当前项
 	handleDelete = (e, id) => {
-    e.stopPropagation()
+		e.stopPropagation()
 		console.log(id)
 	}
 
@@ -86,25 +93,27 @@ class ChooseBankCard extends React.Component {
 					</div>
 					<div className="card">
 						<ul className="swipeAction">
-							{this.state.data.map(item => {
-								return (
-									<li key={item.id}>
-										<span className="wrapper">
-											<div className="content">
-												<div className="img">
-													<img src={require('../../../images/myInfo/icon_jianshe.png')} alt="" />
-												</div>
-												<div className="bankInfo">
-													<p className="bankName">{item.bankName}</p>
-													<p className="cardNum">{item.cardNum}</p>
-												</div>
-												<div className="bankBranch">{item.bankBranch}</div>
-											</div>
-											<i onClick={(e) => this.handleDelete(e, item.id)} />
-										</span>
-									</li>
-								)
-							})}
+							{this.props.cardList.length !== 0
+								? this.props.cardList.map(item => {
+										return (
+											<li key={item.card_id}>
+												<span className="wrapper">
+													<div className="content">
+														<div className="img">
+															<img src={item.bank_icon} alt="" />
+														</div>
+														<div className="bankInfo">
+															<p className="bankName">{item.bank_name}</p>
+															<p className="cardNum">{item.card_id}</p>
+														</div>
+														<div className="bankBranch">{item.bank_address}</div>
+													</div>
+													<i onClick={e => this.handleDelete(e, item.id)} />
+												</span>
+											</li>
+										)
+								  })
+								: null}
 						</ul>
 					</div>
 					<div className="addCard">
@@ -115,5 +124,10 @@ class ChooseBankCard extends React.Component {
 		)
 	}
 }
+
+ChooseBankCard = connect(
+	state => state.backCard,
+	{ getBankCardList }
+)(ChooseBankCard)
 
 export default ChooseBankCard
