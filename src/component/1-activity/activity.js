@@ -1,5 +1,6 @@
 import React from 'react'
 import './activity.scss'
+import './common.scss'
 import { SearchBar, Popover } from 'antd-mobile'
 import { getChildNode } from './../../utils/utils'
 import goldmedal from './../../images/activity/goldmedal@2x.png'
