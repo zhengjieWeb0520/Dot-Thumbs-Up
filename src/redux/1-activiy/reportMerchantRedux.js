@@ -33,55 +33,24 @@ export function reportMerchantInfo(content, img_urls, name, phone, to_user_id) {
     phone: phone,
     to_user_id: to_user_id
   })
-  console.log(img_urls[0])
-  let data2 = new FormData()
-  data2.append("inputFile", img_urls[0])
-  data2.append("title","thisAGoodTitle")
-  console.log(data2)
 	return dispatch => {
-    $.ajax({
-      url:serverIp + '/dianzanbao/sys/file/saveImg.do',
-      type:"post",
-      data:data2,
-      processData:false,
-      contentType:false,
-      success:function(data){
-          console.log(data);
-      },
-      error:function(e){
-          alert("错误！！");
-      }
-  });
-    // axios.post(
-    //   serverIp + '/dianzanbao/sys/file/saveImg.do',
-    //   data2,
-    //   {
-    //     headers: {
-    //       token: window.sessionStorage.getItem('token'),
-    //       user_id: window.sessionStorage.getItem('user_id'),
-    //       'Content-Type': 'multipart/form-data'
-    //     }
-    //   }
-    // ).then(res => {
-    //   console.log(res)
-    // })
-		// axios
-    //   .post(
-    //     serverIp + '/dianzanbao/report/accusation.do', 
-    //     data,
-    //     {
-    //       headers: {
-    //         token: window.sessionStorage.getItem('token'),
-    //         user_id: window.sessionStorage.getItem('user_id')
-    //       }
-		// 	  })
-    //     .then(res => {
-    //       console.log(res)
-    //       if (res.data.result_code === '0') {
-    //         dispatch({ type: REPORTMERCHANT, data: res.data.result_info })
-    //         Toast.info(res.data.result_info, 1)
-    //       }
-    //     })
+		axios
+      .post(
+        serverIp + '/dianzanbao/report/accusation.do', 
+        data,
+        {
+          headers: {
+            token: window.sessionStorage.getItem('token'),
+            user_id: window.sessionStorage.getItem('user_id')
+          }
+			  })
+        .then(res => {
+          console.log(res)
+          if (res.data.result_code === '0') {
+            dispatch({ type: REPORTMERCHANT, data: res.data.result_info })
+            Toast.info(res.data.result_info, 1)
+          }
+        })
 	}
 }
 

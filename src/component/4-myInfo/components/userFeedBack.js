@@ -2,13 +2,16 @@ import React from 'react'
 import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
 import { ImagePicker, InputItem, List, Toast } from 'antd-mobile'
-import { validatorPhone } from '../../../utils/utils'
+import { validatorPhone, serverIp } from '../../../utils/utils'
 import { connect } from 'react-redux'
+import axios from 'axios'
 import { feedBackInfo } from './../../../redux/1-activiy/reportMerchantRedux'
 
 class UserFeedBack extends React.Component {
   constructor(props) {
     super(props)
+    this.submitForm = this.submitForm.bind(this)
+    this.uploadFiles = []
     this.state = {
       files: []
     }
@@ -18,16 +21,42 @@ class UserFeedBack extends React.Component {
   onErrorClick(type) {
     if(type === 'phone') {
       Toast.info('请输入11位手机号', 1)
-    }else if(type === 'code') {
-      Toast.info('请输入6位验证码', 1)
-    }else if(type === 'password' || type === 'repeatPassword') {
-      Toast.info('密码需要大于6位', 1)
     }
   }
 
   onImgChange = (files, type, index) => {
+    let _this = this
     this.setState({
       files,
+    },()=>{
+      let fileData = this.state.files.length > 0 ? this.state.files[this.state.files.length - 1] : {}
+      // console.log(files)
+      // console.log(type)
+      console.log(index)
+      console.log(fileData)
+      if(type === 'add'){
+        let data = new FormData()
+        data.append('image_file', fileData.file)
+        console.log(data)
+        axios.post(
+          serverIp + '/dianzanbao/sys/file/saveImg.do',
+          data,
+          {
+            headers: {
+              token: window.sessionStorage.getItem('token'),
+              user_id: window.sessionStorage.getItem('user_id'),
+              //'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(res => {
+          console.log(res)
+          if(res.data.result_code === "0"){
+            _this.uploadFiles.push(res.data.result_info)
+          }
+        })
+      }else if(type === 'remove'){      
+        this.uploadFiles.splice(index, 1)
+      }     
     })
   }
 
@@ -60,7 +89,16 @@ class UserFeedBack extends React.Component {
       console.log(files)
       console.log(values)
       let reportPhone = values.phone.replace("%20", "").replace(" ", "").replace(" ", "")
-      this.props.feedBackInfo(values.feedBackText, files, values.name, reportPhone)
+      let img_urls = ""
+      this.uploadFiles.forEach((item, index)=>{
+        if(index !== this.uploadFiles.length - 1){
+          img_urls = img_urls + item + ','
+        }else{
+          img_urls = img_urls + item
+        }
+      })
+      console.log(img_urls)
+      this.props.feedBackInfo(values.feedBackText, img_urls, values.name, reportPhone)
     }else {
       Toast.info(error, 1)
     }

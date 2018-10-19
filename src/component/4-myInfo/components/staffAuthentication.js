@@ -33,6 +33,7 @@ class StaffAuthentication extends React.Component {
 			// })
 			let data = new FormData()
       data.append('image_file', document.forms['staffAuth'].positive.files[0])
+      console.log(document.forms['staffAuth'].positive.files[0])
 			axios
 				.post(serverIp + '/dianzanbao/sys/file/saveImg.do', data, {
 					headers: {
