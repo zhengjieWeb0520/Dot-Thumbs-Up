@@ -454,6 +454,22 @@ export const validatorCode = (rule, value, callback) => {
 	}
 }
 
+//上传单张图片
+export function uploadSingleImg(axios, img, callback) {
+	let data = new FormData()
+	data.append('image_file', img)
+	axios
+		.post(serverIp + '/dianzanbao/sys/file/saveImg.do', data, {
+			headers: {
+				token: window.sessionStorage.getItem('token'),
+				user_id: window.sessionStorage.getItem('user_id')
+			}
+		})
+		.then(res => {
+      callback(res.data.result_info)
+		})
+}
+
 /*
 服务器本地ip切换
 

@@ -4,8 +4,7 @@ import { createForm } from 'rc-form'
 import TopNavBar from './topNavBar'
 import axios from 'axios'
 import qs from 'qs'
-import { serverIp } from '../../../utils/utils'
-import { previewImg } from '../../../utils/utils'
+import { uploadSingleImg, serverIp, previewImg } from '../../../utils/utils'
 import { sex } from '../settingPickerData/data'
 
 class StaffAuthentication extends React.Component {
@@ -25,26 +24,21 @@ class StaffAuthentication extends React.Component {
 
 	//身份证正反面预览图片
 	handleChange = (type, val) => {
+		let _this = this
 		if (type === 'positive') {
-			console.log('change')
+			let positive = document.forms['staffAuth'].positive.files[0]
 			previewImg('positive')
-			// let data = qs.stringify({
-			// 	image_file: document.forms['staffAuth'].positive.files[0]
-			// })
-			let data = new FormData()
-      data.append('image_file', document.forms['staffAuth'].positive.files[0])
-			axios
-				.post(serverIp + '/dianzanbao/sys/file/saveImg.do', data, {
-					headers: {
-						token: window.sessionStorage.getItem('token'),
-						user_id: window.sessionStorage.getItem('user_id')
-					}
-				})
-				.then(res => {
-					console.log(res)
-				})
+
+			uploadSingleImg(axios, positive, function(imgUrl) {
+				_this.positive = imgUrl
+			})
 		} else if (type === 'reverse') {
+			let reverse = document.forms['staffAuth'].reverse.files[0]
 			previewImg('reverse')
+
+			uploadSingleImg(axios, reverse, function(imgUrl) {
+				_this.reverse = imgUrl
+			})
 		}
 	}
 
@@ -84,14 +78,15 @@ class StaffAuthentication extends React.Component {
 
 		if (!error) {
 			let values = form.getFieldsValue()
-			console.log(values)
 			if (!values.userName) {
 				Toast.info('请填写员工姓名', 1)
 				return
-			} else if (!values.sexValue) {
-				Toast.info('请选择员工性别', 1)
-				return
-			} else if (!values.phone) {
+			}
+			// else if (!values.sexValue) {
+			// 	Toast.info('请选择员工性别', 1)
+			// 	return
+			// }
+			else if (!values.phone) {
 				Toast.info('填写联系电话', 1)
 				return
 			}
@@ -105,22 +100,36 @@ class StaffAuthentication extends React.Component {
 				Toast.info('请选择身份证反面', 1)
 				return
 			}
-			let data = new FormData()
 			let allData = {
-				userName: values.userName,
-				userSex: values.sexValue,
-				phone: values.phone,
-				positive: positive,
-				reverse: reverse
+				real_name: values.userName,
+				// userSex: values.sexValue,
+        phone: values.phone.replace(/\s+/g, ""),
+				id_card_front_url: this.positive,
+				id_card_background_url: this.reverse
 			}
-
-			for (let key in allData) {
-				data.append(key, allData[key])
-			}
-			console.log(data)
+			this.staffAuthRequest(allData)
 		} else {
 			Toast.info(error, 1)
 		}
+	}
+
+	//发送员工认证请求
+	staffAuthRequest(allData) {
+		let data = qs.stringify({
+			real_name: allData.real_name,
+			phone: allData.phone,
+			id_card_front_url: allData.id_card_front_url,
+			id_card_background_url: allData.id_card_background_url
+			// id_card_front_url: 'https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/201810151700089377231284.jpg',
+		})
+		axios
+			.post(serverIp + '/dianzanbao/userInfo/personRealNameAuth.do', data, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
+				}
+			})
+			.then(res => {})
 	}
 
 	render() {
@@ -133,11 +142,11 @@ class StaffAuthentication extends React.Component {
 						<div className="inputs">
 							<List>
 								<InputItem {...getFieldProps('userName')} clear placeholder="姓名" />
-								<Picker title="选择性别" extra="性别" data={sex} cols={1} {...getFieldProps('sexValue')}>
+								{/* <Picker title="选择性别" extra="性别" data={sex} cols={1} {...getFieldProps('sexValue')}>
 									<List.Item onClick={this.onClick}>
 										<span className="justifyItem">性别</span>
 									</List.Item>
-								</Picker>
+								</Picker> */}
 								<InputItem
 									{...getFieldProps('phone', {
 										rules: [{ validator: this.validatorPhone }]
