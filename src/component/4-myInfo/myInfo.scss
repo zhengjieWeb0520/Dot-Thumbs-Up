@@ -64,7 +64,12 @@
           width: 33.333%;
           text-align: center;
 
-          .icon{
+          a{
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+
+            .icon{
             display: inline-block;
             width: 60px;
             height: 60px;
@@ -76,6 +81,7 @@
             line-height: 24px;
             color: #323232;
             margin-top: 15px;
+          }
           }
         }
 
@@ -846,6 +852,8 @@
     .imgs{
       height: 476px;
       background: #fff;
+      box-sizing: border-box;
+      padding-top: 30px;
     }
   }
 }
@@ -914,7 +922,7 @@
           }
         }
   
-        .timePick, .regionPicker{
+        .timePick, .levelPicker{
           div{
             width: 50%;
             float: left;
@@ -927,6 +935,22 @@
   
             .am-list-item{
               width: 70%;
+            }
+          }
+        }
+
+        .regionPicker{
+          div{
+            width: 33%;
+            float: left;
+            
+  
+            .am-list-item{
+              width: 100%;
+
+              .am-list-extra{
+                text-align: center !important;
+              }
             }
           }
         }
@@ -1213,6 +1237,35 @@
 
   .submitBtn{
     @include submitBtn;
+  }
+}
+
+//收藏
+.collection{
+  .topNav{
+    margin-bottom: 20px;
+    
+    span{
+      width: 50%;
+      text-align: center;
+      line-height: 80px;
+      display: inline-block;
+      background: #fff;
+      font-size: 30px;
+
+      &.select{
+        background: #4ca8fb;
+        color: #fff;
+      }
+    }
+  }
+
+  .contentList{
+    background: #fff;
+
+    .activityContent{
+      height: 1100px;
+    }
   }
 }
 

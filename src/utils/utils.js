@@ -454,23 +454,22 @@ export const validatorCode = (rule, value, callback) => {
 	}
 }
 
-/**
-*删除数组指定下标或指定对象
-*/
-// export function removeItem(obj) {
-//   for(var i =0;i <this.length;i++){
-//     var temp = this[i];
-//     if(!isNaN(obj)){
-//       temp=i;
-//     }
-//     if(temp == obj){
-//       for(var j = i;j <this.length;j++){
-//       this[j]=this[j+1];
-//       }
-//       this.length = this.length-1;
-//     }
-//   }
-// }
+//上传单张图片
+export function uploadSingleImg(axios, img, callback) {
+	let data = new FormData()
+	data.append('image_file', img)
+	axios
+		.post(serverIp + '/dianzanbao/sys/file/saveImg.do', data, {
+			headers: {
+				token: window.sessionStorage.getItem('token'),
+				user_id: window.sessionStorage.getItem('user_id')
+			}
+		})
+		.then(res => {
+      callback(res.data.result_info)
+		})
+}
+
 /*
 服务器本地ip切换
 
