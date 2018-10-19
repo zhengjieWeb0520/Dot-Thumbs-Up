@@ -1,9 +1,10 @@
 import React from 'react'
+import axios from 'axios'
 import { createForm } from 'rc-form'
 import BScroll from 'better-scroll'
 import { InputItem, List, Toast, DatePicker , ImagePicker} from 'antd-mobile'
 import { Radio } from 'antd'
-import { getChildNode } from './../../utils/utils'
+import { getChildNode, serverIp } from './../../utils/utils'
 import TopNavBar from './../4-myInfo/components/topNavBar'
 import './publish.scss'
 
@@ -11,6 +12,7 @@ const RadioGroup = Radio.Group;
 class PublishActivity extends React.Component{
   constructor(props){
     super(props)
+    this.uploadFiles = []  //活动图片的参数
     this.state={
       startDate: '',
       endDate: '',
@@ -213,6 +215,36 @@ class PublishActivity extends React.Component{
       rankingData: rankingData
     })
   }
+  //上传图片
+  onImageClick = (files, type, index) => {
+    let _this = this
+    this.setState({
+      files,
+    }, ()=>{
+      let fileData = this.state.files.length > 0 ? this.state.files[this.state.files.length - 1] : {}
+      if(type === 'add'){
+        let data = new FormData()
+        data.append('image_file', fileData.file)
+        console.log(data)
+        axios.post(
+          serverIp + '/dianzanbao/sys/file/saveImg.do',
+          data,
+          {
+            headers: {
+              token: window.sessionStorage.getItem('token'),
+              user_id: window.sessionStorage.getItem('user_id'),
+            }            
+          }
+        ).then(res => {
+          if(res.data.result_code === "0"){
+            _this.uploadFiles.push(res.data.result_info)
+          }
+        })
+      }else if(type === 'remove'){
+        this.uploadFiles.splice(index, 1)
+      }
+    })
+  }
   submitForm =()=>{
 
   }
@@ -245,7 +277,7 @@ class PublishActivity extends React.Component{
                   <ImagePicker
                     files={this.state.files}
                     onChange={this.onImgChange}
-                    //onImageClick={(index, fs) => console.log(index, fs)}
+                    onImageClick={(index, fs) => console.log(index, fs)}
                     selectable={this.state.files.length < 3}
                     accept="image/gif,image/jpeg,image/jpg,image/png"
                   />

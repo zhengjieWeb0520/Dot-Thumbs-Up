@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { getChildNode } from './../../utils/utils'
+import { connect } from 'react-redux'
+import { getChildNode, ObjectEquals} from './../../utils/utils'
 
 class Footer extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      user_role_id : 0
+    }
+  }
   componentDidMount(){
     let navListUl = document.querySelector(".footers ul")
     let navListLis = getChildNode(navListUl)
@@ -21,7 +28,17 @@ class Footer extends Component{
       }
     }, false)
   }
+  componentWillReceiveProps(nextProps){
+    console.log(this.props)
+    console.log(nextProps)
+    if(!ObjectEquals(this.props.userInfo, nextProps.userInfo)){
+      this.setState({
+        user_role_id: nextProps.userInfo.userInfo.user_info.role_id
+      })
+    }
+  }
   render(){
+    console.log(this.state.user_role_id)
     const url = this.props.match.url
     return(
       <footer className="footers">
@@ -57,4 +74,10 @@ class Footer extends Component{
     )
   }
 }
+Footer = connect(
+  state => ({
+    userInfo : state.getUserInfo
+  }),
+  { }
+)(Footer)
 export default withRouter(Footer)

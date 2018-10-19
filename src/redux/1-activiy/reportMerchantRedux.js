@@ -2,7 +2,6 @@ import qs from 'qs'
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
 import { serverIp, toast } from '../../utils/utils'
-import $ from 'zepto'
 
 const REPORTMERCHANT = "REPORTMERCHANT"
 const FEEDBACK = "FEEDBACK"
