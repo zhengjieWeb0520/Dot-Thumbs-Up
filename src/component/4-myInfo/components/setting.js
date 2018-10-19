@@ -15,10 +15,12 @@ class Setting extends React.Component {
 		}
 	}
 	onPickerOk = (type, value) => {
-		this.setState({
+		this.setState(
+			{
 				[type]: value
-			},() => {
-        console.log(this.state)
+			},
+			() => {
+				console.log(this.state)
 				if (type === 'ageValue') {
 					//年龄只显示岁数，不显示区间
 					let ageContanier = document.querySelector('.agePick .am-list-extra')
@@ -28,13 +30,13 @@ class Setting extends React.Component {
 		)
 	}
 
-  //头像上传input Change事件
-  onAvatarChange = () => {
-    const avatarUpload = document.getElementById("avatarUpload")
-    const showAvatar = document.getElementById("showAvatar")
-    const imgUrl = window.URL.createObjectURL(avatarUpload.files.item(0))
-    showAvatar.src = imgUrl
-  }
+	//头像上传input Change事件
+	onAvatarChange = () => {
+		const avatarUpload = document.getElementById('avatarUpload')
+		const showAvatar = document.getElementById('showAvatar')
+		const imgUrl = window.URL.createObjectURL(avatarUpload.files.item(0))
+		showAvatar.src = imgUrl
+	}
 
 	render() {
 		//格式化省市区
@@ -70,10 +72,10 @@ class Setting extends React.Component {
 				<div className="avatarBox item">
 					<div className="title">头像</div>
 					<div className="content">
-						<img src={require('../../../images/myInfo/icon_jianshe.png')} alt="" id="showAvatar"/>
+						<img src={require('../../../images/myInfo/icon_jianshe.png')} alt="" id="showAvatar" />
 					</div>
 					<span className="icon iconfont icon-jiantou1" />
-          <input type="file" id="avatarUpload" onChange={() => this.onAvatarChange()}/>
+					<input type="file" id="avatarUpload" onChange={() => this.onAvatarChange()} />
 				</div>
 
 				<div className="inputs">

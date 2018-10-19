@@ -1084,7 +1084,10 @@
   width: 4vw;
   height: 4vw;
 }
-
+.publishActivity .am-list .am-list-item .am-list-line .am-list-content{
+  font-size: 26px !important;
+  color: #BBBBBB !important
+}
 
 .goldmedal .am-popover-item-icon{
   @include bg-image('../../images/activity/goldmedal');

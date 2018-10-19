@@ -1,0 +1,101 @@
+@import "./../../utils/variblesAndMixins";
+@import '~antd/dist/antd.css';
+.publishActivity{
+  .publishActivityWrapper{
+    height: 1090px;
+    overflow-y: hidden;
+  }
+  form{
+    .inputs{
+      margin-bottom: 0px !important;
+    }
+    >p{
+      color: #999999;
+      height: 72px;
+      line-height: 72px;
+      padding-left: 3.06667vw;
+      font-size: 24px;
+    }
+    .inputsMenu{
+      height: 72px;
+      line-height: 72px;
+      padding: 0 33% 0 33%;
+      border-bottom: $grayBorderBottom;
+      ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li{
+          width: 125px;
+          span{
+            display: inline-block;
+            p:first-of-type{
+              height: 62px;
+              font-size: 24px;
+              color: #999999;
+            }
+            p:last-of-type{
+              height: 10px;
+            }
+          }
+        }
+        .inputsMenuActive{
+          span{
+            p:first-of-type{
+              height: 62px;
+              font-size: 24px;
+              color: #363636;
+            }
+            p:last-of-type{
+              i{
+                display: block;
+                width: 100%;
+                height: 10px;
+                @include bg-image('../../images/activity/bottomLine');
+              }
+            }
+          }
+        }
+      }
+    }
+    .inputsContent{
+      background: white;
+      height: auto;
+      color: #999999;
+      .inputsContentRadio{
+        height: 82px;
+        line-height: 82px;
+        padding-left: 20px;
+      }
+      .inputsContentInfo{
+        .ranking{
+          .addRanking{
+            height: 82px;
+            line-height: 82px;
+            text-align: center;
+            border-bottom: $grayBorderBottom;
+            i{
+              display: inline-block;
+              width: 32px;
+              height: 32px;
+              vertical-align: middle;
+              @include bg-image('../../images/publish/addIcon');
+            }
+            span{
+              font-size: 24px;
+              margin-left: 20px;
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.publishActivity .ranking .am-list .am-list-item .am-list-line > .am-input-extra{
+  font-size: 48px;
+  color: #A7A7A7;
+}
+.publishActivityWrapper .am-list-item .am-list-line .am-list-extra{
+  line-height: 76px;
+}

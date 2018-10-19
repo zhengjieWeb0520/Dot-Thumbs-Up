@@ -914,7 +914,7 @@
           }
         }
   
-        .timePick, .regionPicker{
+        .timePick, .levelPicker{
           div{
             width: 50%;
             float: left;
@@ -927,6 +927,18 @@
   
             .am-list-item{
               width: 70%;
+            }
+          }
+        }
+
+        .regionPicker{
+          div{
+            width: 33%;
+            float: left;
+            
+  
+            .am-list-item{
+              width: 100%;
             }
           }
         }
