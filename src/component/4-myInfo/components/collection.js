@@ -1,4 +1,5 @@
 import React from 'react'
+// import { connect } from 'react-redux'
 import BScroll from 'better-scroll'
 import TopNavBar from './topNavBar'
 import { Link } from 'react-router-dom'
@@ -9,6 +10,9 @@ class ActiveList extends React.Component {
 	componentDidMount() {
 		const wrapper = document.querySelector('.wrapper')
 		new BScroll(wrapper, { click: true })
+		// bScroll.on('pullingUp', function() {
+		// 	console.log('aa')
+		// })
 	}
 	render() {
 		return (
@@ -98,6 +102,8 @@ class ActiveList extends React.Component {
 		)
 	}
 }
+
+// ActiveList = connect(state => state.collection, {})(ActiveList)
 
 //商家列表
 class BusinessList extends React.Component {
