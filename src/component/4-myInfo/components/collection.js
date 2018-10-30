@@ -6,6 +6,7 @@ import TopNavBar from './topNavBar'
 import { Link } from 'react-router-dom'
 import { getCollectionActive } from '../../../redux/4-myinfo/collectionRedux'
 import '../../1-activity/common.scss'
+import { ObjectEquals } from '../../../utils/utils'
 
 //评分亮星
 function OrangeStar(props) {
@@ -27,12 +28,40 @@ function GaryStar(props) {
 
 //活动列表
 class ActiveList extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			active: null
+		}
+
+		this.count = 2
+	}
+
 	componentWillMount() {
+		this.getFirstPageData('first')
+	}
+
+	//请求第一页数据(页面刚加载和下拉刷新)
+	getFirstPageData(type, fn) {
 		let data = {
 			pageNo: '1',
 			pageSize: '5'
 		}
-		this.props.getCollectionActive(data)
+
+		if (type === 'first') {
+			this.props.getCollectionActive(data)
+		} else {
+			this.props.getCollectionActive(data, fn)
+		}
+	}
+
+	//上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		this.props.getCollectionActive(data, fn)
 	}
 
 	componentDidMount() {
@@ -44,8 +73,8 @@ class ActiveList extends React.Component {
 			click: true,
 			probeType: 1,
 			pullUpLoad: {
-        stop: 50,
-        threshold: 0
+				stop: 50,
+				threshold: 0
 			}
 		})
 
@@ -58,37 +87,50 @@ class ActiveList extends React.Component {
 
 		// 滑动结束
 		this.scroll.on('touchEnd', function(position) {
-      _this.scroll.off('scroll', function() {})
-			if (position.y > 30) {
-        setTimeout(function () {
-				let data = {
-					pageNo: '1',
-					pageSize: '5'
-				}
-				_this.props.getCollectionActive(data, function() {
-					// 恢复文本值
-					topTip.innerText = '下拉刷新'
-					// 刷新成功后的提示
-					Toast.info('刷新成功', 1)
-				})
-				// 刷新列表后,重新计算滚动区域高度
-        _this.scroll.refresh()
-      }, 1000)
-			} else if (position.y < this.maxScrollY - 30) {
+			_this.scroll.off('scroll', function() {})
+			if (position.y > 40) {
+				setTimeout(function() {
+					_this.getFirstPageData('refresh', function() {
+						// 恢复文本值
+						topTip.innerText = '下拉刷新'
+						// 刷新成功后的提示
+            Toast.info('刷新成功', 1)
+            _this.count = 2
+					})
+					// 刷新列表后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			} else if (position.y < this.maxScrollY - 40) {
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
-					// 恢复文本值
-					bottomTip.innerText = '查看更多'
-					// 向列表添加数据
-
+					_this.pullUpLoadData(function(data) {
+						console.log(data.list)
+            console.log(_this.state.active)
+            if (ObjectEquals(data.list, _this.state.active.list)) {
+							// 恢复文本值
+              bottomTip.innerText = '没有更多数据'
+						} else {
+							// 恢复文本值
+              bottomTip.innerText = '查看更多'
+              _this.count++
+						}
+					})
 					// 加载更多后,重新计算滚动区域高度
 					_this.scroll.refresh()
 				}, 1000)
 			}
 		})
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if (!ObjectEquals(nextProps.active, this.props.active)) {
+			this.setState({
+				active: nextProps.active
+			})
+		}
+	}
+
 	render() {
-		let activeList = this.props.active
 		return (
 			<div className="activityContent wrapper">
 				<div>
@@ -96,8 +138,8 @@ class ActiveList extends React.Component {
 						<span className="refresh-hook">下拉刷新</span>
 					</div>
 					<ul id="ActivityContent" className="ActivityContent content">
-						{Object.keys(activeList).length !== 0
-							? activeList.list.map(item => {
+						{this.state.active !== null
+							? this.state.active.list.map(item => {
 									return (
 										<Link to="/activityInfo" className="activityItem" key={item.id}>
 											<div>

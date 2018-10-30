@@ -25,7 +25,7 @@ export function getCollectionActive(pageConfig, fn) {
 	let data = qs.stringify({
 		collection_type: 'active',
 		pageNo: pageConfig.pageNo,
-    pageSize: pageConfig.pageSize
+		pageSize: pageConfig.pageSize
 	})
 	return dispatch => {
 		axios
@@ -37,8 +37,8 @@ export function getCollectionActive(pageConfig, fn) {
 			})
 			.then(res => {
 				if (res.data.result_code === '0') {
-          dispatch({ type: COLLECTIONACTIVE, data: res.data.result_info })
-          fn ? fn() : null
+					dispatch({ type: COLLECTIONACTIVE, data: res.data.result_info })
+					fn ? fn(res.data.result_info) : null
 				}
 			})
 	}
