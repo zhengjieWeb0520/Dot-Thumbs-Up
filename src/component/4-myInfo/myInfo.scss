@@ -12,7 +12,7 @@
   .userInfo{
     height: 503px;
     border-bottom: $grayBorderBottom;
-    padding-top: 128px; 
+    padding-top: 128px;
     @include bg-image('../../images/myInfo/icon_my_bg');
     background-position: top center;
     background-color: #fff;
@@ -115,11 +115,11 @@
     height: 152px;
     background: #fff;
     margin-bottom: 20px;
-    
+
     ul{
       @include flexHorizen;
       height: 100%;
-      
+
       li{
         width: 33.333%;
         height: 100%;
@@ -139,7 +139,7 @@
 
         p{
           font-size: 24px;
-          line-height: 24px; 
+          line-height: 24px;
         }
 
         p.title{
@@ -193,7 +193,7 @@
             margin-right: 29px;
           }
         }
-        
+
       }
 
       li:last-child{
@@ -220,7 +220,7 @@
 }
 
 //去掉滑动报错
-* { touch-action: pan-y; } 
+* { touch-action: pan-y; }
 
 //顶部导航栏
 .topNavBar{
@@ -228,10 +228,10 @@
   padding-top: 40px;
   background: #fff;
   margin-bottom: 18px;
-  
+
   .am-navbar{
     height: 88px;
-    
+
     //返回箭头
     .icon-jiantou1{
       font-size: 30px;
@@ -267,7 +267,7 @@
     .card{
       height: 1091px;
       overflow: auto;
-      
+
       .swipeAction {
         overflow: hidden;
         background: #fff;
@@ -376,11 +376,11 @@
   .am-picker-popup-content, .am-picker-popup-body, .am-picker-popup-body>div{
     height: 100%;
   }
-  
+
   .am-picker-popup-header{
     height: 88px;
     background: #4ba9fa;
-    
+
     .am-picker-popup-item{
       color: #fff;
       font-size: 33px;
@@ -452,7 +452,7 @@
         }
       }
     }
-    
+
     .remainCash{
       font-size: 30px;
       color: #fff;
@@ -699,21 +699,21 @@
           width: 45px;
           height: 45px;
           margin-left: 35px;
-  
+
           img{
             width: 100%;
             height: 100%;
             display: block;
           }
         }
-  
+
         .bankName{
           position: relative;
           right: 153px;
           font-size: 28px;
           color: #333;
         }
-  
+
         .am-icon{
           margin-right: 12px;
         }
@@ -745,7 +745,7 @@
         .am-list-body::before{
           height: 0;
         }
-        
+
         .fake-input{
           font-size: 40px;
           height: 40px;
@@ -797,7 +797,7 @@
     ul{
       box-sizing: border-box;
       padding-left: 30px;
-      
+
       li{
         height: 126px;
         @include flexHorizen(flex-start);
@@ -859,7 +859,7 @@
 }
 
 //员工认证
-.staffAuthentication{ 
+.staffAuthentication{
   .inputs{
     height: 264px;
     margin-bottom: 20px;
@@ -888,23 +888,23 @@
       background: #fff;
 
       .am-list{
-  
+
         .am-list-body::after,
         .am-list-body::before{
           height: 0;
         }
-  
+
         .am-list-item{
           height: 88px;
           border-bottom: $grayBorderBottom;
           width: 520px;
           margin: 0 auto;
-  
+
           input{
             text-align: center;
             font-size: 28px;
           }
-  
+
           .am-list-line{
             .am-list-extra{
               text-align: left;
@@ -918,21 +918,21 @@
             width: 4.5vw;
             height: 4.5vw;
             background-position: 0.46667vw 0.46667vw;
-            background-size: 4.5vw auto; 
+            background-size: 4.5vw auto;
           }
         }
-  
+
         .timePick, .levelPicker{
           div{
             width: 50%;
             float: left;
-            
+
             &:first-child{
               .am-list-item{
                 float: right;
               }
             }
-  
+
             .am-list-item{
               width: 70%;
             }
@@ -943,8 +943,8 @@
           div{
             width: 33%;
             float: left;
-            
-  
+
+
             .am-list-item{
               width: 100%;
 
@@ -956,7 +956,7 @@
         }
       }
     }
-  
+
     .imgs{
       .identity{
         width: 610px;
@@ -964,16 +964,16 @@
         margin: 0 auto;
         padding-top: 40px;
         @include flexHorizen;
-  
+
         .img{
           width: 276px;
           height: 100%;
           position: relative;
-  
+
           &:last-child{
             margin-right: 0;
           }
-  
+
           input{
             width: 100%;
             height: 100%;
@@ -981,7 +981,7 @@
             z-index: 2;
             position: relative;
           }
-  
+
           .preview{
             width: 100%;
             height: 100%;
@@ -990,29 +990,29 @@
             left: 0;
             z-index: 1;
           }
-  
+
           /*
           &.positive .preview{
             @include bg-image('../../images/myInfo/identity_positive');
           }
-  
+
           &.reverse .preview{
             @include bg-image('../../images/myInfo/identity_reverse');
           }
           */
         }
       }
-  
+
       .bussinessLicence{
-        margin-top: 54px; 
+        margin-top: 54px;
         height: 170px;
-  
+
         .licence{
           width: 276px;
           height: 100%;
           margin: 0 auto;
           position: relative;
-  
+
           input{
             width: 100%;
             height: 100%;
@@ -1020,7 +1020,7 @@
             z-index: 2;
             position: relative;
           }
-  
+
           .preview{
             width: 100%;
             height: 100%;
@@ -1092,7 +1092,7 @@
     font-size: 38px;
     margin: 10px 0;
   }
-  
+
   .edition{
     border: 1px solid #ccc;
     font-size: 20px;
@@ -1117,7 +1117,7 @@
       padding-left: 0
     }
   }
-  
+
   .inputs{
     background: #fff;
     margin-bottom: 20px;
@@ -1145,7 +1145,7 @@
       }
     }
   }
-  
+
   .submitBtn{
     @include submitBtn;
   }
@@ -1158,7 +1158,7 @@
     text-align: left !important;
   }
   .am-list .am-list-item .am-list-line .am-list-extra{
-    left: auto; 
+    left: auto;
     position: static;
     font-size: 28px;
     flex-basis: 50%;
@@ -1244,7 +1244,7 @@
 .collection{
   .topNav{
     margin-bottom: 20px;
-    
+
     span{
       width: 50%;
       text-align: center;
@@ -1265,6 +1265,10 @@
 
     .activityContent{
       height: 1100px;
+
+      .ActivityContent {
+        height: 1100px;
+      }
     }
   }
 }
