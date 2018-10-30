@@ -1,9 +1,11 @@
 import React from 'react'
-import TopNavBar from './topNavBar'
-import SendCode from './sendCode'
+import axios from 'axios'
+import qs from 'qs'
+import TopNavBar from '../topNavBar'
+import SendCode from '../sendCode'
 import { createForm } from 'rc-form'
 import { List, InputItem, Toast } from 'antd-mobile'
-import { validatorPhone, validatorCode } from '../../../utils/utils'
+import { validatorPhone, validatorCode, serverIp } from '../../../../utils/utils'
 
 class ChangePassword extends React.Component {
 	//表单密码验证
@@ -36,8 +38,8 @@ class ChangePassword extends React.Component {
 		let error = ''
 		for (let key in errors) {
 			if (errors[key]) {
-        error = errors[key]
-        break
+				error = errors[key]
+				break
 			}
 		}
 
@@ -59,17 +61,37 @@ class ChangePassword extends React.Component {
 				return
 			}
 
-			console.log(values)
+			let data = {
+				user_phone: values.phone.replace(/\s+/g, ''),
+				upd_method: 'code',
+				code: values.code,
+				new_pwd: values.password
+			}
+
+			this.changePasswordByCode(data, function() {
+				form.resetFields()
+				Toast.info('修改成功', 1)
+			})
 		} else {
 			Toast.info(error, 1)
 		}
+	}
+
+	//通过密码修改密码
+	changePasswordByCode(data, fn) {
+		data = qs.stringify(data)
+		axios.post(serverIp + '/dianzanbao/user/upd_password.do', data).then(res => {
+			if (res.data.result_code === '0') {
+				fn()
+			}
+		})
 	}
 
 	render() {
 		const { getFieldProps, getFieldError } = this.props.form
 		return (
 			<div className="changePassword">
-				<TopNavBar title="修改密码" />
+				<TopNavBar title="通过验证码修改" />
 				<div className="inputsBox">
 					<List>
 						<InputItem
@@ -86,12 +108,7 @@ class ChangePassword extends React.Component {
 							clear
 							type="number"
 							placeholder="请输入6位的验证码"
-							extra={
-                <SendCode 
-                  phone={this.props.form.getFieldsValue().phone}
-                  type={'reset_password'}
-                />
-              }
+							extra={<SendCode phone={this.props.form.getFieldsValue().phone} type={'reset_password'} />}
 							maxLength="6"
 							error={!!getFieldError('code')}
 							onErrorClick={() => this.onErrorClick('code')}
