@@ -1,3 +1,4 @@
+import React from 'react'
 //三个数字加一个逗号
 export function toThousands(num) {
 	let result = [],
@@ -469,6 +470,22 @@ export function uploadSingleImg(axios, img, callback) {
       callback(res.data.result_info)
 		})
 }
+
+//五角星绘制
+export function createStarLevel(starLevel, selectStar, defaultStar){
+  let content = []
+  for(let i = 1; i <= 5; i++){
+    let column
+    if(i <= starLevel){
+      column = <i className={selectStar} key={i}></i>
+    }else{
+      column = <i className={defaultStar} key={i}></i>
+    }
+    content.push(column)
+  }
+  return content
+}
+
 
 /*
 服务器本地ip切换

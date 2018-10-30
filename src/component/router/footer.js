@@ -29,16 +29,26 @@ class Footer extends Component{
     }, false)
   }
   componentWillReceiveProps(nextProps){
-    console.log(this.props)
-    console.log(nextProps)
-    if(!ObjectEquals(this.props.userInfo, nextProps.userInfo)){
+    if(!ObjectEquals({}, nextProps.userInfo)){
       this.setState({
         user_role_id: nextProps.userInfo.userInfo.user_info.role_id
+      }, ()=>{
+        window.sessionStorage.setItem('user_role_id', this.state.user_role_id)
       })
     }
   }
   render(){
     console.log(this.state.user_role_id)
+    let user_id = window.sessionStorage.getItem('user_role_id')
+    let publishDom = null
+    if(this.state.user_role_id === 2){
+      publishDom = (<li id='menuParticipate'>
+      <Link to={`/publish`}>
+        <span className='img'></span>
+        <p>发布</p>
+      </Link>
+    </li>)
+    }
     const url = this.props.match.url
     return(
       <footer className="footers">
@@ -56,12 +66,7 @@ class Footer extends Component{
                 <p>参与</p>
               </Link>
             </li>
-            <li id='menuParticipate'>
-              <Link to={`/publish`}>
-                <span className='img'></span>
-                <p>发布</p>
-              </Link>
-            </li>
+            {publishDom}
             <li id='menuMyInfo'>
               <Link to={`${url}/myInfo`}>
                 <span className='img'></span>

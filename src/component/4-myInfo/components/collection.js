@@ -40,7 +40,7 @@ class ActiveList extends React.Component {
 							</p>
 						</div>
 						<div>
-							<p className="radiuOne">
+							<p className="radiu_1">
 								<i />
 								<span>
 									一等奖:
@@ -48,7 +48,7 @@ class ActiveList extends React.Component {
 									<span className="rmb">RMB</span>
 								</span>
 							</p>
-							<p className="radiuTwo">
+							<p className="radiu_2">
 								<i />
 								<span>
 									二等奖:
@@ -56,7 +56,7 @@ class ActiveList extends React.Component {
 									<span className="rmb">RMB</span>
 								</span>
 							</p>
-							<p className="radiuThree">
+							<p className="radiu_3">
 								<i />
 								<span>
 									三等奖:

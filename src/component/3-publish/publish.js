@@ -2,12 +2,15 @@ import React from 'react'
 import axios from 'axios'
 import { createForm } from 'rc-form'
 import BScroll from 'better-scroll'
+import { connect } from 'react-redux'
 import { InputItem, List, Toast, DatePicker , ImagePicker} from 'antd-mobile'
 import { Radio } from 'antd'
-import { getChildNode, serverIp } from './../../utils/utils'
+import { getChildNode, serverIp, dataFormat } from './../../utils/utils'
 import TopNavBar from './../4-myInfo/components/topNavBar'
+import { publishActive } from './../../redux/3-publish/createActiceRedux'
 import './publish.scss'
 
+// 发布活动
 const RadioGroup = Radio.Group;
 class PublishActivity extends React.Component{
   constructor(props){
@@ -16,8 +19,8 @@ class PublishActivity extends React.Component{
     this.state={
       startDate: '',
       endDate: '',
-      menuState: 1, //主菜单切换
-      radioType: 1,
+      menuState: 0, //主菜单切换 0 奖金  1代金券
+      radioType: 0, //0排名  1平摊
       files: [],
       rankingData: [
         {
@@ -62,10 +65,10 @@ class PublishActivity extends React.Component{
       console.log(e.target.parentNode.children[0].innerText )
       if(e.target.outerText === '奖金' || e.target.parentNode.children[0].innerText === '奖金'){
         _this.setState({
-          menuState: 1,         
+          menuState: 0,         
         },()=>{
           _this.setState({
-            radioType: 1,
+            radioType: 0,
             rankingData:  [
               {
                 id: 1,
@@ -80,10 +83,10 @@ class PublishActivity extends React.Component{
         })
       }else if(e.target.outerText === '代金券' || e.target.parentNode.children[0].innerText === '代金券'){
         _this.setState({
-          menuState: 2
+          menuState: 1
         },()=>{
           _this.setState({
-            radioType: 1,
+            radioType: 0,
             rankingData:  [
               {
                 id: 1,
@@ -102,26 +105,26 @@ class PublishActivity extends React.Component{
   //奖金、代金券切换
   createContent(){
     let content
-    if(this.state.menuState === 1){
+    if(this.state.menuState === 0){
       content = (
         <div className='inputsContent inputs bonus'>
           <div className='inputsContentRadio'>
             <RadioGroup onChange={v => {this.handleChange('bonus', v)}} value={this.state.radioType}>
-              <Radio value={1}>排行</Radio>
-              <Radio value={2}>平摊</Radio>
+              <Radio value={0}>排行</Radio>
+              <Radio value={1}>平摊</Radio>
             </RadioGroup> 
           </div>
           <div className='inputsContentInfo'>
             {this.createInputContent()}
           </div>
         </div>)
-    }else if(this.state.menuState === 2){
+    }else if(this.state.menuState === 1){
       content = (
         <div className='inputsContent inputs voucher'>
           <div className='inputsContentRadio'>
             <RadioGroup onChange={v => {this.handleChange('voucher', v)}} value={this.state.radioType}>
-              <Radio value={1}>排行</Radio>
-              <Radio value={2}>平摊</Radio>
+              <Radio value={0}>排行</Radio>
+              <Radio value={1}>平摊</Radio>
             </RadioGroup> 
           </div>
           <div className='inputsContentInfo'>
@@ -136,7 +139,7 @@ class PublishActivity extends React.Component{
   createInputContent(){
     console.log(this.props.form)
     //排行
-    if(this.state.radioType === 1){
+    if(this.state.radioType === 0){
       return(
         <div className="ranking">
           <List>
@@ -173,7 +176,7 @@ class PublishActivity extends React.Component{
           <div className="addRanking" onTouchEnd={v=>{this.addRanking(v)}}><i></i><span>添加排行</span></div>
         </div>
       )
-    }else if(this.state.radioType === 2){
+    }else if(this.state.radioType === 1){
       return(
         <div className="ranking">
           <List>
@@ -216,7 +219,7 @@ class PublishActivity extends React.Component{
     })
   }
   //上传图片
-  onImageClick = (files, type, index) => {
+  onImgChange = (files, type, index) => {
     let _this = this
     this.setState({
       files,
@@ -246,7 +249,72 @@ class PublishActivity extends React.Component{
     })
   }
   submitForm =()=>{
+    const form = this.props.form
+    let errors = form.getFieldsError()
+    let error = ''
+    let  values = form.getFieldsValue()
+    for(let key in errors) {
+      if(errors[key]) {
+        error = errors[key]
+        break
+      }
+    }
 
+    let bonus = ''
+    if(this.state.radioType === 0){
+      for(let i = this.state.rankingData.length - 1; i>= 0; i--){
+        if(i === 0)
+          bonus = bonus + values[`bonus_${i+1}`]
+        else
+          bonus = bonus + values[`bonus_${i+1}`] + ','
+      }
+    }else if(this.state.radioType === 1){
+      bonus = values.flatAmount
+    }
+    let img_urls = ""
+    this.uploadFiles.forEach((item, index)=>{
+      if(index !== this.uploadFiles.length - 1){
+        img_urls = img_urls + item + ','
+      }else{
+        img_urls = img_urls + item
+      }
+    })
+    if(!error){
+      if(!values.activityName){ 
+        Toast.info('请输入活动名称', 1)
+        return
+      }else if(!values.activityInfo){
+        Toast.info('请输入活动描述', 1)
+        return
+      }else if(!values.startDate){
+        Toast.info('请输入开始时间', 1)
+        return
+      }else if(!values.endDate){
+        Toast.info('请输入结束时间', 1)
+        return
+      }else if(!values.bonus_1 && this.state.radioType === 0){
+        Toast.info('请输入金额', 1)
+        return
+      }
+      else if(!values.flatAmount && this.state.radioType === 1){
+        Toast.info('请输入金额', 1)
+        return
+      }
+      console.log(bonus)
+      let data = {
+        active_name: values.activityName,
+        active_start_date: dataFormat(values.startDate, 'yyyy-MM-dd hh:mm'),
+        active_end_date: dataFormat(values.endDate, 'yyyy-MM-dd hh:mm'),
+        active_desc: values.activityInfo,
+        bonus_type : this.state.menuState,
+        distribute_type: this.state.radioType,
+        bonus: bonus,
+        active_images: img_urls 
+      }
+      this.props.publishActive(data)
+    }else{
+      Toast.info(error, 1)
+    }
   }
   render(){
     const { getFieldProps, getFieldError } = this.props.form
@@ -284,25 +352,25 @@ class PublishActivity extends React.Component{
                   {this.state.files.length > 0 ? null : <span className="tips">添加活动图片(最多9张)</span>}
                 </div>
                 <DatePicker
-                  mode="date"
                   title="选择开始时间"
-                  value={this.state.startDate}
-                  onChange={startDate => this.setState({ startDate })}
+                  //value={this.state.startDate}
+                  //onChange={startDate => this.setState({ startDate })}
+                  {...getFieldProps('startDate')}
                   >
                   <List.Item arrow="horizontal">请选择开始时间</List.Item>
                 </DatePicker>
                 <DatePicker
-                  mode="date"
                   title="选择结束时间"
-                  value={this.state.endDate}
-                  onChange={endDate => this.setState({ endDate })}
+                  //value={this.state.endDate}
+                  //onChange={endDate => this.setState({ endDate })}
+                  {...getFieldProps('endDate')}
                   >
                   <List.Item arrow="horizontal">请选择结束时间</List.Item>
                 </DatePicker>
               </List>     
             </div>
           </div>
-          <p>奖金模式</p>
+          <p>奖金模式(活动奖金分配模式一旦创建后不允许编辑)</p>
           <div className='inputs'>
             <div className='inputsMenu'>
               <ul>
@@ -330,5 +398,14 @@ class PublishActivity extends React.Component{
     )
   }
 }
+
 PublishActivity = createForm()(PublishActivity)
+
+PublishActivity = connect(
+	state => ({
+
+  }),
+	{ publishActive }
+)(PublishActivity)
+
 export default PublishActivity
