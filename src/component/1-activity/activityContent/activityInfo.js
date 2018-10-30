@@ -2,15 +2,19 @@ import React from 'react'
 import { getChildNode, ObjectEquals, createStarLevel } from './../../../utils/utils'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { Carousel, WingBlank } from 'antd-mobile';
 import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
 import { getActiveInfo } from './../../../redux/1-activiy/activeIndexRedux'
+import { mechantLevel } from './../../config'
 
+//活动详细信息
 class ActivityInfo extends React.Component{
   constructor(props){
     super(props)
     this.state= {
+      imgHeight:175,
       tabFlag: 0,             //组件切换标识
       collectCondition: '',   //收藏状态
       activeInfo: {},         //活动详情
@@ -39,7 +43,6 @@ class ActivityInfo extends React.Component{
       console.log(this.props.location)
       this.props.getActiveInfo(this.props.location.query.activeId)
     }
-
   }
   componentDidMount(){
     let _this = this
@@ -101,13 +104,13 @@ class ActivityInfo extends React.Component{
   switchContent(){
     switch(this.state.tabFlag){
       case 0:
-        return (<ActivityInfoContent />)
+        return (<ActivityInfoContent activeDetail={this.state.activeDetail} />)
         break;
       case 1:
         return (<ActivityEvaluate />)
         break;
       case 2:
-        return (<ActivityMerchant />)
+        return (<ActivityMerchant merchantInfo={this.state.activeInfo.business_info}/>)
         break;
       default:
         return null
@@ -173,8 +176,30 @@ class ActivityInfo extends React.Component{
       <div id='ActivityInfo' className='activityInfo'>
         <div>
           <div>
-            <div>
+            <div className="carousel">
               {/* 轮播图 */}
+                <Carousel
+                  autoplay
+                  infinite
+                  className={'my-carousel'}
+                >
+                {this.state.activeDetail.activeImg.map((item, index)=>{
+                  console.log(item.img_url)
+                  return( 
+                    <img 
+                      key={index}
+                      src={item.img_url}
+                      alt=""
+                      style={{ width: '100%', verticalAlign: 'top' }}
+                      onLoad={() => {
+                        // fire window resize event to change height
+                        window.dispatchEvent(new Event('resize'));
+                        //this.setState({ imgHeight: 'auto' });
+                      }}
+                      />
+                    )
+                })}
+                </Carousel>
             </div>
             <div>
               <Link to='/index'></Link>
@@ -192,23 +217,24 @@ class ActivityInfo extends React.Component{
               </p>
               <p>
                 {createStarLevel(this.state.activeDetail.starLevel,'orangeStar','grayStar')}
-                {/* <i className='orangeStar'></i>
-                <i className='orangeStar'></i>
-                <i className='orangeStar'></i>
-                <i className='orangeStar'></i>
-                <i className='grayStar'></i> */}
                 <span>{this.state.activeDetail.starLevel}分</span>
                 <span>距离你{this.state.activeDetail.distance}</span>
               </p>
             </div>
             <div>
+              {mechantLevel.map((item, index)=>{
+                if(item.id === this.state.activeDetail.merchantLevel){
+                  return(
+                    <p key = {index}>
+                      <i id='merchant' className={item.classValue}></i>
+                      <span>{item.value}</span>
+                    </p>
+                  )
+                }
+              })}
               <p>
-                <i id='merchant' className='goldmedal'></i>
-                <span>金牌商家</span>
-              </p>
-              <p>
-                <i id='merchant' className='goldmedal'></i>
-                <span>12345</span>
+                <i id='merchant'></i>
+                <span>{this.state.activeDetail.goodNum}</span>
               </p>
             </div>
           </div>

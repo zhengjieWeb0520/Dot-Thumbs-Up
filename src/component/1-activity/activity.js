@@ -10,7 +10,7 @@ import ActivityContent from './../1-activity/activityContent/activityContent'
 import { getIndustry, getActiveList, clearInfo } from './../../redux/1-activiy/activeIndexRedux'
 const AMap = window.AMap;
 const Item = Popover.Item;
-// 活动组件
+// 活动组件(主)
 class Activity extends React.Component{
   constructor(props){
     super(props)
@@ -71,7 +71,8 @@ class Activity extends React.Component{
           pageSize: 5
         }
         console.log(data)
- 
+        window.sessionStorage.setItem('user_lon', data.position.lng)
+        window.sessionStorage.setItem('user_lat', data.position.lat)
         //alert(data.formattedAddress)
         _this.setState({
           address: data.formattedAddress

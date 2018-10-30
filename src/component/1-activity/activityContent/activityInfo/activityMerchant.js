@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// 商家信息
 class ActivityMerchant extends React.Component{
   constructor(props){
     super(props)
   }
   render(){
+    console.log(this.props)
     return(
       <div className='activityMerchant'>
         <div>
@@ -20,15 +22,19 @@ class ActivityMerchant extends React.Component{
                 <span>举报</span>
               </Link>
             </div>
-            <div>
-              
+            <div className='merchantImg'>
+              {this.props.merchantInfo.img_data.imgs.map((item, index)=>{
+                console.log(item.img_url)
+                return (
+                  <img key={index} src={item.img_url} alt=""/>
+                )
+              })}
             </div>
           </div>
-          <p><span>商家名称</span><span>臭臭工坊</span></p>
+          <p><span>商家名称</span><span>{this.props.merchantInfo.user_info.user_name}</span></p>
           <p><span>商家品类</span><span>盖浇饭/地方小吃</span></p>
-          <p><span>商家地址</span><span>南京市江宁区长白街道</span></p>
-          <p><span>商家电话</span><span>000-400-4101</span></p>
-          <p><span>营业时间</span><span>9:00-21:00</span></p>
+          <p><span>商家地址</span><span>{this.props.merchantInfo.user_info.city + this.props.merchantInfo.user_info.area + this.props.merchantInfo.user_info.user_address}</span></p>
+          <p><span>商家电话</span><span>{this.props.merchantInfo.user_info.user_phone}</span></p>
         </div>
       </div>
     )
