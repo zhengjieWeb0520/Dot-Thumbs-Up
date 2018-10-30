@@ -306,6 +306,59 @@ class ActiveList extends React.Component {
 							<div>
 								<p className="radiuOne">
 									<i />
+<<<<<<< HEAD
+									<span>4365</span>
+								</span>
+								<span>
+									<span>433m</span>
+								</span>
+							</p>
+						</div>
+						<div>
+							<p className="radiu_1">
+								<i />
+								<span>
+									一等奖:
+									<span>¥500</span>
+									<span className="rmb">RMB</span>
+								</span>
+							</p>
+							<p className="radiu_2">
+								<i />
+								<span>
+									二等奖:
+									<span>¥300</span>
+									<span className="rmb">RMB</span>
+								</span>
+							</p>
+							<p className="radiu_3">
+								<i />
+								<span>
+									三等奖:
+									<span>¥100</span>
+									<span className="rmb">RMB</span>
+								</span>
+							</p>
+						</div>
+					</Link>
+					<Link to="/activityInfo" className="activityItem">
+						<div>
+							<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
+						</div>
+						<div>
+							<p>商家名称</p>
+							<p>活动名称活动名称</p>
+							<p>
+								<i className="orangeStar" />
+								<i className="orangeStar" />
+								<i className="orangeStar" />
+								<i className="orangeStar" />
+								<i className="grayStar" />
+								<span>4.0分</span>
+							</p>
+							<p>
+								<span>
+=======
 									<span>
 										一等奖:
 										<span>¥500</span>
@@ -313,6 +366,7 @@ class ActiveList extends React.Component {
 									</span>
 								</p>
 								<p className="radiuTwo">
+>>>>>>> 50537dcd6e6844518c55a9b917faca8f3fa035fc
 									<i />
 									<span>
 										二等奖:

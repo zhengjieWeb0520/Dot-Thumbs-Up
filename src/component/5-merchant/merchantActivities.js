@@ -66,9 +66,9 @@ class MerchantActivities extends React.Component{
                 <p>发起时间：2018-09-09</p>
               </div>
               <div>
-                <p className='radiuOne'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuTwo'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuThree'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_1'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_2'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_3'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
                 <p>状态：{'已结束'}</p>
               </div>
             </Link>
@@ -90,33 +90,9 @@ class MerchantActivities extends React.Component{
                 <p>发起时间：2018-09-09</p>
               </div>
               <div>
-                <p className='radiuOne'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuTwo'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuThree'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
-                <p>状态：{'已结束'}</p>
-              </div>           
-            </Link>
-            <Link to='/index' className = 'merchantItem'>
-            <div>
-                <p>活动名称活动名称</p>
-                <p>
-                  <i className='orangeStar'></i>
-                  <i className='orangeStar'></i>
-                  <i className='orangeStar'></i>
-                  <i className='orangeStar'></i>
-                  <i className='grayStar'></i>
-                  <span>4.0分</span>
-                </p>
-                <p>
-                  <i></i>
-                  <span>4365/4365</span>
-                </p>
-                <p>发起时间：2018-09-09</p>
-              </div>
-              <div>
-                <p className='radiuOne'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuTwo'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuThree'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_1'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_2'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_3'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
                 <p>状态：{'已结束'}</p>
               </div>           
             </Link>
@@ -138,9 +114,33 @@ class MerchantActivities extends React.Component{
                 <p>发起时间：2018-09-09</p>
               </div>
               <div>
-                <p className='radiuOne'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuTwo'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
-                <p className='radiuThree'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_1'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_2'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_3'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
+                <p>状态：{'已结束'}</p>
+              </div>           
+            </Link>
+            <Link to='/index' className = 'merchantItem'>
+            <div>
+                <p>活动名称活动名称</p>
+                <p>
+                  <i className='orangeStar'></i>
+                  <i className='orangeStar'></i>
+                  <i className='orangeStar'></i>
+                  <i className='orangeStar'></i>
+                  <i className='grayStar'></i>
+                  <span>4.0分</span>
+                </p>
+                <p>
+                  <i></i>
+                  <span>4365/4365</span>
+                </p>
+                <p>发起时间：2018-09-09</p>
+              </div>
+              <div>
+                <p className='radiu_1'><i></i><span>一等奖:<span>¥500</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_2'><i></i><span>二等奖:<span>¥300</span><span className='rmb'>RMB</span></span></p>
+                <p className='radiu_3'><i></i><span>三等奖:<span>¥100</span><span className='rmb'>RMB</span></span></p>
                 <p>状态：{'已结束'}</p>
               </div>           
             </Link>

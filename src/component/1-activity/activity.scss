@@ -74,17 +74,17 @@
               border-bottom: 6px solid #4DA9FA
             }        
           }
-          #foodLevel{
+          #XMS{
             i{
               @include bg-image('../../images/activity/lollipop');             
             }
           }
-          #lifeLevel{
+          #HSH{
             i{
               @include bg-image('../../images/activity/bicycle');  
             }
           }
-          #enjoyLevel{
+          #AWL{
             i{
               @include bg-image('../../images/activity/babyball');  
             }
@@ -94,7 +94,7 @@
               @include bg-image('../../images/activity/aerospace');
             }
           }
-          #HotelLevel{
+          #ZJD{
             i{
               @include bg-image('../../images/activity/hotail');
             }
@@ -102,23 +102,20 @@
         }
       }
       .activityLevel2{
-        width: 100%;
+        width: 100vw;
         height: 67px;
-        overflow-x: auto;
-        div{
-          width: 1000px; 
-          span{
+        overflow-x: hidden;
+        ul{
+          //width: 2000px;
+          li{
             font-size: 24px;
             color: #9E9E9E;
             display: inline-block;
-            width: 137px;
             line-height: 67px;
             height: 67px;
-            text-align: center
-          }    
-          span:first-of-type{
-            width: 97px;
-          }   
+            margin-left: 30px;
+            text-align: center;
+          }     
         }
       }
       .activityKbGray{
@@ -423,9 +420,9 @@
               }
             }
           }
-          .radiuOne{
+          .radiu_1{
             i{
-              @include bg-image('../../images/activity/radiuone');
+              @include bg-image('../../images/activity/radiu_1');
             }
             span{
               span{
@@ -433,9 +430,9 @@
               }
             }
           }
-          .radiuTwo{
+          .radiu_2{
             i{
-              @include bg-image('../../images/activity/radiutwo');
+              @include bg-image('../../images/activity/radiu_2');
             }
             span{
               span{
@@ -443,9 +440,9 @@
               }
             }
           }
-          .radiuThree{
+          .radiu_3{
             i{
-              @include bg-image('../../images/activity/radiuthree');
+              @include bg-image('../../images/activity/radiu_3');
             }
             span{
               span{

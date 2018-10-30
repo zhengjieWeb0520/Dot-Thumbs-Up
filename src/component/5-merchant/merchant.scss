@@ -228,9 +228,9 @@
           font-size: 22px;
           color: #9E9E9E;
         }
-        .radiuOne{
+        .radiu_1{
           i{
-            @include bg-image('../../images/activity/radiuone');
+            @include bg-image('../../images/activity/radiu_1');
           }
           span{
             span{
@@ -238,9 +238,9 @@
             }
           }
         }
-        .radiuTwo{
+        .radiu_2{
           i{
-            @include bg-image('../../images/activity/radiutwo');
+            @include bg-image('../../images/activity/radiu_2');
           }
           span{
             span{
@@ -248,9 +248,9 @@
             }
           }
         }
-        .radiuThree{
+        .radiu_3{
           i{
-            @include bg-image('../../images/activity/radiuthree');
+            @include bg-image('../../images/activity/radiu_3');
           }
           span{
             span{

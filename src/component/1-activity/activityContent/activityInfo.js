@@ -1,17 +1,45 @@
 import React from 'react'
-import { getChildNode } from './../../../utils/utils'
+import { getChildNode, ObjectEquals, createStarLevel } from './../../../utils/utils'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
+import { getActiveInfo } from './../../../redux/1-activiy/activeIndexRedux'
 
 class ActivityInfo extends React.Component{
   constructor(props){
     super(props)
     this.state= {
-      tabFlag: 0,
-      collectCondition: ''
+      tabFlag: 0,             //组件切换标识
+      collectCondition: '',   //收藏状态
+      activeInfo: {},         //活动详情
+      activeDetail: {
+        merchantName: '',     //商家名称
+        merchantLevel: '',    //商家等级
+        activeName: '',       //活动名称
+        have_collection: '',  //是否已收藏
+        starLevel: '',        //活动评分
+        distance: '',         //距离
+        goodNum: '',          //点赞数量
+        startDate: '',        //开始时间
+        endDate: '',          //结束时间
+        activeDesc: '',       //活动描述
+        distributeType: null, //0 奖金  1代金券
+        bonusType: null,      //0排名，1平摊
+        bonus:'',             //奖金详情  
+        activeImg:[],         //活动图片      
+      },
     }
+  }
+  componentWillMount(){
+    if(this.props.location.query == undefined){
+      this.props.history.push('/index')
+    }else{
+      console.log(this.props.location)
+      this.props.getActiveInfo(this.props.location.query.activeId)
+    }
+
   }
   componentDidMount(){
     let _this = this
@@ -114,7 +142,33 @@ class ActivityInfo extends React.Component{
       })
     }
   }
+  componentWillReceiveProps(nextProps){
+    console.log(this.props)
+    console.log(nextProps)
+    if(!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)){
+      this.setState({
+        activeInfo: nextProps.activeInfo.activeInfo,
+        activeDetail: {
+          merchantName: nextProps.activeInfo.activeInfo.business_info.user_info.user_nick_name,     //商家名称
+          merchantLevel: nextProps.activeInfo.activeInfo.business_info.user_info.star_level,
+          activeName: nextProps.activeInfo.activeInfo.name,       //活动名称
+          have_collection: nextProps.activeInfo.activeInfo.have_collection,  //是否已收藏
+          starLevel: nextProps.activeInfo.activeInfo.star_level,        //活动评分
+          distance:  nextProps.location.query.distance_format,         //距离
+          goodNum: nextProps.location.query.good_count,          //点赞数量
+          startDate: nextProps.activeInfo.activeInfo.start_date,        //开始时间
+          endDate: nextProps.activeInfo.activeInfo.end_date,          //结束时间
+          activeDesc: nextProps.activeInfo.activeInfo.desc,       //活动描述
+          distributeType: nextProps.activeInfo.activeInfo.distribute_type, //0 奖金  1代金券
+          bonusType: nextProps.activeInfo.activeInfo.bonus_type,      //0排名，1平摊
+          bonus: nextProps.activeInfo.activeInfo.bonus,            //奖金详情
+          activeImg: nextProps.activeInfo.activeInfo.detail_images
+        }
+      })
+    }
+  }
   render(){
+    console.log(this.state.activeDetail)
     return(
       <div id='ActivityInfo' className='activityInfo'>
         <div>
@@ -133,17 +187,18 @@ class ActivityInfo extends React.Component{
           <div>
             <div>
               <p>
-                <span>商家名称</span>
-                <span>(活动名称活动名称)</span>
+                <span>{this.state.activeDetail.merchantName}</span>
+                <span>({this.state.activeDetail.activeName})</span>
               </p>
               <p>
+                {createStarLevel(this.state.activeDetail.starLevel,'orangeStar','grayStar')}
+                {/* <i className='orangeStar'></i>
                 <i className='orangeStar'></i>
                 <i className='orangeStar'></i>
                 <i className='orangeStar'></i>
-                <i className='orangeStar'></i>
-                <i className='grayStar'></i>
-                <span>4.0分</span>
-                <span>距离你433m</span>
+                <i className='grayStar'></i> */}
+                <span>{this.state.activeDetail.starLevel}分</span>
+                <span>距离你{this.state.activeDetail.distance}</span>
               </p>
             </div>
             <div>
@@ -183,4 +238,10 @@ class ActivityInfo extends React.Component{
   }
 }
 
+ActivityInfo = connect(
+	state => ({
+    activeInfo: state.getIndustryInfo
+  }),
+	{ getActiveInfo }
+)(ActivityInfo)
 export default ActivityInfo

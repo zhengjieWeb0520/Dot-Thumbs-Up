@@ -22,9 +22,9 @@ class ActivityInfoContent extends React.Component{
             <p><strong>奖金模式</strong></p>
           </div>
           <div>
-            <p className='radiuOne'><i></i><span>一等奖:<span>¥&nbsp;500</span><span className='rmb'>RMB</span></span></p>
-            <p className='radiuTwo'><i></i><span>二等奖:<span>¥&nbsp;300</span><span className='rmb'>RMB</span></span></p>
-            <p className='radiuThree'><i></i><span>三等奖:<span>¥&nbsp;100</span><span className='rmb'>RMB</span></span></p>
+            <p className='radiu_1'><i></i><span>一等奖:<span>¥&nbsp;500</span><span className='rmb'>RMB</span></span></p>
+            <p className='radiu_2'><i></i><span>二等奖:<span>¥&nbsp;300</span><span className='rmb'>RMB</span></span></p>
+            <p className='radiu_3'><i></i><span>三等奖:<span>¥&nbsp;100</span><span className='rmb'>RMB</span></span></p>
           </div>
         </div>
         <div>
