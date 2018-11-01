@@ -30,7 +30,7 @@ class Wallet extends React.Component {
         <div className="incomeRecord">收入记录</div>
         <ul className="recordList">
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -41,7 +41,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -52,7 +52,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -63,7 +63,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -74,7 +74,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -85,7 +85,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -96,7 +96,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>
@@ -107,7 +107,7 @@ class Wallet extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_merchant.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_merchant.png")} alt=""/></div>
             <div className="merchantName">
               <p className="merchant">商家名称</p>
               <p className="activity">活动名称</p>

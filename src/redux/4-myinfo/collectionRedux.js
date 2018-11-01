@@ -4,6 +4,7 @@ import { message } from 'antd'
 import { serverIp, toast } from '../../utils/utils'
 
 const COLLECTIONACTIVE = 'COLLECTIONACTIVE'
+const CLEARCOLLECTIONACTIVE = 'CLEARCOLLECTIONACTIVE'
 
 let initState = {
 	active: {},
@@ -15,6 +16,8 @@ export function collection(state = initState, action) {
 	switch (action.type) {
 		case COLLECTIONACTIVE:
 			return { ...state, active: action.data }
+		case CLEARCOLLECTIONACTIVE:
+			return { ...state, active: {} }
 		default:
 			return state
 	}
@@ -42,4 +45,9 @@ export function getCollectionActive(pageConfig, fn) {
 				}
 			})
 	}
+}
+
+//清空redux活动列表
+export function clearCollectionActive() {
+  return { type: CLEARCOLLECTIONACTIVE}
 }

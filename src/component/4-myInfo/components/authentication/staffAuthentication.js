@@ -1,11 +1,11 @@
 import React from 'react'
 import { List, InputItem, Toast, Picker } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import TopNavBar from './topNavBar'
+import TopNavBar from '../topNavBar'
 import axios from 'axios'
 import qs from 'qs'
-import { uploadSingleImg, serverIp, previewImg } from '../../../utils/utils'
-import { sex } from '../settingPickerData/data'
+import { uploadSingleImg, serverIp, previewImg } from '../../../../utils/utils'
+import { sex } from '../../settingPickerData/data'
 
 class StaffAuthentication extends React.Component {
 	constructor(props) {
@@ -165,7 +165,7 @@ class StaffAuthentication extends React.Component {
 									<input id="positive" type="file" name="positive" onChange={() => this.handleChange('positive')} />
 									<img
 										className="preview"
-										src={require('../../../images/myInfo/identity_positive@2x.png')}
+										src={require('../../../../images/myInfo/identity_positive@2x.png')}
 										alt="身份证正面"
 									/>
 								</div>
@@ -173,7 +173,7 @@ class StaffAuthentication extends React.Component {
 									<input id="reverse" type="file" name="reverse" onChange={() => this.handleChange('reverse')} />
 									<img
 										className="preview"
-										src={require('../../../images/myInfo/identity_reverse@2x.png')}
+										src={require('../../../../images/myInfo/identity_reverse@2x.png')}
 										alt="身份证正面"
 									/>
 								</div>

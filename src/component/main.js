@@ -12,11 +12,11 @@ class Main extends React.Component{
   }
   componentWillMount(){
     let tokenStr = '9539'
-    let user_id = '652159'
+    let user_id = '652157'
     window.sessionStorage.setItem('token', tokenStr)
     window.sessionStorage.setItem('user_id', user_id)
     this.props.getUserInfoPort(tokenStr, user_id)
-    // let _this = this  
+    // let _this = this
     // window.addEventListener('message', function(event) {
     //   // 接收位置信息
     //   _this.loc = event.data
@@ -48,7 +48,7 @@ class Main extends React.Component{
         </iframe> */}
         <section>
           <RouteConfig />
-        </section>      
+        </section>
         <Footer />
       </div>
     )
