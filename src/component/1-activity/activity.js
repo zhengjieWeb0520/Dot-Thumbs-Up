@@ -10,7 +10,7 @@ import ActivityContent from './../1-activity/activityContent/activityContent'
 import { getIndustry, getActiveList, clearInfo } from './../../redux/1-activiy/activeIndexRedux'
 const AMap = window.AMap;
 const Item = Popover.Item;
-// 活动组件
+// 活动组件(主)
 class Activity extends React.Component{
   constructor(props){
     super(props)
@@ -52,7 +52,8 @@ class Activity extends React.Component{
       });
       // 把定位插件加入地图实例
       //map.addControl(geolocation);
-
+      // 调用定位
+      geolocation.getCurrentPosition();
       // 添加地图全局定位事件
       AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
       AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
@@ -71,7 +72,8 @@ class Activity extends React.Component{
           pageSize: 5
         }
         console.log(data)
- 
+        window.sessionStorage.setItem('user_lon', data.position.lng)
+        window.sessionStorage.setItem('user_lat', data.position.lat)
         //alert(data.formattedAddress)
         _this.setState({
           address: data.formattedAddress
@@ -82,10 +84,28 @@ class Activity extends React.Component{
       }
     
       function onError (data) {
-        console.log(data)
+        let activeParam = {
+          dir_one: _this.state.levelState,
+          dir_two: _this.state.level2State,
+          by_user_id: '',
+          key_word: '',
+          order: 'comprehensive',
+          distance_lately: 1,
+          current_user_lon: 118.746916,
+          current_user_dim: 32.033717,
+          business_level: 0,
+          pageNo: 1,
+          pageSize: 5
+        }
+        window.sessionStorage.setItem('user_lon', 118.746916)
+        window.sessionStorage.setItem('user_lat', 32.033717)
+        _this.setState({
+          address: '测试地址'
+        },()=>{
+          _this.props.getIndustry()
+          _this.props.getActiveList(activeParam)
+        })
       }
-      // 调用定位
-      geolocation.getCurrentPosition();
     });
   }
   componentDidMount(){
@@ -121,7 +141,7 @@ class Activity extends React.Component{
     let width = 0
     console.log(activeType.length)
     for(let i = 0; i< activeType.length; i++){
-      width = width + activeType[i].offsetWidth + 30
+      width = width + activeType[i].offsetWidth + 16
     }
     width = width + 40
     console.log(width)

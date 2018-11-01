@@ -1,4 +1,5 @@
 import React from 'react'
+import { goldConfig } from './../component/config'
 //三个数字加一个逗号
 export function toThousands(num) {
 	let result = [],
@@ -25,7 +26,6 @@ export function getChildNode(dom) {
 	}
 	return nodes
 }
-
 /**
  * 获取相邻元素
  * @param ele 参考物元素
@@ -486,7 +486,23 @@ export function createStarLevel(starLevel, selectStar, defaultStar){
   return content
 }
 
-
+//奖金模式
+export function createBonusItem(bonus){
+  let content = []
+  bonus.forEach((item ,index) => {
+    let column
+    let bonusValue = Number(item)
+    let goldValue
+    goldConfig.forEach((item2, index2)=>{
+      if(index === item2.id){
+        goldValue = item2.value
+      }
+    })
+    column = <p key={index} className={`radiu_${index + 1}`}><i></i><span>{goldValue}:<span>¥{bonusValue}</span><span className='rmb'>RMB</span></span></p>
+    content.push(column)
+  });
+  return content
+}
 /*
 服务器本地ip切换
 

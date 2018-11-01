@@ -1,6 +1,6 @@
 import React from 'react'
-
-import { getChildNode } from './../../../../utils/utils'
+import { connect } from 'react-redux'
+import { getChildNode , createBonusItem} from './../../../../utils/utils'
 
 class ActivityInfoContent extends React.Component{
   componentDidMount(){
@@ -9,23 +9,39 @@ class ActivityInfoContent extends React.Component{
   lookMoreRank(){
     document.querySelector('.zhezhao').style.display = 'block'
   }
+  componentWillReceiveProps(nextProps){
+    // console.log(this.props)
+    // console.log(nextProps)
+  }
+  createBonusContent(){
+    let distribute_Content
+    console.log(this.props.activeDetail.distributeType)
+    console.log(this.props.activeDetail.bonus)
+    if(this.props.activeDetail.distributeType === 0){
+      let bonus = this.props.activeDetail.bonus.split(',').reverse()
+      distribute_Content = <div>{createBonusItem(bonus)}</div>
+    }else{
+      distribute_Content = <div className='bonusequal'></div>
+    }
+    console.log(distribute_Content)
+    return distribute_Content
+    
+  }
   render(){
+    console.log(this.props.activeDetail)
+    console.log('----render----')
     return(
       <div className='activityInfoContent'>
         <div>
-          <p><span>活动时间：</span><span>2018.09.09-2019.12.12</span></p>
-          <p><span>活动简介：</span><span>大苏打实打实大苏打实打实大苏打实打实的撒打算大苏打大撒大撒大撒大撒大大实打实撒旦飒飒大苏打大大大苏打</span></p>
+          <p><span>活动时间：</span><span>{this.props.activeDetail.startDate} - {this.props.activeDetail.endDate}</span></p>
+          <p><span>活动简介：</span><span>{this.props.activeDetail.activeDesc}</span></p>
         </div>
         <div>
           <div>
             <div><span></span></div>
             <p><strong>奖金模式</strong></p>
           </div>
-          <div>
-            <p className='radiu_1'><i></i><span>一等奖:<span>¥&nbsp;500</span><span className='rmb'>RMB</span></span></p>
-            <p className='radiu_2'><i></i><span>二等奖:<span>¥&nbsp;300</span><span className='rmb'>RMB</span></span></p>
-            <p className='radiu_3'><i></i><span>三等奖:<span>¥&nbsp;100</span><span className='rmb'>RMB</span></span></p>
-          </div>
+          {this.createBonusContent()}
         </div>
         <div>
           <div>
@@ -116,4 +132,10 @@ class ActivityInfoContent extends React.Component{
   }
 }
 
+ActivityInfoContent = connect(
+	state => ({
+    activeInfo: state.getIndustryInfo
+  }),
+	{  }
+)(ActivityInfoContent)
 export default ActivityInfoContent

@@ -1,16 +1,20 @@
 export const mechantLevel = [
   {
     id: 0,
-    value: '普通商家'
+    value: '普通商家',
+    classValue: ''
   },{
     id: 1,
-    value: '铜牌商家'
+    value: '铜牌商家',
+    classValue: 'bronzemedal'
   },{
     id: 2,
-    value: '银牌商家'
+    value: '银牌商家',
+    classValue: 'silvermedal'
   },{
     id: 3,
-    value: '金牌商家'
+    value: '金牌商家',
+    classValue: 'goldmedal'
   }
 ]
 
