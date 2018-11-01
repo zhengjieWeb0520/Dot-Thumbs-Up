@@ -124,3 +124,13 @@ export function getActiveInfo(id){
       })
   }
 }
+//收藏活动
+export function addCollection(collection_type, collection_id){
+  let data = qs.stringify({
+    collection_type: collection_type, 
+    collection_id: collection_id
+  })
+  return dispatch => {
+    
+  }
+}

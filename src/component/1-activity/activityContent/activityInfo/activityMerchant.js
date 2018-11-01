@@ -1,10 +1,22 @@
 import React from 'react'
+import BScroll from 'better-scroll'
 import { Link } from 'react-router-dom'
 
 // 商家信息
 class ActivityMerchant extends React.Component{
   constructor(props){
     super(props)
+  }
+  componentDidMount(){
+    const wrapper = document.querySelector('.merchantImg')
+    const scroll = new BScroll(wrapper,{
+      click: true,
+      scrollX: true,
+      scrollY: false,
+    })
+  }
+  componentDidUpdate(){
+
   }
   render(){
     console.log(this.props)
@@ -23,12 +35,14 @@ class ActivityMerchant extends React.Component{
               </Link>
             </div>
             <div className='merchantImg'>
-              {this.props.merchantInfo.img_data.imgs.map((item, index)=>{
-                console.log(item.img_url)
-                return (
-                  <img key={index} src={item.img_url} alt=""/>
-                )
-              })}
+              <div>
+                {this.props.merchantInfo.img_data.imgs.map((item, index)=>{
+                  console.log(item.img_url)
+                  return (
+                    <img key={index} src={item.img_url} alt=""/>
+                  )
+                })}
+              </div>
             </div>
           </div>
           <p><span>商家名称</span><span>{this.props.merchantInfo.user_info.user_name}</span></p>

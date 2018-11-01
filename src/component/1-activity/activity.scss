@@ -645,10 +645,15 @@
           }
           .merchantImg{
             height: 150px;
+            width: 86vw;
+            overflow-x: hidden;
+            >div{
+              width: 150vw;
+            }
             img{
               width: 150px;
               height: 150px;
-              margin-right: 10px;
+              margin-right:20px;
             }
           }
         }
