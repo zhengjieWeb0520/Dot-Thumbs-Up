@@ -1,7 +1,7 @@
 import qs from 'qs'
 import axios from 'axios'
 import { Toast } from 'antd-mobile'
-import { serverIp, toast } from '../../utils/utils'
+import { serverIp } from '../../utils/utils'
 
 const USERINFO = 'USERINFO'
 
@@ -27,7 +27,7 @@ export function getUserInfoPort(token, user_id){
   return dispatch => {
     axios
       .post(
-        serverIp + '/dianzanbao/userInfo/getUserInfo.do', 
+        serverIp + '/dianzanbao/userInfo/getUserInfo.do',
         {},
         {
           headers: {
@@ -38,6 +38,27 @@ export function getUserInfoPort(token, user_id){
       ).then(res => {
         if(res.data.result_code === '0'){
           dispatch(getUserInformation(res.data.result_info))
+        }
+      })
+  }
+}
+
+//修改商家信息
+export function modifyUserInfo(key, value) {
+  let data = qs.stringify({
+    [key]: value
+  })
+  return dispatch => {
+    axios
+      .post(serverIp + '/dianzanbao/userInfo/updUserInfo.do', data, {
+        headers: {
+          token: window.sessionStorage.getItem('token'),
+          user_id: window.sessionStorage.getItem('user_id')
+        }
+      })
+      .then(res => {
+        if (res.data.result_code === '0') {
+          Toast.info("修改成功")
         }
       })
   }

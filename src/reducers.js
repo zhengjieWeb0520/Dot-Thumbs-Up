@@ -5,7 +5,6 @@ import { reportMerchant } from './redux/1-activiy/reportMerchantRedux'
 import { getUserInfo } from './redux/1-activiy/getUserInfoRedux'
 import { createActivity } from './redux/3-publish/createActiceRedux'
 import { getIndustryInfo } from './redux/1-activiy/activeIndexRedux'
-import { userInfo } from './redux/4-myinfo/getUserInfoRedux'
 import { collection } from './redux/4-myinfo/collectionRedux'
 import { merchantActivity } from './redux/5-merchant/merchantRedux'
 import { recentView } from './redux/4-myinfo/recentViewRedux'
@@ -14,7 +13,6 @@ export default combineReducers({
 	counter,
 	backCard,
 	reportMerchant,
-	userInfo,
 	collection,
 	getUserInfo,
 	createActivity,
