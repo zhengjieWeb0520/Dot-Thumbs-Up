@@ -27,7 +27,7 @@ class MyInfoMain extends React.Component {
 								</Link>
 							</li>
 							<li className="involve">
-								<Link to={`/involve`}>
+                <Link to={`/index/participate`}>
 									<span className="icon" />
 									<p>参与</p>
 								</Link>

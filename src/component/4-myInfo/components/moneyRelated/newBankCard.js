@@ -1,56 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createForm } from 'rc-form'
+import axios from 'axios'
+import qs from 'qs'
 import { List, InputItem, Picker, Toast } from 'antd-mobile'
-import { validatorCode, validatorPhone } from '../../../utils/utils'
-import SendCode from './sendCode'
-import TopNavBar from './topNavBar'
-import { addBankCard } from '../../../redux/4-myinfo/backCardRedux'
+import { validatorCode, validatorPhone, serverIp } from '../../../../utils/utils'
+import SendCode from '../sendCode'
+import TopNavBar from '../topNavBar'
+import { addBankCard } from '../../../../redux/4-myinfo/backCardRedux'
 
 class NewBankCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			bankList: [
-				{
-					value: '中国农业银行',
-					label: '中国农业银行'
-				},
-				{
-					value: '中国工商银行',
-					label: '中国工商银行'
-				},
-				{
-					value: '中国招商银行',
-					label: '中国招商银行'
-				},
-				{
-					value: '南京银行',
-					label: '南京银行'
-				}
-			],
-			bankBranchList: [
-				{
-					value: '雨花台支行',
-					label: '雨花台支行'
-				},
-				{
-					value: '建邺支行',
-					label: '建邺支行'
-				},
-				{
-					value: '玄武支行',
-					label: '玄武支行'
-				},
-				{
-					value: '栖霞支行',
-					label: '栖霞支行'
-				}
-			],
+			bankList: [],
 			cols: 1,
 			bankBranchValue: [],
 			bankValue: []
 		}
+	}
+
+	componentWillMount() {
+		axios
+			.post(serverIp + '/dianzanbao/bank/getBankConfigs.do', null, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
+				}
+			})
+			.then(res => {
+				//获取银行列表
+				let data = res.data.result_info
+				let bankList = []
+				data.forEach(item => {
+					bankList.push({
+						value: item.bank_id,
+						label: item.bank_name
+					})
+				})
+
+				this.setState({
+					bankList,
+					bankListOrigin: data
+				})
+			})
 	}
 
 	onClick = () => {}
@@ -88,9 +81,20 @@ class NewBankCard extends React.Component {
 		}
 	}
 
+	//根据银行id查询银行名称
+	getBankNameByBankId(id) {
+		let bankName
+		for (let i = 0; i < this.state.bankListOrigin.length; i++) {
+			if (this.state.bankListOrigin[i].bank_id === id) {
+				bankName = this.state.bankListOrigin[i].bank_name
+				break
+			}
+		}
+		return bankName
+	}
+
 	//提交新银行卡表单
 	submitForm = () => {
-		this.props.addBankCard()
 		const form = this.props.form
 		let errors = form.getFieldsError()
 		let values = form.getFieldsValue()
@@ -118,20 +122,48 @@ class NewBankCard extends React.Component {
 			} else if (!values.bankValue) {
 				Toast.info('请选择银行', 1)
 				return
-      } 
-      // else if (!values.bankBranchValue) {
+			}
+			// else if (!values.bankBranchValue) {
 			// 	Toast.info('请选择支行', 1)
 			// 	return
-      // } 
-      else if (!values.HosterCardNum) {
+			// }
+			else if (!values.HosterCardNum) {
 				Toast.info('请输入银行卡号', 1)
 				return
 			}
-			console.log(values)
+
+			let data = {
+				bank_id: values.bankValue[0],
+				bank_address: this.getBankNameByBankId(values.bankValue[0]),
+				card_id: values.HosterCardNum.replace(/\s+/g, ''),
+				name: values.HosterName,
+				id_card: values.HosterNumber,
+				phone: values.HosteTel.replace(/\s+/g, ''),
+				code: values.HosterCode
+			}
+
+			this.props.addBankCard(data, function(tips) {
+				Toast.info(tips, 1)
+				if (tips === '添加成功') {
+					form.resetFields()
+				}
+			})
 		} else {
 			Toast.info(error, 1)
 		}
 	}
+
+	//添加银行卡
+	// addBankCard(data, fn) {
+	// 	data = qs.stringify(data)
+	// 	axios.post(serverIp + '/dianzanbao/user/upd_password.do', data).then(res => {
+	// 		if (res.data.result_code === '0') {
+	// 			fn('添加成功')
+	// 		} else {
+	// 			fn(res.data.err_msg)
+	// 		}
+	// 	})
+	// }
 
 	//错误信息提示
 	onErrorClick(type) {

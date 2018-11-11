@@ -4,8 +4,9 @@ import BScroll from 'better-scroll'
 import { Toast } from 'antd-mobile'
 import TopNavBar from './topNavBar'
 import { Link } from 'react-router-dom'
-import { getCollectionActive } from '../../../redux/4-myinfo/collectionRedux'
+import { getCollectionActive, clearCollectionActive } from '../../../redux/4-myinfo/collectionRedux'
 import '../../1-activity/common.scss'
+import { ObjectEquals } from '../../../utils/utils'
 
 //评分亮星
 function OrangeStar(props) {
@@ -27,12 +28,40 @@ function GaryStar(props) {
 
 //活动列表
 class ActiveList extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			active: null
+		}
+
+		this.count = 2
+	}
+
 	componentWillMount() {
+		this.getFirstPageData('first')
+	}
+
+	//请求第一页数据(页面刚加载和下拉刷新)
+	getFirstPageData(type, fn) {
 		let data = {
 			pageNo: '1',
 			pageSize: '5'
 		}
-		this.props.getCollectionActive(data)
+
+		if (type === 'first') {
+			this.props.getCollectionActive(data)
+		} else {
+			this.props.getCollectionActive(data, fn)
+		}
+	}
+
+	//上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		this.props.getCollectionActive(data, fn)
 	}
 
 	componentDidMount() {
@@ -44,8 +73,8 @@ class ActiveList extends React.Component {
 			click: true,
 			probeType: 1,
 			pullUpLoad: {
-        stop: 50,
-        threshold: 0
+				stop: 50,
+				threshold: 0
 			}
 		})
 
@@ -58,37 +87,53 @@ class ActiveList extends React.Component {
 
 		// 滑动结束
 		this.scroll.on('touchEnd', function(position) {
-      _this.scroll.off('scroll', function() {})
-			if (position.y > 30) {
-        setTimeout(function () {
-				let data = {
-					pageNo: '1',
-					pageSize: '5'
-				}
-				_this.props.getCollectionActive(data, function() {
-					// 恢复文本值
-					topTip.innerText = '下拉刷新'
-					// 刷新成功后的提示
-					Toast.info('刷新成功', 1)
-				})
-				// 刷新列表后,重新计算滚动区域高度
-        _this.scroll.refresh()
-      }, 1000)
-			} else if (position.y < this.maxScrollY - 30) {
+			_this.scroll.off('scroll', function() {})
+			if (position.y > 40) {
+				setTimeout(function() {
+					_this.getFirstPageData('refresh', function() {
+						// 恢复文本值
+						topTip.innerText = '下拉刷新'
+						// 刷新成功后的提示
+						Toast.info('刷新成功', 1)
+						_this.count = 2
+					})
+					// 刷新列表后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			} else if (position.y < this.maxScrollY - 40) {
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
-					// 恢复文本值
-					bottomTip.innerText = '查看更多'
-					// 向列表添加数据
-
+					_this.pullUpLoadData(function(data) {
+						if (ObjectEquals(data.list, _this.state.active.list)) {
+							// 恢复文本值
+							bottomTip.innerText = '没有更多数据'
+						} else {
+							// 恢复文本值
+							bottomTip.innerText = '查看更多'
+							_this.count++
+						}
+					})
 					// 加载更多后,重新计算滚动区域高度
 					_this.scroll.refresh()
 				}, 1000)
 			}
 		})
 	}
+
+	componentWillReceiveProps(nextProps) {
+		if (!ObjectEquals(nextProps.active, this.props.active)) {
+			this.setState({
+				active: nextProps.active
+			})
+		}
+	}
+
+	componentWillUnmount() {
+    this.props.clearCollectionActive()
+	}
+
 	render() {
-		let activeList = this.props.active
+		console.log(this.state)
 		return (
 			<div className="activityContent wrapper">
 				<div>
@@ -96,10 +141,16 @@ class ActiveList extends React.Component {
 						<span className="refresh-hook">下拉刷新</span>
 					</div>
 					<ul id="ActivityContent" className="ActivityContent content">
-						{Object.keys(activeList).length !== 0
-							? activeList.list.map(item => {
+						{this.state.active !== null
+							? this.state.active.list.map(item => {
+									let path = {
+										pathname: '/activityInfo',
+										query: {
+											id: item.id
+										}
+									}
 									return (
-										<Link to="/activityInfo" className="activityItem" key={item.id}>
+										<Link to={path} className="activityItem" key={item.id}>
 											<div>
 												<img src={item.img_url} alt="" />
 											</div>
@@ -123,7 +174,7 @@ class ActiveList extends React.Component {
 											</div>
 											{item.distribute_type === 0 ? (
 												<div>
-													<p className="radiuOne">
+													<p className="radiu_1">
 														<i />
 														<span>
 															一等奖:
@@ -131,7 +182,7 @@ class ActiveList extends React.Component {
 															<span className="rmb">RMB</span>
 														</span>
 													</p>
-													<p className="radiuTwo">
+													<p className="radiu_2">
 														<i />
 														<span>
 															二等奖:
@@ -139,7 +190,7 @@ class ActiveList extends React.Component {
 															<span className="rmb">RMB</span>
 														</span>
 													</p>
-													<p className="radiuThree">
+													<p className="radiu_3">
 														<i />
 														<span>
 															三等奖:
@@ -155,245 +206,6 @@ class ActiveList extends React.Component {
 									)
 							  })
 							: null}
-
-						{/* <Link to="/activityInfo" className="activityItem">
-							<div>
-								<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
-							</div>
-							<div>
-								<p>商家名称</p>
-								<p>活动名称活动名称</p>
-								<p>
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="grayStar" />
-									<span>4.0分</span>
-								</p>
-								<p>
-									<span>
-										<i />
-										<span>4365</span>
-									</span>
-									<span>
-										<span>433m</span>
-									</span>
-								</p>
-							</div>
-							<div className="bonusequal" />
-						</Link>
-
-						<Link to="/activityInfo" className="activityItem">
-							<div>
-								<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
-							</div>
-							<div>
-								<p>商家名称</p>
-								<p>活动名称活动名称</p>
-								<p>
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="grayStar" />
-									<span>4.0分</span>
-								</p>
-								<p>
-									<span>
-										<i />
-										<span>4365</span>
-									</span>
-									<span>
-										<span>433m</span>
-									</span>
-								</p>
-							</div>
-							<div>
-								<p className="radiuOne">
-									<i />
-									<span>
-										一等奖:
-										<span>¥500</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuTwo">
-									<i />
-									<span>
-										二等奖:
-										<span>¥300</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuThree">
-									<i />
-									<span>
-										三等奖:
-										<span>¥100</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-							</div>
-						</Link>
-						<Link to="/activityInfo" className="activityItem">
-							<div>
-								<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
-							</div>
-							<div>
-								<p>商家名称</p>
-								<p>活动名称活动名称</p>
-								<p>
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="grayStar" />
-									<span>4.0分</span>
-								</p>
-								<p>
-									<span>
-										<i />
-										<span>4365</span>
-									</span>
-									<span>
-										<span>433m</span>
-									</span>
-								</p>
-							</div>
-							<div>
-								<p className="radiuOne">
-									<i />
-<<<<<<< HEAD
-									<span>4365</span>
-								</span>
-								<span>
-									<span>433m</span>
-								</span>
-							</p>
-						</div>
-						<div>
-							<p className="radiu_1">
-								<i />
-								<span>
-									一等奖:
-									<span>¥500</span>
-									<span className="rmb">RMB</span>
-								</span>
-							</p>
-							<p className="radiu_2">
-								<i />
-								<span>
-									二等奖:
-									<span>¥300</span>
-									<span className="rmb">RMB</span>
-								</span>
-							</p>
-							<p className="radiu_3">
-								<i />
-								<span>
-									三等奖:
-									<span>¥100</span>
-									<span className="rmb">RMB</span>
-								</span>
-							</p>
-						</div>
-					</Link>
-					<Link to="/activityInfo" className="activityItem">
-						<div>
-							<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
-						</div>
-						<div>
-							<p>商家名称</p>
-							<p>活动名称活动名称</p>
-							<p>
-								<i className="orangeStar" />
-								<i className="orangeStar" />
-								<i className="orangeStar" />
-								<i className="orangeStar" />
-								<i className="grayStar" />
-								<span>4.0分</span>
-							</p>
-							<p>
-								<span>
-=======
-									<span>
-										一等奖:
-										<span>¥500</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuTwo">
->>>>>>> 50537dcd6e6844518c55a9b917faca8f3fa035fc
-									<i />
-									<span>
-										二等奖:
-										<span>¥300</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuThree">
-									<i />
-									<span>
-										三等奖:
-										<span>¥100</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-							</div>
-						</Link>
-						<Link to="/activityInfo" className="activityItem">
-							<div>
-								<img src={require('./../../../images/activity/activities/item3.png')} alt="" />
-							</div>
-							<div>
-								<p>商家名称</p>
-								<p>活动名称活动名称</p>
-								<p>
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="orangeStar" />
-									<i className="grayStar" />
-									<span>4.0分</span>
-								</p>
-								<p>
-									<span>
-										<i />
-										<span>4365</span>
-									</span>
-									<span>
-										<span>433m</span>
-									</span>
-								</p>
-							</div>
-							<div>
-								<p className="radiuOne">
-									<i />
-									<span>
-										一等奖:
-										<span>¥500</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuTwo">
-									<i />
-									<span>
-										二等奖:
-										<span>¥300</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-								<p className="radiuThree">
-									<i />
-									<span>
-										三等奖:
-										<span>¥100</span>
-										<span className="rmb">RMB</span>
-									</span>
-								</p>
-							</div>
-						</Link> */}
 					</ul>
 					<div className="bottom-tip">
 						<span className="loading-hook">查看更多</span>
@@ -406,7 +218,7 @@ class ActiveList extends React.Component {
 
 ActiveList = connect(
 	state => state.collection,
-	{ getCollectionActive }
+  { getCollectionActive, clearCollectionActive }
 )(ActiveList)
 
 //商家列表

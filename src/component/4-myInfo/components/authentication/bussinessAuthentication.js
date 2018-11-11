@@ -3,9 +3,9 @@ import axios from 'axios'
 import qs from 'qs'
 import { List, InputItem, Picker, DatePicker, Toast } from 'antd-mobile'
 import { createForm } from 'rc-form'
-import TopNavBar from './topNavBar'
-import { previewImg, validatorPhone, uploadSingleImg, serverIp } from '../../../utils/utils'
-import { districtData } from '../settingPickerData/data'
+import TopNavBar from '../topNavBar'
+import { previewImg, validatorPhone, uploadSingleImg, serverIp } from '../../../../utils/utils'
+import { districtData } from '../../settingPickerData/data'
 
 class BussinessAuthentication extends React.Component {
 	constructor(props) {
@@ -304,7 +304,7 @@ class BussinessAuthentication extends React.Component {
 									type="number"
 									placeholder="推荐员工号"
 								/>
-								{/* <div className="timePick">
+								<div className="timePick">
 									<DatePicker
 										mode="time"
 										minuteStep={2}
@@ -328,7 +328,7 @@ class BussinessAuthentication extends React.Component {
 									>
 										<List.Item arrow="horizontal" />
 									</DatePicker>
-								</div> */}
+								</div>
 								<InputItem
 									{...getFieldProps('phone', {
 										rules: [{ validator: validatorPhone }]
@@ -384,7 +384,7 @@ class BussinessAuthentication extends React.Component {
 									<input id="positive" type="file" name="positive" onChange={() => this.handleChange('positive')} />
 									<img
 										className="preview"
-										src={require('../../../images/myInfo/identity_positive@2x.png')}
+										src={require('../../../../images/myInfo/identity_positive@2x.png')}
 										alt="身份证正面"
 									/>
 								</div>
@@ -392,7 +392,7 @@ class BussinessAuthentication extends React.Component {
 									<input id="reverse" type="file" name="reverse" onChange={() => this.handleChange('reverse')} />
 									<img
 										className="preview"
-										src={require('../../../images/myInfo/identity_reverse@2x.png')}
+										src={require('../../../../images/myInfo/identity_reverse@2x.png')}
 										alt="身份证反面"
 									/>
 								</div>
@@ -402,7 +402,7 @@ class BussinessAuthentication extends React.Component {
 									<input id="licence" type="file" name="licence" onChange={() => this.handleChange('licence')} />
 									<img
 										className="preview"
-										src={require('../../../images/myInfo/bussiness_lisence@2x.png')}
+										src={require('../../../../images/myInfo/bussiness_lisence@2x.png')}
 										alt="营业执照"
 									/>
 								</div>

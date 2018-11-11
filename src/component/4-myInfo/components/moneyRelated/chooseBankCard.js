@@ -1,37 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import TopNavBar from './topNavBar'
-import { Index, getParents } from '../../../utils/utils'
+import TopNavBar from '../topNavBar'
+import { Index, getParents } from '../../../../utils/utils'
 import { Link } from 'react-router-dom'
 import $ from 'zepto'
-import { getBankCardList } from '../../../redux/4-myinfo/backCardRedux'
+import { getBankCardList, deleteBankCard } from '../../../../redux/4-myinfo/backCardRedux'
 
 class ChooseBankCard extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			data: [
-				{
-					id: 1,
-					imgUrl: '../../../images/myInfo/icon_gongshang.png',
-					bankName: '中国工商银行',
-					cardNum: '6222****5077',
-					bankBranch: '浦口支行'
-				},
-				{
-					id: 2,
-					imgUrl: '../../../images/myInfo/icon_jianshe.png',
-					bankName: '中国建设银行',
-					cardNum: '6222****5077',
-					bankBranch: '青浦支行'
-				}
-			]
-		}
-	}
-
 	componentWillMount() {
 		this.props.getBankCardList()
-		console.log(this.props)
 	}
 
 	componentDidMount() {
@@ -79,8 +56,11 @@ class ChooseBankCard extends React.Component {
 
 	//侧滑删除当前项
 	handleDelete = (e, id) => {
+    let _this = this
 		e.stopPropagation()
-		console.log(id)
+		this.props.deleteBankCard(id, function() {
+			_this.props.getBankCardList()
+		})
 	}
 
 	render() {
@@ -127,7 +107,7 @@ class ChooseBankCard extends React.Component {
 
 ChooseBankCard = connect(
 	state => state.backCard,
-	{ getBankCardList }
+	{ getBankCardList, deleteBankCard }
 )(ChooseBankCard)
 
 export default ChooseBankCard

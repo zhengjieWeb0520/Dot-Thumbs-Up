@@ -1,8 +1,8 @@
 @import "./../../utils/variblesAndMixins";
 
 .activityContent {
-  height: 793px;
-  position: relative;
+  height: 1082px !important;
+  background: #fff;
   overflow: hidden;
 
   .top-tip{
@@ -27,6 +27,7 @@
   }
 
 	.ActivityContent {
+
 		.activityItem {
 			margin-left: 20px;
 			height: 218px;

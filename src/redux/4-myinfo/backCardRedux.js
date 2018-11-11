@@ -1,16 +1,17 @@
 import qs from 'qs'
 import axios from 'axios'
-import { message } from 'antd'
-import { serverIp, toast } from '../../utils/utils'
+import { Toast } from 'antd-mobile'
+import { serverIp } from '../../utils/utils'
 
 const GETBANKCARDLIST = 'GETBANKCARDLIST'
+const GETBANKLIST = 'GETBANKLIST'
 const ADDBANKCARD = 'ADDBANKCARD'
 const DELETEBANKCARD = 'DELETEBANKCARD'
 const ALLBANK = 'ALLBANK'
 
 let initState = {
 	cardList: [],
-	allBank: []
+	bankList: []
 }
 
 //银行卡
@@ -18,6 +19,8 @@ export function backCard(state = initState, action) {
 	switch (action.type) {
 		case GETBANKCARDLIST:
 			return { ...state, cardList: action.data }
+		case GETBANKLIST:
+			return { ...state, bankList: action.data }
 		case ADDBANKCARD:
 			return { ...state }
 		case DELETEBANKCARD:
@@ -48,43 +51,48 @@ export function getBankCardList() {
 }
 
 //增加银行卡
-export function addBankCard(values) {
-  let data = qs.stringify({
-    bank_id: 2,
-    bank_address: '建设银行',
-    card_id: 6228481234564569852,
-    name: '集赞宝',
-    id_card: 321322199204021234,
-    phone: 15715150862,
-    code: 261238
-  })
+export function addBankCard(values, fn) {
+	values = qs.stringify(values)
 	return dispatch => {
 		axios
-			.post(
-				serverIp + '/dianzanbao/bank/addBankCard.do',
-				data,
-				{
-					headers: {
-						token: window.sessionStorage.getItem('token'),
-						user_id: window.sessionStorage.getItem('user_id')
-					}
+			.post(serverIp + '/dianzanbao/bank/addBankCard.do', values, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
 				}
-			)
+			})
 			.then(res => {
 				if (res.data.result_code === '0') {
 					dispatch({ type: ADDBANKCARD })
-					toast(message, '添加成功', 'success')
+					fn('添加成功')
+				} else {
+					fn(res.data.err_msg)
 				}
 			})
 	}
 }
 
 //删除银行卡
-export function deleteBankCard() {
-	return { type: DELETEBANKCARD }
-}
-
-//获取所有银行列表
-export function getAllBank() {
-	return { type: ALLBANK }
+export function deleteBankCard(id, fn) {
+	let data = qs.stringify({
+		ids: id
+	})
+	return dispatch => {
+		axios
+			.post(serverIp + '/dianzanbao/bank/delBankCards.do', data, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
+				}
+			})
+			.then(res => {
+				if (res.data.result_code === '0') {
+					dispatch({ type: DELETEBANKCARD })
+          Toast.info('删除成功')
+          fn()
+				} else {
+					Toast.info(res.data.err_msg)
+				}
+			})
+	}
 }

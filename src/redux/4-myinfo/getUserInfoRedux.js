@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs'
 import { serverIp } from '../../utils/utils'
 
 const GETUSERINFO = 'GETUSERINFO'
@@ -30,6 +31,26 @@ export function getUserInfo() {
 			.then(res => {
 				if (res.data.result_code === '0') {
 					dispatch({ type: GETUSERINFO, data: res.data.result_info })
+				}
+			})
+	}
+}
+
+//修改商家信息
+export function modifyUserInfo() {
+	let data = qs.stringify({
+
+	})
+	return dispatch => {
+		axios
+			.post(serverIp + '/dianzanbao/userInfo/updUserInfo.do', data, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
+				}
+			})
+			.then(res => {
+				if (res.data.result_code === '0') {
 				}
 			})
 	}

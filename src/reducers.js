@@ -8,6 +8,7 @@ import { getIndustryInfo } from './redux/1-activiy/activeIndexRedux'
 import { userInfo } from './redux/4-myinfo/getUserInfoRedux'
 import { collection } from './redux/4-myinfo/collectionRedux'
 import { merchantActivity } from './redux/5-merchant/merchantRedux'
+import { recentView } from './redux/4-myinfo/recentViewRedux'
 
 export default combineReducers({
 	counter,
@@ -18,5 +19,9 @@ export default combineReducers({
 	getUserInfo,
 	createActivity,
 	getIndustryInfo,
-	merchantActivity
+	merchantActivity,
+	recentView,
+	getUserInfo,
+	createActivity,
+	getIndustryInfo
 })

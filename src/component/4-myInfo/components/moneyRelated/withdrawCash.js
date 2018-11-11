@@ -1,5 +1,5 @@
 import React from 'react'
-import TopNavBar from './topNavBar'
+import TopNavBar from '../topNavBar'
 import { Icon, InputItem, List } from 'antd-mobile'
 import { Link } from 'react-router-dom'
 import { createForm } from 'rc-form'
@@ -22,7 +22,7 @@ class WithdrawCash extends React.Component {
 					<div className="bankChoose">
 						<Link to={`/wallet/withdraw/selectBankCard`}>
 							<div className="img">
-								<img src={require('../../../images/myInfo/icon_gongshang.png')} alt="" />
+								<img src={require('../../../../images/myInfo/icon_gongshang.png')} alt="" />
 							</div>
 							<div className="bankName">中国工商银行（5077）</div>
 							<Icon type="right" size="lg" color="#c5c5c5" />

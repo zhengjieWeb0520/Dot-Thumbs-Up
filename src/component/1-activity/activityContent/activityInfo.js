@@ -33,14 +33,14 @@ class ActivityInfo extends React.Component{
         activeDesc: '',       //活动描述
         distributeType: null, //0 奖金  1代金券
         bonusType: null,      //0排名，1平摊
-        bonus:'',             //奖金详情  
-        activeImg:[],         //活动图片      
+        bonus:'',             //奖金详情
+        activeImg:[],         //活动图片
       },
     }
   }
   componentWillMount(){
     if(this.props.location.query == undefined){
-      this.props.history.push('/index')
+      this.props.history.goBack()
     }else{
       console.log(this.props.location)
       this.props.getActiveInfo(this.props.location.query.activeId)
@@ -69,11 +69,11 @@ class ActivityInfo extends React.Component{
       }else if(e.target.textContent === '评价'){
         _this.setState({
           tabFlag: 1
-        })     
+        })
       }else if(e.target.textContent === '商家'){
         _this.setState({
           tabFlag: 2
-        })  
+        })
       }
     })
 
@@ -100,7 +100,7 @@ class ActivityInfo extends React.Component{
           e.target.parentNode.firstChild.classList.add('willpointActive')
         }else if(e.target.parentNode.textContent === '我的集赞'){
           e.target.parentNode.firstChild.classList.add('mypointActive')
-        }      
+        }
       }
     }, false)
   }
@@ -208,6 +208,12 @@ class ActivityInfo extends React.Component{
   componentWillUnmount(){
     this.props.clearInfo()
   }
+
+  //微信分享
+  shareToWx () {
+    console.log('aa')
+  }
+
   render(){
     console.log(this.state.activeDetail)
     return(
@@ -223,8 +229,8 @@ class ActivityInfo extends React.Component{
                 >
                 {this.state.activeDetail.activeImg.map((item, index)=>{
                   console.log(item.img_url)
-                  return( 
-                    <img 
+                  return(
+                    <img
                       key={index}
                       src={item.img_url}
                       alt=""
@@ -243,11 +249,13 @@ class ActivityInfo extends React.Component{
               <Link to='/index'></Link>
               <span></span>
               <span className='collectionCondition'>{this.state.collectCondition}</span>
-              {this.state.have_collection === false && this.state.have_collection !== null ?  
+              {/* {this.state.have_collection === false && this.state.have_collection !== null ?  
                 (<i className='collectIcon uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>):  
                 (<i className='collectIcon collection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>)
               }       
-              <i className='share'></i>
+              <i className='share'></i> */}
+              <i className='uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>
+              <i className='share' onClick={this.shareToWx.bind(this)}></i>
             </div>
           </div>
           <div>
@@ -298,7 +306,7 @@ class ActivityInfo extends React.Component{
                 <span>我的集赞</span>
               </li>
             </ul>
-          </div>          
+          </div>
         </div>
       </div>
     )

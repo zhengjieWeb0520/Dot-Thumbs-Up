@@ -1,5 +1,5 @@
 import React from 'react'
-import TopNavBar from './topNavBar'
+import TopNavBar from '../topNavBar'
 import { Popover, NavBar, Icon } from 'antd-mobile'
 const Item = Popover.Item;
 
@@ -74,7 +74,7 @@ class WithdrawRecord extends React.Component {
 				</div>
         <ul className="withDrawList">
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
             <div className="content">
               <div className="bankInfo">
                 <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
@@ -87,7 +87,7 @@ class WithdrawRecord extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
             <div className="content">
               <div className="bankInfo">
                 <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
@@ -100,7 +100,7 @@ class WithdrawRecord extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
             <div className="content">
               <div className="bankInfo">
                 <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
@@ -113,7 +113,7 @@ class WithdrawRecord extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
             <div className="content">
               <div className="bankInfo">
                 <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
@@ -126,7 +126,7 @@ class WithdrawRecord extends React.Component {
             </div>
           </li>
           <li>
-            <div className="img"><img src={require("../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
+            <div className="img"><img src={require("../../../../images/myInfo/icon_jianshe.png")} alt=""/></div>
             <div className="content">
               <div className="bankInfo">
                 <p className="whichBank">提现到 建设银行 <span>8月8日 12:00</span></p>
