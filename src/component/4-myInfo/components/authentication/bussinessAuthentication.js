@@ -304,7 +304,7 @@ class BussinessAuthentication extends React.Component {
 									type="number"
 									placeholder="推荐员工号"
 								/>
-								{/* <div className="timePick">
+								<div className="timePick">
 									<DatePicker
 										mode="time"
 										minuteStep={2}
@@ -328,7 +328,7 @@ class BussinessAuthentication extends React.Component {
 									>
 										<List.Item arrow="horizontal" />
 									</DatePicker>
-								</div> */}
+								</div>
 								<InputItem
 									{...getFieldProps('phone', {
 										rules: [{ validator: validatorPhone }]

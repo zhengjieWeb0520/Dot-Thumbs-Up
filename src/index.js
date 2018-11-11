@@ -18,6 +18,7 @@ import MerchantPublish from './component/5-merchant/merchantPublish'
 import MerchantActivities from './component/5-merchant/merchantActivities'
 import ReportMerchant from './component/1-activity/activityContent/activityInfo/reportMerchant'
 import PublishActivity from './component/3-publish/publish'
+import MechantModify from './component/5-merchant/merchantModify'
 import SelectBankCard from './component/4-myInfo/components/moneyRelated/selectBankCard'
 //员工和商家认证
 import BussinessAuthentication from './component/4-myInfo/components/authentication/bussinessAuthentication'
@@ -57,7 +58,8 @@ ReactDOM.render(
 					<Route path="/merchantPublish" component={MerchantPublish} />
 					<Route path="/merchantActivities" component={MerchantActivities} />
 					<Route path="/reportMerchant" component={ReportMerchant} />
-					<Route path="/publish" component={PublishActivity} />
+					<Route path="/publish" exact component={PublishActivity} />
+					<Route path="/publish/setting" component={MechantModify} />
 					<Route path="/collection" component={Collection} />
 					<Route path="/recentView" component={RecentView} />
 					<Route path={`/chooseBankCard`} exact component={ChooseBankCard} />
@@ -71,8 +73,8 @@ ReactDOM.render(
 					<Route path={`/bussinessAuthentication`} component={BussinessAuthentication} />
 					<Route path={`/staffAuthentication`} component={StaffAuthentication} />
 					<Route path={`/changePassword`} exact component={TypeOfChangePassword} />
-          <Route path={`/changePassword/bypassword`} component={ChangePasswordByPassword} />
-          <Route path={`/changePassword/bycode`} component={ChangePasswordByCode} />
+					<Route path={`/changePassword/bypassword`} component={ChangePasswordByPassword} />
+					<Route path={`/changePassword/bycode`} component={ChangePasswordByCode} />
 					<Route path={`/aboutUs`} component={AboutUs} />
 					<Route path={`/userFeedBack`} component={UserFeedBack} />
 					<Route path={`/setting`} exact component={Setting} />

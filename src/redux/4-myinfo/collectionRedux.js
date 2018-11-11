@@ -28,7 +28,9 @@ export function getCollectionActive(pageConfig, fn) {
 	let data = qs.stringify({
 		collection_type: 'active',
 		pageNo: pageConfig.pageNo,
-		pageSize: pageConfig.pageSize
+		pageSize: pageConfig.pageSize,
+		current_user_lon: window.sessionStorage.getItem('user_lon'),
+		current_user_dim: window.sessionStorage.getItem('user_lat')
 	})
 	return dispatch => {
 		axios
@@ -49,5 +51,5 @@ export function getCollectionActive(pageConfig, fn) {
 
 //清空redux活动列表
 export function clearCollectionActive() {
-  return { type: CLEARCOLLECTIONACTIVE}
+	return { type: CLEARCOLLECTIONACTIVE }
 }

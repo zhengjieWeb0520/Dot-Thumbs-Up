@@ -131,7 +131,6 @@ class NewBankCard extends React.Component {
 				Toast.info('请输入银行卡号', 1)
 				return
 			}
-			console.log(values)
 
 			let data = {
 				bank_id: values.bankValue[0],

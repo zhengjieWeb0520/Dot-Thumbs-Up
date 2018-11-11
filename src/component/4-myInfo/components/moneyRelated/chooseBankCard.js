@@ -4,12 +4,11 @@ import TopNavBar from '../topNavBar'
 import { Index, getParents } from '../../../../utils/utils'
 import { Link } from 'react-router-dom'
 import $ from 'zepto'
-import { getBankCardList } from '../../../../redux/4-myinfo/backCardRedux'
+import { getBankCardList, deleteBankCard } from '../../../../redux/4-myinfo/backCardRedux'
 
 class ChooseBankCard extends React.Component {
 	componentWillMount() {
 		this.props.getBankCardList()
-		console.log(this.props)
 	}
 
 	componentDidMount() {
@@ -57,8 +56,11 @@ class ChooseBankCard extends React.Component {
 
 	//侧滑删除当前项
 	handleDelete = (e, id) => {
+    let _this = this
 		e.stopPropagation()
-		alert(id)
+		this.props.deleteBankCard(id, function() {
+			_this.props.getBankCardList()
+		})
 	}
 
 	render() {
@@ -86,7 +88,7 @@ class ChooseBankCard extends React.Component {
 														</div>
 														<div className="bankBranch">{item.bank_address}</div>
 													</div>
-													<i onClick={e => this.handleDelete(e, item.bank_address)} />
+													<i onClick={e => this.handleDelete(e, item.id)} />
 												</span>
 											</li>
 										)
@@ -105,7 +107,7 @@ class ChooseBankCard extends React.Component {
 
 ChooseBankCard = connect(
 	state => state.backCard,
-	{ getBankCardList }
+	{ getBankCardList, deleteBankCard }
 )(ChooseBankCard)
 
 export default ChooseBankCard

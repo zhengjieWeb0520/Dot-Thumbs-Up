@@ -170,6 +170,12 @@ class ActivityInfo extends React.Component{
       })
     }
   }
+
+  //微信分享
+  shareToWx () {
+    console.log('aa')
+  }
+
   render(){
     console.log(this.state.activeDetail)
     return(
@@ -185,8 +191,8 @@ class ActivityInfo extends React.Component{
                 >
                 {this.state.activeDetail.activeImg.map((item, index)=>{
                   console.log(item.img_url)
-                  return( 
-                    <img 
+                  return(
+                    <img
                       key={index}
                       src={item.img_url}
                       alt=""
@@ -206,7 +212,7 @@ class ActivityInfo extends React.Component{
               <span></span>
               <span className='collectionCondition'>{this.state.collectCondition}</span>
               <i className='uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>
-              <i className='share'></i>
+              <i className='share' onClick={this.shareToWx.bind(this)}></i>
             </div>
           </div>
           <div>
