@@ -22,19 +22,24 @@ class MerchantActivities extends React.Component{
     }
   }
   componentWillMount(){
-    this.setState({
-      user_id: this.props.userInfo.userInfo.user_info.user_id,
-      userImages: this.props.userInfo.userInfo.img_data.imgs,
-      userName: this.props.userInfo.userInfo.user_info.user_name,
-      business_level: this.props.userInfo.userInfo.user_info.business_level,
-      star_level: this.props.userInfo.userInfo.user_info.star_level
-    },()=>{
-      let data ={
-        pageNo: 1,
-        pageSize: 5
-      }
-      this.props.getMerchantActivity(data)
-    })
+    if(this.props.userInfo.userInfo){
+      this.setState({
+        user_id: this.props.userInfo.userInfo.user_info.user_id,
+        userImages: this.props.userInfo.userInfo.img_data.imgs,
+        userName: this.props.userInfo.userInfo.user_info.user_name,
+        business_level: this.props.userInfo.userInfo.user_info.business_level,
+        star_level: this.props.userInfo.userInfo.user_info.star_level
+      },()=>{
+        let data ={
+          pageNo: 1,
+          pageSize: 5
+        }
+        this.props.getMerchantActivity(data)
+      })
+    }else{
+      this.props.history.push('/index')
+    }
+
   }
   componentDidMount(){   
     let _this = this
@@ -92,6 +97,9 @@ class MerchantActivities extends React.Component{
   componentWillReceiveProps(nextProps){
     console.log(nextProps)
     console.log(this.props)
+    if(!ObjectEquals(nextProps.userInfo, {})){
+      
+    }
     if(!ObjectEquals(nextProps.merchantInfo.merchantActiveList, {})){
       this.setState({
         merchantActive: nextProps.merchantInfo.merchantActiveList.list
@@ -132,8 +140,8 @@ class MerchantActivities extends React.Component{
               {distribute_Content}
             </Link>
             <div className='operate'>
-              <Button type="primary">编辑</Button>
-              <Button type="warning">删除</Button>
+              <Button type="primary" onTouchEnd={this.editeActive}>编辑</Button>
+              <Button type="warning" onTouchEnd={this.deleteActive}>删除</Button>
             </div>
           </li>
           content.push(column)
