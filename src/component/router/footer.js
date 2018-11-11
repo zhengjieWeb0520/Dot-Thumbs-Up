@@ -7,7 +7,8 @@ class Footer extends Component{
   constructor(props){
     super(props)
     this.state={
-      user_role_id : 0
+      user_role_id : 0,
+      user_images: []
     }
   }
   componentDidMount(){
@@ -29,9 +30,11 @@ class Footer extends Component{
     }, false)
   }
   componentWillReceiveProps(nextProps){
+    console.log(nextProps)
     if(!ObjectEquals({}, nextProps.userInfo)){
       this.setState({
-        user_role_id: nextProps.userInfo.userInfo.user_info.role_id
+        user_role_id: nextProps.userInfo.userInfo.user_info.role_id,
+        user_images: nextProps.userInfo.userInfo.img_data.imgs
       }, ()=>{
         window.sessionStorage.setItem('user_role_id', this.state.user_role_id)
       })
@@ -41,9 +44,15 @@ class Footer extends Component{
     console.log(this.state.user_role_id)
     let user_id = window.sessionStorage.getItem('user_role_id')
     let publishDom = null
+    let path = {
+      pathname: `/merchantActivities`,
+      query: {
+        user_images: this.state.user_images
+      }
+    }
     if(this.state.user_role_id === 2){
       publishDom = (<li id='menuParticipate'>
-      <Link to={`/publish`}>
+      <Link to={path}>
         <span className='img'></span>
         <p>发布</p>
       </Link>

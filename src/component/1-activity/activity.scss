@@ -216,7 +216,14 @@
           flex: 1 1;
         }
         .collectionCondition{
-          width: 80px;
+          width: 100px;
+          display: none;
+          padding: 5px 10px 5px 10px;
+          background: white;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          border: 1px solid $grayBorderBottom
+
         }
         i{
           display: inline-block;

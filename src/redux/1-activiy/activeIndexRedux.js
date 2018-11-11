@@ -24,7 +24,7 @@ export function getIndustryInfo(state = initState, action){
     case ACTIVEINFO:
       return {...state, activeInfo: action.data}
     case CLEARINFO:
-      return {...state, industryInfo: {}, activeList: {}}
+      return {...state, industryInfo: {}, activeList: {}, activeInfo:{}}
     default:
       return state
   }
@@ -131,6 +131,21 @@ export function addCollection(collection_type, collection_id){
     collection_id: collection_id
   })
   return dispatch => {
-    
+    axios
+    .post(
+      serverIp + '/dianzanbao/collection/addCollection.do', 
+      data,
+      {
+        headers: {
+          token: window.sessionStorage.getItem('token'),
+          user_id: window.sessionStorage.getItem('user_id')
+        }
+      }
+    ).then(res => {
+      console.log(res)
+      if(res.data.result_code === '0'){
+        dispatch(getActiveInfoAction(res.data.result_info))
+      }
+    })
   }
 }

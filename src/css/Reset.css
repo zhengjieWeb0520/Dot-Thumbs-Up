@@ -614,6 +614,10 @@ fieldset,
 img {
   border: 0;
   vertical-align: middle; }
+li{
+  text-decoration: none;
+  list-style: none;
+}
 
 article,
 aside,

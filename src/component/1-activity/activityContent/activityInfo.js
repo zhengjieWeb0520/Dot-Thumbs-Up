@@ -6,7 +6,8 @@ import { Carousel, WingBlank } from 'antd-mobile';
 import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
-import { getActiveInfo } from './../../../redux/1-activiy/activeIndexRedux'
+import { getActiveInfo, clearInfo } from './../../../redux/1-activiy/activeIndexRedux'
+import { getIsOrNotCollect, addCollection, removeCollection } from './../../../redux/4-myinfo/collectionRedux'
 import { mechantLevel } from './../../config'
 
 //活动详细信息
@@ -17,6 +18,7 @@ class ActivityInfo extends React.Component{
       imgHeight:175,
       tabFlag: 0,             //组件切换标识
       collectCondition: '',   //收藏状态
+      have_collection: null,  //是否已收藏
       activeInfo: {},         //活动详情
       activeDetail: {
         merchantName: '',     //商家名称
@@ -42,6 +44,7 @@ class ActivityInfo extends React.Component{
     }else{
       console.log(this.props.location)
       this.props.getActiveInfo(this.props.location.query.activeId)
+      this.props.getIsOrNotCollect( 'active',this.props.location.query.activeId)
     }
   }
   componentDidMount(){
@@ -121,39 +124,39 @@ class ActivityInfo extends React.Component{
   collectClick(e){
     console.log(e)
     let _this = this
-    let collectDom = document.querySelector('.collectionCondition')
-    collectDom.style.display = 'block'
-    if(e.target.className === 'uncollection'){
-      e.target.classList.remove('uncollection')
-      e.target.classList.add('collection')
-      _this.setState({
-        collectCondition: '已收藏'
-      },()=>{
-        setTimeout(() => {
-          collectDom.style.display = 'none'
-        }, 1500);
-      })
-    }else if(e.target.className === 'collection'){
-      e.target.classList.remove('collection')
-      e.target.classList.add('uncollection')
-      _this.setState({
-        collectCondition: '已取消'
-      },()=>{
-        setTimeout(() => {
-          collectDom.style.display = 'none'
-        }, 1500);
-      })
+    if(this.state.have_collection === false){
+      this.props.addCollection('active', this.props.location.query.activeId)
+      // e.target.classList.remove('uncollection')
+      // e.target.classList.add('collection')
+      // _this.setState({
+      //   collectCondition: '已收藏'
+      // },()=>{
+      //   setTimeout(() => {
+      //     collectDom.style.display = 'none'
+      //   }, 1500);
+      // })
+    }else if(this.state.have_collection === true){
+      this.props.removeCollection('active', this.props.location.query.activeId)
+      // e.target.classList.remove('collection')
+      // e.target.classList.add('uncollection')
+      // _this.setState({
+      //   collectCondition: '已取消'
+      // },()=>{
+      //   setTimeout(() => {
+      //     collectDom.style.display = 'none'
+      //   }, 1500);
+      // })
     }
   }
   componentWillReceiveProps(nextProps){
-    console.log(this.props)
-    console.log(nextProps)
     if(!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)){
+      console.log(this.props)
+      console.log(nextProps)
       this.setState({
         activeInfo: nextProps.activeInfo.activeInfo,
         activeDetail: {
           merchantName: nextProps.activeInfo.activeInfo.business_info.user_info.user_nick_name,     //商家名称
-          merchantLevel: nextProps.activeInfo.activeInfo.business_info.user_info.star_level,
+          merchantLevel: nextProps.activeInfo.activeInfo.business_info.user_info.business_level,
           activeName: nextProps.activeInfo.activeInfo.name,       //活动名称
           have_collection: nextProps.activeInfo.activeInfo.have_collection,  //是否已收藏
           starLevel: nextProps.activeInfo.activeInfo.star_level,        //活动评分
@@ -169,6 +172,41 @@ class ActivityInfo extends React.Component{
         }
       })
     }
+    if(nextProps.collection.have_collection != this.props.collection.have_collection){
+      this.setState({
+        have_collection: nextProps.collection.have_collection
+      })
+    }
+    if(nextProps.collection.collect_info != this.props.collection.collect_info){
+      if(nextProps.collection.collect_info === '已收藏'){
+        this.setState({
+          have_collection : true
+        }, ()=>{
+          this.changeCollectionStyle(nextProps.collection.collect_info)
+        })
+      }else if(nextProps.collection.collect_info === '已取消'){
+        this.setState({
+          have_collection : false
+        }, ()=>{
+          this.changeCollectionStyle(nextProps.collection.collect_info)
+        })
+      }
+    }
+  }
+  //收藏取消样式
+  changeCollectionStyle(collect_info){
+    let collectDom = document.querySelector('.collectionCondition')
+    collectDom.style.display = 'inline-block'
+    this.setState({
+      collectCondition: collect_info
+    }, ()=>{
+      setTimeout(() => {
+        collectDom.style.display = 'none'
+      }, 1500);
+    }) 
+  }
+  componentWillUnmount(){
+    this.props.clearInfo()
   }
   render(){
     console.log(this.state.activeDetail)
@@ -205,7 +243,10 @@ class ActivityInfo extends React.Component{
               <Link to='/index'></Link>
               <span></span>
               <span className='collectionCondition'>{this.state.collectCondition}</span>
-              <i className='uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>
+              {this.state.have_collection === false && this.state.have_collection !== null ?  
+                (<i className='collectIcon uncollection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>):  
+                (<i className='collectIcon collection' onTouchEnd = {(v) => {this.collectClick(v)}}></i>)
+              }       
               <i className='share'></i>
             </div>
           </div>
@@ -266,8 +307,9 @@ class ActivityInfo extends React.Component{
 
 ActivityInfo = connect(
 	state => ({
-    activeInfo: state.getIndustryInfo
+    activeInfo: state.getIndustryInfo,
+    collection: state.collection
   }),
-	{ getActiveInfo }
+	{ getActiveInfo,clearInfo, getIsOrNotCollect, addCollection, removeCollection }
 )(ActivityInfo)
 export default ActivityInfo

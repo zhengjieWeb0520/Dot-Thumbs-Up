@@ -30,3 +30,7 @@ export const goldConfig = [
     value: '三等奖'
   }
 ]
+
+export const activeStatus = [
+  
+]

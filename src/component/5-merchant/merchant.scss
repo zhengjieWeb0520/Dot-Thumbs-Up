@@ -9,8 +9,20 @@
       background: white;
     }
     >div:first-of-type{
-      height: 444px;
+      height: 384px;
       position: relative;
+      .carousel{
+        height: 100%;
+        .my-carousel{
+          height: 100% !important;
+          .slider-frame{
+            height: 100% !important
+          }
+        }
+        img{
+          height: 100%;
+        }
+      }
       >div:last-of-type{
         position: absolute;
         height: 80px;
@@ -135,7 +147,7 @@
   }
 }
 .merchantContent{
-  height:720px!important;
+  height:700px!important;
   background: white;
   border-radius: 10px;
   margin: 20px;
@@ -143,13 +155,40 @@
   .merchantItemContent{
     margin: 20px;
     height: auto!important;
+    overflow-y: hidden;
+    li{
+      width: 123.33333vw;
+      overflow: hidden;
+      display: flex;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+    }
+    .swipeleft{
+      position: relative;
+      transform: translateX(-29.33333vw);
+      -webkit-transform: translateX(-29.33333vw);
+    }
+    .operate{
+      width: 20vw;
+      display: flex;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      .am-button{
+        width:10vw;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
     .merchantItem{
       display: flex;
       padding: 10px;
       border-bottom: $grayBorderBottom;
+      width: 80%;
       >div:first-of-type{
-        flex: 1 1;
         padding-top: 10px;
+        width: 46vw;
         p{
           margin-bottom: 6px;
         }
@@ -195,9 +234,16 @@
           color: #9E9E9E;
         }
       }
+
       >div:nth-of-type(2){
-        width:268px;
+        width:298px;
         text-align: right;
+        .bonusequal{
+          flex: 1 1;
+          margin-left: 8vw;
+          height: 65%;
+          @include bg-image('../../images/activity/bonusequal');
+        }
         p{
           i{
             display: inline-block;
@@ -259,6 +305,22 @@
           }
         }
       }
+    }
+  }
+}
+.mechantBtn{
+  height: 80px;
+  margin-top: 20px;
+  background: white;
+  ul{
+    height: 100%;
+    display: flex;
+    li{
+      flex: 1 1;
+      line-height: 80px;
+      text-align: center;
+      color: #4DA9FA;
+      font-size: 24px;  
     }
   }
 }
