@@ -88,10 +88,10 @@ export function deleteBankCard(id, fn) {
 			.then(res => {
 				if (res.data.result_code === '0') {
 					dispatch({ type: DELETEBANKCARD })
-          Toast.info('删除成功')
+          Toast.info('删除成功', 1)
           fn()
 				} else {
-					Toast.info(res.data.err_msg)
+					Toast.info(res.data.err_msg, 1)
 				}
 			})
 	}
