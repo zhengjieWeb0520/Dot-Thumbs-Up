@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 class MyInfoMain extends React.Component {
 	render() {
 		const url = this.props.match.url
-		let data = Object.keys(this.props.userInfoData).length === 0 ? false : this.props.userInfoData.user_info
+		let data = Object.keys(this.props.userInfo).length === 0 ? false : this.props.userInfo.user_info
 		//头像（没有头像时，加载默认头像）
 		let userAvatar = data ? (data.user_head ? data.user_head : defaultUserAvatar) : ''
 		return (
@@ -117,7 +117,7 @@ class MyInfoMain extends React.Component {
 }
 
 MyInfoMain = connect(
-	state => state.userInfo,
+  state => state.getUserInfo,
 	{}
 )(MyInfoMain)
 

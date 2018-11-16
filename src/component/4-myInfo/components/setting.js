@@ -16,18 +16,18 @@ class Setting extends React.Component {
 	}
 
 	render() {
-		let data = Object.keys(this.props.userInfoData).length === 0 ? false : this.props.userInfoData.user_info
+		let data = Object.keys(this.props.userInfo).length === 0 ? false : this.props.userInfo.user_info
 		//地区拼接
 		let location = data ? data.province + ',' + data.city + ',' + data.area : ''
 		//头像（没有头像时，加载默认头像）
-    let userAvatar = data ? (data.user_head ? data.user_head : defaultUserAvatar) : ''
+		let userAvatar = data ? (data.user_head ? data.user_head : defaultUserAvatar) : ''
 		return (
 			<div className="setting">
 				<TopNavBar title="设置" />
 				<div className="avatarBox item">
 					<div className="title">头像</div>
 					<div className="content">
-            <img src={userAvatar} alt="" id="showAvatar" />
+						<img src={userAvatar} alt="" id="showAvatar" />
 					</div>
 				</div>
 
@@ -61,7 +61,7 @@ class Setting extends React.Component {
 }
 
 Setting = connect(
-	state => state.userInfo,
+	state => state.getUserInfo,
 	{}
 )(Setting)
 

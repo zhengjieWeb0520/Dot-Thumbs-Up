@@ -1,15 +1,17 @@
 @import '../utils/variblesAndMixins';
 
-#root, #container, #main{
-  height: 100vh;
-  background: #F5F5F7;
+#root,
+#container,
+#main {
+	height: 100vh;
+	background: #f5f5f7;
 }
 p{
   margin-bottom: 0;
 }
 //菜单选中
-.menuActive p{
-  color: #383838 !important
+.menuActive p {
+	color: #383838 !important;
 }
 #main{
   display: flex;
@@ -64,28 +66,38 @@ p{
   }
 }
 //底部菜单图片自适应
-footer nav ul #menuActivity .img{
-  @include bg-image('../images/icon/acticity');
-  background-size: 100% 100%;
+footer nav ul #menuActivity .img {
+	@include bg-image('../images/icon/acticity');
+	background-size: 100% 100%;
 }
-footer nav ul #menuParticipate .img{
-  @include bg-image('../images/icon/participate');
-  background-size: 100% 100%;
+footer nav ul #menuParticipate .img {
+	@include bg-image('../images/icon/participate');
+	background-size: 100% 100%;
 }
-footer nav ul #menuMyInfo .img{
-  @include bg-image('../images/icon/myinfo');
-  background-size: 100% 100%;
+footer nav ul #menuMyInfo .img {
+	@include bg-image('../images/icon/myinfo');
+	background-size: 100% 100%;
 }
 
-footer nav ul #menuActivity.menuActive .img{
-  @include bg-image('../images/icon/acticity-active');
-  background-size: 100% 100%;
+footer nav ul #menuActivity.menuActive .img {
+	@include bg-image('../images/icon/acticity-active');
+	background-size: 100% 100%;
 }
-footer nav ul #menuParticipate.menuActive .img{
-  @include bg-image('../images/icon/participate-active');
-  background-size: 100% 100%;
+footer nav ul #menuParticipate.menuActive .img {
+	@include bg-image('../images/icon/participate-active');
+	background-size: 100% 100%;
 }
-footer nav ul #menuMyInfo.menuActive .img{
-  @include bg-image('../images/icon/myinfo-active');
-  background-size: 100% 100%;
+footer nav ul #menuMyInfo.menuActive .img {
+	@include bg-image('../images/icon/myinfo-active');
+	background-size: 100% 100%;
+}
+
+//修改antd-mobile的imagePicker的删除图片按钮
+.am-image-picker-list .am-image-picker-item .am-image-picker-item-remove {
+	width: 4vw !important;
+	height: 4vw !important;
+  background-image: url(../images/myInfo/removeImage.png) !important;
+  top: 0 !important;
+  right: 0 !important;
+  background-size: cover !important;
 }

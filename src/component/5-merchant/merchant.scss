@@ -100,7 +100,7 @@
             margin-left: 20px;
             font-size: 22px;
             color: #9E9E9E;
-          }          
+          }
         }
       }
       >div:last-of-type{
@@ -110,7 +110,7 @@
         p{
           flex: 1 1;
           display: flex;
-          align-items: center;        
+          align-items: center;
         }
         p:first-of-type{
           >i{
@@ -136,9 +136,9 @@
           >i{
             width: 27px;
             height: 27px;
-            vertical-align: middle;   
+            vertical-align: middle;
             margin-right: 10px;
-            @include bg-image('../../images/activity/willpointblue');       
+            @include bg-image('../../images/activity/willpointblue');
           }
           span{
             font-size: 26px;
@@ -284,7 +284,7 @@
           }
           span{
             span{
-              color: #FFBF6C 
+              color: #FFBF6C
             }
           }
         }
@@ -326,7 +326,7 @@
       line-height: 80px;
       text-align: center;
       color: #4DA9FA;
-      font-size: 24px;  
+      font-size: 24px;
     }
   }
 }
@@ -338,8 +338,23 @@
   }
 
 	.timePick > div {
-		width: 50%;
-		float: left;
+    width: 100%;
+
+    &>span {
+      display: inline-block;
+      width: 50%;
+      font-size: 3.73333vw;
+      color: #333;
+      padding-left: 5.73333vw;
+      border-bottom: 1px solid #ebebeb;
+      line-height: 11.73333vw;
+      box-sizing: border-box;
+    }
+
+    &>div {
+      width: 50%;
+      display: inline-block;
+    }
 	}
 
 	.timePick {
