@@ -135,6 +135,10 @@ class PublishActivity extends React.Component{
     }
     return content
   }
+  handeleFocus(){
+    console.log(document.querySelector('.inputsContent'))
+    document.querySelector('.inputsContent').scrollIntoView()
+  }
   //排行、平摊切换
   createInputContent(){
     console.log(this.props.form)
@@ -151,6 +155,7 @@ class PublishActivity extends React.Component{
                     clear
                     type="name"
                     placeholder="请设置金额"
+                    onFocus = {(v)=>{this.handeleFocus()}}
                     {...this.props.form.getFieldProps(`bonus_${item.id}`)} 
                   >
                     <span className="justifyItem">{item.name}</span>
@@ -163,6 +168,7 @@ class PublishActivity extends React.Component{
                     clear
                     type="name"
                     placeholder="请设置金额"
+                    onFocus = {(v)=>{this.handeleFocus()}}
                     extra="×"
                     onExtraClick={v=>{this.removeRanking(v)}}
                     {...this.props.form.getFieldProps(`bonus_${item.id}`)} 
@@ -184,6 +190,7 @@ class PublishActivity extends React.Component{
               clear
               type="name"
               placeholder="请输入金额"
+              onFocus = {(v)=>{this.handeleFocus()}}
               {...this.props.form.getFieldProps(`flatAmount`)} 
             >
             </InputItem>

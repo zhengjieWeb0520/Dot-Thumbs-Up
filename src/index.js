@@ -18,6 +18,7 @@ import MerchantPublish from './component/5-merchant/merchantPublish'
 import MerchantActivities from './component/5-merchant/merchantActivities'
 import ReportMerchant from './component/1-activity/activityContent/activityInfo/reportMerchant'
 import PublishActivity from './component/3-publish/publish'
+import EditePublish from './component/3-publish/editePublish'
 import MechantModify from './component/5-merchant/merchantModify'
 import SelectBankCard from './component/4-myInfo/components/moneyRelated/selectBankCard'
 //员工和商家认证
@@ -59,7 +60,8 @@ ReactDOM.render(
 					<Route path="/merchantActivities" component={MerchantActivities} />
 					<Route path="/reportMerchant" component={ReportMerchant} />
 					<Route path="/publish" exact component={PublishActivity} />
-					<Route path="/publish/setting" component={MechantModify} />
+          <Route path={`/editePublish`} exact component={EditePublish} />
+          <Route path="/publish/setting" component={MechantModify} />
 					<Route path="/collection" component={Collection} />
 					<Route path="/recentView" component={RecentView} />
 					<Route path={`/chooseBankCard`} exact component={ChooseBankCard} />

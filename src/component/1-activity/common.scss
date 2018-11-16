@@ -1,7 +1,8 @@
 @import "./../../utils/variblesAndMixins";
 
 .activityContent {
-  height: 1082px !important;
+ // height: 792px !important;
+ height: calc(100% - 443px);
   background: #fff;
   overflow: hidden;
 

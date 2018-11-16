@@ -3,11 +3,15 @@ import BScroll from 'better-scroll'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './merchant.scss'
+import axios from 'axios'
+import qs from 'qs'
 import $ from 'zepto'
-import { Carousel, WingBlank, Button } from 'antd-mobile';
-import { ObjectEquals, createStarLevel } from './../../utils/utils'
+import { Carousel, WingBlank, Button, Modal } from 'antd-mobile';
+import { ObjectEquals, createStarLevel, serverIp } from './../../utils/utils'
 import { mechantLevel, goldConfig }  from './../config'
 import { getMerchantActivity } from './../../redux/5-merchant/merchantRedux'
+
+const alert = Modal.alert;
 
 class MerchantActivities extends React.Component{
   constructor(props){
@@ -106,9 +110,54 @@ class MerchantActivities extends React.Component{
       })
     }
   }
+  editeActive = (e, activeId) =>{
+    let data = {
+      id: activeId
+    }
+    let path = {
+      pathname: '/editePublish',
+      query:data
+    }
+    this.props.history.push(path)
+  }
+  //确定删除
+  confirmDeleteActive = (e, activeId) => {
+    alert('删除', '确定删除?', [
+      { text: '取消', onPress: () => console.log('cancel') },
+      { text: '确定', onPress: () => this.deleteActive(activeId) },
+    ])
+  }
+  //删除活动
+  deleteActive = (activeId)=>{
+    console.log(activeId)
+    let data = {
+      id: activeId
+    }
+    axios
+    .post(
+      serverIp + '/dianzanbao/active/deleteActive.do', 
+      data,
+      {
+        headers: {
+          token: window.sessionStorage.getItem('token'),
+          user_id: window.sessionStorage.getItem('user_id')
+        }
+      }
+    ).then(res => {
+      console.log(res)
+      if(res.data.result_code === '0'){
+        let data1 ={
+          pageNo: 1,
+          pageSize: 5
+        }
+        this.props.getMerchantActivity(data1)
+      }
+    })
+  }
   createActiveContent(){
     let content = []
     if(!ObjectEquals(this.state.merchantActive, {})){
+      console.log(this.state.merchantActive)
       this.state.merchantActive.map((item, index)=>{
         let activeStatus = item.status === 0 ? '进行中' : '已结束'
         let column = null
@@ -129,19 +178,19 @@ class MerchantActivities extends React.Component{
           distribute_Content = <div><div className='bonusequal'></div><p>状态：{activeStatus}</p></div>
         }
         column =
-          <li className='wrapper'>
+          <li className='wrapper' key={`wrapper${index}`}>
             <Link to={path} className='merchantItem' key={item.id}>
               <div>
                 <p>{item.name}</p>
                 <p>{createStarLevel(item.star_level, 'orangeStar', 'grayStar')}<span>{`${item.star_level.toFixed(1)}分`}</span></p>
                 <p><i></i><span>{item.good_count}</span></p>
-                <p>发起时间：{item.good_count}</p>
+                <p>发起时间：{item.start_date}</p>
               </div>
               {distribute_Content}
             </Link>
             <div className='operate'>
-              <Button type="primary" onTouchEnd={this.editeActive}>编辑</Button>
-              <Button type="warning" onTouchEnd={this.deleteActive}>删除</Button>
+              <Button type="primary" onTouchEnd={(v)=>{this.editeActive(v, item.id)}}>编辑</Button>
+              <Button type="warning" onTouchEnd={(v)=>{this.confirmDeleteActive(v, item.id)}}>删除</Button>
             </div>
           </li>
           content.push(column)
@@ -172,7 +221,8 @@ class MerchantActivities extends React.Component{
     console.log(this.state)
     return(
       <div id='merchantActivities' className='merchantActivities'>
-        <div>
+        <div className='merchantActivitiesContainer'>
+          <div className='merchantActivitiesContent'>
           <div>
             <div className="carousel">
               <Carousel
@@ -233,6 +283,7 @@ class MerchantActivities extends React.Component{
           <div className = 'merchantItemContent swipeAction'>
             {this.createActiveContent()}
           </div>
+        </div>
         </div>
         <div className = 'mechantBtn'>
           <ul className = 'mechantBtnUl'>

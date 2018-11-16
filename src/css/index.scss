@@ -4,6 +4,9 @@
   height: 100vh;
   background: #F5F5F7;
 }
+p{
+  margin-bottom: 0;
+}
 //菜单选中
 .menuActive p{
   color: #383838 !important
@@ -12,10 +15,11 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow-y: hidden;
+  //overflow-y: hidden;
   section{
-    height: 1236px;
-    overflow-y: scroll
+    height: calc(100vh - 98px);
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   footer{
     position: fixed;

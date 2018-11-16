@@ -43,7 +43,7 @@ class ActivityInfo extends React.Component{
       this.props.history.goBack()
     }else{
       console.log(this.props.location)
-      this.props.getActiveInfo(this.props.location.query.activeId)
+      this.props.getActiveInfo(this.props.location.query.activeId, 'active')
       this.props.getIsOrNotCollect( 'active',this.props.location.query.activeId)
     }
   }
@@ -126,8 +126,8 @@ class ActivityInfo extends React.Component{
     let _this = this
     if(this.state.have_collection === false){
       this.props.addCollection('active', this.props.location.query.activeId)
-      // e.target.classList.remove('uncollection')
-      // e.target.classList.add('collection')
+       e.target.classList.remove('uncollection')
+       e.target.classList.add('collection')
       // _this.setState({
       //   collectCondition: '已收藏'
       // },()=>{
@@ -137,8 +137,8 @@ class ActivityInfo extends React.Component{
       // })
     }else if(this.state.have_collection === true){
       this.props.removeCollection('active', this.props.location.query.activeId)
-      // e.target.classList.remove('collection')
-      // e.target.classList.add('uncollection')
+       e.target.classList.remove('collection')
+       e.target.classList.add('uncollection')
       // _this.setState({
       //   collectCondition: '已取消'
       // },()=>{
