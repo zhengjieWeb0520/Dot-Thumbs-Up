@@ -3,13 +3,18 @@
 .merchantActivities{
   height: 100vh;
   overflow-y: auto;
-  >div{
+  .merchantActivitiesContainer{
+    height: calc(100vh - 80px);
+    height: -moz-calc(100vh - 80px);
+    height: -webkit-calc(100vh - 80px);
+  }
+  .merchantActivitiesContent{
     overflow-y: auto;
     >div{
       background: white;
     }
     >div:first-of-type{
-      height: 384px;
+      height: 324px;
       position: relative;
       .carousel{
         height: 100%;
@@ -147,7 +152,10 @@
   }
 }
 .merchantContent{
-  height:700px!important;
+  //height:700px!important;
+  height: calc(100% - 488px);
+  height: -moz-calc(100% - 488px);
+  height: -webkit-calc(100% - 488px);
   background: white;
   border-radius: 10px;
   margin: 20px;
@@ -310,7 +318,9 @@
 }
 .mechantBtn{
   height: 80px;
-  margin-top: 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
   background: white;
   ul{
     height: 100%;

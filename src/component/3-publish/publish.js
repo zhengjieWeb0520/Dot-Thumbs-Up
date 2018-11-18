@@ -135,6 +135,10 @@ class PublishActivity extends React.Component{
     }
     return content
   }
+  handeleFocus(){
+    console.log(document.querySelector('.inputsContent'))
+    document.querySelector('.inputsContent').scrollIntoView()
+  }
   //排行、平摊切换
   createInputContent(){
     console.log(this.props.form)
@@ -151,6 +155,7 @@ class PublishActivity extends React.Component{
                     clear
                     type="name"
                     placeholder="请设置金额"
+                    onFocus = {(v)=>{this.handeleFocus()}}
                     {...this.props.form.getFieldProps(`bonus_${item.id}`)} 
                   >
                     <span className="justifyItem">{item.name}</span>
@@ -163,6 +168,7 @@ class PublishActivity extends React.Component{
                     clear
                     type="name"
                     placeholder="请设置金额"
+                    onFocus = {(v)=>{this.handeleFocus()}}
                     extra="×"
                     onExtraClick={v=>{this.removeRanking(v)}}
                     {...this.props.form.getFieldProps(`bonus_${item.id}`)} 
@@ -184,6 +190,7 @@ class PublishActivity extends React.Component{
               clear
               type="name"
               placeholder="请输入金额"
+              onFocus = {(v)=>{this.handeleFocus()}}
               {...this.props.form.getFieldProps(`flatAmount`)} 
             >
             </InputItem>
@@ -206,7 +213,7 @@ class PublishActivity extends React.Component{
         rankingData: rankingData
       })
     }else{
-      Toast.info('注意:最多只能设置前3名', 1)
+      Toast.info('注意:最多只能设置前3名', 2)
     }
   }
   //删除排名
@@ -316,6 +323,16 @@ class PublishActivity extends React.Component{
       Toast.info(error, 1)
     }
   }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    console.log(this.props)
+    if(nextProps.publishState !== ''){
+      Toast.success(nextProps.publishState,3, this.onClose, true);
+    }
+  }
+  onClose =()=>{
+    
+  }
   render(){
     const { getFieldProps, getFieldError } = this.props.form
     return(
@@ -402,9 +419,9 @@ class PublishActivity extends React.Component{
 PublishActivity = createForm()(PublishActivity)
 
 PublishActivity = connect(
-	state => ({
+	state => 
+    state.createActivity,
 
-  }),
 	{ publishActive }
 )(PublishActivity)
 

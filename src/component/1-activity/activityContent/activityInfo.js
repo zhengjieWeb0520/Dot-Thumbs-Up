@@ -7,6 +7,7 @@ import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
 import { getActiveInfo, clearInfo } from './../../../redux/1-activiy/activeIndexRedux'
+import { thumpsUpActive } from './../../../redux/1-activiy/activeThumbsUp'
 import { getIsOrNotCollect, addCollection, removeCollection } from './../../../redux/4-myinfo/collectionRedux'
 import { mechantLevel } from './../../config'
 
@@ -43,7 +44,7 @@ class ActivityInfo extends React.Component{
       this.props.history.goBack()
     }else{
       console.log(this.props.location)
-      this.props.getActiveInfo(this.props.location.query.activeId)
+      this.props.getActiveInfo(this.props.location.query.activeId, 'active')
       this.props.getIsOrNotCollect( 'active',this.props.location.query.activeId)
     }
   }
@@ -87,7 +88,7 @@ class ActivityInfo extends React.Component{
       if(e.target.tagName === 'LI'){
         e.target.classList.add('pointActive')
         if(e.target.textContent === '我要点赞'){
-          console.log(e.target.firstChild)
+          _this.props.thumpsUpActive(_this.props.location.query.activeId)
           e.target.firstChild.classList.add('willpointActive')
         }else if(e.target.textContent === '我的集赞'){
           e.target.firstChild.classList.add('mypointActive')
@@ -97,6 +98,7 @@ class ActivityInfo extends React.Component{
       if(e.target.tagName === 'I' || e.target.tagName === 'SPAN'){
         e.target.parentNode.classList.add('pointActive')
         if(e.target.parentNode.textContent === '我要点赞'){
+          _this.props.thumpsUpActive(_this.props.location.query.activeId)
           e.target.parentNode.firstChild.classList.add('willpointActive')
         }else if(e.target.parentNode.textContent === '我的集赞'){
           e.target.parentNode.firstChild.classList.add('mypointActive')
@@ -126,8 +128,8 @@ class ActivityInfo extends React.Component{
     let _this = this
     if(this.state.have_collection === false){
       this.props.addCollection('active', this.props.location.query.activeId)
-      // e.target.classList.remove('uncollection')
-      // e.target.classList.add('collection')
+       e.target.classList.remove('uncollection')
+       e.target.classList.add('collection')
       // _this.setState({
       //   collectCondition: '已收藏'
       // },()=>{
@@ -137,8 +139,8 @@ class ActivityInfo extends React.Component{
       // })
     }else if(this.state.have_collection === true){
       this.props.removeCollection('active', this.props.location.query.activeId)
-      // e.target.classList.remove('collection')
-      // e.target.classList.add('uncollection')
+       e.target.classList.remove('collection')
+       e.target.classList.add('uncollection')
       // _this.setState({
       //   collectCondition: '已取消'
       // },()=>{
@@ -318,6 +320,6 @@ ActivityInfo = connect(
     activeInfo: state.getIndustryInfo,
     collection: state.collection
   }),
-	{ getActiveInfo,clearInfo, getIsOrNotCollect, addCollection, removeCollection }
+	{ getActiveInfo,clearInfo, getIsOrNotCollect, addCollection, removeCollection, thumpsUpActive}
 )(ActivityInfo)
 export default ActivityInfo

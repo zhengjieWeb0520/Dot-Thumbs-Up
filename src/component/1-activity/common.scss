@@ -1,10 +1,13 @@
 @import "./../../utils/variblesAndMixins";
 
 .activityContent {
-  height: 1082px !important;
+ // height: 792px !important;
+ height: calc(100% - 443px);
+ height: -moz-calc(100% - 443px);
+ height: -webkit-calc(100% - 443px);
   background: #fff;
   overflow: hidden;
-
+  position: relative;
   .top-tip{
     position: absolute;
     top: -40px;
@@ -183,7 +186,7 @@
 			}
 		}
 		> div:first-of-type {
-			margin-top: 20px;
+			//margin-top: 20px;
 		}
 	}
 }
