@@ -10,7 +10,7 @@ const GETACTIVELIST = 'GETACTIVELIST'
 const ACTIVEINFO = 'ACTIVEINFO'
 
 let initState = {
-  industryInfo: '',
+  industryInfo: [],
   activeList: {},
   activeInfo: {}
 }
@@ -65,7 +65,7 @@ export function getIndustry(){
   }
 }
 //获取活动列表
-export function getActiveList(activeParam){
+export function getActiveList(activeParam, fn){
   let data = qs.stringify({
     dir_one: activeParam.dir_one,
     dir_two: activeParam.dir_two,
@@ -94,6 +94,7 @@ export function getActiveList(activeParam){
         console.log(res)
         if(res.data.result_code === '0'){
           dispatch(getActiveAction(res.data.result_info))
+          fn ? fn(res.data.result_info) : null
         }
       })
   }

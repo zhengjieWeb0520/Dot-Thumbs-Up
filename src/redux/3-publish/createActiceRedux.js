@@ -8,7 +8,7 @@ const EDITECTIVITY = 'EDITECTIVITY'
 
 
 let initState = {
-  publishState: [],
+  publishState: '',
   editeState: '',
 }
 
@@ -16,7 +16,7 @@ let initState = {
 export function createActivity(state = initState, action){
   switch (action.type){
     case CREATEACTIVITY:
-      return {...state}
+      return {...state, publishState: action.data}
     case EDITECTIVITY:
       return {...state}
     default :
@@ -49,8 +49,8 @@ export function publishActive(activeInfo){
     )
     .then(res => {
       if (res.data.result_code === '0') {
-        dispatch({ type: CREATEACTIVITY })
-        Toast.success(res.data.result_info, 1);
+        dispatch({ type: CREATEACTIVITY, data: res.data.result_info })
+        
       }
     }) 
   }

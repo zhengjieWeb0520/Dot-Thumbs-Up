@@ -20,6 +20,8 @@ p{
   //overflow-y: hidden;
   section{
     height: calc(100vh - 98px);
+    height: -moz-calc(100vh - 98px);
+    height: -webkit-calc(100vh - 98px);
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }

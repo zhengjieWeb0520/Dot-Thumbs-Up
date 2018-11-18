@@ -117,7 +117,11 @@
             height: 67px;
             margin-left: 30px;
             text-align: center;
-          }     
+          }  
+          .level2Active{
+            font-weight: 700;
+            color: black;
+          }   
         }
       }
       .activityKbGray{
@@ -958,6 +962,9 @@
   right: 8px;
 }
 //pop
+.am-popover{
+  //left:0!important
+}
 .am-popover .am-popover-item-container{
   padding: 5vw 3vw 5vw 3vw
 }

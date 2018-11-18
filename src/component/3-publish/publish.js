@@ -213,7 +213,7 @@ class PublishActivity extends React.Component{
         rankingData: rankingData
       })
     }else{
-      Toast.info('注意:最多只能设置前3名', 1)
+      Toast.info('注意:最多只能设置前3名', 2)
     }
   }
   //删除排名
@@ -323,6 +323,16 @@ class PublishActivity extends React.Component{
       Toast.info(error, 1)
     }
   }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    console.log(this.props)
+    if(nextProps.publishState !== ''){
+      Toast.success(nextProps.publishState,3, this.onClose, true);
+    }
+  }
+  onClose =()=>{
+    
+  }
   render(){
     const { getFieldProps, getFieldError } = this.props.form
     return(
@@ -409,9 +419,9 @@ class PublishActivity extends React.Component{
 PublishActivity = createForm()(PublishActivity)
 
 PublishActivity = connect(
-	state => ({
+	state => 
+    state.createActivity,
 
-  }),
 	{ publishActive }
 )(PublishActivity)
 

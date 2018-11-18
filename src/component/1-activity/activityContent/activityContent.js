@@ -2,9 +2,6 @@ import React from 'react'
 import BScroll from 'better-scroll'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import activities1 from './../../../images/activity/activities/item1.png'
-import activities2 from './../../../images/activity/activities/item2.png'
-import activities3 from './../../../images/activity/activities/item3.png'
 import { ObjectEquals , createStarLevel} from '../../../utils/utils'
 import { goldConfig } from '../../config'
 
@@ -16,11 +13,30 @@ class ActivityContent extends React.Component{
     this.state = {
       arctiveList: {}   //活动列表
     }
+    this.count = 2
   }
   componentDidMount(){
     const wrapper = document.querySelector('.wrapper')
-    const scroll = new BScroll(wrapper,{click: true})
+    const topTip = wrapper.querySelector('.top-tip')
+		const bottomTip = wrapper.querySelector('.bottom-tip')
+		let _this = this
+    const scroll = new BScroll(wrapper,{
+      click: true,
+      probeType: 1,
+			pullUpLoad: {
+				stop: 50,
+				threshold: 0
+			}
+    })
   }
+  	//上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		//this.props.getCollectionActive(data, fn)
+	}
   componentWillReceiveProps(nextProps){
     //console.log(this.props)
     //console.log(nextProps)
@@ -92,9 +108,14 @@ class ActivityContent extends React.Component{
   render(){
     console.log(this.state.arctiveList)
     return(
-      <ul id='ActivityContent' className='ActivityContent content'>
-        {this.createActiveContent()}
-      </ul>
+      <div className='activityContent wrapper'>
+        <ul id='ActivityContent' className='ActivityContent content'>
+        <div className="top-tip">
+          <span className="refresh-hook">下拉刷新</span>
+        </div>
+          {this.createActiveContent()}
+        </ul>
+      </div>
     )
   }
 }

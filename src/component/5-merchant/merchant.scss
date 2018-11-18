@@ -4,7 +4,9 @@
   height: 100vh;
   overflow-y: auto;
   .merchantActivitiesContainer{
-    height: calc(100vh - 80px)
+    height: calc(100vh - 80px);
+    height: -moz-calc(100vh - 80px);
+    height: -webkit-calc(100vh - 80px);
   }
   .merchantActivitiesContent{
     overflow-y: auto;
@@ -152,6 +154,8 @@
 .merchantContent{
   //height:700px!important;
   height: calc(100% - 488px);
+  height: -moz-calc(100% - 488px);
+  height: -webkit-calc(100% - 488px);
   background: white;
   border-radius: 10px;
   margin: 20px;
