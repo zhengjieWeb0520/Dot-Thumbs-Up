@@ -1,6 +1,8 @@
 @import "./../../utils/variblesAndMixins";
 #Participate{
-  height: 1236px;
+  height: calc(100vh - 85px);
+  height: -moz-calc(100vh - 85px);
+  height: -webkit-calc(100vh - 85px);
   background: #F6F6F6;
   .participateHeader{
     height: 252px;
@@ -75,8 +77,11 @@
     }
   }
   .participateContent{
-    height: 984px;
+    height: calc(100vh - 390px);
+    height: -moz-calc(100vh - 390px);
+    height: -webkit-calc(100vh - 390px); 
     overflow: hidden;
+    margin-top: 20px;
     .ParticipateContent{
       >div{
         background: white;

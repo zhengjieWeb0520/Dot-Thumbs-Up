@@ -54,7 +54,7 @@ class Footer extends Component{
       publishDom = (<li id='menuParticipate'>
       <Link to={path}>
         <span className='img'></span>
-        <p>发布</p>
+        <p>商家</p>
       </Link>
     </li>)
     }
