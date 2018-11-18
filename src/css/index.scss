@@ -60,6 +60,15 @@
 		}
 	}
 }
+
+@media screen and (min-height: 737px) {
+  #main {
+    section {
+      height: 100%;
+    }
+  }
+}
+
 //底部菜单图片自适应
 footer nav ul #menuActivity .img {
 	@include bg-image('../images/icon/acticity');
