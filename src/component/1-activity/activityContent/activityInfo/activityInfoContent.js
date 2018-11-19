@@ -1,8 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { getChildNode , createBonusItem} from './../../../../utils/utils'
-
+import { getUserRanking } from '../../../../redux/1-activiy/activeRangeRedux'
 class ActivityInfoContent extends React.Component{
+  componentWillMount(){
+    let data = {
+      id: this.props.activeId,
+      pageNo: '1',
+      pageSize: '9'
+    }
+    this.props.getUserRanking(data)
+  }
   componentDidMount(){
 
   }
@@ -10,8 +18,8 @@ class ActivityInfoContent extends React.Component{
     document.querySelector('.zhezhao').style.display = 'block'
   }
   componentWillReceiveProps(nextProps){
-    // console.log(this.props)
-    // console.log(nextProps)
+     console.log(this.props)
+     console.log(nextProps)
   }
   createBonusContent(){
     let distribute_Content
@@ -134,8 +142,9 @@ class ActivityInfoContent extends React.Component{
 
 ActivityInfoContent = connect(
 	state => ({
-    activeInfo: state.getIndustryInfo
+    activeInfo: state.getIndustryInfo,
+    userRanking: state.userRanking
   }),
-	{  }
+	{ getUserRanking }
 )(ActivityInfoContent)
 export default ActivityInfoContent

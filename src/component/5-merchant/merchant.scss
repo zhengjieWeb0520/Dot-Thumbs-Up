@@ -152,7 +152,6 @@
   }
 }
 .merchantContent{
-  //height:700px!important;
   height: calc(100% - 488px);
   height: -moz-calc(100% - 488px);
   height: -webkit-calc(100% - 488px);
@@ -160,16 +159,17 @@
   border-radius: 10px;
   margin: 20px;
   overflow: hidden;
+  position: relative;
   .merchantItemContent{
     margin: 20px;
     height: auto!important;
-    overflow-y: hidden;
     li{
       width: 123.33333vw;
       overflow: hidden;
       display: flex;
       -webkit-transition: all 0.3s;
       transition: all 0.3s;
+      margin-top: 8px;
     }
     .swipeleft{
       position: relative;

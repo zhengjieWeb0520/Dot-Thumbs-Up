@@ -22,6 +22,7 @@ class ActivityInfo extends React.Component{
       have_collection: null,  //是否已收藏
       activeInfo: {},         //活动详情
       activeDetail: {
+        activeId : '',        //活动名称
         merchantName: '',     //商家名称
         merchantLevel: '',    //商家等级
         activeName: '',       //活动名称
@@ -109,7 +110,7 @@ class ActivityInfo extends React.Component{
   switchContent(){
     switch(this.state.tabFlag){
       case 0:
-        return (<ActivityInfoContent activeDetail={this.state.activeDetail} />)
+        return this.props.location.query !== undefined ? (<ActivityInfoContent activeId ={this.props.location.query.activeId} activeDetail={this.state.activeDetail} />) : null
         break;
       case 1:
         return (<ActivityEvaluate />)
@@ -157,6 +158,7 @@ class ActivityInfo extends React.Component{
       this.setState({
         activeInfo: nextProps.activeInfo.activeInfo,
         activeDetail: {
+          activeId:  nextProps.activeInfo.activeInfo.id,
           merchantName: nextProps.activeInfo.activeInfo.business_info.user_info.user_nick_name,     //商家名称
           merchantLevel: nextProps.activeInfo.activeInfo.business_info.user_info.business_level,
           activeName: nextProps.activeInfo.activeInfo.name,       //活动名称

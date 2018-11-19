@@ -83,7 +83,7 @@
     overflow: hidden;
     margin-top: 20px;
     .ParticipateContent{
-      >div{
+      .participateItem{
         background: white;
         border-radius: 10px;
         margin: 20px;
@@ -142,7 +142,7 @@
               color:#4D4D4D            
             }
             >span:last-of-type{
-              width: 322px;
+              width: 382px;
               text-align: center;
               font-size: 22px;
               color:#9E9E9E

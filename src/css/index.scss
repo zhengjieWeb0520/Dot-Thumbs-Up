@@ -71,7 +71,9 @@ p{
 @media screen and (min-height: 737px) {
   #main {
     section {
-      height: 100%;
+      height: calc(100vh - 13.06667vw);
+      height: -moz-calc(100vh - 13.06667vw);
+      height: -webkit-calc(100vh - 13.06667vw)
     }
   }
 }

@@ -6,7 +6,7 @@ import './merchant.scss'
 import axios from 'axios'
 import qs from 'qs'
 import $ from 'zepto'
-import { Carousel, WingBlank, Button, Modal } from 'antd-mobile';
+import { Carousel, WingBlank, Button, Modal, Toast} from 'antd-mobile';
 import { ObjectEquals, createStarLevel, serverIp } from './../../utils/utils'
 import { mechantLevel, goldConfig }  from './../config'
 import { getMerchantActivity } from './../../redux/5-merchant/merchantRedux'
@@ -16,6 +16,7 @@ const alert = Modal.alert;
 class MerchantActivities extends React.Component{
   constructor(props){
     super(props)
+    this.count = 2
     this.state = {
       userImages : [],      //商家图片信息
       userName: '',         //商家名称
@@ -38,18 +39,90 @@ class MerchantActivities extends React.Component{
           pageNo: 1,
           pageSize: 5
         }
-        this.props.getMerchantActivity(data)
+        this.getFirstPageData('first')
       })
     }else{
       this.props.history.push('/index')
     }
 
   }
+  //请求第一页数据（页面刚加载和下拉刷新）
+  getFirstPageData(type, fn){
+    let data ={
+      pageNo: '1',
+      pageSize: '5'
+    }
+    if(type === 'first'){
+      this.props.getMerchantActivity(data)
+    }else{
+      this.props.getMerchantActivity(data, fn)
+    }
+  }
+  //上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		this.props.getMerchantActivity(data, fn)
+	}
+
   componentDidMount(){   
     let _this = this
     const wrapper = document.querySelector('.merchantContent')
-    const scroll = new BScroll(wrapper,{click: true})
-
+    const topTip = wrapper.querySelector('.top-tip')
+		const bottomTip = wrapper.querySelector('.bottom-tip')
+    this.scroll = new BScroll(wrapper, {
+			click: true,
+			probeType: 1,
+			pullUpLoad: {
+				stop: 50,
+				threshold: 0
+			}
+		})
+		//滑动监听
+		this.scroll.on('scroll', function(pos) {
+			if (pos.y > 30) {
+				topTip.innerText = '释放立即刷新'
+			}
+    })
+    // 滑动结束
+		this.scroll.on('touchEnd', function(position) {
+			_this.scroll.off('scroll', function() {})
+			if (position.y > 40) {
+				setTimeout(function() {
+					_this.getFirstPageData('refresh', function() {
+						// 恢复文本值
+						topTip.innerText = '下拉刷新'
+						// 刷新成功后的提示
+						Toast.info('刷新成功', 1)
+						_this.count = 2
+					})
+					// 刷新列表后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			} else if (position.y < this.maxScrollY - 40) {
+				bottomTip.innerText = '加载中...'
+				setTimeout(function() {
+					_this.pullUpLoadData(function(data) {
+            console.log(data)
+            console.log(_this.state.merchantActive)
+						if (ObjectEquals(data.list, _this.state.merchantActive)) {
+							// 恢复文本值
+							bottomTip.innerText = '没有更多数据'
+						} else {
+							// 恢复文本值
+							bottomTip.innerText = '查看更多'
+							_this.count++
+						}
+					})
+					// 加载更多后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			}
+    })
+    
+    //底部菜单点击
     let mechantBtnUl = document.querySelector('.mechantBtnUl')
     mechantBtnUl.addEventListener('click', function(e){
       console.log(e)
@@ -280,8 +353,16 @@ class MerchantActivities extends React.Component{
           </div>      
         </div>
         <div className='merchantContent'>
-          <div className = 'merchantItemContent swipeAction'>
-            {this.createActiveContent()}
+          <div className = 'merchantItemContent swipeAction wrapper'>
+            <div className="top-tip">
+              <span className="refresh-hook">下拉刷新</span>
+            </div>
+            <ul>
+              {this.createActiveContent()}
+            </ul>
+            <div className="bottom-tip">
+						 <span className="loading-hook">查看更多</span>
+            </div>
           </div>
         </div>
         </div>
