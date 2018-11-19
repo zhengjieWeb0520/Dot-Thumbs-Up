@@ -6,6 +6,7 @@ import { serverIp, toast } from '../../utils/utils'
 
 const MERCHANTACTIVELIST = 'MERCHANTACTIVELIST'
 const PARTICPATEACTIVE = 'PARTICPATEACTIVE'
+const CLEARACTIVE = 'CLEARACTIVE'
 
 let initState = {
   merchantActiveList : {},
@@ -18,6 +19,8 @@ export function merchantActivity (state = initState, action) {
       return {...state, merchantActiveList: action.data}
     case PARTICPATEACTIVE:
       return {...state, participateActiveList: action.data}
+    case CLEARACTIVE:
+      return {...state, merchantActiveList: {}, participateActiveList: []}
     default:
       return state
   }
@@ -52,6 +55,8 @@ export function getMerchantActivity(activeParam, fn){
 //用户参与的活动
 export function getParticipateActivity(activeParam, fn){
   let data = qs.stringify({
+    active_status: activeParam.active_status,
+    user_status: activeParam.user_status,
     joined: '1',
     pageNo: activeParam.pageNo,
     pageSize: activeParam.pageSize
@@ -75,4 +80,8 @@ export function getParticipateActivity(activeParam, fn){
         }
       })
   }
+}
+
+export function clearActive(){
+  return {type: CLEARACTIVE}
 }

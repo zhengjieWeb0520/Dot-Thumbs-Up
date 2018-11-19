@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { goldConfig } from './../config'
 import { Toast } from 'antd-mobile'
 import { getChildNode, ObjectEquals, dataFormat} from './../../utils/utils'
-import { getParticipateActivity } from './../../redux/5-merchant/merchantRedux'
+import { getParticipateActivity, clearActive } from './../../redux/5-merchant/merchantRedux'
 
 import ParticipateContent from './component/participateContent'
 //参与组件
@@ -15,11 +15,22 @@ class Participate extends React.Component{
     super(props)
     this.count = 2
     this.state = {
-      paticipateActive: []
+      paticipateActive: [],
+      active_status: '0',
+      user_status: ''
     }
   }
   componentWillMount(){
     this.getFirstPageData('first')
+  }
+  changeState(_this){
+    let data = {
+      active_status: _this.state.active_status,
+      user_status: _this.state.user_status,
+      pageNo: '1',
+      pageSize: '5'
+    }
+    _this.props.getParticipateActivity(data)
   }
   componentDidMount(){
     let _this = this
@@ -34,6 +45,43 @@ class Participate extends React.Component{
         e.target.parentNode.classList.add('processingActive')
       }else {
         e.target.classList.add('processingActive')
+      }
+      console.log(e)
+      if(e.target.textContent === '进行中' || e.target.parentNode.textContent === '进行中'){
+        _this.setState({
+          active_status : '0',
+          user_status: ''
+        },()=>{
+          _this.changeState(_this)
+        })
+      }else if(e.target.textContent === '已结束' || e.target.parentNode.textContent === '已结束'){
+        _this.setState({
+          active_status : '1',
+          user_status: ''
+        },()=>{
+          _this.changeState(_this)
+        })
+      }else if(e.target.textContent === '已中奖' || e.target.parentNode.textContent === '已中奖'){
+        _this.setState({
+          active_status: '1',
+          user_status : '1'
+        },()=>{
+          _this.changeState(_this)
+        })
+      }else if(e.target.textContent === '未中奖' || e.target.parentNode.textContent === '未中奖'){
+        _this.setState({
+          active_status: '1',
+          user_status : '0'
+        },()=>{
+          _this.changeState(_this)
+        })
+      }else if(e.target.textContent === '全部活动' || e.target.parentNode.textContent === '全部活动'){
+        _this.setState({
+          active_status: '',
+          user_status : ''
+        },()=>{
+          _this.changeState(_this)
+        })
       }
     }, false)
 
@@ -102,6 +150,8 @@ class Participate extends React.Component{
   //请求第一页数据（页面刚加载和下拉刷新）
   getFirstPageData(type, fn){
     let data ={
+      active_status: this.state.active_status,
+      user_status: this.state.user_status,
       pageNo: '1',
       pageSize: '5'
     }
@@ -114,6 +164,8 @@ class Participate extends React.Component{
   //上拉加载
 	pullUpLoadData(fn) {
 		let data = {
+      active_status: this.state.active_status,
+      user_status: this.state.user_status,
 			pageNo: '1',
 			pageSize: String(5 * this.count)
 		}
@@ -142,15 +194,16 @@ class Participate extends React.Component{
         }else{
           distribute_Content = <div><i></i><span>{`${item.bonus}   人人有份`}</span></div>
         }
+        let user_status = item.user_status === 0 ? '未中奖' : '中奖'
         column = 
           <Link to={path} className='participateItem'>
             <div className='participateItemHeader'>
               <div>
                 <span></span>
-                <span>{item.name}<i></i></span>             
+                <span>{item.business_name}<i></i></span>             
               </div>
               <div>
-                未中奖
+                {user_status}
               </div>
             </div>
             <div className='participateItemContent'>
@@ -185,6 +238,9 @@ class Participate extends React.Component{
       content.push(column)
     });
     return content
+  }
+  componentWillUnmount(){
+    this.props.clearActive()
   }
   //组件切换
   render(){
@@ -237,7 +293,7 @@ Participate = connect(
 	state => ({
     paticipateInfo : state.merchantActivity
   }),
-	{ getParticipateActivity }
+	{ getParticipateActivity, clearActive }
 )(Participate)
 
 export default Participate

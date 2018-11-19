@@ -4,15 +4,19 @@ import axios from 'axios'
 import { serverIp, dataFormat } from '../../utils/utils'
 
 const LIKEUSERRANGE = 'LIKEUSERRANGE'
+const CLEAR = 'CLEAR'
 
 const initState = {
-  userRankings : []
+  userRankings : [],
+  updateTime : ''
 }
 
 export function userRanking (state= initState, action){
   switch (action.type){
     case LIKEUSERRANGE:
       return {...state, userRankings: action.data, updateTime: action.time}
+    case CLEAR:
+      return {...state, userRankings:[], updateTime:''}
     default:
       return state
   }
@@ -45,4 +49,7 @@ export function getUserRanking(params, fn){
     })
   }
 
+}
+export function clearData(){
+  return {type: CLEAR}
 }
