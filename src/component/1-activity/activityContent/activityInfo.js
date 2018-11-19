@@ -73,8 +73,8 @@ class ActivityInfo extends React.Component {
 					timestamp: res.data.result_info.timestamp,
 					nonceStr: res.data.result_info.noncestr,
 					signature: res.data.result_info.signature,
-					jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
-        })
+					jsApiList: ['updateAppMessageShareData', 'onMenuShareAppMessage']
+				})
 			}
 		})
 	}
@@ -270,19 +270,32 @@ class ActivityInfo extends React.Component {
 			},
 			buttonIndex => {
 				// this.setState({ clicked: BUTTONS[buttonIndex] })
-				debugger
+				let link = decodeURI('http://www.jizanbao.com:3000')
+				console.log(link)
 				wx.ready(function() {
 					if (buttonIndex === 0) {
-            console.log("aaa")
-						wx.onMenuShareAppMessage({
-							title: '点赞宝', // 分享标题
-							desc: '分享分享', // 分享描述
+						setTimeout(() => {
+              console.log("aaa")
+							wx.updateAppMessageShareData({
+								title: '点赞宝', // 分享标题
+								desc: '点赞宝', // 分享描述
+								link: 'http://www.jizanbao.com/activityInfo', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+								imgUrl: '', // 分享图标
+								success: function() {
+									Toast.info('分享成功', 1)
+								},
+								fail: function() {
+									Toast.info('分享失败', 1)
+								}
+							})
+						}, 0)
+					} else if (buttonIndex === 1) {
+						wx.onMenuShareTimeline({
+							title: 'aa', // 分享标题
 							link: 'www.jizanbao.com', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 							imgUrl: '', // 分享图标
-							type: '', // 分享类型,music、video或link，不填默认为link
-							dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 							success: function() {
-								Toast.info('分享成功', 1)
+								// 用户点击了分享后执行的回调函数
 							}
 						})
 					}
