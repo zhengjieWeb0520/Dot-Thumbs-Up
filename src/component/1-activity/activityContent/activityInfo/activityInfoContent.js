@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import { getChildNode , createBonusItem, ObjectEquals} from './../../../../utils/utils'
 import { getUserRanking , clearData} from '../../../../redux/1-activiy/activeRangeRedux'
 class ActivityInfoContent extends React.Component{
@@ -23,7 +24,16 @@ class ActivityInfoContent extends React.Component{
 
   }
   lookMoreRank(){
-    document.querySelector('.zhezhao').style.display = 'block'
+    console.log(this.props)
+    let data = {
+      activeId : this.props.activeId
+    }
+    let path = {
+      pathname: '/moreRank',
+      query: data
+    }
+    //this.props.history.push(path)
+    //document.querySelector('.zhezhao').style.display = 'block'
   }
   componentWillReceiveProps(nextProps){
      console.log(this.props)
@@ -149,4 +159,4 @@ ActivityInfoContent = connect(
   }),
 	{ getUserRanking, clearData }
 )(ActivityInfoContent)
-export default ActivityInfoContent
+export default withRouter(ActivityInfoContent)

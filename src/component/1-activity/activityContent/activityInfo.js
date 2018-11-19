@@ -146,7 +146,7 @@ class ActivityInfo extends React.Component {
       return this.props.location.query !== undefined ? (<ActivityInfoContent activeId ={this.props.location.query.activeId} activeDetail={this.state.activeDetail} />) : null
 				break
 			case 1:
-				return <ActivityEvaluate />
+				return this.props.location.query !== undefined ? <ActivityEvaluate activeId ={this.props.location.query.activeId}/> : null
 				break
 			case 2:
 				return <ActivityMerchant merchantInfo={this.state.activeInfo.business_info} />
@@ -311,7 +311,7 @@ class ActivityInfo extends React.Component {
 		console.log(this.state.activeDetail)
 		return (
 			<div id="ActivityInfo" className="activityInfo">
-				<div>
+				<div className = 'activityInfoContainer'>
 					<div>
 						<div className="carousel">
 							{/* 轮播图 */}
@@ -398,7 +398,8 @@ class ActivityInfo extends React.Component {
 						</ul>
 					</div>
 					{this.switchContent()}
-					<div className="activityInfoFooter">
+				</div>
+        <div className="activityInfoFooter">
 						<ul>
 							<li>
 								<i />
@@ -410,7 +411,6 @@ class ActivityInfo extends React.Component {
 							</li>
 						</ul>
 					</div>
-				</div>
 			</div>
 		)
 	}
