@@ -61,7 +61,6 @@ class ActivityInfo extends React.Component {
 
 		let url = qs.stringify({
 			url: window.location.href.split('#')[0]
-			// url: 'jizanbao.com:8080'
 		})
 		console.log('url', window.location.href.split('#')[0])
 		//初始化微信sdk
@@ -73,11 +72,37 @@ class ActivityInfo extends React.Component {
 					timestamp: res.data.result_info.timestamp,
 					nonceStr: res.data.result_info.noncestr,
 					signature: res.data.result_info.signature,
-					jsApiList: ['updateAppMessageShareData', 'onMenuShareAppMessage']
+					jsApiList: [
+						'onMenuShareAppMessage',
+						'onMenuShareTimeline',
+						'chooseWXPay',
+						'showOptionMenu',
+						'updateAppMessageShareData',
+						'hideMenuItems',
+						'showMenuItems'
+					]
 				})
 			}
 		})
+
+		let link = window.location.href.split('#')[0]
+		wx.ready(function() {
+			console.log('aaa')
+			wx.updateAppMessageShareData({
+				title: 'abc', // 分享标题
+				desc: 'abc', // 分享描述
+				link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+				imgUrl: '', // 分享图标
+				success: function() {
+					Toast.info('分享成功', 1)
+				},
+				fail: function() {
+					Toast.info('分享失败', 1)
+				}
+			})
+		})
 	}
+
 	componentDidMount() {
 		let _this = this
 		let menuListUl = document.querySelector('.tabSwitch ul')
@@ -270,16 +295,16 @@ class ActivityInfo extends React.Component {
 			},
 			buttonIndex => {
 				// this.setState({ clicked: BUTTONS[buttonIndex] })
-				let link = decodeURI('http://www.jizanbao.com:3000')
+				let link = window.location.href.split('#')[0]
 				console.log(link)
 				wx.ready(function() {
 					if (buttonIndex === 0) {
 						setTimeout(() => {
-              console.log("aaa")
+							console.log('aaa')
 							wx.updateAppMessageShareData({
 								title: '点赞宝', // 分享标题
 								desc: '点赞宝', // 分享描述
-								link: 'http://www.jizanbao.com/activityInfo', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+								link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 								imgUrl: '', // 分享图标
 								success: function() {
 									Toast.info('分享成功', 1)
