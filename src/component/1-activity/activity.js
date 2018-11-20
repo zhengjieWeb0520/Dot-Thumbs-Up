@@ -64,11 +64,12 @@ class Activity extends React.Component{
       AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
       AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
       function onComplete (data) {
+        console.log(data)
         window.sessionStorage.setItem('user_lon', data.position.lng)
         window.sessionStorage.setItem('user_lat', data.position.lat)
         //alert(data.formattedAddress)
         _this.setState({
-          address: data.formattedAddress
+          address: data.addressComponent.township + data.addressComponent.street 
         },()=>{
           _this.props.getIndustry()
           _this.getFirstActiveList('first')

@@ -7,8 +7,23 @@ function Arrow() {
 }
 
 class TopNavBar extends React.Component {
+  componentDidMount(){
+    console.log(this.props)
+  }
   onLeftClick = () => {
-    this.props.history.goBack()
+    if(this.props.activeId){
+      let data = {
+        activeId: this.props.activeId
+      }
+      let path = {
+        pathname : '/activityInfo',
+        query: data
+      }
+      this.props.history.push(path)
+    }else{
+      this.props.history.goBack()
+    }
+    
   }
 
   onRightClick = () => {

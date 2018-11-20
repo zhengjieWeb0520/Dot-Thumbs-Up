@@ -32,7 +32,7 @@ class ActivityInfoContent extends React.Component{
       pathname: '/moreRank',
       query: data
     }
-    //this.props.history.push(path)
+    this.props.history.push(path)
     //document.querySelector('.zhezhao').style.display = 'block'
   }
   componentWillReceiveProps(nextProps){
@@ -74,7 +74,7 @@ class ActivityInfoContent extends React.Component{
             rankingData2.map((item, index)=>{
               if(item.index === 1 || item.index === 2 || item.index === 3){
                 return(
-                  <tr>
+                  <tr key ={`${item.user_name}_${item.index}`}>
                     <td>{`No.${item.index}`}</td>
                     <td>{item.user_name}</td>
                     <td>{item.num}</td>
@@ -82,7 +82,7 @@ class ActivityInfoContent extends React.Component{
                 )
               }else{
                 return(
-                  <tr>
+                  <tr key ={`${item.user_name}_${item.index}`}>
                   <td>{item.index}</td>
                   <td>{item.user_name}</td>
                   <td>{item.num}</td>

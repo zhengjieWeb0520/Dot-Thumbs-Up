@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import qs from 'qs'
 import Footer from './../component/router/footer'
 import RouteConfig from './../component/router/routers'
 import { getUserInfoPort } from './../redux/1-activiy/getUserInfoRedux'
+import { serverIp } from './../utils/utils'
 
 class Main extends React.Component{
   constructor(props){
@@ -11,22 +14,35 @@ class Main extends React.Component{
     this.TmapFlag = true //只获取一次
   }
   componentWillMount(){
-    let tokenStr = '9539'
-    let user_id = '652159'
-    window.sessionStorage.setItem('token', tokenStr)
-    window.sessionStorage.setItem('user_id', user_id)
-    this.props.getUserInfoPort(tokenStr, user_id)
-    // let _this = this
-    // window.addEventListener('message', function(event) {
-    //   // 接收位置信息
-    //   _this.loc = event.data
-    //   if(_this.loc != null){
-    //     console.log(_this.loc)
-    //     window.sessionStorage.setItem('user_lon', _this.loc.lng)
-    //     window.sessionStorage.setItem('user_lat', _this.loc.lat)
-    //     window.sessionStorage.setItem('user_addr', _this.loc.addr)
-    //   }
-    //  }, false);
+    let codeString = window.location.href.split("&")[0].split("=")[1];
+    let _this = this
+    alert(codeString)
+    if(codeString !== undefined){
+      let code = qs.stringify({
+        code: codeString
+      })
+      alert(code)
+      axios.post(serverIp + '/dianzanbao/user/weixinLogin.do', code).then(res => {
+        if (res.data.result_code === '0') {
+          alert('进来了')
+          alert(res.data.result_info.user_id)
+          let tokenStr = res.data.result_info.token
+          let user_id = res.data.result_info.user_id
+          window.sessionStorage.setItem('token', tokenStr)
+          window.sessionStorage.setItem('user_id', user_id)
+          _this.props.getUserInfoPort(tokenStr, user_id)
+        }else{
+          alert('没进来')
+          alert(res.data.result_info)
+        }
+      })
+    }else{
+      let tokenStr = '9539'
+      let user_id = '652159'
+      window.sessionStorage.setItem('token', tokenStr)
+      window.sessionStorage.setItem('user_id', user_id)
+      this.props.getUserInfoPort(tokenStr, user_id)
+    }
   }
   componentWillReceiveProps(nextProps){
     console.log(nextProps)

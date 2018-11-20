@@ -3,7 +3,7 @@ import wx from 'weixin-js-sdk'
 import axios from 'axios'
 import qs from 'qs'
 import { getChildNode, ObjectEquals, createStarLevel, serverIp } from './../../../utils/utils'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Carousel, WingBlank, ActionSheet, Toast } from 'antd-mobile'
 import ActivityEvaluate from './activityInfo/activityEvaluate'
@@ -423,4 +423,4 @@ ActivityInfo = connect(
 	}),
 	{ getActiveInfo, clearInfo, getIsOrNotCollect, addCollection, removeCollection, thumpsUpActive }
 )(ActivityInfo)
-export default ActivityInfo
+export default withRouter(ActivityInfo)

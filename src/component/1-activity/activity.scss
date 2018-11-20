@@ -854,16 +854,21 @@
   }
 }
 .moreRankingWaper{
-  height: 956px;
+  //height: 956px;
+  height:calc(100vh - 166px);
+  height: -moz-calc(100vh - 166px);
+  height: -webkit-calc(100vh - 166px);
+  overflow: hidden;
   border-radius: 10px;
   margin: 22px 20px 20px 20px;
   padding: 20px;
   padding-right: 40px;
-  >div:first-of-type{
+  background: white;
+  .activityInfoContentTitle{
     display: flex;
     height: 70px;
     >div:first-of-type{
-      width: 192px;
+      width: 222px;
       padding-left: 20px;
       display: flex;
       align-items: center;
@@ -890,18 +895,18 @@
       font-size: 20px;
     }
   }
-  >div:last-of-type{
+  .activityInfoContentContainer{
     table{
       width: 100%;
       thead{
         background: #F3F3F3;
-        height: 40px;
+        height: 60px;
         tr{
           th{
             text-align: center;
             font-size: 20px;
             color: #6C6C6C;
-            line-height: 40px;
+            line-height: 60px;
           }
           th:first-of-type{
             border-top-left-radius: 12px;
@@ -921,7 +926,7 @@
       }
       tbody{
         tr{
-          height: 74px;
+          height: 84px;
           border-bottom: $grayBorderBottom;
           td{
             color: #363636;
