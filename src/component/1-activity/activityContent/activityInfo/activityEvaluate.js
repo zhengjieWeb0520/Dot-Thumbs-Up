@@ -1,11 +1,25 @@
 import React from 'react'
 import BScroll from 'better-scroll'
+import { connect } from 'react-redux'
 import { getChildNode } from './../../../../utils/utils'
 import yhHeader from './../../../../images/activity/evaluate/header.png'
 import evaluateImg1 from './../../../../images/activity/evaluate/evaluateImg1.png'
 import evaluateImg2 from './../../../../images/activity/evaluate/evaluateImg2.png'
+import { getActiveEvaluate } from './../../../../redux/1-activiy/activeEvaluateRedux'
 
 class ActivityEvaluate extends React.Component{
+  constructor(props){
+    super(props)
+    this.count = 2
+    this.state = {
+      evaluateInfo : [],
+      filter:''
+    }
+  }
+  componentWillMount(){
+    console.log(this.props.activeId)
+    this.getFirstPageData('first')
+  }
   componentDidMount(){
     const wrapper = document.querySelector('.activityEvaluateWraper')
     const scroll = new BScroll(wrapper,{click: true})
@@ -32,6 +46,23 @@ class ActivityEvaluate extends React.Component{
       }
     }, false)
   }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+  }
+  //请求第一页数据（页面刚加载和下拉刷新）
+  getFirstPageData(type, fn){
+    let data ={
+      active_id: this.props.activeId,
+      filter: this.state.filter,
+      pageNo: '1',
+      pageSize: '5'
+    }
+    if(type === 'first'){
+      this.props.getActiveEvaluate(data)
+    }else{
+      this.props.getActiveEvaluate(data, fn)
+    }
+  }
   render(){
     return(
       <div className='activityEvaluate activityEvaluateWraper'>
@@ -52,10 +83,8 @@ class ActivityEvaluate extends React.Component{
           <div className = 'selectTab'>
             <ul>
               <li name={'selectTab1'} className = 'evaluateActive'><span>全部</span></li>
-              <li name={'selectTab2'}><span>最新</span></li>
               <li name={'selectTab3'}><span>好评&nbsp;{212}</span></li>
               <li name={'selectTab4'}><span>差评&nbsp;{65}</span></li>
-              <li name={'selectTab5'}><span>味道好&nbsp;{12}</span></li>
             </ul>
           </div>
           <div className='evaluateContent'>
@@ -104,4 +133,10 @@ class ActivityEvaluate extends React.Component{
   }
 }
 
+ActivityEvaluate = connect(
+	state => ({
+		evaluateInfo: state.activeEvaluate,
+	}),
+	{ getActiveEvaluate }
+)(ActivityEvaluate)
 export default ActivityEvaluate

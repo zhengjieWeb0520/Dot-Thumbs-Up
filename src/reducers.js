@@ -9,7 +9,8 @@ import { collection } from './redux/4-myinfo/collectionRedux'
 import { merchantActivity } from './redux/5-merchant/merchantRedux'
 import { recentView } from './redux/4-myinfo/recentViewRedux'
 import { thumbsUp } from './redux/1-activiy/activeThumbsUp'
-
+import { userRanking } from './redux/1-activiy/activeRangeRedux'
+import { activeEvaluate } from './redux/1-activiy/activeEvaluateRedux'
 export default combineReducers({
 	counter,
 	backCard,
@@ -23,5 +24,7 @@ export default combineReducers({
 	getUserInfo,
 	createActivity,
   getIndustryInfo,
-  thumbsUp
+  thumbsUp,
+  userRanking,
+  activeEvaluate
 })

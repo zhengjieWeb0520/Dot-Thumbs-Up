@@ -1,17 +1,50 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getChildNode , createBonusItem} from './../../../../utils/utils'
-
+import { withRouter } from 'react-router-dom'
+import { getChildNode , createBonusItem, ObjectEquals} from './../../../../utils/utils'
+import { getUserRanking , clearData} from '../../../../redux/1-activiy/activeRangeRedux'
 class ActivityInfoContent extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      updataTime: '',
+      myRank:[],
+      rankingData: []
+    }
+  }
+  componentWillMount(){
+    let data = {
+      id: this.props.activeId,
+      pageNo: '1',
+      pageSize: '9'
+    }
+    this.props.getUserRanking(data)
+  }
   componentDidMount(){
 
   }
   lookMoreRank(){
-    document.querySelector('.zhezhao').style.display = 'block'
+    console.log(this.props)
+    let data = {
+      activeId : this.props.activeId
+    }
+    let path = {
+      pathname: '/moreRank',
+      query: data
+    }
+    //this.props.history.push(path)
+    //document.querySelector('.zhezhao').style.display = 'block'
   }
   componentWillReceiveProps(nextProps){
-    // console.log(this.props)
-    // console.log(nextProps)
+     console.log(this.props)
+     console.log(nextProps)
+     if(!ObjectEquals(nextProps.userRanking.userRankings, this.props.userRanking.userRankings)){
+      this.setState({
+        updataTime: nextProps.userRanking.updateTime,
+        myRank: nextProps.userRanking.userRankings.my,
+        rankingData: nextProps.userRanking.userRankings.list
+      })
+     }
   }
   createBonusContent(){
     let distribute_Content
@@ -26,6 +59,44 @@ class ActivityInfoContent extends React.Component{
     console.log(distribute_Content)
     return distribute_Content
     
+  }
+  createRankingContent(){
+    if(JSON.stringify(this.state.rankingData) !== '[]'){
+      let rankingData = this.state.rankingData
+      let myRank =  this.state.myRank
+      console.log(rankingData)
+      rankingData.unshift(myRank)
+      let rankingData2 = [...new Set(rankingData)]
+      console.log(rankingData2)
+      return(
+        <tbody>
+          {
+            rankingData2.map((item, index)=>{
+              if(item.index === 1 || item.index === 2 || item.index === 3){
+                return(
+                  <tr>
+                    <td>{`No.${item.index}`}</td>
+                    <td>{item.user_name}</td>
+                    <td>{item.num}</td>
+                  </tr>
+                )
+              }else{
+                return(
+                  <tr>
+                  <td>{item.index}</td>
+                  <td>{item.user_name}</td>
+                  <td>{item.num}</td>
+                </tr>         
+                )
+              }
+            })
+          }
+        </tbody>
+      )
+    }
+  }
+  componentWillUnmount(){
+    this.props.clearData()
   }
   render(){
     console.log(this.props.activeDetail)
@@ -50,7 +121,7 @@ class ActivityInfoContent extends React.Component{
               <span>集赞排行</span>
             </div>
             <div>
-              更新于2018.14 16:00
+              更新于{this.state.updataTime}
             </div>
           </div>
           <div>
@@ -68,58 +139,7 @@ class ActivityInfoContent extends React.Component{
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>214</td>
-                  <td>吴昊</td>
-                  <td>2135</td>
-                </tr>
-                <tr>
-                  <td>No.1</td>
-                  <td>张三</td>
-                  <td>2125</td>
-                </tr>
-                <tr>
-                  <td>No.2</td>
-                  <td>李四</td>
-                  <td>235</td>
-                </tr>
-                <tr>
-                  <td>No.3</td>
-                  <td>赵二</td>
-                  <td>215</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>赵二</td>
-                  <td>215</td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>张三</td>
-                  <td>2125</td>
-                </tr>
-                <tr>
-                  <td>6</td>
-                  <td>李四</td>
-                  <td>235</td>
-                </tr>
-                <tr>
-                  <td>7</td>
-                  <td>赵二</td>
-                  <td>215</td>
-                </tr>
-                <tr>
-                  <td>8</td>
-                  <td>赵二</td>
-                  <td>215</td>
-                </tr>
-                <tr>
-                  <td>9</td>
-                  <td>赵二</td>
-                  <td>215</td>
-                </tr>
-              </tbody>
+              {this.createRankingContent()}
             </table>
             <div>
               <span onTouchEnd = {(v) => {this.lookMoreRank(v)}}>查看更多排名</span>
@@ -134,8 +154,9 @@ class ActivityInfoContent extends React.Component{
 
 ActivityInfoContent = connect(
 	state => ({
-    activeInfo: state.getIndustryInfo
+    activeInfo: state.getIndustryInfo,
+    userRanking: state.userRanking
   }),
-	{  }
+	{ getUserRanking, clearData }
 )(ActivityInfoContent)
-export default ActivityInfoContent
+export default withRouter(ActivityInfoContent)

@@ -21,6 +21,7 @@ import PublishActivity from './component/3-publish/publish'
 import EditePublish from './component/3-publish/editePublish'
 import MechantModify from './component/5-merchant/merchantModify'
 import SelectBankCard from './component/4-myInfo/components/moneyRelated/selectBankCard'
+import MoreRank from './component/1-activity/activityContent/activityInfo/moreRank'
 //员工和商家认证
 import BussinessAuthentication from './component/4-myInfo/components/authentication/bussinessAuthentication'
 import StaffAuthentication from './component/4-myInfo/components/authentication/staffAuthentication'
@@ -63,8 +64,9 @@ ReactDOM.render(
           <Route path={`/editePublish`} exact component={EditePublish} />
           <Route path="/publish/setting" component={MechantModify} />
 					<Route path="/collection" component={Collection} />
-					<Route path="/recentView" component={RecentView} />
-					<Route path={`/chooseBankCard`} exact component={ChooseBankCard} />
+					<Route path="/recentView" component={RecentView} />				
+          <Route path={`/moreRank`} exact component={MoreRank} />
+          <Route path={`/chooseBankCard`} exact component={ChooseBankCard} />
 					<Route path={`/chooseBankCard/newBankCard`} component={NewBackCard} />
 					<Route path={`/wallet`} exact component={Wallet} />
 					<Route path={`/wallet/withdraw`} exact component={WithdrawCash} />
