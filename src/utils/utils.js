@@ -508,5 +508,5 @@ export function createBonusItem(bonus){
 服务器本地ip切换
 
 */
-export const serverIp = 'http://jizanbao.com:8080'
-// export const serverIp = ''
+//export const serverIp = 'http://jizanbao.com:8080'
+ export const serverIp = ''
