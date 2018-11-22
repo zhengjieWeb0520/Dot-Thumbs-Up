@@ -1,0 +1,95 @@
+.login{
+  height: 100vh;
+  background: white;
+  text-align: center;
+  .login-logo{
+		width: 180px;
+		height: 180px;
+		background: #14daff;
+		border-radius: 30px;
+		margin: 0 auto;
+		margin-top: 200px;
+  }
+  .login-content{
+    margin-top: 150px;
+    .am-list-line:after{
+      display: none;
+      background-color: black !important
+    }
+    .am-list{
+      .am-list-body::before{
+        display: none;
+      }
+      .am-list-body::after{
+        display:none;
+      }
+      .am-list-item{
+        height: 15.73333vw;
+        border-bottom: 1px solid #ebebeb;
+        width: 69.33333vw;
+        margin: 0 auto;
+      }
+      .am-list-item:last-of-type{
+        border: none
+      }
+      .am-input-extra{
+        max-height: 6.8vw;
+        color: white;
+      }
+    } 
+  }
+  .forgetPassword{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 69.33333vw;
+    height: 70px;
+    margin: 0 auto;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 16px;  
+    a{
+      color: #4CA9F9;
+    }
+  }
+  .submitBtn{
+    width: 69.33333vw;
+    margin: 0 auto;
+    margin-top: 40px;
+    height: 80px;
+    line-height: 80px;
+    font-size:18px;
+    color: white;
+    background: #4CA9F9
+  }
+  .quickRegist{
+    width: 69.33333vw;
+    margin: 0 auto;
+    margin-top: 80px;
+    text-align: right;
+    font-size: 16px;
+    a{
+      color: #4CA9F9
+    }
+  }
+  .regulation{
+    width: 42.33333vw;
+    margin: 0 auto;
+    margin-top: 30px;
+    .am-checkbox{
+      margin-right: 40px;
+    }
+    .am-checkbox-inner{
+      width: 3.8vw;
+      height: 3.8vw;
+    }
+  }
+}
+.regist{
+  .login-logo{
+    margin-top: 150px;
+  }
+  .login-content{
+    margin-top: 100px;
+  }
+}

@@ -14,31 +14,69 @@ class Main extends React.Component{
     this.TmapFlag = true //只获取一次
   }
   componentWillMount(){
-    let codeString = window.location.href.split("&")[0].split("=")[1];
     let _this = this
-    alert(codeString)
-    if(codeString !== undefined){
+    let hrefParams = window.location.href.split("?")[1]
+    if(hrefParams.indexOf("token") != -1 ){  //app登录
+      let userString = hrefParams.split('&')[0].split('=')[1]
+      let tokenString  = hrefParams.split('&')[1].split('=')[1]
+      window.sessionStorage.setItem('token', tokenString)
+      window.sessionStorage.setItem('user_id', userString)
+      _this.props.getUserInfoPort(tokenString, userString)
+    }else if(hrefParams.indexOf("code") != -1){  //微信登录
+      let codeString = window.location.href.split("&")[0].split("=")[1];
       let code = qs.stringify({
         code: codeString
       })
-      alert(code)
-      axios.post(serverIp + '/dianzanbao/user/weixinLogin.do', code).then(res => {
-        if (res.data.result_code === '0') {
-          alert('进来了')
-          alert(res.data.result_info.user_id)
-          let tokenStr = res.data.result_info.token
-          let user_id = res.data.result_info.user_id
-          window.sessionStorage.setItem('token', tokenStr)
-          window.sessionStorage.setItem('user_id', user_id)
-          _this.props.getUserInfoPort(tokenStr, user_id)
-        }else{
-          alert('没进来')
+      let user_id = window.sessionStorage.getItem('user_id')
+      let token = window.sessionStorage.getItem('token')
+      alert(user_id)
+      //第二次跳转 当sessionStorage内有user_id时则关联
+      if(user_id.toString() != "null"){
+        alert('进微信登录')
+        axios.post(serverIp + '/dianzanbao/user/getWxOpenId.do', code).then(res=>{
           alert(res.data.result_info)
-        }
-      })
+          if(res.data.result_code === '0'){
+            alert(res.data.result_info)
+            let wx_open_id = res.data.result_info
+            let data = qs({wx_open_id: wx_open_id})
+            axios.post(
+              serverIp + '/dianzanbao/userInfo/relationUser.do',             
+              data,
+              {
+                headers: {
+                  token: window.sessionStorage.getItem('token'),
+                  user_id: window.sessionStorage.getItem('user_id')
+                }
+              }
+              ).then(res =>{
+                if(res.data.result_code === '0'){
+                  alert(res.data.result_info)
+                }
+            }) 
+          }
+        })
+      }else if(user_id.toString() == "null"){ //第一次跳转 当sessionStorage内没有user_id时则登陆
+        alert('进微信登录')
+        axios.post(serverIp + '/dianzanbao/user/weixinLogin.do', code).then(res => {
+          if (res.data.result_code === '0') {
+            alert('进来了')
+            alert(res.data.result_info.user_id)
+            let tokenStr = res.data.result_info.token
+            let user_id = res.data.result_info.user_id
+            window.sessionStorage.setItem('token', tokenStr)
+            window.sessionStorage.setItem('user_id', user_id)
+            _this.props.getUserInfoPort(tokenStr, user_id)
+          }else if(res.data.result_code === '-1'){
+            alert('没进来')
+            _this.props.history.push('login')
+          }else{
+            window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2514283f85a9e278&redirect_uri=http%3a%2f%2fjizanbao.com%2fgetWxCode.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
+          }
+        })
+      }
     }else{
       let tokenStr = '9539'
-      let user_id = '652159'
+      let user_id = '652157'
       window.sessionStorage.setItem('token', tokenStr)
       window.sessionStorage.setItem('user_id', user_id)
       this.props.getUserInfoPort(tokenStr, user_id)

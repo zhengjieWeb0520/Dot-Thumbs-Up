@@ -25,6 +25,10 @@ import MoreRank from './component/1-activity/activityContent/activityInfo/moreRa
 //员工和商家认证
 import BussinessAuthentication from './component/4-myInfo/components/authentication/bussinessAuthentication'
 import StaffAuthentication from './component/4-myInfo/components/authentication/staffAuthentication'
+//登录注册
+import Login from './component/6-login/login'
+import VerificatLogin from './component/6-login/verificatLogin'
+import Regist from './component/6-login/regist'
 //修改密码
 import TypeOfChangePassword from './component/4-myInfo/components/changePassword/typeOfChangePassword'
 import ChangePasswordByPassword from './component/4-myInfo/components/changePassword/changePasswordByPassword'
@@ -57,6 +61,9 @@ ReactDOM.render(
 			<div id="container">
 				<Switch>
 					<Route path="/index" component={Main} />
+          <Route path='/login' component={Login}/> 
+          <Route path='/verificatLogin' component={VerificatLogin}/>           
+          <Route path='/regiter' component={Regist}/>              
 					<Route path="/merchantPublish" component={MerchantPublish} />
 					<Route path="/merchantActivities" component={MerchantActivities} />
 					<Route path="/reportMerchant" component={ReportMerchant} />
