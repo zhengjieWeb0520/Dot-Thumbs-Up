@@ -8,7 +8,6 @@ function Arrow() {
 
 class LoginNavBar extends React.Component{
   componentDidMount(){
-    console.log(this.props)
   }
   onLeftClick = () => {
     this.props.history.push(this.props.linkname)

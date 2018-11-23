@@ -30,14 +30,9 @@ class UserFeedBack extends React.Component {
       files,
     },()=>{
       let fileData = this.state.files.length > 0 ? this.state.files[this.state.files.length - 1] : {}
-      // console.log(files)
-      // console.log(type)
-      console.log(index)
-      console.log(fileData)
       if(type === 'add'){
         let data = new FormData()
         data.append('image_file', fileData.file)
-        console.log(data)
         axios.post(
           serverIp + '/dianzanbao/sys/file/saveImg.do',
           data,
@@ -49,7 +44,6 @@ class UserFeedBack extends React.Component {
             }
           }
         ).then(res => {
-          console.log(res)
           if(res.data.result_code === "0"){
             _this.uploadFiles.push(res.data.result_info)
           }
@@ -86,8 +80,6 @@ class UserFeedBack extends React.Component {
           files.push(item.file)
         })
       }
-      console.log(files)
-      console.log(values)
       let reportPhone = values.phone.replace("%20", "").replace(" ", "").replace(" ", "")
       let img_urls = ""
       this.uploadFiles.forEach((item, index)=>{
@@ -97,7 +89,6 @@ class UserFeedBack extends React.Component {
           img_urls = img_urls + item
         }
       })
-      console.log(img_urls)
       this.props.feedBackInfo(values.feedBackText, img_urls, values.name, reportPhone)
     }else {
       Toast.info(error, 1)

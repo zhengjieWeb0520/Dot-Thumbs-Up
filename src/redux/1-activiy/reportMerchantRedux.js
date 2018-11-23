@@ -44,7 +44,6 @@ export function reportMerchantInfo(content, img_urls, name, phone, to_user_id) {
           }
 			  })
         .then(res => {
-          console.log(res)
           if (res.data.result_code === '0') {
             dispatch({ type: REPORTMERCHANT, data: res.data.result_info })
             Toast.info(res.data.result_info, 1)
@@ -62,7 +61,6 @@ export function feedBackInfo(content, img_urls, name, phone) {
     phone: phone,
     to_user_id: ''
   })
-  console.log(data)
 	return dispatch => {
 		axios
       .post(
@@ -75,7 +73,6 @@ export function feedBackInfo(content, img_urls, name, phone) {
           }
 			  })
         .then(res => {
-          console.log(res)
           if (res.data.result_code === '0') {
             dispatch({ type: REPORTMERCHANT, data: res.data.result_info })
             Toast.info(res.data.result_info, 1)

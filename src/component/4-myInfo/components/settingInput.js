@@ -161,7 +161,6 @@ class SettingInput extends React.Component {
 			}
     }
     alert("提交成功")
-		console.log(this.state.data)
 	}
 
 	//初始化标题和type

@@ -8,7 +8,6 @@ function Arrow() {
 
 class TopNavBar extends React.Component {
   componentDidMount(){
-    console.log(this.props)
   }
   onLeftClick = () => {
     if(this.props.activeId){

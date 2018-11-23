@@ -35,7 +35,6 @@ class PublishActivity extends React.Component{
     }
   }
   handleChange(type, e) {
-    console.log('radio checked', e.target.value);
     this.setState({
       radioType: e.target.value,
     });
@@ -48,8 +47,7 @@ class PublishActivity extends React.Component{
     let navListLis = getChildNode(navListUl)
     let _this = this
     //点击menu切换样式
-    navListUl.addEventListener('click', function(e){
-      console.log(e)     
+    navListUl.addEventListener('click', function(e){    
       navListLis.forEach((item, index)=>{
         item.classList.remove('inputsMenuActive')
       })
@@ -62,7 +60,6 @@ class PublishActivity extends React.Component{
       }else {
         e.target.classList.add('inputsMenuActive')
       }
-      console.log(e.target.parentNode.children[0].innerText )
       if(e.target.outerText === '奖金' || e.target.parentNode.children[0].innerText === '奖金'){
         _this.setState({
           menuState: 0,         
@@ -136,12 +133,10 @@ class PublishActivity extends React.Component{
     return content
   }
   handeleFocus(){
-    console.log(document.querySelector('.inputsContent'))
     document.querySelector('.inputsContent').scrollIntoView()
   }
   //排行、平摊切换
   createInputContent(){
-    console.log(this.props.form)
     //排行
     if(this.state.radioType === 0){
       return(
@@ -235,7 +230,6 @@ class PublishActivity extends React.Component{
       if(type === 'add'){
         let data = new FormData()
         data.append('image_file', fileData.file)
-        console.log(data)
         axios.post(
           serverIp + '/dianzanbao/sys/file/saveImg.do',
           data,
@@ -307,7 +301,6 @@ class PublishActivity extends React.Component{
         Toast.info('请输入金额', 1)
         return
       }
-      console.log(bonus)
       let data = {
         active_name: values.activityName,
         active_start_date: dataFormat(values.startDate, 'yyyy-MM-dd hh:mm'),
@@ -324,8 +317,6 @@ class PublishActivity extends React.Component{
     }
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    console.log(this.props)
     if(nextProps.publishState !== ''){
       Toast.success(nextProps.publishState,3, this.onClose, true);
     }

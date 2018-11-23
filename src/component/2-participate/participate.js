@@ -46,7 +46,6 @@ class Participate extends React.Component{
       }else {
         e.target.classList.add('processingActive')
       }
-      console.log(e)
       if(e.target.textContent === '进行中' || e.target.parentNode.textContent === '进行中'){
         _this.setState({
           active_status : '0',
@@ -121,8 +120,6 @@ class Participate extends React.Component{
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
 					_this.pullUpLoadData(function(data) {
-            console.log(data)
-            console.log(_this.state.paticipateActive)
 						if (ObjectEquals(data.list, _this.state.paticipateActive)) {
 							// 恢复文本值
 							bottomTip.innerText = '没有更多数据'
@@ -139,8 +136,6 @@ class Participate extends React.Component{
     })
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    console.log(this.props)
     if(!ObjectEquals(nextProps.paticipateInfo.participateActiveList, this.props.paticipateInfo.participateActiveList)){
       this.setState({
         paticipateActive: nextProps.paticipateInfo.participateActiveList.list

@@ -24,7 +24,6 @@ class ActivityInfoContent extends React.Component{
 
   }
   lookMoreRank(){
-    console.log(this.props)
     let data = {
       activeId : this.props.activeId
     }
@@ -36,8 +35,6 @@ class ActivityInfoContent extends React.Component{
     //document.querySelector('.zhezhao').style.display = 'block'
   }
   componentWillReceiveProps(nextProps){
-     console.log(this.props)
-     console.log(nextProps)
      if(!ObjectEquals(nextProps.userRanking.userRankings, this.props.userRanking.userRankings)){
       this.setState({
         updataTime: nextProps.userRanking.updateTime,
@@ -48,15 +45,12 @@ class ActivityInfoContent extends React.Component{
   }
   createBonusContent(){
     let distribute_Content
-    console.log(this.props.activeDetail.distributeType)
-    console.log(this.props.activeDetail.bonus)
     if(this.props.activeDetail.distributeType === 0){
       let bonus = this.props.activeDetail.bonus.split(',').reverse()
       distribute_Content = <div>{createBonusItem(bonus)}</div>
     }else{
       distribute_Content = <div className='bonusequal'></div>
     }
-    console.log(distribute_Content)
     return distribute_Content
     
   }
@@ -64,10 +58,8 @@ class ActivityInfoContent extends React.Component{
     if(JSON.stringify(this.state.rankingData) !== '[]'){
       let rankingData = this.state.rankingData
       let myRank =  this.state.myRank
-      console.log(rankingData)
-      rankingData.unshift(myRank)
+      rankingData = myRank !== null ? rankingData.unshift(myRank) : rankingData
       let rankingData2 = [...new Set(rankingData)]
-      console.log(rankingData2)
       return(
         <tbody>
           {
@@ -99,8 +91,6 @@ class ActivityInfoContent extends React.Component{
     this.props.clearData()
   }
   render(){
-    console.log(this.props.activeDetail)
-    console.log('----render----')
     return(
       <div className='activityInfoContent'>
         <div>

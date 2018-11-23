@@ -58,7 +58,6 @@ class Login extends React.Component{
         login_method: 'password',
         user_pwd: values.password
       }
-      console.log(data)
       this.userLogin(data, function(_this, result_info){
         form.resetFields()
         Toast.info('登录成功', 1)
