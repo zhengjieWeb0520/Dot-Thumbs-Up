@@ -57,7 +57,6 @@ export function getIndustry(){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch(getIndustryAction(res.data.result_info))
         }
@@ -91,7 +90,6 @@ export function getActiveList(activeParam, fn){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch(getActiveAction(res.data.result_info))
           fn ? fn(res.data.result_info) : null
@@ -118,7 +116,6 @@ export function getActiveInfo(id){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch(getActiveInfoAction(res.data.result_info))
         }
@@ -143,7 +140,6 @@ export function addCollection(collection_type, collection_id){
         }
       }
     ).then(res => {
-      console.log(res)
       if(res.data.result_code === '0'){
         dispatch(getActiveInfoAction(res.data.result_info))
       }

@@ -15,13 +15,11 @@ class Setting extends React.Component {
 		}
 	}
 	onPickerOk = (type, value) => {
-    console.log(value)
 		this.setState(
 			{
 				[type]: value
 			},
 			() => {
-				console.log(this.state)
 				if (type === 'ageValue') {
 					//年龄只显示岁数，不显示区间
 					let ageContanier = document.querySelector('.agePick .am-list-extra')

@@ -19,7 +19,6 @@ class ActivityMerchant extends React.Component{
 
   }
   render(){
-    console.log(this.props)
     return(
       <div className='activityMerchant'>
         <div>
@@ -37,7 +36,6 @@ class ActivityMerchant extends React.Component{
             <div className='merchantImg'>
               <div>
                 {this.props.merchantInfo.img_data.imgs.map((item, index)=>{
-                  console.log(item.img_url)
                   return (
                     <img key={index} src={item.img_url} alt=""/>
                   )

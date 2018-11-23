@@ -17,7 +17,6 @@ class ActivityEvaluate extends React.Component{
     }
   }
   componentWillMount(){
-    console.log(this.props.activeId)
     this.getFirstPageData('first')
   }
   componentDidMount(){
@@ -32,7 +31,6 @@ class ActivityEvaluate extends React.Component{
         item.classList.remove('evaluateActive')
         item.classList.remove('evaluateGray')
       })
-      console.log(e)
       if(e.target.tagName === 'SPAN'){
         e.target.parentNode.classList.add('evaluateActive')
         if(e.target.parentNode.getAttribute("name") === 'selectTab4'){

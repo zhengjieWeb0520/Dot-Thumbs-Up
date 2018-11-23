@@ -54,7 +54,6 @@ class ActivityInfo extends React.Component {
 		if (this.props.location.query == undefined) {
 			this.props.history.goBack()
 		} else {
-			console.log(this.props.location)
 			this.props.getActiveInfo(this.props.location.query.activeId, 'active')
 			this.props.getIsOrNotCollect('active', this.props.location.query.activeId)
 		}
@@ -125,7 +124,6 @@ class ActivityInfo extends React.Component {
 			menuListLis.forEach((item, index) => {
 				item.classList.remove('tabActive')
 			})
-			console.log(e)
 			if (e.target.tagName === 'SPAN') {
 				e.target.parentNode.classList.add('tabActive')
 			} else {
@@ -200,7 +198,6 @@ class ActivityInfo extends React.Component {
 	}
 	//收藏
 	collectClick(e) {
-		console.log(e)
 		let _this = this
 		if (this.state.have_collection === false) {
 			this.props.addCollection('active', this.props.location.query.activeId)
@@ -228,8 +225,6 @@ class ActivityInfo extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)) {
-			console.log(this.props)
-			console.log(nextProps)
 			this.setState({
 				activeInfo: nextProps.activeInfo.activeInfo,
 				activeDetail: {
@@ -350,7 +345,6 @@ class ActivityInfo extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.activeDetail)
 		return (
 			<div id="ActivityInfo" className="activityInfo">
 				<div className="activityInfoContainer">
@@ -359,7 +353,6 @@ class ActivityInfo extends React.Component {
 							{/* 轮播图 */}
 							<Carousel autoplay infinite className={'my-carousel'}>
 								{this.state.activeDetail.activeImg.map((item, index) => {
-									console.log(item.img_url)
 									return (
 										<img
 											key={index}

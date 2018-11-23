@@ -78,7 +78,6 @@ export function getIsOrNotCollect(collection_type, collection_id){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch({ type: ISCOLLECT, data: res.data.result_info })
         }
@@ -103,7 +102,6 @@ export function addCollection(collection_type, collection_id){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch({ type: ADDCOLLECT, data: '已收藏' })
         }
@@ -128,7 +126,6 @@ export function removeCollection(collection_type, collection_id){
           }
         }
       ).then(res => {
-        console.log(res)
         if(res.data.result_code === '0'){
           dispatch({ type: REMOVECOLLECT, data: '已取消' })
         }

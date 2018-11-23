@@ -64,7 +64,6 @@ class Activity extends React.Component{
       AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
       AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
       function onComplete (data) {
-        console.log(data)
         window.sessionStorage.setItem('user_lon', data.position.lng)
         window.sessionStorage.setItem('user_lat', data.position.lat)
         //alert(data.formattedAddress)
@@ -97,13 +96,11 @@ class Activity extends React.Component{
       navListLis.forEach((item, index)=>{
         item.classList.remove('level1Active')
       })
-      console.log(e)
       if(e.target.tagName === 'I' || e.target.tagName === 'P'){
         e.target.parentNode.classList.add('level1Active')
         _this.setState({
           levelState: e.target.parentNode.id
         }, ()=>{
-          console.log(_this.state.levelState)
           let activeParam = {
             dir_one: _this.state.levelState,
             dir_two: _this.state.level2State,
@@ -123,7 +120,6 @@ class Activity extends React.Component{
         _this.setState({
           levelState: e.target.id
         }, ()=>{
-          console.log(_this.state.levelState)
           let activeParam = {
             dir_one: _this.state.levelState,
             dir_two: _this.state.level2State,
@@ -179,8 +175,6 @@ class Activity extends React.Component{
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
 					_this.pullUpLoadData(function(data) {
-            console.log(data);
-            console.log( _this.state.activeList)
 						if (ObjectEquals(data.list, _this.state.activeList.list)) {
 							// 恢复文本值
 							bottomTip.innerText = '没有更多数据'
@@ -233,11 +227,9 @@ class Activity extends React.Component{
     this.props.getActiveList(activeParam, fn)
 	}
   componentDidUpdate(prevProps){
-    console.log(prevProps)
     let activeTypeDOM = document.querySelector('.activeType')
     let activeType = document.querySelectorAll('.activeType li')
     let width = 0
-    console.log(activeType.length)
     for(let i = 0; i< activeType.length + 1; i++){
       if(i < activeType.length)
         width = width + activeType[i].offsetWidth + 16
@@ -246,7 +238,6 @@ class Activity extends React.Component{
       }
     }
     width = width + 40
-    console.log(width)
     activeTypeDOM.style.width = width + 'px'
     const wrapper = document.querySelector('.activityLevel2')
     const scroll = new BScroll(wrapper,{
@@ -260,7 +251,6 @@ class Activity extends React.Component{
       let activityLevel2UlLi = activityLevel2Ul.getElementsByTagName('li')
       let _this = this
       activityLevel2Ul.addEventListener('click', function(e){
-        console.log('bbbbb')
         if(_this.level2Flag === true){
           _this.level2Flag = false
           _this.setState({
@@ -301,8 +291,6 @@ class Activity extends React.Component{
       rankSelect: node.props.children,
       rankSelectValue: node.props.value
     },()=>{
-      console.log(this.state.rankSelect)
-      console.log(this.state.rankSelectValue)
       let activeParam = {
         dir_one: _this.state.levelState,
         dir_two: _this.state.level2State,
@@ -322,7 +310,6 @@ class Activity extends React.Component{
   onMerchantSelect(node){
     let _this = this
     let iconDom = document.querySelector('#merchant')
-    console.log(node)
     iconDom.classList.remove(iconDom.className)
     iconDom.classList.add(node.props.className)
     this.setState({
@@ -346,8 +333,6 @@ class Activity extends React.Component{
     })
   }
   componentWillReceiveProps(nextProps){
-    console.log(this.props)
-    console.log(nextProps)
     //二级分类内容
     if(!ObjectEquals(this.props.industryInfo.industryInfo, nextProps.industryInfo.industryInfo)){
       this.setState({
@@ -366,7 +351,6 @@ class Activity extends React.Component{
   }
   createActiveContent(){
     let content = []
-    console.log(this.state.activeList)
     if(!ObjectEquals(this.state.activeList, {})){
       this.state.activeList.list.map((item, index)=>{
         let column = null
@@ -382,7 +366,6 @@ class Activity extends React.Component{
         let distribute_Content
         if(item.distribute_type === 0){
           let bonus = item.bonus.split(',').reverse()
-          //console.log(bonus)
           distribute_Content = <div>{this.createBonusItem(bonus)}</div>
         }else{
           distribute_Content = <div className='bonusequal'></div>
@@ -454,8 +437,6 @@ class Activity extends React.Component{
         }
       })
     }
-    console.log(industyInfo)
-    console.log(this.state.activeList)
     let address = window.sessionStorage.getItem('user_addr')
     return(
       <div id='Activity' className='acticityCommon'>

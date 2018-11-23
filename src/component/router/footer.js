@@ -16,7 +16,6 @@ class Footer extends Component{
     let navListLis = getChildNode(navListUl)
     //点击menu切换样式
     navListUl.addEventListener('touchend', function(e){
-      console.log(e)
       navListLis.forEach((item, index)=>{
         item.classList.remove('menuActive')
       })
@@ -30,7 +29,6 @@ class Footer extends Component{
     }, false)
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
     if(!ObjectEquals({}, nextProps.userInfo)){
       this.setState({
         user_role_id: nextProps.userInfo.userInfo.user_info.role_id,
@@ -41,7 +39,6 @@ class Footer extends Component{
     }
   }
   render(){
-    console.log(this.state.user_role_id)
     let user_id = window.sessionStorage.getItem('user_role_id')
     let publishDom = null
     let path = {

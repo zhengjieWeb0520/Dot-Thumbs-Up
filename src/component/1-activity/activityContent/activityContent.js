@@ -38,8 +38,6 @@ class ActivityContent extends React.Component{
 		//this.props.getCollectionActive(data, fn)
 	}
   componentWillReceiveProps(nextProps){
-    //console.log(this.props)
-    //console.log(nextProps)
     if(!ObjectEquals(nextProps.activeList.activeList, this.props.activeList.activeList)){
       this.setState({
         arctiveList: nextProps.activeList.activeList
@@ -63,7 +61,6 @@ class ActivityContent extends React.Component{
         let distribute_Content
         if(item.distribute_type === 0){
           let bonus = item.bonus.split(',').reverse()
-          //console.log(bonus)
           distribute_Content = <div>{this.createBonusItem(bonus)}</div>
         }else{
           distribute_Content = <div className='bonusequal'></div>
@@ -106,7 +103,6 @@ class ActivityContent extends React.Component{
     return content
   }
   render(){
-    console.log(this.state.arctiveList)
     return(
       <div className='activityContent wrapper'>
         <ul id='ActivityContent' className='ActivityContent content'>

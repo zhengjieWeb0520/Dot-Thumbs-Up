@@ -34,7 +34,6 @@ export default class Communicate extends Component{
     let param = {
       fartherProps: this.fartherProps
     }
-    console.log(this.props)
     return(
       <div id="Communicate">
         <h1>父子组件之间的通信</h1>

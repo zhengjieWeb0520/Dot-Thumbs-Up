@@ -42,7 +42,6 @@ export function thumpsUpActive(active_id, parent_user_id){
         }
       }
     ).then(res => {
-      console.log(res)
       if(res.data.result_code === '0'){
         dispatch({type: THUMBSUP, data: '点赞成功'})
         Toast.success('点赞成功',3);

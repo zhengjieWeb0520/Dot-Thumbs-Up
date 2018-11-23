@@ -18,8 +18,6 @@ class MoreRank extends React.Component {
 	}
 	componentWillMount() {
 		if (this.props.history.location.query !== undefined) {
-			console.log(this.props)
-			console.log(this.state.rankingData)
 			let data = {
 				id: this.props.history.location.query.activeId,
 				pageNo: '1',
@@ -69,8 +67,6 @@ class MoreRank extends React.Component {
         bottomTip.innerText = '加载中...'
         setTimeout(function() {
           _this.pullUpLoadData(function(data) {
-            console.log(data)
-            console.log(_this.state.paticipateActive)
             if (ObjectEquals(data.list, _this.state.rankingData)) {
               // 恢复文本值
               bottomTip.innerText = '没有更多数据'
@@ -87,12 +83,7 @@ class MoreRank extends React.Component {
     })
   }
 	componentWillReceiveProps(nextProps) {
-		console.log(this.props)
-		console.log(nextProps)
 		if (!ObjectEquals(nextProps.userRanking.userRankings, {})) {
-			console.log(nextProps.userRanking)
-			console.log(nextProps.userRanking.userRankings)
-			console.log(nextProps.userRanking.userRankings.list)
 			this.setState({
 				updataTime: nextProps.userRanking.updateTime,
 				myRank: nextProps.userRanking.userRankings.my,
@@ -123,14 +114,11 @@ class MoreRank extends React.Component {
 		this.props.getUserRanking(data, fn)
   }
 	createRankingContent() {
-		console.log(this.state.rankingData)
 		if (JSON.stringify(this.state.rankingData) !== '[]') {
 			let rankingData = this.state.rankingData
 			let myRank = this.state.myRank
-			console.log(rankingData)
 			rankingData.unshift(myRank)
 			let rankingData2 = [...new Set(rankingData)]
-			console.log(rankingData2)
 			return (
 				<tbody>
 					{rankingData2.map((item, index) => {

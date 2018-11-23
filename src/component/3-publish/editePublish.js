@@ -17,14 +17,10 @@ class EditePublish extends React.Component{
       activeAsc: '',
       files: []
     }
-    console.log(this.props)
     this.props.getActiveInfo(this.props.location.query.id)
   }
-  componentWillMount(){
-    console.log(this.props)
-  }
+
   onImgChange =(files, type, index)=>{
-    console.log(this.uploadFiles)
     let _this = this
     this.setState({
       files,
@@ -33,7 +29,6 @@ class EditePublish extends React.Component{
       if(type === 'add'){
         let data = new FormData()
         data.append('image_file', fileData.file)
-        console.log(data)
         axios.post(
           serverIp + '/dianzanbao/sys/file/saveImg.do',
           data,
@@ -52,11 +47,8 @@ class EditePublish extends React.Component{
         this.uploadFiles.splice(index, 1)
       }
     })
-    console.log(this.uploadFiles)
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
-    console.log(this.props)
     if(!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)){
       let filesArray = []
       this.uploadFiles = []

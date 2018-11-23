@@ -5,7 +5,6 @@ class SelectBankCard extends React.Component {
   componentDidMount(){
     let cardBox = document.querySelector(".selectBankCard .cardBox ul")
     cardBox.addEventListener("click", function(e) {
-      console.log(e.target.tagName)
       let li = e.target.tagName === 'LI' ? e.target : (e.target.tagName === 'DIV' ? e.target.parentNode : e.target.parentNode.parentNode)
 
       if(!li.className.includes('active')) {
