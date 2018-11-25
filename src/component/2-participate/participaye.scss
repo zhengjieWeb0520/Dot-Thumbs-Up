@@ -50,27 +50,27 @@
         }
         #processing{
           i{
-            @include bg-image('../../images/participate/processing');  
+            @include bg-image('../../images/participate/processing');
           }
         }
         #haveover{
           i{
-            @include bg-image('../../images/participate/haveover');  
+            @include bg-image('../../images/participate/haveover');
           }
         }
         #havewon{
           i{
-            @include bg-image('../../images/participate/havewon');  
+            @include bg-image('../../images/participate/havewon');
           }
         }
         #notwon{
           i{
-            @include bg-image('../../images/participate/notwon');  
+            @include bg-image('../../images/participate/notwon');
           }
         }
         #allType{
           i{
-            @include bg-image('../../images/participate/allType');  
+            @include bg-image('../../images/participate/allType');
           }
         }
       }
@@ -79,7 +79,7 @@
   .participateContent{
     height: calc(100vh - 390px);
     height: -moz-calc(100vh - 390px);
-    height: -webkit-calc(100vh - 390px); 
+    height: -webkit-calc(100vh - 390px);
     overflow: hidden;
     margin-top: 20px;
     .ParticipateContent{
@@ -98,7 +98,7 @@
           display: flex;
           >div:first-of-type{
             flex: 1 1;
-            display: flex;          
+            display: flex;
             align-items: center;
             span:first-of-type{
               display: inline-block;
@@ -139,7 +139,7 @@
             >span:first-of-type{
               flex: 1 1;
               font-size: 26px;
-              color:#4D4D4D            
+              color:#4D4D4D
             }
             >span:last-of-type{
               width: 382px;
@@ -152,7 +152,7 @@
             height: 36px;
             line-height: 36px;
             font-size: 22px;
-            color:#9E9E9E 
+            color:#9E9E9E
           }
           >div:last-of-type{
             height: 70px;
@@ -162,7 +162,7 @@
               display: inline-block;
               width: 34px;
               height: 34px;
-              @include bg-image('../../images/participate/money'); 
+              @include bg-image('../../images/participate/money');
             }
             span{
               margin-left: 20px;
@@ -173,5 +173,32 @@
         }
       }
     }
+  }
+}
+
+//活动评价
+.activityComment {
+  .activityRate{
+    background: #fff;
+    height: 88px;
+    line-height: 88px;
+
+    span{
+      display: inline-block;
+    }
+
+    span.title{
+      width: 25%;
+      font-size: 30px;
+      text-align: center;
+      line-height: 88px;
+    }
+
+    span.Rate{
+      width: 75%;
+    }
+  }
+  .submitBtn{
+    bottom: 98px !important;
   }
 }

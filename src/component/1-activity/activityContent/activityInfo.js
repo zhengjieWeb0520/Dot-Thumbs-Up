@@ -71,34 +71,47 @@ class ActivityInfo extends React.Component {
 					timestamp: res.data.result_info.timestamp,
 					nonceStr: res.data.result_info.noncestr,
 					signature: res.data.result_info.signature,
-					jsApiList: [
-						'onMenuShareAppMessage',
-						'onMenuShareTimeline',
-						'chooseWXPay',
-						'showOptionMenu',
-						'updateAppMessageShareData',
-						'hideMenuItems',
-						'showMenuItems'
-					]
+          jsApiList: ['updateAppMessageShareData', 'getNetworkType']
 				})
 			}
 		})
 
 		let link = window.location.href.split('#')[0]
 		wx.ready(function() {
-			console.log('aaa')
-			wx.updateAppMessageShareData({
-				title: 'abc', // 分享标题
-				desc: 'abc', // 分享描述
-				link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl: '', // 分享图标
-				success: function() {
-					Toast.info('分享成功', 1)
-				},
-				fail: function() {
-					Toast.info('分享失败', 1)
+			wx.checkJsApi({
+				jsApiList: ['updateAppMessageShareData'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+				success: function(res) {
+					console.log(res)
+					// 以键值对的形式返回，可用的api值true，不可用为false
+					// 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
 				}
 			})
+			console.log('aaa')
+			// wx.updateAppMessageShareData({
+			// 	title: 'abc', // 分享标题
+			// 	desc: 'abc', // 分享描述
+			// 	link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			// 	imgUrl: '', // 分享图标
+			// 	success: function() {
+			// 		Toast.info('分享成功', 1)
+			// 	},
+			// 	fail: function() {
+			// 		Toast.info('分享失败', 1)
+			// 	}
+      // })
+
+      wx.onMenuShareWeibo({
+        title: '', // 分享标题
+        desc: '', // 分享描述
+        link: link, // 分享链接
+        imgUrl: '', // 分享图标
+        success: function () {
+          console.log('bbb')
+        },
+        cancel: function () {
+          // 用户取消分享后执行的回调函数
+        }
+      });
 		})
 	}
 
@@ -166,10 +179,14 @@ class ActivityInfo extends React.Component {
 	switchContent() {
 		switch (this.state.tabFlag) {
 			case 0:
-      return this.props.location.query !== undefined ? (<ActivityInfoContent activeId ={this.props.location.query.activeId} activeDetail={this.state.activeDetail} />) : null
+				return this.props.location.query !== undefined ? (
+					<ActivityInfoContent activeId={this.props.location.query.activeId} activeDetail={this.state.activeDetail} />
+				) : null
 				break
 			case 1:
-				return this.props.location.query !== undefined ? <ActivityEvaluate activeId ={this.props.location.query.activeId}/> : null
+				return this.props.location.query !== undefined ? (
+					<ActivityEvaluate activeId={this.props.location.query.activeId} />
+				) : null
 				break
 			case 2:
 				return <ActivityMerchant merchantInfo={this.state.activeInfo.business_info} />
@@ -330,7 +347,7 @@ class ActivityInfo extends React.Component {
 	render() {
 		return (
 			<div id="ActivityInfo" className="activityInfo">
-				<div className = 'activityInfoContainer'>
+				<div className="activityInfoContainer">
 					<div>
 						<div className="carousel">
 							{/* 轮播图 */}
@@ -417,18 +434,18 @@ class ActivityInfo extends React.Component {
 					</div>
 					{this.switchContent()}
 				</div>
-        <div className="activityInfoFooter">
-						<ul>
-							<li>
-								<i />
-								<span>我要点赞</span>
-							</li>
-							<li>
-								<i />
-								<span>我的集赞</span>
-							</li>
-						</ul>
-					</div>
+				<div className="activityInfoFooter">
+					<ul>
+						<li>
+							<i />
+							<span>我要点赞</span>
+						</li>
+						<li>
+							<i />
+							<span>我的集赞</span>
+						</li>
+					</ul>
+				</div>
 			</div>
 		)
 	}
