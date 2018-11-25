@@ -87,7 +87,6 @@
         background: white;
         border-radius: 10px;
         margin: 20px;
-        height: 270px;
         padding-left: 36px;
         padding-right: 6px;
         display: flex;
@@ -132,6 +131,9 @@
         }
         .participateItemContent{
           flex: 1 1;
+          position: relative;
+          padding-bottom: 40px;
+
           >div:first-of-type{
             height: 70px;
             display: flex;
@@ -169,6 +171,18 @@
               font-size: 24px;
               color:#070707
             }
+          }
+
+          .toCommentBtn{
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 1px solid sandybrown;
+            color: sandybrown;
           }
         }
       }

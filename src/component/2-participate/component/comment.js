@@ -5,6 +5,7 @@ import { ImagePicker, InputItem, List, Toast } from 'antd-mobile'
 import { validatorPhone, serverIp } from '../../../utils/utils'
 import { connect } from 'react-redux'
 import axios from 'axios'
+import qs from 'qs'
 import { feedBackInfo } from '../../../redux/1-activiy/reportMerchantRedux'
 
 class Comment extends React.Component {
@@ -41,8 +42,6 @@ class Comment extends React.Component {
 						})
 						.then(res => {
 							if (res.data.result_code === '0') {
-								console.log(res.data)
-								console.log(_this.state.imgs)
 								_this.setState({
 									imgs: _this.state.imgs.concat([res.data.result_info])
 								})
@@ -66,15 +65,40 @@ class Comment extends React.Component {
 	}
 
 	submitForm = () => {
+		let _this = this
 		if (this.state.content === '') {
 			Toast.info('请填写评价内容', 1)
 		} else if (this.state.star_level === 0) {
-      Toast.info('请选择评价评分', 1)
+			Toast.info('请选择评价评分', 1)
 		}
 		console.log(this.state)
+		console.log(this.props.location.query)
+		let data = qs.stringify({
+			active_id: this.props.location.query.activeId,
+			star_level: this.state.star_level,
+			content: this.state.content,
+			imgs: this.state.imgs.join(',')
+		})
+    axios.post('/dianzanbao/active/comment.do', data, {
+      headers: {
+        token: window.sessionStorage.getItem('token'),
+        user_id: window.sessionStorage.getItem('user_id')
+      }
+    }).then(res => {
+			console.log(res)
+			if (res.data.result_code === '0') {
+				Toast.info('评论成功')
+				// _this.setState({
+				// 	imgs: [],
+				// 	content: '',
+				// 	star_level: 0
+				// })
+			}
+		})
 	}
 
 	render() {
+    console.log('render')
 		return (
 			<div className="userFeedBack activityComment">
 				<TopNavBar title="活动评价 " />
