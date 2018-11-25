@@ -27,7 +27,7 @@ class Activity extends React.Component{
       merchantVisible: false, //显隐状态
       keyWord: '',
       TmapFlag: true, //只获取一次
-      levelState : 'XMS', //主类型状态 
+      levelState : 'XMS', //主类型状态
       level2State : '' ,  //二级行业KEY
       rankSelect: '综合排序', //综合排序
       rankSelectValue: 'comprehensive',   //综合排序value
@@ -68,13 +68,13 @@ class Activity extends React.Component{
         window.sessionStorage.setItem('user_lat', data.position.lat)
         //alert(data.formattedAddress)
         _this.setState({
-          address: data.addressComponent.township + data.addressComponent.street 
+          address: data.addressComponent.township + data.addressComponent.street
         },()=>{
           _this.props.getIndustry()
           _this.getFirstActiveList('first')
         })
       }
-    
+
       function onError (data) {
         window.sessionStorage.setItem('user_lon', 118.746916)
         window.sessionStorage.setItem('user_lat', 32.033717)
@@ -85,7 +85,7 @@ class Activity extends React.Component{
           _this.getFirstActiveList('first')
         })
       }
-    });
+    })
   }
   componentDidMount(){
     let _this = this
@@ -209,7 +209,7 @@ class Activity extends React.Component{
     } else {
       this.props.getActiveList(activeParam, fn)
     }
-  } 
+  }
   //上拉加载
 	pullUpLoadData(fn) {
     let activeParam = {
@@ -370,7 +370,7 @@ class Activity extends React.Component{
         }else{
           distribute_Content = <div className='bonusequal'></div>
         }
-        column =  
+        column =
           <Link to={path} className='activityItem' key={item.id}>
             <div>
               <img src={item.img_url} alt=""/>
@@ -450,7 +450,7 @@ class Activity extends React.Component{
             <div className='activityLevel1'>
               <ul>
                 <li id='XMS' key='XMS' className='level1Active'>
-                  <i></i> 
+                  <i></i>
                   <p>享美食</p>
                 </li>
                 <li id='HSH' key='HSH'>
@@ -459,28 +459,28 @@ class Activity extends React.Component{
                 </li>
                 <li id='AWL' key='AWL'>
                   <i></i>
-                  <p>爱玩乐</p>                 
+                  <p>爱玩乐</p>
                 </li>
                 <li id='ZJD' key='ZJD'>
                   <i></i>
-                  <p>住酒店</p>   
+                  <p>住酒店</p>
                 </li>
                 <li id='allLevel'>
                   <i></i>
-                  <p>全部</p>   
+                  <p>全部</p>
                 </li>
               </ul>
             </div>
             <div className='activityLevel2'>
               <ul className ='activeType'>
                 <li key={''} name='' >{'全部'}</li>
-                {   
-                  !ObjectEquals(industyInfo, {}) ? 
+                {
+                  !ObjectEquals(industyInfo, {}) ?
                   industyInfo.map((item, index)=>{
                     return <li key={item.key} name={item.key}>{item.name}</li>
-                  }) : null                 
+                  }) : null
                 }
-              </ul>             
+              </ul>
             </div>
             <div className='activityKbGray'>
             </div>
@@ -514,7 +514,7 @@ class Activity extends React.Component{
                       transform: 'translateY(-50%)'
                     }}
                     >
-                      
+
                       <i className='downArrow'></i>
                     </div>
                   </Popover>
@@ -550,14 +550,14 @@ class Activity extends React.Component{
                       transform: 'translateY(-50%)'
                     }}
                     >
-                      
+
                       <i className='downArrow'></i>
                     </div>
                   </Popover>
                 </li>
               </ul>
             </div>
-          </div>   
+          </div>
         </div>
         <div className='activityContent wrapper'>
           <ul id='ActivityContent' className='ActivityContent content'>
