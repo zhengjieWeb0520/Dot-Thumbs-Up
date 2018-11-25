@@ -11,7 +11,7 @@
 		margin-top: 100px;
   }
   .login-content{
-    margin-top: 100px;
+    margin-top: 80px;
     .am-list-line:after{
       display: none;
       background-color: black !important
@@ -28,6 +28,9 @@
         border-bottom: 1px solid #ebebeb;
         width: 69.33333vw;
         margin: 0 auto;
+        input{
+          font-size: 18px;
+        }
       }
       .am-list-item:last-of-type{
         border: none
