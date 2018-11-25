@@ -46,10 +46,12 @@ export function clearInfo(){
 }
 //获取行业类别
 export function getIndustry(){
+  let data = {}
   return dispatch => {
     axios
       .post(
-        serverIp + '/dianzanbao/config/getIndustry.do', 
+        serverIp + '/dianzanbao/config/getIndustry.do',
+        data,
         {
           headers: {
             token: window.sessionStorage.getItem('token'),
@@ -57,6 +59,8 @@ export function getIndustry(){
           }
         }
       ).then(res => {
+        alert(res.data.result_code)
+        alert(res.data.err_msg)
         if(res.data.result_code === '0'){
           dispatch(getIndustryAction(res.data.result_info))
         }

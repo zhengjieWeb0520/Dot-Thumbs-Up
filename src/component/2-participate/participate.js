@@ -186,6 +186,7 @@ class Participate extends React.Component {
 			pageSize: String(5 * this.count)
 		}
 		this.props.getParticipateActivity(data, fn)
+<<<<<<< HEAD
 	}
 
 	//创建组件内容
@@ -328,6 +329,125 @@ class Participate extends React.Component {
 			</div>
 		)
 	}
+=======
+  }
+  
+  //创建组件内容
+  createParticipateContent(){
+    let content = []
+    if(JSON.stringify(this.state.paticipateActive) !== '[]'){
+      this.state.paticipateActive.forEach((item, index)=>{
+        let column = null
+        let data = {
+          activeId: item.id,
+          distance_format: item.distance_format,
+          good_count: item.good_count
+        }
+        let path = {
+          pathname: `/activityInfo`,
+          query: data
+        }
+        let distribute_Content
+        if(item.distribute_type === 0){
+          let bonus = item.bonus.split(',').reverse()
+          distribute_Content = <div><i></i>{this.createBonusItem(bonus)}</div>
+        }else{
+          distribute_Content = <div><i></i><span>{`${item.bonus}   人人有份`}</span></div>
+        }
+        let user_status = item.user_status === 0 ? '未中奖' : '中奖'
+        column = 
+          <Link to={path} key={index} className='participateItem'>
+            <div className='participateItemHeader'>
+              <div>
+                <span></span>
+                <span>{item.business_name}<i></i></span>             
+              </div>
+              <div>
+                {user_status}
+              </div>
+            </div>
+            <div className='participateItemContent'>
+              <div>
+                <span>{item.name}</span>
+                <span>{item.start_date.substring(0, 13)}&nbsp;-&nbsp;{item.end_date.substring(0, 13)}</span>
+              </div>
+              <div>{item.desc}</div>
+              {distribute_Content}
+            </div>
+          </Link>
+        content.push(column)
+      })
+      return  content
+    }else{
+      return null
+    }
+  }
+  //奖金模式
+  createBonusItem(bonus){
+    let content = []
+    bonus.forEach((item ,index) => {
+      let column
+      let bonusValue = Number(item)
+      let goldValue
+      goldConfig.forEach((item2, index2)=>{
+        if(index === item2.id){
+          goldValue = item2.value
+        }
+      })
+      column = <span key={index}>{`${goldValue}:${bonusValue}RMB`}</span>
+      content.push(column)
+    });
+    return content
+  }
+  componentWillUnmount(){
+    this.props.clearActive()
+  }
+  //组件切换
+  render(){
+    return(
+      <div id="Participate">
+        <div className='participateHeader'>   
+          <div className='participateTitle'>我&nbsp;的&nbsp;参&nbsp;与</div>
+          <div className='participateTab'>
+            <ul>
+              <li id='processing' className='processingActive'>
+                <i></i> 
+                <p>进行中</p>              
+              </li>
+              <li id='haveover'>
+                <i></i> 
+                <p>已结束</p>               
+              </li>
+              <li id='havewon'>
+                <i></i> 
+                <p>已中奖</p>                     
+              </li>
+              <li id='notwon'>
+                <i></i> 
+                <p>未中奖</p>  
+              </li>
+              <li id='allType'>
+                <i></i> 
+                <p>全部活动</p>  
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className='participateContent participateWrapper'>
+          <div id='ParticipateContent' className='ParticipateContent content'>
+              <div className="top-tip">
+                <span className="refresh-hook">下拉刷新</span>
+              </div>
+              {this.createParticipateContent()}
+              <div className="bottom-tip">
+						    <span className="loading-hook">查看更多</span>
+              </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+>>>>>>> d6faab5b0d0c8c22702014815c380c47e3dc695c
 }
 
 Participate = connect(

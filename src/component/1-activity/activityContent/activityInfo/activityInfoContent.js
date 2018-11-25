@@ -58,8 +58,10 @@ class ActivityInfoContent extends React.Component{
     if(JSON.stringify(this.state.rankingData) !== '[]'){
       let rankingData = this.state.rankingData
       let myRank =  this.state.myRank
-      rankingData = myRank !== null ? rankingData.unshift(myRank) : rankingData
+      rankingData = myRank !== null ? [myRank].concat(rankingData) : rankingData
+      console.log(rankingData)
       let rankingData2 = [...new Set(rankingData)]
+      console.log(rankingData2)
       return(
         <tbody>
           {

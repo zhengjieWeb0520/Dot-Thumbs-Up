@@ -7,14 +7,24 @@ import Footer from './../component/router/footer'
 import RouteConfig from './../component/router/routers'
 import { getUserInfoPort } from './../redux/1-activiy/getUserInfoRedux'
 import { serverIp } from './../utils/utils'
+import { Toast } from 'antd-mobile'
+import $ from 'zepto'
 
 class Main extends React.Component{
   constructor(props){
     super(props)
     this.TmapFlag = true //只获取一次
+    this.state = {
+      goRender : false
+    }
   }
   componentWillMount(){
     let _this = this
+    let ceshidata = qs.stringify({
+      wx_open_id: 'o2uL35jAePpEkl6rimFUCC3VDpOQ'
+    })
+    //this.relationUser(ceshidata, 9539, 652157)
+    
     let hrefParams = window.location.href.split("?")[1]
     console.log(hrefParams)
     if(hrefParams === undefined){
@@ -23,6 +33,9 @@ class Main extends React.Component{
       window.sessionStorage.setItem('token', tokenStr)
       window.sessionStorage.setItem('user_id', user_id)
       this.props.getUserInfoPort(tokenStr, user_id)
+      this.setState({
+        goRender: true
+      })
     }else {
       if(hrefParams.indexOf("token") != -1 ){  //app登录
         let userString = hrefParams.split('&')[0].split('=')[1]
@@ -37,37 +50,17 @@ class Main extends React.Component{
         })
         let user_id = window.sessionStorage.getItem('user_id')
         let token = window.sessionStorage.getItem('token')
-        alert(user_id)
         //第二次跳转 当sessionStorage内有user_id时则关联
         if(user_id != undefined){
-          alert(codeData)
           axios.post(serverIp + '/dianzanbao/user/getWxOpenId.do', codeData).then(res=>{
-            alert(res.status)
-            alert(res.data.result_code)
-            alert(res.data.err_msg)   
-            alert(res.request.response)
             if(res.data.result_code === '0'){
-              alert(res.data.result_info)
-              let wx_open_id = res.data.result_info
-              let data = qs({wx_open_id: wx_open_id})
-              axios.post(
-                serverIp + '/dianzanbao/userInfo/relationUser.do',             
-                data,
-                {
-                  headers: {
-                    token: window.sessionStorage.getItem('token'),
-                    user_id: window.sessionStorage.getItem('user_id')
-                  }
-                }
-                ).then(res2 =>{
-                  if(res2.data.result_code === '0'){
-                    alert(res2.data.result_info)
-                  }
-              }) 
+              let data2 = qs.stringify({
+                wx_open_id: res.data.result_info
+              })
+              _this.relationUser(data2, token, user_id) 
             }
           })
         }else if(user_id == undefined){ //第一次跳转 当sessionStorage内没有user_id时则登陆
-          alert('第一次进')
           axios.post(serverIp + '/dianzanbao/user/weixinLogin.do', codeData).then(res => {
             if (res.data.result_code === '0') {
               let tokenStr = res.data.result_info.token
@@ -75,6 +68,9 @@ class Main extends React.Component{
               window.sessionStorage.setItem('token', tokenStr)
               window.sessionStorage.setItem('user_id', user_id)
               _this.props.getUserInfoPort(tokenStr, user_id)
+              _this.setState({
+                goRender: true
+              })
             }else if(res.data.result_code === '-1'){
               _this.props.history.push('login')
             }else{
@@ -82,7 +78,6 @@ class Main extends React.Component{
             }
           })
         }else{
-          alert(typeof(user_id))
         }
       }else{
         let tokenStr = '9539'
@@ -93,6 +88,31 @@ class Main extends React.Component{
       }
     }
   }
+  relationUser(data, token, user_id){
+    let _this = this
+    console.log("data：" + data)
+    console.log("token：" + token)
+    console.log("user_id：" + user_id)
+    axios.post(
+      serverIp + '/dianzanbao/userInfo/relationUser.do',             
+      data,
+      {
+        headers: {
+          token: token,
+          user_id: user_id
+        }
+      }
+      ).then(response =>{
+        if(response.data.result_code === '0'){
+          Toast.info( response.data.result_info, 1)
+          _this.setState({
+            goRender: true
+          })
+        }
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
   componentWillReceiveProps(nextProps){
     console.log(nextProps)
   }
@@ -101,9 +121,9 @@ class Main extends React.Component{
     return (
       <div id = 'main'>
         <section>
-          <RouteConfig />
+          {this.state.goRender === true ? <RouteConfig />: null}
         </section>
-        <Footer />
+        {this.state.goRender === true ? <Footer />: null}    
       </div>
     )
   }
