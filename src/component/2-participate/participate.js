@@ -191,7 +191,7 @@ class Participate extends React.Component{
         }
         let user_status = item.user_status === 0 ? '未中奖' : '中奖'
         column = 
-          <Link to={path} className='participateItem'>
+          <Link to={path} key={index} className='participateItem'>
             <div className='participateItemHeader'>
               <div>
                 <span></span>

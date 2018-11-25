@@ -133,5 +133,5 @@
       ]
     }
   },
-  "proxy": "http://jizanbao.com:8080"
+  "proxy": "https://jizanbao.com"
 }

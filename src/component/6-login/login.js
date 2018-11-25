@@ -63,35 +63,7 @@ class Login extends React.Component{
         Toast.info('登录成功', 1)
         window.sessionStorage.setItem('token', result_info.token)
         window.sessionStorage.setItem('user_id', result_info.user_id)
-        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2514283f85a9e278&redirect_uri=http%3a%2f%2fjizanbao.com%2fgetWxCode.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
-        // if(wxCode !== undefined){
-        //   alert(wxCode)
-        //   let data = qs.stringify({code: wxCode})
-        //   axios.post(serverIp + '/dianzanbao/user/getWxOpenId.do', data).then(res =>{
-        //     alert(res.data.result_code)
-        //     alert(res.data.err_msg)
-        //     if (res.data.result_code === '0') {           
-        //       let wx_open_id = res.data.result_info
-        //       let data = qs({wx_open_id: wx_open_id})
-        //       axios.post(
-        //         serverIp + '/dianzanbao/userInfo/relationUser.do',             
-        //         data,
-        //         {
-        //           headers: {
-        //             token: window.sessionStorage.getItem('token'),
-        //             user_id: window.sessionStorage.getItem('user_id')
-        //           }
-        //         }
-        //         ).then(res =>{
-        //           if(res.data.result_code === '0'){
-        //             alert(res.data.result_info)
-        //           }
-        //       })
-        //     }
-        //   })
-        // }else{
-        //   _this.props.history.push('/index?aaaa')
-        // }     
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2514283f85a9e278&redirect_uri=http%3a%2f%2fjizanbao.com%2fgetWxCode.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"    
       })
     }else {
       Toast.info(error, 1)
