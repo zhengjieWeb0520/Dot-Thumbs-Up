@@ -123,7 +123,7 @@ class Regist extends React.Component{
             <InputItem
               clear
 							type="number"
-							placeholder="请输入6位的验证码"
+							placeholder="请输入的验证码"
 							extra={<SendCode phone={this.props.form.getFieldsValue().phone} type={'register_user'} />}
 							maxLength="6"
 							error={!!getFieldError('code')}
