@@ -79,7 +79,7 @@ class Main extends React.Component{
         }else{
         }
       }else if(hrefParams.indexOf("activeId") != -1){   //分享链接
-        
+        let activeId
       }else{
         let tokenStr = '9539'
         let user_id = '652157'
