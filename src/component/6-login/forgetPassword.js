@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { InputItem, List, Checkbox, Toast} from 'antd-mobile'
+import { InputItem, List, Toast} from 'antd-mobile'
 import { createForm } from 'rc-form'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -10,14 +10,10 @@ import LoginNavBar from './loginNavBar'
 import SendCode from './../4-myInfo/components/sendCode'
 import { validatorPhone, validatorCode, serverIp } from './../../utils/utils'
 
-const AgreeItem = Checkbox.AgreeItem;
 
-class Regist extends React.Component{
+class ForgetPassword extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      checkFlag :false
-    }
   }
   //表单密码验证
 	validatorPassword = (rule, value, callback) => {
@@ -73,18 +69,16 @@ class Regist extends React.Component{
 			} else if (values.password != values.repeatPassword) {
 				Toast.info('两次输入的密码不一致', 1)
 				return
-      }else if (this.state.checkFlag === false)(
-        Toast.info('请同意用户协议', 1)
-      )
+      }
       let data= {
         user_phone: values.phone.replace(/\s+/g, ''),
-        user_pwd: values.password,
-				code: values.code,
-				role_id : '0'
+        upd_method: 'code',
+        new_pwd: values.password,
+				code: values.code
       }
       this.registerUser (data, function(_this){
         form.resetFields()
-        Toast.info('注册成功', 1)
+        Toast.info('重置成功', 1)
         _this.props.history.push('/login')
       })
     }else {
@@ -93,7 +87,7 @@ class Regist extends React.Component{
   }
   registerUser(data, fn){
     data = qs.stringify(data)
-    axios.post(serverIp + '/dianzanbao/user/register.do', data).then(res => {
+    axios.post(serverIp + '/dianzanbao/user/upd_password.do', data).then(res => {
       if(res.data.result_code === '0'){
         fn(this)
       }
@@ -161,16 +155,11 @@ class Regist extends React.Component{
           </List>
         </form>
       </div>
-      <div className='regulation'>
-        <AgreeItem data-seed="logId" onChange={this.handleChange}>
-            &nbsp;同意 <a onClick={(e) => { e.preventDefault(); alert('agree it'); }}>《用户服务协议》</a>
-        </AgreeItem>
-      </div>
-      <div className="submitBtn" onClick={this.submitForm}>注册</div>
+      <div className="submitBtn" onClick={this.submitForm}>重置密码</div>
     </div>
     )
   }
 }
 
-Regist = createForm()(Regist)
-export default withRouter(Regist)
+ForgetPassword = createForm()(ForgetPassword)
+export default withRouter(ForgetPassword)

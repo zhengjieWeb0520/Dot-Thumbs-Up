@@ -59,11 +59,12 @@ class VerificatLogin extends React.Component{
         login_method: 'code',
         code: values.code
       }
-      console.log(data)
-      this.userLogin(data, function(_this){
+      this.userLogin(data, function(_this, result_info){
         form.resetFields()
         Toast.info('登录成功', 1)
-        _this.props.history.push('/index?aaaa')
+        window.sessionStorage.setItem('token', result_info.token)
+        window.sessionStorage.setItem('user_id', result_info.user_id)
+        window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2514283f85a9e278&redirect_uri=http%3a%2f%2fjizanbao.com%2fgetWxCode.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"   
       })
     }else{
       Toast.info(error, 1)
@@ -73,7 +74,7 @@ class VerificatLogin extends React.Component{
     data = qs.stringify(data)
     axios.post(serverIp + '/dianzanbao/user/login.do', data).then(res => {
       if (res.data.result_code === '0') {
-				fn(this)
+				fn(this, res.data.result_info)
 			}else if(res.data.result_code === '-1'){
         Toast.info(res.data.err_msg, 1)
       }
@@ -98,7 +99,7 @@ class VerificatLogin extends React.Component{
 								rules: [{ validator: validatorPhone }]
 							})}
             >      
-            <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />       
+            <div style={{ backgroundImage: 'url(https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/201811262206245429689877.jpg)', backgroundSize: '100% 100%', height: '22px', width: '22px' }} />       
             </InputItem>
             <InputItem
               clear
@@ -112,7 +113,7 @@ class VerificatLogin extends React.Component{
 								rules: [{ validator: validatorCode }]
 							})}
             >
-            <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />
+            <div style={{ backgroundImage: 'url(https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/201811262207450028787002.jpg)', backgroundSize: '100% 100%', height: '22px', width: '22px' }} />
             </InputItem>
           </List>
         </form>
