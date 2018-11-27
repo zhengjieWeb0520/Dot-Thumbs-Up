@@ -5,20 +5,46 @@ import { Toast } from 'antd-mobile'
 import { serverIp } from '../../utils/utils'
 
 const ACTIVREVALUATE = 'ACTIVREVALUATE'
+const COMMENTSTATISTICS = 'COMMENTSTATISTICS'
 
 let initState = {
-  activeEvaluate : []
+  activeEvaluate : [],
+  commentsStatistics: []
 }
 
 export function activeEvaluate(state = initState, action){
   switch (action.type){
     case ACTIVREVALUATE:
       return {...state, activeEvaluate: action.data}
+    case COMMENTSTATISTICS:
+      return {...state, commentsStatistics: action.data}
     default:
       return state
   }
 }
-
+//获取评价的统计信息
+export function getCommentsStatistics(active_id){
+  let data = qs.stringify({
+    active_id: active_id
+  })
+  return dispatch =>{
+    axios
+    .post(
+      serverIp + '/dianzanbao/active/getCommentsStatistics.do', 
+      data,
+      {
+        headers: {
+          token: window.sessionStorage.getItem('token'),
+          user_id: window.sessionStorage.getItem('user_id')
+        }
+      }
+    ).then(res => {
+      if(res.data.result_code === '0'){
+        dispatch({ type: COMMENTSTATISTICS, data: res.data.result_info})
+      }
+    })
+  }
+}
 //获取评价列表
 export function getActiveEvaluate(activeParam, fn){
   let data = qs.stringify({

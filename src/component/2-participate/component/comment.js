@@ -71,46 +71,45 @@ class Comment extends React.Component {
 		} else if (this.state.star_level === 0) {
 			Toast.info('请选择评价评分', 1)
 		}
-		console.log(this.state)
-		console.log(this.props.location.query)
 		let data = qs.stringify({
 			active_id: this.props.location.query.activeId,
 			star_level: this.state.star_level,
 			content: this.state.content,
 			imgs: this.state.imgs.join(',')
 		})
-    axios.post('/dianzanbao/active/comment.do', data, {
-      headers: {
-        token: window.sessionStorage.getItem('token'),
-        user_id: window.sessionStorage.getItem('user_id')
-      }
-    }).then(res => {
-			console.log(res)
-			if (res.data.result_code === '0') {
-				Toast.info('评论成功')
-				// _this.setState({
-				// 	imgs: [],
-				// 	content: '',
-				// 	star_level: 0
-				// })
-			}
-		})
+		axios
+			.post('/dianzanbao/active/comment.do', data, {
+				headers: {
+					token: window.sessionStorage.getItem('token'),
+					user_id: window.sessionStorage.getItem('user_id')
+				}
+			})
+			.then(res => {
+				if (res.data.result_code === '0') {
+					Toast.info('评论成功', 1)
+					_this.setState({
+						imgs: [],
+						content: '',
+						star_level: 0,
+						files: []
+					})
+				}
+			})
 	}
 
 	render() {
-    console.log('render')
 		return (
 			<div className="userFeedBack activityComment">
 				<TopNavBar title="活动评价 " />
 				<div className="inputs">
 					<div className="textarea">
-						<textarea cols="30" rows="10" onChange={this.handleChangeComment} />
+						<textarea cols="30" rows="10" onChange={this.handleChangeComment} value={this.state.content} />
 					</div>
 					<div className="imagePick">
 						<ImagePicker
 							files={this.state.files}
 							onChange={this.onImgChange}
-							onImageClick={(index, fs) => console.log(index, fs)}
+							// onImageClick={(index, fs) => console.log(index, fs)}
 							selectable={this.state.files.length < 3}
 							accept="image/gif,image/jpeg,image/jpg,image/png"
 						/>
@@ -120,7 +119,7 @@ class Comment extends React.Component {
 				<div className="activityRate">
 					<span className="title">活动评分</span>
 					<span className="Rate">
-						<Rate onChange={this.handleChangeRate} />
+						<Rate onChange={this.handleChangeRate} value={this.state.star_level} />
 					</span>
 				</div>
 				<div className="submitBtn" onClick={this.submitForm}>

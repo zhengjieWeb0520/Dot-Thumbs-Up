@@ -59,8 +59,6 @@ export function getIndustry(){
           }
         }
       ).then(res => {
-        alert(res.data.result_code)
-        alert(res.data.err_msg)
         if(res.data.result_code === '0'){
           dispatch(getIndustryAction(res.data.result_info))
         }

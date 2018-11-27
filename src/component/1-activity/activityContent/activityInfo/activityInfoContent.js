@@ -96,7 +96,7 @@ class ActivityInfoContent extends React.Component{
     return(
       <div className='activityInfoContent'>
         <div>
-          <p><span>活动时间：</span><span>{this.props.activeDetail.startDate} - {this.props.activeDetail.endDate}</span></p>
+          <p><span>活动时间：</span><span>{this.props.activeDetail.startDate.substring(0,16)} - {this.props.activeDetail.endDate.substring(0,16)}</span></p>
           <p><span>活动简介：</span><span>{this.props.activeDetail.activeDesc}</span></p>
         </div>
         <div>

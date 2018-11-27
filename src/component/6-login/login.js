@@ -98,7 +98,7 @@ class Login extends React.Component{
                   rules: [{ validator: validatorPhone }]
                 })}
               >      
-              <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />       
+              <div style={{ backgroundImage: 'url(https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/201811262206245429689877.jpg)', backgroundSize: '100% 100%', height: '22px', width: '22px' }} />       
               </InputItem>
               <InputItem
                 clear
@@ -110,7 +110,7 @@ class Login extends React.Component{
                   rules: [{ validator: this.validatorPassword }]
                 })}
               >
-              <div style={{ backgroundImage: 'url(https://zos.alipayobjects.com/rmsportal/DfkJHaJGgMghpXdqNaKF.png)', backgroundSize: 'cover', height: '22px', width: '22px' }} />
+              <div style={{ backgroundImage: 'url(https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/201811262207276237088528.jpg)', backgroundSize: '100% 100%', height: '22px', width: '22px' }} />
               </InputItem>
             </List>
           </form>

@@ -66,7 +66,6 @@ class Activity extends React.Component{
       function onComplete (data) {
         window.sessionStorage.setItem('user_lon', data.position.lng)
         window.sessionStorage.setItem('user_lat', data.position.lat)
-        //alert(data.formattedAddress)
         _this.setState({
           address: data.addressComponent.township + data.addressComponent.street
         },()=>{

@@ -26,7 +26,6 @@ class Main extends React.Component{
     //this.relationUser(ceshidata, 9539, 652157)
     
     let hrefParams = window.location.href.split("?")[1]
-    console.log(hrefParams)
     if(hrefParams === undefined){
       let tokenStr = '9539'
       let user_id = '652157'
@@ -79,6 +78,8 @@ class Main extends React.Component{
           })
         }else{
         }
+      }else if(hrefParams.indexOf("activeId") != -1){   //分享链接
+        
       }else{
         let tokenStr = '9539'
         let user_id = '652157'

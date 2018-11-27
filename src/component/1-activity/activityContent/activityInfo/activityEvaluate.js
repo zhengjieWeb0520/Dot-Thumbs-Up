@@ -1,27 +1,38 @@
 import React from 'react'
 import BScroll from 'better-scroll'
 import { connect } from 'react-redux'
-import { getChildNode } from './../../../../utils/utils'
+import { getChildNode, ObjectEquals, createStarLevel } from './../../../../utils/utils'
 import yhHeader from './../../../../images/activity/evaluate/header.png'
 import evaluateImg1 from './../../../../images/activity/evaluate/evaluateImg1.png'
 import evaluateImg2 from './../../../../images/activity/evaluate/evaluateImg2.png'
-import { getActiveEvaluate } from './../../../../redux/1-activiy/activeEvaluateRedux'
-
+import { getCommentsStatistics, getActiveEvaluate } from './../../../../redux/1-activiy/activeEvaluateRedux'
+import { Toast} from 'antd-mobile'
 class ActivityEvaluate extends React.Component{
   constructor(props){
     super(props)
     this.count = 2
     this.state = {
       evaluateInfo : [],
-      filter:''
+      filter:'',
+      commentsStatistics: {},
     }
   }
   componentWillMount(){
     this.getFirstPageData('first')
   }
   componentDidMount(){
+    let _this = this
     const wrapper = document.querySelector('.activityEvaluateWraper')
-    const scroll = new BScroll(wrapper,{click: true})
+    const topTip = wrapper.querySelector('.top-tip')
+		const bottomTip = wrapper.querySelector('.bottom-tip')
+    this.scroll = new BScroll(wrapper, {
+			click: true,
+			probeType: 1,
+			pullUpLoad: {
+				stop: 50,
+				threshold: 0
+			}
+		})
     
     let navListUl = document.querySelector(".selectTab ul")
     let navListLis = getChildNode(navListUl)
@@ -43,9 +54,59 @@ class ActivityEvaluate extends React.Component{
         }
       }
     }, false)
+
+    //滑动监听
+		this.scroll.on('scroll', function(pos) {
+			if (pos.y > 30) {
+				topTip.innerText = '释放立即刷新'
+			}
+    })
+    		// 滑动结束
+		this.scroll.on('touchEnd', function(position) {
+			_this.scroll.off('scroll', function() {})
+			if (position.y > 40) {
+				setTimeout(function() {
+					_this.getFirstPageData('refresh', function() {
+						// 恢复文本值
+						topTip.innerText = '下拉刷新'
+						// 刷新成功后的提示
+						Toast.info('刷新成功', 1)
+						_this.count = 2
+					})
+					// 刷新列表后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			} else if (position.y < this.maxScrollY - 40) {
+				bottomTip.innerText = '加载中...'
+				setTimeout(function() {
+					_this.pullUpLoadData(function(data) {
+						if (ObjectEquals(data.list, _this.state.evaluateInfo)) {
+							// 恢复文本值
+							bottomTip.innerText = '没有更多数据'
+						} else {
+							// 恢复文本值
+							bottomTip.innerText = '查看更多'
+							_this.count++
+						}
+					})
+					// 加载更多后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			}
+		})
   }
   componentWillReceiveProps(nextProps){
     console.log(nextProps)
+    if(!ObjectEquals(nextProps.evaluateInfo.commentsStatistics, {})){
+      this.setState({
+        commentsStatistics: nextProps.evaluateInfo.commentsStatistics
+      })
+    }
+    if(!ObjectEquals(nextProps.evaluateInfo.activeEvaluate, {})){   
+      this.setState({
+        evaluateInfo: nextProps.evaluateInfo.activeEvaluate.list
+      })
+    }
   }
   //请求第一页数据（页面刚加载和下拉刷新）
   getFirstPageData(type, fn){
@@ -57,74 +118,87 @@ class ActivityEvaluate extends React.Component{
     }
     if(type === 'first'){
       this.props.getActiveEvaluate(data)
+      this.props.getCommentsStatistics(data.active_id)
     }else{
       this.props.getActiveEvaluate(data, fn)
     }
   }
+  	//上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+      active_id: this.props.activeId,
+      filter: this.state.filter,
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		this.props.getActiveEvaluate(data, fn)
+	}
+  createEvaluateContent(){
+    console.log(this.state.evaluateInfo)
+    let content = []
+    if(JSON.stringify(this.state.evaluateInfo) !== '[]'){
+      this.state.evaluateInfo.map((item, index)=>{
+        let column = null
+        column= 
+          <div className='evaluateItem'>
+              <div>
+                  {/* <img src={item.user_head} alt=""/> */}
+                  <img src={yhHeader} alt=""/>
+              </div>
+              <div>
+                  <div><span>{item.user_name}</span><span>{item.create_date}</span></div>
+                  <div>
+                    {createStarLevel(item.star_level, 'evaluateAllStar', 'evaluateHalfStar')}
+                    {/* <span>超棒</span> */}
+                  </div>
+                  <div>{item.content}</div>
+                  <div>
+                    {
+                      item.detail_images.map((item2, index2)=>{
+                        return <img key={item2.id} src={item2.img_url} alt=""/>
+                      })
+                    }
+                  </div>
+              </div>
+          </div>
+          content.push(column)
+      })
+      return content
+    }else{
+      return null
+    }
+  }
   render(){
+    console.log(this.state.commentsStatistics)
+    console.log(this.state.evaluateInfo)
     return(
-      <div className='activityEvaluate activityEvaluateWraper'>
+      <div className='activityEvaluate activityEvaluateWraper wraper'>
         <ul className='content'>
-          <div>
-            <div>4.7</div>
+          <div className="top-tip">
+							<span className="refresh-hook">下拉刷新</span>
+					</div>
+          <div className='content-header'>
+            <div>{this.state.commentsStatistics.business_star_level}</div>
             <div>
               <p>商家评分</p>
               <p>
-                <i className='evaluateAllStar'></i>
-                <i className='evaluateAllStar'></i>
-                <i className='evaluateAllStar'></i>
-                <i className='evaluateAllStar'></i>
-                <i className='evaluateHalfStar'></i>
+                {createStarLevel(this.state.commentsStatistics.business_star_level, 'evaluateAllStar','evaluateHalfStar')}
               </p>
             </div>
           </div>
           <div className = 'selectTab'>
             <ul>
               <li name={'selectTab1'} className = 'evaluateActive'><span>全部</span></li>
-              <li name={'selectTab3'}><span>好评&nbsp;{212}</span></li>
-              <li name={'selectTab4'}><span>差评&nbsp;{65}</span></li>
+              <li name={'selectTab3'}><span>好评&nbsp;{this.state.commentsStatistics.good_count}</span></li>
+              <li name={'selectTab4'}><span>差评&nbsp;{this.state.commentsStatistics.bad_count}</span></li>
             </ul>
           </div>
           <div className='evaluateContent'>
-            <div className='evaluateItem'>
-              <div>
-                <img src={yhHeader} alt=""/>
-              </div>
-              <div>
-                <div><span>用户名</span><span>2018-09-01</span></div>
-                <div>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <span>超棒</span>
-                </div>
-                <div>活动很棒，很好玩，哈哈哈哈,活动很棒，很好玩，哈哈哈哈活动很棒，很好玩，哈哈哈哈，活动很棒，很好玩，哈哈哈哈，活动很棒，很好玩，哈哈哈哈</div>
-                <div>
-                  <img src={evaluateImg1} alt=""/>
-                  <img src={evaluateImg2} alt=""/>
-                </div>
-              </div>
-            </div>
-            <div className='evaluateItem'>
-              <div>
-                <img src={yhHeader} alt=""/>
-              </div>
-              <div>
-                <div><span>用户名</span><span>2018-09-01</span></div>
-                <div>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <i className='evaluateAllStar'></i>
-                  <span>超棒</span>
-                </div>
-                <div>活动很棒，很好玩，哈哈哈哈,活动很棒，很好玩，哈哈哈哈活动很棒，很好玩，哈哈哈哈，活动很棒，很好玩，哈哈哈哈，活动很棒，很好玩，哈哈哈哈</div>
-              </div>
-            </div>
+            {this.createEvaluateContent()}
           </div>
+          <div className="bottom-tip">
+							<span className="loading-hook">查看更多</span>
+					</div>
         </ul>
       </div>
     )
@@ -135,6 +209,6 @@ ActivityEvaluate = connect(
 	state => ({
 		evaluateInfo: state.activeEvaluate,
 	}),
-	{ getActiveEvaluate }
+	{ getCommentsStatistics, getActiveEvaluate }
 )(ActivityEvaluate)
 export default ActivityEvaluate

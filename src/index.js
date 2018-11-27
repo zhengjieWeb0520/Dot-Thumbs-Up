@@ -29,6 +29,7 @@ import StaffAuthentication from './component/4-myInfo/components/authentication/
 import Login from './component/6-login/login'
 import VerificatLogin from './component/6-login/verificatLogin'
 import Regist from './component/6-login/regist'
+import ForgetPassword from './component/6-login/forgetPassword'
 //修改密码
 import TypeOfChangePassword from './component/4-myInfo/components/changePassword/typeOfChangePassword'
 import ChangePasswordByPassword from './component/4-myInfo/components/changePassword/changePasswordByPassword'
@@ -63,7 +64,8 @@ ReactDOM.render(
 					<Route path="/index" component={Main} />
           <Route path='/login' component={Login}/> 
           <Route path='/verificatLogin' component={VerificatLogin}/>           
-          <Route path='/regiter' component={Regist}/>              
+          <Route path='/regiter' component={Regist}/>          
+          <Route path='/forgetPassword' component={ForgetPassword}/>            
 					<Route path="/merchantPublish" component={MerchantPublish} />
 					<Route path="/merchantActivities" component={MerchantActivities} />
 					<Route path="/reportMerchant" component={ReportMerchant} />
