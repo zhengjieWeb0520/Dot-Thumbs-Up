@@ -71,38 +71,80 @@ class ActivityInfo extends React.Component {
 					timestamp: res.data.result_info.timestamp,
 					nonceStr: res.data.result_info.noncestr,
 					signature: res.data.result_info.signature,
-					jsApiList: ['updateAppMessageShareData', 'onMenuShareAppMessage', 'onMenuShareTimeline']
+					jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline', 'onMenuShareWeibo', 'updateAppMessageShareData']
+				})
+
+				wx.ready(function() {
+					alert('inner,新版')
+					wx.updateAppMessageShareData({
+						title: '点赞宝', // 分享标题
+						desc: '点赞宝', // 分享描述
+            link: window.location.href.split('#')[0] + '#/activityInfo?id=18', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl: require('../../../images/myInfo/icon_bulb@3x.png'), // 分享图标
+						success: function() {
+							Toast.info('分享成功', 1)
+						},
+						fail: function(res) {
+							Toast.info('分享失败', 1)
+						},
+						complete: function() {
+							Toast.info('分享完成', 1)
+						}
+					})
+
+					// wx.onMenuShareAppMessage({
+					//   title: '测试',
+					//   desc: "描述",
+					//   imgUrl: 'https://dianzanbao.oss-cn-hangzhou.aliyuncs.com/%E7%82%B9%E8%B5%9E75.png',
+					//   link: window.location.href.split('#')[0] + "&分享相关的参数",
+					//   type: 'link'
+					// })
 				})
 			}
 		})
 
-		let link = window.location.href.split('#')[0]
-		wx.ready(function() {
-			wx.checkJsApi({
-        jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
-				success: function(res) {
-					console.log(res)
-					// 以键值对的形式返回，可用的api值true，不可用为false
-					// 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
-				}
-			})
-			console.log('aaa')
-			wx.onMenuShareAppMessage({
-				title: 'aa', // 分享标题
-				desc: 'aa', // 分享描述
-				link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-				imgUrl: '', // 分享图标
-				type: '', // 分享类型,music、video或link，不填默认为link
-				dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-				success: function() {
-					Toast.info('分享成功', 1)
-					// 用户点击了分享后执行的回调函数
-				},
-				fail: function() {
-					Toast.info('分享失败', 1)
-				}
-			})
-		})
+		// let link = window.location.href.split('#')[0]
+		// alert(link)
+		// let link = 'www.jizanbao.com'
+		// wx.ready(function() {
+		// 	wx.checkJsApi({
+		// 		jsApiList: ['onMenuShareAppMessage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+		// 		success: function(res) {
+		// 			console.log(res)
+		// 			// 以键值对的形式返回，可用的api值true，不可用为false
+		// 			// 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+		// 		}
+		// 	})
+		// 	setTimeout(() => {
+		// 		console.log('aaa')
+		// 		// wx.onMenuShareTimeline({
+		// 		// 	title: '', // 分享标题
+		// 		//   link: 'https://jizanbao.com/activityInfo', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+		// 		// 	imgUrl: '', // 分享图标
+		// 		// 	success: function() {
+		// 		// 		Toast.info('分享成功', 1)
+		// 		// 		// 用户点击了分享后执行的回调函数
+		// 		// 	},
+		// 		// 	fail: function() {
+		// 		// 		Toast.info('分享失败', 1)
+		// 		// 	}
+		// 		// })
+		// 		wx.onMenuShareWeibo({
+		// 			title: 'aa', // 分享标题
+		// 			desc: 'aa', // 分享描述
+		// 			link: 'https://jizanbao.com/', // 分享链接
+		// 			imgUrl: require('../.././../images/myInfo/icon_bulb@3x.png'), // 分享图标
+		// 			success: function() {
+		// 				// 用户确认分享后执行的回调函数
+		// 				Toast.info('分享成功', 1)
+		// 			},
+		// 			cancel: function() {
+		// 				Toast.info('取消', 1)
+		// 				// 用户取消分享后执行的回调函数
+		// 			}
+		// 		})
+		// 	}, 0)
+		// })
 	}
 
 	componentDidMount() {
@@ -298,40 +340,42 @@ class ActivityInfo extends React.Component {
 			buttonIndex => {
 				// this.setState({ clicked: BUTTONS[buttonIndex] })
 				let link = window.location.href.split('#')[0]
-				console.log(link)
+				alert(window.location.href)
+				alert(link)
 				wx.ready(function() {
 					if (buttonIndex === 0) {
 						setTimeout(() => {
-							console.log('aaa')
+							alert('inner,新版')
 							wx.updateAppMessageShareData({
 								title: '点赞宝', // 分享标题
 								desc: '点赞宝', // 分享描述
-								link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-								imgUrl: '', // 分享图标
+								link: 'https://jizanbao.com/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+								imgUrl: require('../../../images/myInfo/icon_bulb@3x.png'), // 分享图标
 								success: function() {
 									Toast.info('分享成功', 1)
 								},
-								fail: function() {
+								fail: function(res) {
 									Toast.info('分享失败', 1)
+								},
+								complete: function() {
+									Toast.info('分享完成', 1)
 								}
 							})
 						}, 0)
 					} else if (buttonIndex === 1) {
-            wx.onMenuShareAppMessage({
-              title: 'aa', // 分享标题
-              desc: 'aa', // 分享描述
-              link: link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-              imgUrl: '', // 分享图标
-              type: '', // 分享类型,music、video或link，不填默认为link
-              dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-              success: function () {
-                Toast.info('分享成功', 1)
-                // 用户点击了分享后执行的回调函数
-              },
-              fail: function () {
-                Toast.info('分享失败', 1)
-              }
-            })
+						alert('inner,老版')
+						wx.onMenuShareAppMessage({
+							title: 'aa', // 分享标题
+							desc: 'aa',
+							link: 'https://jizanbao.com/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+							imgUrl: require('../../../images/myInfo/icon_bulb@3x.png'), // 分享图标
+							success: function() {
+								Toast.info('分享成功', 1)
+							},
+							fail: function(res) {
+								Toast.info('分享失败', 1)
+							}
+						})
 					}
 					wx.error(function(res) {
 						console.log(res)
