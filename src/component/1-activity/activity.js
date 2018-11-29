@@ -3,9 +3,11 @@ import './activity.scss'
 import './common.scss'
 import BScroll from 'better-scroll'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link , withRouter} from 'react-router-dom'
+import qs from 'qs'
+import axios from 'axios'
 import { SearchBar, Popover, Toast } from 'antd-mobile'
-import { getChildNode, ObjectEquals, createStarLevel } from './../../utils/utils'
+import { getChildNode, ObjectEquals, createStarLevel , serverIp} from './../../utils/utils'
 import goldmedal from './../../images/activity/goldmedal@2x.png'
 import ActivityContent from './../1-activity/activityContent/activityContent'
 import { getIndustry, getActiveList, clearInfo } from './../../redux/1-activiy/activeIndexRedux'
@@ -40,8 +42,9 @@ class Activity extends React.Component{
   }
   componentWillMount(){
     let _this = this
-
-     AMap.plugin('AMap.Geolocation', function() {
+    let passActiveId  = window.sessionStorage.getItem('activeId')
+    let goodCount = window.sessionStorage.getItem('goodCount')
+    AMap.plugin('AMap.Geolocation', function() {
       // 初始化定位插件
       let geolocation = new AMap.Geolocation({
         enableHighAccuracy: true, //是否使用高精度定位，默认:true
@@ -66,12 +69,57 @@ class Activity extends React.Component{
       function onComplete (data) {
         window.sessionStorage.setItem('user_lon', data.position.lng)
         window.sessionStorage.setItem('user_lat', data.position.lat)
-        _this.setState({
-          address: data.addressComponent.township + data.addressComponent.street
-        },()=>{
-          _this.props.getIndustry()
-          _this.getFirstActiveList('first')
-        })
+        if(passActiveId != undefined){
+          let data2 = qs.stringify({
+            id: passActiveId,
+            with_business_info: 1,
+            with_rankings: 10
+          })
+          axios
+          .post(
+            serverIp + '/dianzanbao/active/getActiveDetail.do', 
+            data2,
+            {
+              headers: {
+                token: window.sessionStorage.getItem('token'),
+                user_id: window.sessionStorage.getItem('user_id')
+              }
+            }
+          ).then(res => {
+            if(res.data.result_code === '0'){
+              let merchantLon = Number(res.data.result_info.business_info.user_info.x_longitude)
+              let merchantLat = Number(res.data.result_info.business_info.user_info.y_dimension)
+              let p1 = [merchantLon, merchantLat]
+              let p2 = [Number(data.position.lng), Number(data.position.lat)]
+              let dis = AMap.GeometryUtil.distance(p1, p2)
+              let dis_fromat
+              
+              if(dis < 1000){
+                dis_fromat = dis + '米'
+              }else{
+                dis_fromat = (dis / 1000).toFixed(2) + '千米'
+              }
+              let data3 = {
+                activeId: passActiveId,
+                distance_format: dis_fromat,
+                good_count: goodCount
+              }
+              let path = {
+                pathname: `/activityInfo`,
+                query: data3
+              }
+              window.sessionStorage.removeItem('activeId')
+              _this.props.history.push(path)
+            }
+          })
+        }else{
+          _this.setState({
+            address: data.addressComponent.township + data.addressComponent.street
+          },()=>{
+            _this.props.getIndustry()
+            _this.getFirstActiveList('first')
+          })
+        }
       }
 
       function onError (data) {
@@ -280,7 +328,8 @@ class Activity extends React.Component{
 
       })
     //}
-
+    console.log(prevProps)
+    console.log(this.props)
   }
   //排序选择
   onSelect(node){
@@ -582,4 +631,4 @@ Activity = connect(
 )(Activity)
 
 
-export default Activity
+export default withRouter(Activity)

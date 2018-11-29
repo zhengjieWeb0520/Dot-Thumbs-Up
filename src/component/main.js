@@ -15,22 +15,19 @@ class Main extends React.Component{
     super(props)
     this.TmapFlag = true //只获取一次
     this.state = {
-      goRender : false
+      goRender: false
     }
   }
   componentWillMount(){
-    let _this = this
-    let ceshidata = qs.stringify({
-      wx_open_id: 'o2uL35jAePpEkl6rimFUCC3VDpOQ'
-    })
-    //this.relationUser(ceshidata, 9539, 652157)
-    
+    let _this = this 
     let hrefParams = window.location.href.split("?")[1]
     if(hrefParams === undefined){
-      let tokenStr = '9539'
-      let user_id = '652157'
-      window.sessionStorage.setItem('token', tokenStr)
-      window.sessionStorage.setItem('user_id', user_id)
+      // let tokenStr = '9539'
+      // let user_id = '652159'
+      // window.sessionStorage.setItem('token', tokenStr)
+      // window.sessionStorage.setItem('user_id', user_id)
+      let tokenStr = window.sessionStorage.getItem('token')
+      let user_id = window.sessionStorage.getItem('user_id')
       this.props.getUserInfoPort(tokenStr, user_id)
       this.setState({
         goRender: true
@@ -50,16 +47,17 @@ class Main extends React.Component{
         let user_id = window.sessionStorage.getItem('user_id')
         let token = window.sessionStorage.getItem('token')
         //第二次跳转 当sessionStorage内有user_id时则关联
-        if(user_id != undefined){
+        if(user_id != null){
+          // alert('进关联')
           axios.post(serverIp + '/dianzanbao/user/getWxOpenId.do', codeData).then(res=>{
             if(res.data.result_code === '0'){
               let data2 = qs.stringify({
                 wx_open_id: res.data.result_info
               })
-              _this.relationUser(data2, token, user_id) 
+              _this.relationUser(data2, token, user_id)
             }
           })
-        }else if(user_id == undefined){ //第一次跳转 当sessionStorage内没有user_id时则登陆
+        }else if(user_id == null){ //第一次跳转 当sessionStorage内没有user_id时则登陆                                
           axios.post(serverIp + '/dianzanbao/user/weixinLogin.do', codeData).then(res => {
             if (res.data.result_code === '0') {
               let tokenStr = res.data.result_info.token
@@ -78,24 +76,19 @@ class Main extends React.Component{
           })
         }else{
         }
-      }else if(hrefParams.indexOf("activeId") != -1){   //分享链接
-        let activeId
-      }else{
-        let tokenStr = '9539'
-        let user_id = '652157'
-        window.sessionStorage.setItem('token', tokenStr)
-        window.sessionStorage.setItem('user_id', user_id)
+      }else if(hrefParams === undefined){
+        alert('直接进2')
+        let tokenStr = window.sessionStorage.getItem('token')
+        let user_id = window.sessionStorage.setItem('user_id')
+        alert(user_id)
         this.props.getUserInfoPort(tokenStr, user_id)
       }
     }
   }
   relationUser(data, token, user_id){
     let _this = this
-    console.log("data：" + data)
-    console.log("token：" + token)
-    console.log("user_id：" + user_id)
     axios.post(
-      serverIp + '/dianzanbao/userInfo/relationUser.do',             
+      serverIp + '/dianzanbao/userInfo/relationUser.do',
       data,
       {
         headers: {
@@ -124,7 +117,7 @@ class Main extends React.Component{
         <section>
           {this.state.goRender === true ? <RouteConfig />: null}
         </section>
-        {this.state.goRender === true ? <Footer />: null}    
+        {this.state.goRender === true ? <Footer />: null}
       </div>
     )
   }

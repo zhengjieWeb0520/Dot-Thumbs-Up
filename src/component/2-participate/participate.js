@@ -226,7 +226,7 @@ class Participate extends React.Component {
 						</div>
 					)
 				}
-				let user_status = item.user_status === 0 ? '未中奖' : '中奖'
+        let user_status = item.user_status === 0 ? '未中奖' : '中奖'
 				column = (
 					<Link to={path} className="participateItem">
 						<div className="participateItemHeader">
@@ -249,10 +249,10 @@ class Participate extends React.Component {
 								</span>
 							</div>
 							<div>{item.desc}</div>
-							{distribute_Content}
-							<Link to={commentPath} className="toCommentBtn">
+              {distribute_Content}
+              {item.status.toString() === '1' ?  <Link to={commentPath} className="toCommentBtn">
 								评价
-							</Link>
+							</Link> : null}
 						</div>
 					</Link>
 				)

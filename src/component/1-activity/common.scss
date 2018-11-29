@@ -93,18 +93,20 @@
 						color: #ffffff;
 						margin-right: 20px;
 						span {
-							display: block;
-							font-size: 20px;
+							display: inline-block;
+              font-size: 20px;
+              vertical-align:middle;
 							-webkit-transform: scale(0.8);
 							display: inline-block;
 							height: 26px;
-							line-height: 30px;
+              line-height: 30px;         
 						}
 						i {
 							display: inline-block;
 							@include bg-image('../../images/activity/goodicon');
 							width: 18px;
-							height: 20px;
+              height: 20px;
+              vertical-align: middle;
 						}
 					}
 					> span:first-of-type {
