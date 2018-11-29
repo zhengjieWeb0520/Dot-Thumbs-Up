@@ -118,6 +118,7 @@ class Main extends React.Component{
     console.log(nextProps)
   }
   render(){
+    console.log('render')
     const url = this.props.match.url
     return (
       <div id = 'main'>

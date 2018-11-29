@@ -103,7 +103,7 @@ class StaffAuthentication extends React.Component {
 			let allData = {
 				real_name: values.userName,
 				// userSex: values.sexValue,
-        phone: values.phone.replace(/\s+/g, ""),
+				phone: values.phone.replace(/\s+/g, ''),
 				id_card_front_url: this.positive,
 				id_card_background_url: this.reverse
 			}
@@ -129,7 +129,13 @@ class StaffAuthentication extends React.Component {
 					user_id: window.sessionStorage.getItem('user_id')
 				}
 			})
-			.then(res => {})
+			.then(res => {
+        if (res.data.result_code === '0') {
+          Toast.info(res.data.result_info, 1)
+        } else if (res.data.result_code === '-1') {
+          Toast.info(res.data.err_msg, 1)
+        }
+			})
 	}
 
 	render() {

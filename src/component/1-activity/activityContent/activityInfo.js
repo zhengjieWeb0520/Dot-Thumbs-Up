@@ -51,12 +51,12 @@ class ActivityInfo extends React.Component {
 		}
 	}
 	componentWillMount() {
-		if (this.props.location.query == undefined) {
-			this.props.history.goBack()
-		} else {
-			this.props.getActiveInfo(this.props.location.query.activeId, 'active')
-			this.props.getIsOrNotCollect('active', this.props.location.query.activeId)
-		}
+		// if (this.props.location.query == undefined) {
+		// 	this.props.history.goBack()
+		// } else {
+		// 	this.props.getActiveInfo(this.props.location.query.activeId, 'active')
+		// 	this.props.getIsOrNotCollect('active', this.props.location.query.activeId)
+		// }
 
 		let url = qs.stringify({
 			url: window.location.href.split('#')[0]
@@ -76,7 +76,8 @@ class ActivityInfo extends React.Component {
 				})
 
 				wx.ready(function() {
-					let activeId = _this.props.location.query.activeId
+          // let activeId = _this.props.location.query.activeId
+          let activeId = 'aa'
 					let parentUserId = window.sessionStorage.getItem('user_id')
           alert(activeId)
           alert(parentUserId)

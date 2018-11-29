@@ -112,15 +112,15 @@ class BussinessAuthentication extends React.Component {
 			if (!values.HosterName) {
 				Toast.info('请填写商家名称', 1)
 				return
-			}
-			// else if (!values.startTime) {
+      }
+      // else if (!values.startTime) {
 			// 	Toast.info('选择开始时间', 1)
 			// 	return
 			// } else if (!values.endTime) {
 			// 	Toast.info('选择结束时间', 1)
 			// 	return
-			// }
-			else if (!values.phone) {
+      // }
+      else if (!values.phone) {
 				Toast.info('填写联系电话', 1)
 				return
 			} else if (!values.province) {
@@ -187,23 +187,31 @@ class BussinessAuthentication extends React.Component {
 			area: allData.area[0],
 			x_longitude: 16.111,
 			y_dimension: 20.982,
-			from_user_id: allData.from_user_id
+			from_user_id: allData.from_user_id,
+			// startTime: allData.startTime,
+			// endTime: allData.endTime
 		})
 		axios
-      .post(serverIp + '/dianzanbao/userInfo/businessAuth.do', data, {
+			.post(serverIp + '/dianzanbao/userInfo/businessAuth.do', data, {
 				headers: {
 					token: window.sessionStorage.getItem('token'),
 					user_id: window.sessionStorage.getItem('user_id')
 				}
 			})
-			.then(res => {})
+			.then(res => {
+				if (res.data.result_code === '0') {
+					Toast.info(res.data.result_info, 1)
+				} else if (res.data.result_code === '-1') {
+					Toast.info(res.data.err_msg, 1)
+				}
+			})
 	}
 
 	//商家名称验证
 	validateHosterName = (rule, value, callback) => {
 		if (value) {
 			if (value.replace(/\s/g, '').length < 5 || value.replace(/\s/g, '').length > 16) {
-				callback(new Error('请输入5到16位字符'))
+				callback(new Error('商家名称请输入5到16位字符'))
 			} else {
 				callback()
 			}
@@ -214,7 +222,7 @@ class BussinessAuthentication extends React.Component {
 	validatorCrewId = (rule, value, callback) => {
 		if (value) {
 			if (value.replace(/\s/g, '').length < 6) {
-				callback(new Error('请输入0到6位数字'))
+				callback(new Error('员工号请输入0到6位数字'))
 			} else {
 				callback()
 			}
@@ -224,9 +232,9 @@ class BussinessAuthentication extends React.Component {
 	//错误信息提示
 	onErrorClick(type) {
 		if (type === 'HosterName') {
-			Toast.info('请输入5到16位字符', 1)
+			Toast.info('商家名称请输入5到16位字符', 1)
 		} else if (type === 'CrewId') {
-			Toast.info('请输入0到6位数字', 1)
+			Toast.info('员工号请输入0到6位数字', 1)
 		} else if (type === 'phone') {
 			Toast.info('请输入11位手机号', 1)
 		}
@@ -304,7 +312,7 @@ class BussinessAuthentication extends React.Component {
 									type="number"
 									placeholder="推荐员工号"
 								/>
-								<div className="timePick">
+								{/* <div className="timePick">
 									<DatePicker
 										mode="time"
 										minuteStep={2}
@@ -320,7 +328,6 @@ class BussinessAuthentication extends React.Component {
 										mode="time"
 										minuteStep={2}
 										use12Hours
-										// value={this.state.endTime}
 										title="结束营业时间"
 										onChange={time => this.handleChange('endTime', time)}
 										extra="结束营业时间"
@@ -328,7 +335,7 @@ class BussinessAuthentication extends React.Component {
 									>
 										<List.Item arrow="horizontal" />
 									</DatePicker>
-								</div>
+								</div> */}
 								<InputItem
 									{...getFieldProps('phone', {
 										rules: [{ validator: validatorPhone }]
