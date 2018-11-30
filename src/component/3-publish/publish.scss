@@ -2,6 +2,7 @@
 @import '~antd/dist/antd.css';
 //发布活动
 .publishActivity{
+  overflow-y: auto;
   .publishActivityWrapper{
     height: 1090px;
     overflow-y: hidden;

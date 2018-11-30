@@ -83,7 +83,9 @@ class ChangePassword extends React.Component {
 		axios.post(serverIp + '/dianzanbao/user/upd_password.do', data).then(res => {
 			if (res.data.result_code === '0') {
 				fn()
-			}
+      } else if (res.data.result_code === '-1') {
+        Toast.info(res.data.err_msg, 1)
+      }
 		})
 	}
 

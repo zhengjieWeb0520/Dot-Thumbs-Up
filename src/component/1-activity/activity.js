@@ -579,6 +579,7 @@ class Activity extends React.Component{
                     overlayStyle={{color: 'currentColor'}}
                     visible={this.state.merchantVisible}
                     overlay={[
+                      (<Item key="10" className='goldmedal' value="" icon={<img src={goldmedal}/>} data-seed="logId">全部商家</Item>),
                       (<Item key="6" className='goldmedal' value="3" icon={<img src={goldmedal}/>} data-seed="logId">金牌商家</Item>),
                       (<Item key="7" className='silvermedal' value="2" icon={<img src={goldmedal}/>} data-seed="logId">银牌商家</Item>),
                       (<Item key="8" className='bronzemedal' value="1" icon={<img src={goldmedal}/>} data-seed="logId">铜牌商家</Item>),

@@ -338,7 +338,9 @@ class ActivityInfo extends React.Component {
 	// 		}
 	// 	)
 	// }
-
+  goback =()=>{
+    this.props.history.goBack()
+  }
 	render() {
 		return (
 			<div id="ActivityInfo" className="activityInfo">
@@ -365,7 +367,7 @@ class ActivityInfo extends React.Component {
 							</Carousel>
 						</div>
 						<div>
-							<Link to="/index" />
+							<a onClick={this.goback}></a>
               <span />
 							<span className="collectionCondition">{this.state.collectCondition}</span>
 							{this.state.have_collection === false && this.state.have_collection !== null ?

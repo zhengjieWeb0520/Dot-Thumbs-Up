@@ -18,10 +18,12 @@ export function getUserInfo(state = initState, action) {
 			return state
 	}
 }
+
 //获取个人信息
 function getUserInformation(data) {
 	return { data, type: USERINFO }
 }
+
 //获取个人信息接口
 export function getUserInfoPort(token, user_id) {
 	return dispatch => {

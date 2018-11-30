@@ -1,5 +1,9 @@
 @import './../../utils/variblesAndMixins';
 // 活动详情
+$normalFontSize: 30px;
+$normalFontSize28: 28px;
+$normalFontSize26: 26px;
+$normalFontSize24: 24px;
 .merchantActivities{
   height: 100vh;
   overflow-y: auto;
@@ -82,7 +86,7 @@
           }
         }
         p:first-of-type{
-          font-size: 28px;
+          font-size: $normalFontSize;
           color: black;
           font-weight: 700;
         }
@@ -100,7 +104,7 @@
           }
           span{
             margin-left: 20px;
-            font-size: 22px;
+            font-size: $normalFontSize24;
             color: #9E9E9E;
           }
         }
@@ -131,7 +135,7 @@
             @include bg-image('../../images/activity/bronzemedal');
           }
           span{
-            font-size: 26px;
+            font-size: $normalFontSize28;
           }
         }
         p:last-of-type{
@@ -143,7 +147,7 @@
             @include bg-image('../../images/activity/willpointblue');
           }
           span{
-            font-size: 26px;
+            font-size: $normalFontSize28;
             color: #4DA9FA
           }
         }
@@ -201,7 +205,7 @@
           margin-bottom: 6px;
         }
         p:first-of-type{
-          font-size: 26px;
+          font-size: $normalFontSize28;
           color: #363636;
           font-weight: 600;
         }
@@ -219,7 +223,7 @@
           }
           span{
             margin-left: 20px;
-            font-size: 22px;
+            font-size: $normalFontSize24;
             color: #9E9E9E;
           }
         }
@@ -232,7 +236,7 @@
           }
           span{
             margin-left: 16px;
-            font-size: 22px;
+            font-size: $normalFontSize24;
             color: #9E9E9E;
           }
         }
@@ -261,15 +265,15 @@
             margin-right: 18px;
           }
           span{
-            font-size: 22px;
+            font-size: $normalFontSize24;
             color: #797979;
             span{
-              font-size: 28px;
+              font-size: $normalFontSize;
               margin: 0 5px 0 5px;
             }
             .rmb{
               display: inline-block;
-              font-size: 24px;
+              font-size: $normalFontSize26;
               margin: 0;
               -webkit-transform:scale(0.8);
               color: #797979!important;
@@ -279,7 +283,7 @@
         p:last-of-type{
           text-align: right;
           margin-top: 5px;
-          font-size: 22px;
+          font-size: $normalFontSize24;
           color: #9E9E9E;
         }
         .radiu_1{
@@ -330,7 +334,7 @@
       line-height: 80px;
       text-align: center;
       color: #4DA9FA;
-      font-size: 24px;
+      font-size: $normalFontSize26;
     }
   }
 }

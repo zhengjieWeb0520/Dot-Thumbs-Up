@@ -87,6 +87,8 @@ class ChangePassword extends React.Component {
 			.then(res => {
 				if (res.data.result_code === '0') {
 					fn()
+        } else if (res.data.result_code === '-1'){
+					Toast.info(res.data.err_msg, 1)
 				}
 			})
 	}

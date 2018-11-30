@@ -39,6 +39,7 @@ class Footer extends Component{
     }
   }
   render(){
+    let hrefParam = window.location.href
     let user_id = window.sessionStorage.getItem('user_role_id')
     let publishDom = null
     let path = {
@@ -60,25 +61,49 @@ class Footer extends Component{
       <footer className="footers">
         <nav>
           <ul>
-            <li id='menuActivity' className='menuActive'>
+            {hrefParam.indexOf("myInfo") != -1 || hrefParam.indexOf("participate") != -1 ?
+              <li id='menuActivity'>
               <Link to={`${url}`}>
                 <span className='img'></span>
                 <p>活动</p>
               </Link>
-            </li>
-            <li id='menuParticipate'>
-              <Link to={`${url}/participate`}>
+              </li> :
+              <li id='menuActivity' className='menuActive'>
+              <Link to={`${url}`}>
                 <span className='img'></span>
-                <p>参与</p>
+                <p>活动</p>
               </Link>
-            </li>
+              </li>           
+            }
+            {hrefParam.indexOf('participate') != -1 ? 
+              <li id='menuParticipate' className='menuActive'>
+                <Link to={`${url}/participate`}>
+                  <span className='img'></span>
+                  <p>参与</p>
+                </Link>
+              </li>:
+              <li id='menuParticipate' >
+                <Link to={`${url}/participate`}>
+                  <span className='img'></span>
+                  <p>参与</p>
+                </Link>
+              </li>
+            }
             {publishDom}
-            <li id='menuMyInfo'>
-              <Link to={`${url}/myInfo`}>
-                <span className='img'></span>
-                <p>我的</p>
-              </Link>
-            </li>
+            {hrefParam.indexOf('myInfo') != -1 ?
+              <li id='menuMyInfo' className='menuActive'>
+                <Link to={`${url}/myInfo`}>
+                  <span className='img'></span>
+                  <p>我的</p>
+                </Link>
+              </li> : 
+              <li id='menuMyInfo'>
+                <Link to={`${url}/myInfo`}>
+                  <span className='img'></span>
+                  <p>我的</p>
+                </Link>
+              </li>
+            }
           </ul>
         </nav>
       </footer>

@@ -1,4 +1,9 @@
 @import "./../../utils/variblesAndMixins";
+
+$normalFontSize: 30px;
+$normalFontSize28: 28px;
+$normalFontSize26: 26px;
+$normalFontSize24: 24px;
 .acticityCommon{
   height: 100%;
   background: white;
@@ -28,7 +33,7 @@
           height: 36px;
         }
         span{
-          font-size: 24px;
+          font-size: $normalFontSize26;
           margin-left: 2vw;
           color: white;
         }
@@ -64,7 +69,7 @@
             p{
               line-height: 55px;
               margin-top: 8px;
-              font-size: 24px;
+              font-size: $normalFontSize;
               color: #9E9E9E;
               height: 65px;
               padding: 0 5px 0 5px;
@@ -110,7 +115,7 @@
         ul{
           //width: 2000px;
           li{
-            font-size: 24px;
+            font-size: $normalFontSize;
             color: #9E9E9E;
             display: inline-block;
             line-height: 67px;
@@ -152,7 +157,7 @@
           }
           li{
             position: relative;
-            font-size: 26px;
+            font-size: $normalFontSize;
             >i{
               display: inline-block;
               width: 4vw;
@@ -388,18 +393,18 @@
           line-height: 44px;
         }
         span:first-of-type{
-          font-size: 24px;
+          font-size: $normalFontSize26;
           color: #9E9E9E;
           margin-right: 10px;
         }
         span:last-of-type{
-          font-size: 24px;
+          font-size: $normalFontSize26;
           color: #363636
         }
         p:last-of-type{
           display: flex;
           span:first-of-type{
-            width: 120px;
+            //width: 120px;
           }
           span:last-of-type{
             flex: 1 1;
@@ -431,7 +436,7 @@
           }
           p{
             text-align: center;
-            font-size: 24px;
+            font-size: $normalFontSize26;
           }
         }
         .bonusequal{
@@ -449,7 +454,7 @@
               margin-right: 18px;
             }
             span{
-              font-size: 24px;
+              font-size: $normalFontSize26;
               color: #6C6C6C;
               span{
                 font-size: 28px;
@@ -457,7 +462,7 @@
               }
               .rmb{
                 display: inline-block;
-                font-size: 24px;
+                font-size: $normalFontSize26;
                 margin: 0;
                 -webkit-transform:scale(0.8);
                 color: #6C6C6C!important;
@@ -519,7 +524,7 @@
             }
             span{
               margin-left: 10px;
-              font-size: 30px;
+              font-size: $normalFontSize;
               color: #363636;
               font-weight: 700;
             }
@@ -530,7 +535,7 @@
             justify-content: flex-end;
             align-items: center;
             color: #6C6C6C;
-            font-size: 20px;
+            font-size: $normalFontSize24;
           }
         }
         >div:last-of-type{
@@ -542,7 +547,7 @@
               tr{
                 th{
                   text-align: center;
-                  font-size: 20px;
+                  font-size: $normalFontSize24;
                   color: #6C6C6C;
                   line-height: 40px;
                 }
@@ -568,7 +573,7 @@
                 border-bottom: $grayBorderBottom;
                 td{
                   color: #363636;
-                  font-size: 20px;
+                  font-size: $normalFontSize24;
                   font-weight: 600;
                   text-align: center;
                 }
@@ -601,7 +606,7 @@
             padding-right: 15px;
             span{
               color: #4DA9FA;
-              font-size: 24px;
+              font-size: $normalFontSize26;
               font-weight: 600;
             }
             i{
@@ -641,7 +646,7 @@
                 @include bg-image('../../images/activity/merchantInfo');
               }
               span{
-                font-size: 28px;
+                font-size: $normalFontSize;
                 color: #363636;
                 margin-left: 20px;
                 font-weight: 600;
@@ -660,7 +665,7 @@
               }
               span{
                 margin-left: 20px;
-                font-size: 24px;
+                font-size: $normalFontSize26;
                 color: #6C6C6C
               }
             }
@@ -686,7 +691,7 @@
           align-items: center;
           span{
             flex: 1 1;
-            font-size: 26px;
+            font-size: $normalFontSize28;
           }
           span:first-of-type{
             text-align: left;
@@ -729,7 +734,7 @@
             padding-left: 12px;
             p:first-of-type{
               color : #6C6C6C;
-              font-size: 22px
+              font-size: $normalFontSize24
             }
             p:last-of-type{
               @include evaluateStar(3.33333vw, 3.33333vw);
@@ -757,9 +762,9 @@
               justify-content: center;
               align-items: center;
               border-radius: 3px;
-              font-size: 24px;
+              font-size: $normalFontSize26;
               span{
-                font-size: 24px;
+                font-size: $normalFontSize26;
                 -webkit-transform: scale(0.8);
                 color: #6C6C6C
               }
@@ -808,13 +813,13 @@
                   height: 30px;
                 }
                 span:first-of-type{
-                  font-size: 26px;
+                  font-size: $normalFontSize28;
                   font-weight: 600;
                   color: #333333
                 }
                 span:last-of-type{
                   text-align: right;
-                  font-size: 24px;
+                  font-size: $normalFontSize26;
                   color: #6C6C6C
                 }
               }
@@ -832,12 +837,12 @@
                 span{
                   color: #FF7B4D;
                   margin-left: 20px;
-                  font-size: 24px;
+                  font-size: $normalFontSize26;
                 }
               }
               >div:nth-of-type(3){
                 height: auto;
-                font-size: 24px;
+                font-size: $normalFontSize26;
                 color: #333333;
               }
               >div:nth-of-type(4){
@@ -882,7 +887,7 @@
       }
       span{
         margin-left: 10px;
-        font-size: 30px;
+        font-size: $normalFontSize;
         color: #363636;
         font-weight: 700;
       }
@@ -893,7 +898,7 @@
       justify-content: flex-end;
       align-items: center;
       color: #6C6C6C;
-      font-size: 20px;
+      font-size: $normalFontSize24;
     }
   }
   .activityInfoContentContainer{
@@ -905,7 +910,7 @@
         tr{
           th{
             text-align: center;
-            font-size: 20px;
+            font-size: $normalFontSize24;
             color: #6C6C6C;
             line-height: 60px;
           }
@@ -931,7 +936,7 @@
           border-bottom: $grayBorderBottom;
           td{
             color: #363636;
-            font-size: 20px;
+            font-size: $normalFontSize24;
             font-weight: 600;
             text-align: center;
           }
@@ -964,7 +969,7 @@
       padding-right: 15px;
       span{
         color: #4DA9FA;
-        font-size: 24px;
+        font-size: $normalFontSize26;
         font-weight: 600;
       }
       i{
@@ -1002,7 +1007,7 @@
           span{
             margin-left: 20px;
             color:#4DA9FA;
-            font-size: 28px;
+            font-size: $normalFontSize26;
           }
         }
         li:first-of-type{
@@ -1037,11 +1042,11 @@
     background: white;
     line-height: 80px;
     span:first-of-type{
-      font-size: 24px;
+      font-size: $normalFontSize26;
     }
     span:last-of-type{
       margin-left: 40px;
-      font-size: 26px;
+      font-size: $normalFontSize28;
       font-weight: 600
     }
   }
@@ -1068,13 +1073,13 @@
   display: inline-block;
   color: white;
   height: 60px;
-  font-size: 24px;
+  font-size: $normalFontSize26;
   margin-left: 20px;
   padding-top: 2px;
 }
 .am-search.am-search-start .am-search-input input[type='search']{
   color: white;
-  font-size: 24px;
+  font-size: $normalFontSize26;
   height: 60px;
   padding: 0 3.73333vw 0 7.66667vw;
 }
@@ -1085,7 +1090,7 @@
   @include bg-image('../../images/activity/magnifier');
 }
 .am-search-cancel-show, .am-search-cancel{
-  font-size: 24px;
+  font-size: $normalFontSize26;
   color: white;
 }
 .am-search-input .am-search-clear{
@@ -1103,7 +1108,7 @@
   padding: 5vw 3vw 5vw 3vw
 }
 .am-popover-item span{
-  font-size: 26px;
+  font-size: $normalFontSize26;
 }
 .am-popover-item-icon img{
   display: none;
@@ -1113,7 +1118,7 @@
   height: 4vw;
 }
 .publishActivity .am-list .am-list-item .am-list-line .am-list-content{
-  font-size: 26px !important;
+  font-size: $normalFontSize26 !important;
   color: #BBBBBB !important
 }
 

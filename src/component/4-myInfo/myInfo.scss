@@ -1,4 +1,6 @@
 @import './../../utils/variblesAndMixins';
+// 常规字体大小
+$normalFontSize: 30px;
 
 .myContainer {
 	height: 1236px;
@@ -46,7 +48,7 @@
 			}
 
 			.userName {
-				font-size: 28px;
+				font-size: $normalFontSize;
 				line-height: 28px;
 				text-align: center;
 				font-weight: bold;
@@ -385,7 +387,9 @@
 
 		.am-picker-popup-item {
 			color: #fff;
-			font-size: 33px;
+      font-size: 33px;
+      height: 90px;
+      width: 150px;
 		}
 	}
 
@@ -1271,7 +1275,7 @@
 			line-height: 80px;
 			display: inline-block;
 			background: #fff;
-			font-size: 30px;
+			font-size: 32px;
 
 			&.select {
 				background: #4ca8fb;
@@ -1287,10 +1291,54 @@
 			height: 1100px;
 
 			.ActivityContent {
-        min-height: 1100px;
-        height: auto;
+				min-height: 1100px;
+				height: auto;
 			}
-		}
+    }
+
+    .businessContent {
+      overflow: hidden;
+			height: 1100px;
+
+			.businessList {
+				min-height: 1100px;
+        height: auto;
+
+        .noData{
+          font-size: 29px;
+          text-align: center;
+        }
+
+        li{
+          border-bottom: $grayBorderBottom;
+          overflow: hidden;
+
+          .headImg {
+            float: left;
+            width: 25%;
+
+            img{
+              width: 100px;
+              height: 100px;
+              display: block;
+              margin: 0 auto;
+              margin-top: 20px;
+            }
+          }
+          .businessInfo{
+            float: left;
+            width: 75%;
+            font-size: 29px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            p{
+              line-height: 45px;
+            }
+          }
+        }
+			}
+    }
 	}
 }
 
@@ -1381,7 +1429,11 @@
 		height: 1380px !important;
 	}
 
-  .collection .contentList .activityContent .ActivityContent{
+	.collection .contentList .activityContent .ActivityContent {
+		min-height: 185vw !important;
+  }
+
+  .collection .businessContent .businessList {
     min-height: 185vw !important;
   }
 }

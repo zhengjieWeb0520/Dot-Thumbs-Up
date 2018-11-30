@@ -45,10 +45,8 @@ class MechantModify extends React.Component {
 
 	//刷新个人信息
 	refreshUserInfo = () => {
-		let tokenStr = '9539'
-		let user_id = '652159'
-		window.sessionStorage.setItem('token', tokenStr)
-		window.sessionStorage.setItem('user_id', user_id)
+    let tokenStr = window.sessionStorage.getItem('token')
+    let user_id = window.sessionStorage.getItem('user_id')
 		this.props.getUserInfoPort(tokenStr, user_id)
 	}
 

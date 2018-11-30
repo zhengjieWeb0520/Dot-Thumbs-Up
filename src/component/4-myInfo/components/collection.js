@@ -129,7 +129,7 @@ class ActiveList extends React.Component {
 	}
 
 	componentWillUnmount() {
-    this.props.clearCollectionActive()
+		this.props.clearCollectionActive()
 	}
 
 	render() {
@@ -217,16 +217,153 @@ class ActiveList extends React.Component {
 
 ActiveList = connect(
 	state => state.collection,
-  { getCollectionActive, clearCollectionActive }
+	{ getCollectionActive, clearCollectionActive }
 )(ActiveList)
 
 //商家列表
 class BusinessList extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			active: null
+		}
+
+		this.count = 2
+	}
+
+	componentWillMount() {
+		// this.getFirstPageData('first')
+	}
+
+	//请求第一页数据(页面刚加载和下拉刷新)
+	getFirstPageData(type, fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: '5'
+		}
+
+		if (type === 'first') {
+			// this.props.getCollectionActive(data)
+		} else {
+			// this.props.getCollectionActive(data, fn)
+		}
+	}
+
+	//上拉加载
+	pullUpLoadData(fn) {
+		let data = {
+			pageNo: '1',
+			pageSize: String(5 * this.count)
+		}
+		this.props.getCollectionActive(data, fn)
+	}
+
+	componentDidMount() {
+		const wrapper = document.querySelector('.wrapper')
+		const topTip = wrapper.querySelector('.top-tip')
+		const bottomTip = wrapper.querySelector('.bottom-tip')
+		let _this = this
+		this.scroll = new BScroll(wrapper, {
+			click: true,
+			probeType: 1,
+			pullUpLoad: {
+				stop: 50,
+				threshold: 0
+			}
+		})
+
+		//滑动监听
+		this.scroll.on('scroll', function(pos) {
+			if (pos.y > 30) {
+				topTip.innerText = '释放立即刷新'
+			}
+		})
+
+		// 滑动结束
+		this.scroll.on('touchEnd', function(position) {
+			_this.scroll.off('scroll', function() {})
+			if (position.y > 40) {
+				setTimeout(function() {
+					_this.getFirstPageData('refresh', function() {
+						// 恢复文本值
+						topTip.innerText = '下拉刷新'
+						// 刷新成功后的提示
+						Toast.info('刷新成功', 1)
+						_this.count = 2
+					})
+					// 刷新列表后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			} else if (position.y < this.maxScrollY - 40) {
+				bottomTip.innerText = '加载中...'
+				setTimeout(function() {
+					_this.pullUpLoadData(function(data) {
+						if (ObjectEquals(data.list, _this.state.active.list)) {
+							// 恢复文本值
+							bottomTip.innerText = '没有更多数据'
+						} else {
+							// 恢复文本值
+							bottomTip.innerText = '查看更多'
+							_this.count++
+						}
+					})
+					// 加载更多后,重新计算滚动区域高度
+					_this.scroll.refresh()
+				}, 1000)
+			}
+		})
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (!ObjectEquals(nextProps.active, this.props.active)) {
+			this.setState({
+				active: nextProps.active
+			})
+		}
+	}
+
+	componentWillUnmount() {
+		// this.props.clearCollectionActive()
+	}
+
 	render() {
-		return <div className="businessList">商家列表</div>
+		return (
+			<div className="businessContent wrapper">
+				<div>
+					<div className="top-tip">
+						<span className="refresh-hook">下拉刷新</span>
+					</div>
+					<ul className="businessList">
+						{/* <li>
+							<div className="headImg">
+								<img src={require('../../../images/myInfo/icon_bulb@3x.png')} alt="" />
+							</div>
+							<div className="businessInfo">
+								<p>南京美团</p>
+								<p>
+									<span>距离：132m&nbsp;&nbsp;</span>
+									<span>营业时间：9:00-12:00</span>
+								</p>
+								<p>地址：啊啊啊啊啊</p>
+							</div>
+            </li> */}
+						<p className="noData">暂无数据</p>
+					</ul>
+					<div className="bottom-tip">
+						<span className="loading-hook">查看更多</span>
+					</div>
+				</div>
+			</div>
+		)
 	}
 }
 
+BusinessList = connect(
+	state => state.collection,
+	{ getCollectionActive, clearCollectionActive }
+)(BusinessList)
+
+// 整个收藏
 class Collection extends React.Component {
 	constructor(props) {
 		super(props)

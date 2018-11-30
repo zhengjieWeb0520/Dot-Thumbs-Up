@@ -99,7 +99,7 @@
             flex: 1 1;
             display: flex;
             align-items: center;
-            span:first-of-type{
+            .headerImg{
               display: inline-block;
               width:43px;
               height: 43px;
@@ -133,7 +133,6 @@
           flex: 1 1;
           position: relative;
           padding-bottom: 40px;
-
           >div:first-of-type{
             height: 70px;
             display: flex;

@@ -231,7 +231,7 @@ class Participate extends React.Component {
 					<Link to={path} className="participateItem">
 						<div className="participateItemHeader">
 							<div>
-								<span />
+								<img className='headerImg' src={item.img_url} alt=""/>
 								<span>
 									{item.business_name}
 									<i />
