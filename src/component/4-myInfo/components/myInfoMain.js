@@ -14,7 +14,9 @@ class MyInfoMain extends React.Component {
 				<div className="userInfo">
 					<div className="userAvatar">
 						<div className="img">
-							<img src={userAvatar} alt="" />
+              <Link to={`/setting`}>
+							  <img src={userAvatar} alt="" />
+              </Link>
 						</div>
 						<p className="userName">用户名称</p>
 					</div>
@@ -107,7 +109,7 @@ class MyInfoMain extends React.Component {
 						</li>
 					</ul>
 				</div>
-				<div className="signOut">退出登陆</div>
+				<div className="signOut" style={{display: 'none'}}>退出登陆</div>
 				<Link to={'/setting'}>
 					<div className="setting">设置</div>
 				</Link>
