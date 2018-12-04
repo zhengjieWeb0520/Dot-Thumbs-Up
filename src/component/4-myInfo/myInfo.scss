@@ -227,8 +227,10 @@ $normalFontSize: 30px;
 
 //顶部导航栏
 .topNavBar {
-	height: 128px;
-	padding-top: 40px;
+  // height: 128px;
+  height: 110px;
+  // padding-top: 40px;
+  padding-top: 10px;
 	background: #fff;
 	margin-bottom: 18px;
 

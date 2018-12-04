@@ -92,13 +92,14 @@ class ActivityInfo extends React.Component {
 				})
 
 				wx.ready(function() {
-          let activeId = _this.props.location.query.activeId
-          let parentUserId = window.sessionStorage.getItem('user_id')
-          let good_count = _this.props.location.query.good_count
+					// let activeId = _this.props.location.query.activeId
+					let activeId = 'aa'
+					let parentUserId = window.sessionStorage.getItem('user_id')
 					wx.updateAppMessageShareData({
 						title: '点赞宝', // 分享标题
 						desc: '点赞宝', // 分享描述
-            link: window.location.href.split('#')[0] + `#/activityInfo?activeId=${activeId}&parentUserId=${parentUserId}&good_count=${good_count}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						link:
+							window.location.href.split('#')[0] + `#/activityInfo#activeId=${activeId}&parentUserId=${parentUserId}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
 						imgUrl: require('../../../images/myInfo/icon_bulb@3x.png') // 分享图标
 					})
 				})
@@ -215,7 +216,8 @@ class ActivityInfo extends React.Component {
 		}
 	}
 	componentWillReceiveProps(nextProps) {
-		if (!ObjectEquals(nextProps.activeInfo.activeInfo, {})) {
+		if (!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)) {
+			console.log(nextProps)
 			this.setState({
 				activeInfo: nextProps.activeInfo.activeInfo,
 				activeDetail: {

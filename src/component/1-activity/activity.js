@@ -489,7 +489,7 @@ class Activity extends React.Component{
     return(
       <div id='Activity' className='acticityCommon'>
         <div className='activityCondition'>
-          <div className='activityKb'></div>
+          {/* <div className='activityKb'></div> */}
           <div className='activityHeader'>
             <div><i className='positionIcon'></i><span>{this.state.address}</span></div>
             <div><SearchBar placeholder="输入商家或活动关键字" onSubmit={(val)=>{this.keyWordSearch(val)}} maxLength={8} /></div>
