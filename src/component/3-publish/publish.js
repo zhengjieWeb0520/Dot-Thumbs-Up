@@ -313,6 +313,7 @@ class PublishActivity extends React.Component{
         active_images: img_urls 
       }
       this.props.publishActive(data)
+      this.props.form.resetFields()
     }else{
       Toast.info(error, 1)
     }

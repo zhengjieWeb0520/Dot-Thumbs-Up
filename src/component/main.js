@@ -22,12 +22,12 @@ class Main extends React.Component{
     let _this = this 
     let hrefParams = window.location.href.split("?")[1]
     if(hrefParams === undefined){
-      //  let tokenStr = '9539'
-      //  let user_id = '652159'
-      // window.sessionStorage.setItem('token', tokenStr)
-      // window.sessionStorage.setItem('user_id', user_id)
-      let tokenStr = window.sessionStorage.getItem('token')
-      let user_id = window.sessionStorage.getItem('user_id')
+       let tokenStr = '9539'
+       let user_id = '652159'
+      window.sessionStorage.setItem('token', tokenStr)
+      window.sessionStorage.setItem('user_id', user_id)
+      // let tokenStr = window.sessionStorage.getItem('token')
+      // let user_id = window.sessionStorage.getItem('user_id')
       this.props.getUserInfoPort(tokenStr, user_id)
       this.setState({
         goRender: true

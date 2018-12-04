@@ -91,6 +91,7 @@ class ReportMerchant extends React.Component{
     }else {
       Toast.info(error, 1)
     }
+    
   }
   render(){
     const { getFieldProps, getFieldError } = this.props.form
