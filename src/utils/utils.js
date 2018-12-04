@@ -506,7 +506,6 @@ export function createBonusItem(bonus){
 
 /*
 服务器本地ip切换
-
 */
   export const serverIp = 'https://jizanbao.com'
 //  export const serverIp = ''

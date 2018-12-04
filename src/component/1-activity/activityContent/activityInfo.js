@@ -69,6 +69,7 @@ class ActivityInfo extends React.Component {
       if (this.props.location.query == undefined) {
         this.props.history.goBack()
       } else {
+        console.log(this.props)
         this.props.getActiveInfo(this.props.location.query.activeId, 'active')
         this.props.getIsOrNotCollect('active', this.props.location.query.activeId)
       }

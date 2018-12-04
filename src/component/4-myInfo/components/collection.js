@@ -133,6 +133,7 @@ class ActiveList extends React.Component {
 	}
 
 	render() {
+    console.log(this.state.active)
 		return (
 			<div className="activityContent wrapper">
 				<div>
@@ -145,7 +146,9 @@ class ActiveList extends React.Component {
 									let path = {
 										pathname: '/activityInfo',
 										query: {
-											id: item.id
+                      activeId: item.id,
+                      distance_format: item.distance_format,
+                      good_count: item.good_count
 										}
 									}
 									return (
@@ -164,10 +167,10 @@ class ActiveList extends React.Component {
 												<p>
 													<span>
 														<i />
-														<span>4365</span>
+														<span>{item.good_count}</span>
 													</span>
 													<span>
-														<span>433m</span>
+														<span>{item.distance_format}</span>
 													</span>
 												</p>
 											</div>
