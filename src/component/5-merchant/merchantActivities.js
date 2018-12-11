@@ -291,7 +291,7 @@ class MerchantActivities extends React.Component{
     return content
   }
   render(){
-    console.log(this.state)
+    console.log(this.state.merchantActive)
     return(
       <div id='merchantActivities' className='merchantActivities'>
         <div className='merchantActivitiesContainer'>
@@ -361,7 +361,7 @@ class MerchantActivities extends React.Component{
               {this.createActiveContent()}
             </ul>
             <div className="bottom-tip">
-						 <span className="loading-hook">查看更多</span>
+            {JSON.stringify(this.state.merchantActive) ? <span className="loading-hook">查看更多</span> : <span className="loading-hook">没有更多数据</span>}
             </div>
           </div>
         </div>

@@ -53,6 +53,7 @@ class ReportMerchant extends React.Component{
     })
   }
   submitForm =()=>{
+    let _this = this
     const form = this.props.form
     let errors = form.getFieldsError()
     let values = form.getFieldsValue()
@@ -87,11 +88,19 @@ class ReportMerchant extends React.Component{
           img_urls = img_urls + item
         }
       })
-      this.props.reportMerchantInfo(values.reportText, img_urls, values.name, reportPhone, '652158')
+      this.props.reportMerchantInfo(values.reportText, img_urls, values.name, reportPhone, '652158', function(){
+        this.props.form.resetFields()
+        _this.setState({
+					files: []
+				})
+				_this.uploadFiles = []
+				document.getElementById('textarea').value = ''
+      })
+      
     }else {
       Toast.info(error, 1)
     }
-    
+
   }
   render(){
     const { getFieldProps, getFieldError } = this.props.form

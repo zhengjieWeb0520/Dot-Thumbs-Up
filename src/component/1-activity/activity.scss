@@ -6,8 +6,8 @@ $normalFontSize26: 26px;
 $normalFontSize24: 24px;
 .acticityCommon{
   height: 100%;
-  background: white;
-  overflow-y: scroll;
+  background: #ffffff;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   .activityCondition{
     height: 443px;
@@ -138,8 +138,8 @@ $normalFontSize24: 24px;
         line-height: 84px;
         .downArrow{
           display: inline-block;
-          width: 24px;
-          height: 15px;
+          width: 18px;
+          height: 10px;
           @include bg-image('../../images/activity/ArrowImg');
         }
         ul{

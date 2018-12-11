@@ -1,8 +1,10 @@
 @import "./../../utils/variblesAndMixins";
-#Participate{
-  height: calc(100vh - 85px);
-  height: -moz-calc(100vh - 85px);
-  height: -webkit-calc(100vh - 85px);
+.participate{
+  // height: calc(100vh - 85px);
+  // height: -moz-calc(100vh - 85px);
+  // height: -webkit-calc(100vh - 85px);
+  height: 100%;
+  overflow-y: hidden;
   background: #F6F6F6;
   .participateHeader{
     height: 252px;
@@ -77,11 +79,11 @@
     }
   }
   .participateContent{
-    height: calc(100vh - 390px);
-    height: -moz-calc(100vh - 390px);
-    height: -webkit-calc(100vh - 390px);
+    height: calc(100% - 252px);
+    height: -moz-calc(100% - 252px);
+    height: -webkit-calc(100% - 252px);
     overflow: hidden;
-    margin-top: 20px;
+    position: relative;
     .ParticipateContent{
       .participateItem{
         background: white;

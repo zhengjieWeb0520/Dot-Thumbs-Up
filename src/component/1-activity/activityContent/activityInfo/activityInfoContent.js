@@ -127,7 +127,7 @@ class ActivityInfoContent extends React.Component{
                     用户名
                   </th>
                   <th>
-                    点赞数量
+                    集赞数量
                   </th>
                 </tr>
               </thead>

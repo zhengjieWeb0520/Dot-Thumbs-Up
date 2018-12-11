@@ -168,6 +168,27 @@ class ActivityEvaluate extends React.Component{
       return null
     }
   }
+  goodClick = ()=>{
+    this.setState({
+      filter: 'good'
+    },()=>{
+      this.getFirstPageData('first')
+    })
+  }
+  badClick = ()=>{
+    this.setState({
+      filter: 'bad'
+    },()=>{
+      this.getFirstPageData('first')
+    })
+  }
+  allClick = ()=>{
+    this.setState({
+      filter: ''
+    },()=>{
+      this.getFirstPageData('first')
+    })
+  }
   render(){
     console.log(this.state.commentsStatistics)
     console.log(this.state.evaluateInfo)
@@ -188,9 +209,9 @@ class ActivityEvaluate extends React.Component{
           </div>
           <div className = 'selectTab'>
             <ul>
-              <li name={'selectTab1'} className = 'evaluateActive'><span>全部</span></li>
-              <li name={'selectTab3'}><span>好评&nbsp;{this.state.commentsStatistics.good_count}</span></li>
-              <li name={'selectTab4'}><span>差评&nbsp;{this.state.commentsStatistics.bad_count}</span></li>
+              <li name={'selectTab1'} onClick={this.allClick} className = 'evaluateActive'><span>全部</span></li>
+              <li name={'selectTab3'} onClick={this.goodClick}><span>好评&nbsp;{this.state.commentsStatistics.good_count}</span></li>
+              <li name={'selectTab4'} onClick={this.badClick}><span>差评&nbsp;{this.state.commentsStatistics.bad_count}</span></li>
             </ul>
           </div>
           <div className='evaluateContent'>

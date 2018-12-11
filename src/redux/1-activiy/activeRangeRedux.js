@@ -42,8 +42,8 @@ export function getUserRanking(params, fn){
       }
     ).then(res => {
       if(res.data.result_code === '0'){
-        dispatch({ type: LIKEUSERRANGE, data: res.data.result_info, time:currentTime})
         fn ? fn(res.data.result_info) : null
+        dispatch({ type: LIKEUSERRANGE, data: res.data.result_info, time:currentTime})    
       }
     })
   }

@@ -147,6 +147,9 @@ class ActiveList extends React.Component {
 										pathname: '/activityInfo',
 										query: {
                       activeId: item.id,
+                      name: item.name,
+                      dec: item.desc,
+                      activeImg: item.img_url,
                       distance_format: item.distance_format,
                       good_count: item.good_count
 										}

@@ -25,7 +25,8 @@ if (isIPhone) {
 //活动详细信息
 class ActivityInfo extends React.Component {
 	constructor(props) {
-		super(props)
+    super(props)
+    this.title = ''
 		this.state = {
 			imgHeight: 175,
 			tabFlag: 0, //组件切换标识
@@ -82,6 +83,7 @@ class ActivityInfo extends React.Component {
 		//初始化微信sdk
 		axios.post(serverIp + '/dianzanbao/wechat/getConfig.do', url).then(res => {
 			if (res.data.result_code === '0') {
+        console.log(_this.title)
 				wx.config({
 					debug: false,
 					appId: res.data.result_info.appid,
@@ -92,15 +94,18 @@ class ActivityInfo extends React.Component {
 				})
 
 				wx.ready(function() {
-					// let activeId = _this.props.location.query.activeId
-					let activeId = 'aa'
-					let parentUserId = window.sessionStorage.getItem('user_id')
+          let activeId = _this.props.location.query.activeId
+          let parentUserId = window.sessionStorage.getItem('user_id')
+          let good_count = _this.props.location.query.good_count
+          let name = _this.props.location.query.name
+          let dec = _this.props.location.query.dec
+          let activeImg = _this.props.location.query.activeImg
+          console.log(name)
 					wx.updateAppMessageShareData({
-						title: '点赞宝', // 分享标题
-						desc: '点赞宝', // 分享描述
-						link:
-							window.location.href.split('#')[0] + `#/activityInfo#activeId=${activeId}&parentUserId=${parentUserId}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-						imgUrl: require('../../../images/myInfo/icon_bulb@3x.png') // 分享图标
+						title: name, // 分享标题
+						desc: dec, // 分享描述
+            link: window.location.href.split('#')[0] + `#/activityInfo?activeId=${activeId}&parentUserId=${parentUserId}&good_count=${good_count}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+						imgUrl: activeImg // 分享图标
 					})
 				})
 			}
@@ -139,34 +144,34 @@ class ActivityInfo extends React.Component {
 		let navListUl = document.querySelector('.activityInfoFooter ul')
 		let navListLis = getChildNode(navListUl)
 		//点击底部切换样式
-		// navListUl.addEventListener(
-		// 	'click',
-		// 	function(e) {
-		// 		navListLis.forEach((item, index) => {
-		// 			item.classList.remove('pointActive')
-		// 		})
-		// 		if (e.target.tagName === 'LI') {
-		// 			e.target.classList.add('pointActive')
-		// 			if (e.target.textContent === '我要点赞') {
-		// 				_this.props.thumpsUpActive(_this.props.location.query.activeId)
-		// 				e.target.firstChild.classList.add('willpointActive')
-		// 			} else if (e.target.textContent === '我的集赞') {
-		// 				e.target.firstChild.classList.add('mypointActive')
-		// 				_this.props.history.push('/index/participate')
-		// 			}
-		// 		}
-		// 		if (e.target.tagName === 'I' || e.target.tagName === 'SPAN') {
-		// 			e.target.parentNode.classList.add('pointActive')
-		// 			if (e.target.parentNode.textContent === '我要点赞') {
-		// 				_this.props.thumpsUpActive(_this.props.location.query.activeId)
-		// 				e.target.parentNode.firstChild.classList.add('willpointActive')
-		// 			} else if (e.target.parentNode.textContent === '我的集赞') {
-		// 				e.target.parentNode.firstChild.classList.add('mypointActive')
-		// 			}
-		// 		}
-		// 	},
-		// 	false
-		// )
+		navListUl.addEventListener(
+			'click',
+			function(e) {
+				navListLis.forEach((item, index) => {
+					item.classList.remove('pointActive')
+				})
+				if (e.target.tagName === 'LI') {
+					//e.target.classList.add('pointActive')
+					if (e.target.textContent === '我要点赞') {
+						_this.props.thumpsUpActive(_this.props.location.query.activeId)
+						//e.target.firstChild.classList.add('willpointActive')
+					} else if (e.target.textContent === '已点赞') {
+						//e.target.firstChild.classList.add('mypointActive')
+						_this.props.history.push('/index/participate')
+					}
+				}
+				if (e.target.tagName === 'I' || e.target.tagName === 'SPAN') {
+					//e.target.parentNode.classList.add('pointActive')
+					if (e.target.parentNode.textContent === '我要点赞') {
+						_this.props.thumpsUpActive(_this.props.location.query.activeId)
+						//e.target.parentNode.firstChild.classList.add('willpointActive')
+					} else if (e.target.parentNode.textContent === '已点赞') {
+						//e.target.parentNode.firstChild.classList.add('mypointActive')
+					}
+				}
+			},
+			false
+		)
 	}
 	switchContent() {
 		switch (this.state.tabFlag) {
@@ -217,7 +222,8 @@ class ActivityInfo extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)) {
-			console.log(nextProps)
+      console.log(nextProps)
+      this.title = nextProps.activeInfo.activeInfo.name
 			this.setState({
 				activeInfo: nextProps.activeInfo.activeInfo,
 				activeDetail: {

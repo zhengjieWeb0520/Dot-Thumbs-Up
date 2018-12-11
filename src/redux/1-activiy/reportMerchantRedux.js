@@ -24,7 +24,7 @@ export function reportMerchant(state = initState, action) {
 }
 
 //举报商家接口
-export function reportMerchantInfo(content, img_urls, name, phone, to_user_id) {
+export function reportMerchantInfo(content, img_urls, name, phone, to_user_id,callBack) {
 	let data = qs.stringify({
 		content: content,
 		img_urls: img_urls,
@@ -43,7 +43,8 @@ export function reportMerchantInfo(content, img_urls, name, phone, to_user_id) {
 			.then(res => {
 				if (res.data.result_code === '0') {
 					dispatch({ type: REPORTMERCHANT, data: res.data.result_info })
-					Toast.info(res.data.result_info, 1)
+          Toast.info(res.data.result_info, 1)
+          callBack()
 				}
 			})
 	}

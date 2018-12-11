@@ -48,8 +48,8 @@ export function getRecentViewActive(pageConfig, fn) {
 			})
 			.then(res => {
 				if (res.data.result_code === '0') {
-					dispatch({ type: RECENTVIEWACTIVE, data: res.data.result_info })
-					fn ? fn(res.data.result_info) : null
+          fn ? fn(res.data.result_info) : null
+					dispatch({ type: RECENTVIEWACTIVE, data: res.data.result_info })		
 				}
 			})
 	}
@@ -74,8 +74,8 @@ export function getRecentViewBusiness(pageConfig, fn) {
 			})
 			.then(res => {
 				if (res.data.result_code === '0') {
-					dispatch({ type: RECENTVIEWBUSINESS, data: res.data.result_info })
-					fn ? fn(res.data.result_info) : null
+          fn ? fn(res.data.result_info) : null
+					dispatch({ type: RECENTVIEWBUSINESS, data: res.data.result_info })		
 				}
 			})
 	}

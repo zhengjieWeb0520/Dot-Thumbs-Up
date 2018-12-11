@@ -185,7 +185,7 @@ class Activity extends React.Component{
     }, false)
 
     //上拉刷新，下拉加载
-    const wrapper = document.querySelector('.wrapper')
+    const wrapper = document.querySelector('.acticityCommon')
     const topTip = wrapper.querySelector('.top-tip')
 		let bottomTip = wrapper.querySelector('.bottom-tip')
     this.scroll = new BScroll(wrapper,{
@@ -222,6 +222,8 @@ class Activity extends React.Component{
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
 					_this.pullUpLoadData(function(data) {
+            console.log(data.list)
+            console.log( _this.state.activeList.list)
 						if (ObjectEquals(data.list, _this.state.activeList.list)) {
 							// 恢复文本值
 							bottomTip.innerText = '没有更多数据'
@@ -259,6 +261,7 @@ class Activity extends React.Component{
   }
   //上拉加载
 	pullUpLoadData(fn) {
+    console.log(this.count)
     let activeParam = {
       dir_one: this.state.levelState,
       dir_two: this.state.level2State,
@@ -404,6 +407,9 @@ class Activity extends React.Component{
         let column = null
         let data = {
           activeId: item.id,
+          name: item.name,
+          dec: item.desc,
+          activeImg: item.img_url,
           distance_format: item.distance_format,
           good_count: item.good_count
         }
@@ -488,6 +494,10 @@ class Activity extends React.Component{
     let address = window.sessionStorage.getItem('user_addr')
     return(
       <div id='Activity' className='acticityCommon'>
+        <div>
+        <div className="top-tip">
+          <span className="refresh-hook">下拉刷新</span>
+        </div>
         <div className='activityCondition'>
           {/* <div className='activityKb'></div> */}
           <div className='activityHeader'>
@@ -610,14 +620,12 @@ class Activity extends React.Component{
         </div>
         <div className='activityContent wrapper'>
           <ul id='ActivityContent' className='ActivityContent content'>
-            <div className="top-tip">
-              <span className="refresh-hook">下拉刷新</span>
-            </div>
             {this.createActiveContent()}
             <div className="bottom-tip">
-						<span className="loading-hook">查看更多</span>
+            {JSON.stringify(this.state.activeList.list) !== '[]' ? <span className="loading-hook">查看更多</span> : <span className="loading-hook">没有更多数据</span>}
 				  	</div>
           </ul>
+        </div>
         </div>
       </div>
     )

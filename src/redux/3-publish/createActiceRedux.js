@@ -24,7 +24,7 @@ export function createActivity(state = initState, action){
   }
 }
 // 发布活动
-export function publishActive(activeInfo){
+export function publishActive(activeInfo, callBack){
   let data = qs.stringify({
     active_name: activeInfo.active_name,
     active_start_date: activeInfo.active_start_date,
@@ -50,7 +50,7 @@ export function publishActive(activeInfo){
     .then(res => {
       if (res.data.result_code === '0') {
         dispatch({ type: CREATEACTIVITY, data: res.data.result_info })
-        
+        callBack()
       }
     }) 
   }

@@ -45,8 +45,8 @@ export function getMerchantActivity(activeParam, fn){
         }
       ).then(res => {
         if(res.data.result_code === '0'){
-          dispatch({ type: MERCHANTACTIVELIST, data: res.data.result_info})
-        	fn ? fn(res.data.result_info) : null
+          fn ? fn(res.data.result_info) : null
+          dispatch({ type: MERCHANTACTIVELIST, data: res.data.result_info}) 	
         }
       })
   }
@@ -73,8 +73,8 @@ export function getParticipateActivity(activeParam, fn){
         }
       ).then(res => {
         if(res.data.result_code === '0'){
-          dispatch({ type: PARTICPATEACTIVE, data: res.data.result_info})
-        	fn ? fn(res.data.result_info) : null
+          fn ? fn(res.data.result_info) : null
+          dispatch({ type: PARTICPATEACTIVE, data: res.data.result_info})  	
         }
       })
   }

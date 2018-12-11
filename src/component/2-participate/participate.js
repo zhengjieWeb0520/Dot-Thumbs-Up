@@ -103,7 +103,7 @@ class Participate extends React.Component {
 			false
 		)
 
-		const wrapper = document.querySelector('.participateWrapper')
+		const wrapper = document.querySelector('.participate')
 		const topTip = wrapper.querySelector('.top-tip')
 		const bottomTip = wrapper.querySelector('.bottom-tip')
 		this.scroll = new BScroll(wrapper, {
@@ -286,7 +286,11 @@ class Participate extends React.Component {
 	//组件切换
 	render() {
 		return (
-			<div id="Participate">
+			<div id="Participate" className='participate'>
+        <div>
+        <div className="top-tip">
+					<span className="refresh-hook">下拉刷新</span>
+				</div>
 				<div className="participateHeader">
 					<div className="participateTitle">我&nbsp;的&nbsp;参&nbsp;与</div>
 					<div className="participateTab">
@@ -316,15 +320,13 @@ class Participate extends React.Component {
 				</div>
 				<div className="participateContent participateWrapper">
 					<div id="ParticipateContent" className="ParticipateContent content">
-						<div className="top-tip">
-							<span className="refresh-hook">下拉刷新</span>
-						</div>
 						{this.createParticipateContent()}
 						<div className="bottom-tip">
-							<span className="loading-hook">查看更多</span>
+            {JSON.stringify(this.state.paticipateActive) !== '[]' ? 	<span className="loading-hook">查看更多</span> : 	<span className="loading-hook">没有更多数据</span>} 					
 						</div>
 					</div>
 				</div>
+        </div>
 			</div>
 		)
 	}

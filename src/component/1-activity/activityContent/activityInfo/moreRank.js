@@ -169,7 +169,7 @@ class MoreRank extends React.Component {
 									<tr>
 										<th>排名</th>
 										<th>用户名</th>
-										<th>点赞数量</th>
+										<th>集赞数量</th>
 									</tr>
 								</thead>
 								{this.createRankingContent()}

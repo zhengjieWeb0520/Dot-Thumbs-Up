@@ -88,9 +88,10 @@ export function getActiveList(activeParam, fn) {
 			})
 			.then(res => {
 				if (res.data.result_code === '0') {
-					Toast.hide()
+          Toast.hide()
+          fn ? fn(res.data.result_info) : null
 					dispatch(getActiveAction(res.data.result_info))
-					fn ? fn(res.data.result_info) : null
+					
 				}
 			})
 	}

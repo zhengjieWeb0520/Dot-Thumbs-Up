@@ -251,6 +251,7 @@ class PublishActivity extends React.Component{
     })
   }
   submitForm =()=>{
+    let _this = this
     const form = this.props.form
     let errors = form.getFieldsError()
     let error = ''
@@ -312,8 +313,9 @@ class PublishActivity extends React.Component{
         bonus: bonus,
         active_images: img_urls 
       }
-      this.props.publishActive(data)
-      this.props.form.resetFields()
+      this.props.publishActive(data, function(){
+        _this.props.form.resetFields()
+      })  
     }else{
       Toast.info(error, 1)
     }
