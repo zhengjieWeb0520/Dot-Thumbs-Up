@@ -25,7 +25,12 @@ class MoreRank extends React.Component {
 			}
 			this.getFirstPageData('first')
 		} else {
-			this.props.history.push('/index')
+      let data = {
+				id: JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId,
+				pageNo: '1',
+				pageSize: '15'
+			}
+			this.getFirstPageData('first')
 		}
 	}
 	componentDidMount() {
@@ -94,7 +99,7 @@ class MoreRank extends React.Component {
 	//请求第一页数据（页面刚加载和下拉刷新）
 	getFirstPageData(type, fn) {
 		let data = {
-			id: this.props.history.location.query.activeId,
+			id: JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId,
 			pageNo: '1',
 			pageSize: '15'
 		}
@@ -107,7 +112,7 @@ class MoreRank extends React.Component {
   //上拉加载
 	pullUpLoadData(fn) {
 		let data = {
-      id: this.props.history.location.query.activeId,
+      id: JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId,
 			pageNo: '1',
 			pageSize: String(15 * this.count)
 		}
@@ -147,7 +152,7 @@ class MoreRank extends React.Component {
 	render() {
 		return (
 			<div id="moreRanking" className="moreRanking">
-				<TopNavBar title="更多排名" activeId={this.props.history.location.query.activeId} />
+				<TopNavBar title="更多排名" activeId={JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId} />
 				<div className="moreRankingWaper activityInfoContent">
 					<div>
 						<div className="top-tip">

@@ -48,14 +48,14 @@ class Footer extends Component{
         user_images: this.state.user_images
       }
     }
-    if(this.state.user_role_id === 2){
+    //if(this.state.user_role_id === 2){
       publishDom = (<li id='menuParticipate'>
       <Link to={path}>
         <span className='img'></span>
         <p>商家</p>
       </Link>
     </li>)
-    }
+    //}
     const url = this.props.match.url
     return(
       <footer className="footers">

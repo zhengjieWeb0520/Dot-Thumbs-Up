@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import BScroll from 'better-scroll'
 import { connect } from 'react-redux'
 import { getChildNode, ObjectEquals, createStarLevel } from './../../../../utils/utils'
@@ -6,6 +7,7 @@ import yhHeader from './../../../../images/activity/evaluate/header.png'
 import evaluateImg1 from './../../../../images/activity/evaluate/evaluateImg1.png'
 import evaluateImg2 from './../../../../images/activity/evaluate/evaluateImg2.png'
 import { getCommentsStatistics, getActiveEvaluate } from './../../../../redux/1-activiy/activeEvaluateRedux'
+import ScaleImage from './../../scaleImage'
 import { Toast} from 'antd-mobile'
 class ActivityEvaluate extends React.Component{
   constructor(props){
@@ -132,7 +134,12 @@ class ActivityEvaluate extends React.Component{
 			pageSize: String(5 * this.count)
 		}
 		this.props.getActiveEvaluate(data, fn)
-	}
+  }
+  displayImage =(e, value)=>{
+    console.log(value)
+    ReactDOM.render(<ScaleImage imgurl={value}/>, document.querySelector('#zhezhao'))
+    document.querySelector('.zhezhao').style.display = 'block'
+  }
   createEvaluateContent(){
     console.log(this.state.evaluateInfo)
     let content = []
@@ -140,7 +147,7 @@ class ActivityEvaluate extends React.Component{
       this.state.evaluateInfo.map((item, index)=>{
         let column = null
         column= 
-          <div className='evaluateItem'>
+          <div className='evaluateItem' key = {index}>
               <div>
                   {/* <img src={item.user_head} alt=""/> */}
                   <img src={yhHeader} alt=""/>
@@ -155,7 +162,7 @@ class ActivityEvaluate extends React.Component{
                   <div>
                     {
                       item.detail_images.map((item2, index2)=>{
-                        return <img key={item2.id} src={item2.img_url} alt=""/>
+                        return <img key={item2.id} src={item2.img_url} onTouchEnd={(v, url)=>this.displayImage(v, item2.img_url)} alt=""/>
                       })
                     }
                   </div>

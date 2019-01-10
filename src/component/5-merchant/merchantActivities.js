@@ -23,10 +23,11 @@ class MerchantActivities extends React.Component{
       user_id: '',          //商家ID
       business_level:'',    //商家等级
       star_level: '',       //商家星级
-      merchantActive:''     //商家发布的活动
+      merchantActive: []     //商家发布的活动
     }
   }
   componentWillMount(){
+    let merchantCache = window.sessionStorage.getItem('merchantActive')
     if(this.props.userInfo.userInfo){
       this.setState({
         user_id: this.props.userInfo.userInfo.user_info.user_id,
@@ -35,11 +36,17 @@ class MerchantActivities extends React.Component{
         business_level: this.props.userInfo.userInfo.user_info.business_level,
         star_level: this.props.userInfo.userInfo.user_info.star_level
       },()=>{
-        let data ={
-          pageNo: 1,
-          pageSize: 5
+        if(merchantCache !== null){
+          this.setState({
+            merchantActive: JSON.parse(merchantCache)
+          })
+        }else{
+          let data ={
+            pageNo: 1,
+            pageSize: 5
+          }
+          this.getFirstPageData('first')
         }
-        this.getFirstPageData('first')
       })
     }else{
       this.props.history.push('/index')
@@ -180,6 +187,8 @@ class MerchantActivities extends React.Component{
     if(!ObjectEquals(nextProps.merchantInfo.merchantActiveList, {})){
       this.setState({
         merchantActive: nextProps.merchantInfo.merchantActiveList.list
+      },()=>{
+        window.sessionStorage.setItem('merchantActive', JSON.stringify(nextProps.merchantInfo.merchantActiveList.list))
       })
     }
   }

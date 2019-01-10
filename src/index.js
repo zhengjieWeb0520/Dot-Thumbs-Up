@@ -69,7 +69,7 @@ ReactDOM.render(
 					<Route path="/merchantPublish" component={MerchantPublish} />
 					<Route path="/merchantActivities" component={MerchantActivities} />
 					<Route path="/reportMerchant" component={ReportMerchant} />
-					<Route path="/publish" exact component={PublishActivity} />
+					<Route path="/publish/" exact component={PublishActivity} />
           <Route path={`/editePublish`} exact component={EditePublish} />
           <Route path="/publish/setting" component={MechantModify} />
 					<Route path="/collection" component={Collection} />
@@ -93,7 +93,7 @@ ReactDOM.render(
 					<Route path={`/setting`} exact component={Setting} />
 					<Route path={`/setting/:type`} component={SettingInput} />
 				</Switch>
-				<div className="zhezhao" />
+				<div className="zhezhao" id='zhezhao'/>
 			</div>
 		</HashRouter>
 	</Provider>,

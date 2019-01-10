@@ -75,8 +75,9 @@ export function getActiveList(activeParam, fn) {
 		current_user_dim: activeParam.current_user_dim,
 		business_level: activeParam.business_level,
 		pageNo: activeParam.pageNo,
-		pageSize: activeParam.pageSize
-	})
+		pageSize: 100
+  })
+  debugger
 	Toast.loading('加载中')
 	return dispatch => {
 		axios

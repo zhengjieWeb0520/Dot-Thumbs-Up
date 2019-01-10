@@ -38,7 +38,14 @@ class ActiveList extends React.Component {
 	}
 
 	componentWillMount() {
-		this.getFirstPageData('first')
+    let collectCache =  window.sessionStorage.getItem('collectActive')
+    if(collectCache !== null){
+      this.setState({
+        active: JSON.parse(collectCache)
+      })
+    }else{
+      this.getFirstPageData('first')
+    }	
 	}
 
 	//请求第一页数据(页面刚加载和下拉刷新)
@@ -47,7 +54,6 @@ class ActiveList extends React.Component {
 			pageNo: '1',
 			pageSize: '5'
 		}
-
 		if (type === 'first') {
 			this.props.getCollectionActive(data)
 		} else {
@@ -124,7 +130,9 @@ class ActiveList extends React.Component {
 		if (!ObjectEquals(nextProps.active, this.props.active)) {
 			this.setState({
 				active: nextProps.active
-			})
+			},()=>{
+        window.sessionStorage.setItem('collectActive', JSON.stringify(nextProps.active))
+      })
 		}
 	}
 
@@ -324,7 +332,9 @@ class BusinessList extends React.Component {
 		if (!ObjectEquals(nextProps.active, this.props.active)) {
 			this.setState({
 				active: nextProps.active
-			})
+			},()=>{
+        window.sessionStorage.setItem('collectMerchant', JSON.stringify(nextProps.active))
+      })
 		}
 	}
 

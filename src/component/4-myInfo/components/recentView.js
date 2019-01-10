@@ -129,7 +129,9 @@ class ActiveList extends React.Component {
 		if (!ObjectEquals(nextProps.active, this.props.active)) {
 			this.setState({
 				active: nextProps.active
-			})
+			},()=>{
+        
+      })
 		}
 	}
 

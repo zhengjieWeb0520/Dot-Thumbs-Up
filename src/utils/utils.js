@@ -503,9 +503,90 @@ export function createBonusItem(bonus){
   });
   return content
 }
+/*
+图片缩放
+@params
+target     缩放目标
+wheelDelta 鼠标事件
+params     所需参数
+*/
+export function bbimg(target, wheelDelta, params){
+  params.zoomVal+=wheelDelta/1200;
+  if (params.zoomVal >= 0.2) {
+    target.style.transform="scale("+params.zoomVal+")";
+  } else {
+      params.zoomVal=0.2;
+      target.style.transform="scale("+params.zoomVal+")";
+      return false;
+  }
+}
+/*
+获取目标样式
+@params
+target     目标节点
+key        属性key值
+*/
+function getCss(target, key){
+  return target.currentStyle? target.currentStyle[key] : document.defaultView.getComputedStyle(target,false)[key];
+}
+/*
+拖拽
+@params
+*/
+export function startDrag(bar, target, params, callback){
+  if(getCss(target, "left") !== "auto"){
+    params.left = getCss(target, "left");
+}
+if(getCss(target, "top") !== "auto"){
+    params.top = getCss(target, "top");
+}
+//o是移动对象
+bar.onmousedown = function(event){
+    params.flag = true;
+    if(!event){
+        event = window.event;
+        //防止IE文字选中
+        bar.onselectstart = function(){
+            return false;
+        }
+    }
+    var e = event;
+    params.currentX = e.clientX;
+    params.currentY = e.clientY;
+};
+document.onmouseup = function(){
+    params.flag = false;
+    if(getCss(target, "left") !== "auto"){
+        params.left = getCss(target, "left");
+    }
+    if(getCss(target, "top") !== "auto"){
+        params.top = getCss(target, "top");
+    }
+};
+document.onmousemove = function(event){
+    var e = event ? event: window.event;
 
+    if(params.flag){
+        var nowX = e.clientX, nowY = e.clientY;
+        var disX = nowX - params.currentX, disY = nowY - params.currentY;
+        target.style.left = parseInt(params.left) + disX+ "px";
+        target.style.top = parseInt(params.top) + disY+ "px";
+
+        if (typeof callback == "function") {
+            callback((parseInt(params.left) || 0) + disX, (parseInt(params.top) || 0) + disY);
+        }
+
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
+        return false;
+    }
+
+
+}
+}
 /*
 服务器本地ip切换
 */
   // export const serverIp = 'https://jizanbao.com'
- export const serverIp = ''
+  export const serverIp = ''

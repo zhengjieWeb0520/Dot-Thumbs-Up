@@ -52,7 +52,7 @@ class ActivityInfo extends React.Component {
 		}
 	}
 	componentWillMount() {
-    if(window.location.href.indexOf("activeId") != -1){
+    if(window.location.href.indexOf("activeId") != -1){//从分享界面进入系统
       let params =window.location.href.split('?')[2]
       let activeIdParams = params.split('&')[0]
       let parentIdParams = params.split('&')[1]
@@ -66,11 +66,20 @@ class ActivityInfo extends React.Component {
       window.sessionStorage.setItem('parentId', parentId)
       window.sessionStorage.setItem('goodCount', goodCount)
       window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx2514283f85a9e278&redirect_uri=http%3a%2f%2fjizanbao.com%2fgetWxCode.html&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect"
-    }else{
+    }else{//正常页面加载
       if (this.props.location.query == undefined) {
-        this.props.history.goBack()
+        //this.props.history.goBack()
+        let selectedActive = JSON.parse(window.sessionStorage.getItem('selectedActive')) 
+        this.props.getActiveInfo(selectedActive.activeId, 'active')
+        this.props.getIsOrNotCollect('active', selectedActive.activeId)
       } else {
         console.log(this.props)
+        let selectActiveInfo = {
+          activeId: this.props.location.query.activeId,
+          distance_format: this.props.location.query.distance_format,
+          good_count: this.props.location.query.good_count
+        }
+        window.sessionStorage.setItem('selectedActive', JSON.stringify(selectActiveInfo))
         this.props.getActiveInfo(this.props.location.query.activeId, 'active')
         this.props.getIsOrNotCollect('active', this.props.location.query.activeId)
       }
@@ -178,12 +187,12 @@ class ActivityInfo extends React.Component {
 			case 0:
 				return this.props.location.query !== undefined ? (
 					<ActivityInfoContent activeId={this.props.location.query.activeId} activeDetail={this.state.activeDetail} />
-				) : null
+				) : <ActivityInfoContent activeId={JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId} activeDetail={this.state.activeDetail} />
 				break
 			case 1:
 				return this.props.location.query !== undefined ? (
 					<ActivityEvaluate activeId={this.props.location.query.activeId} />
-				) : null
+				) : <ActivityEvaluate activeId={JSON.parse(window.sessionStorage.getItem('selectedActive')).activeId} />
 				break
 			case 2:
 				return <ActivityMerchant merchantInfo={this.state.activeInfo.business_info} />
@@ -224,6 +233,7 @@ class ActivityInfo extends React.Component {
 		if (!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)) {
       console.log(nextProps)
       this.title = nextProps.activeInfo.activeInfo.name
+      let selectActiveInfo = JSON.parse(window.sessionStorage.getItem('selectedActive'))
 			this.setState({
 				activeInfo: nextProps.activeInfo.activeInfo,
 				activeDetail: {
@@ -232,8 +242,8 @@ class ActivityInfo extends React.Component {
 					activeName: nextProps.activeInfo.activeInfo.name, //活动名称
 					have_collection: nextProps.activeInfo.activeInfo.have_collection, //是否已收藏
 					starLevel: nextProps.activeInfo.activeInfo.star_level, //活动评分
-					distance: nextProps.location.query.distance_format, //距离
-					goodNum: nextProps.location.query.good_count, //点赞数量
+					distance: selectActiveInfo.distance_format, //距离
+					goodNum: selectActiveInfo.good_count, //点赞数量
 					startDate: nextProps.activeInfo.activeInfo.start_date, //开始时间
 					endDate: nextProps.activeInfo.activeInfo.end_date, //结束时间
 					activeDesc: nextProps.activeInfo.activeInfo.desc, //活动描述

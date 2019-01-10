@@ -13,7 +13,7 @@ import ParticipateContent from './component/participateContent'
 class Participate extends React.Component {
 	constructor(props) {
 		super(props)
-		this.count = 2
+    this.count = 2
 		this.state = {
 			paticipateActive: [],
 			active_status: '0',
@@ -21,7 +21,16 @@ class Participate extends React.Component {
 		}
 	}
 	componentWillMount() {
-		this.getFirstPageData('first')
+    let paticipateCache = window.sessionStorage.getItem('paticipateActive')
+    if(paticipateCache !== null){
+      this.setState({
+        paticipateActive: JSON.parse(paticipateCache) 
+      },()=>{
+        console.log(this.state.paticipateActive)
+      })
+    }else{
+      this.getFirstPageData('first')
+    }
 	}
 	changeState(_this) {
 		let data = {
@@ -158,9 +167,12 @@ class Participate extends React.Component {
 		if (
 			!ObjectEquals(nextProps.paticipateInfo.participateActiveList, this.props.paticipateInfo.participateActiveList)
 		) {
+      console.log(nextProps.paticipateInfo.participateActiveList.list)
 			this.setState({
 				paticipateActive: nextProps.paticipateInfo.participateActiveList.list
-			})
+			},()=>{
+          window.sessionStorage.setItem('paticipateActive', JSON.stringify(nextProps.paticipateInfo.participateActiveList.list))
+      })
 		}
 	}
 	//请求第一页数据（页面刚加载和下拉刷新）

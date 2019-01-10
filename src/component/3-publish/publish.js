@@ -315,6 +315,7 @@ class PublishActivity extends React.Component{
       }
       this.props.publishActive(data, function(){
         _this.props.form.resetFields()
+        //_this.props
       })  
     }else{
       Toast.info(error, 1)
