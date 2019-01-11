@@ -5,7 +5,7 @@ import qs from 'qs'
 import { getChildNode, ObjectEquals, createStarLevel, serverIp } from './../../../utils/utils'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Carousel, WingBlank, ActionSheet, Toast } from 'antd-mobile'
+import { Carousel, WingBlank, ActionSheet, Toast, Button } from 'antd-mobile'
 import ActivityEvaluate from './activityInfo/activityEvaluate'
 import ActivityInfoContent from './activityInfo/activityInfoContent'
 import ActivityMerchant from './activityInfo/activityMerchant'
@@ -13,6 +13,7 @@ import { getActiveInfo, clearInfo } from './../../../redux/1-activiy/activeIndex
 import { thumpsUpActive } from './../../../redux/1-activiy/activeThumbsUp'
 import { getIsOrNotCollect, addCollection, removeCollection } from './../../../redux/4-myinfo/collectionRedux'
 import { mechantLevel } from './../../config'
+import { payActivity } from './../../payActive'
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent)
 let wrapProps
@@ -360,7 +361,13 @@ class ActivityInfo extends React.Component {
   goback =()=>{
     this.props.history.goBack()
   }
+  pay = (e, val) => {
+    console.log(e)
+    console.log(val)
+    payActivity(val)
+  }
 	render() {
+    console.log(this.props.location.query)
 		return (
 			<div id="ActivityInfo" className="activityInfo">
 				<div className="activityInfoContainer">
@@ -418,6 +425,10 @@ class ActivityInfo extends React.Component {
 								</span>
 							</p>
 						</div>
+            {
+              this.props.location.query !== undefined && this.props.location.query.activeStatus === -1 ?
+              <div className="willPay"><Button type={'primary'} onClick={(v, val)=>{this.pay(v, this.props.location.query.activeId)}}>待支付</Button></div> : null
+            }
 						<div>
 							{mechantLevel.map((item, index) => {
 								if (item.id === this.state.activeDetail.merchantLevel) {

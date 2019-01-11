@@ -236,17 +236,30 @@ class MerchantActivities extends React.Component{
       }
     })
   }
+  pay = (e,val)=>{
+    console.log(e)
+    console.log(val)
+  }
+  //创建活动内容
   createActiveContent(){
     let content = []
     if(!ObjectEquals(this.state.merchantActive, {})){
       console.log(this.state.merchantActive)
       this.state.merchantActive.map((item, index)=>{
-        let activeStatus = item.status === 0 ? '进行中' : '已结束'
+        let activeStatus
+        if(item.status === 0){
+          activeStatus = '进行中'
+        }else if(item.status === 1){
+          activeStatus = '已结束'
+        }else if(item.status === -1){
+          activeStatus = '待支付'
+        }
         let column = null
         let data = {
           activeId: item.id,
           distance_format: item.distance_format,
-          good_count: item.good_count
+          good_count: item.good_count,
+          activeStatus: item.status
         }
         let path = {
           pathname: `/activityInfo`,
@@ -256,8 +269,10 @@ class MerchantActivities extends React.Component{
         if(item.distribute_type === 0){
           let bonus = item.bonus.split(',').reverse()
           distribute_Content = <div>{this.createBonusItem(bonus)}<p>状态：{activeStatus}</p></div>
-        }else{
+        }else if(item.distribute_type === 1){
           distribute_Content = <div><div className='bonusequal'></div><p>状态：{activeStatus}</p></div>
+        }else if(item.distribute_type === -1){
+          //distribute_Content = <div><div className='bonusequal'></div><p>状态：<Button type={'primary'} onClick={(v, val)=>{this.pay(v, item.id)}}>待支付</Button></p></div>
         }
         column =
           <li className='wrapper' key={`wrapper${index}`}>

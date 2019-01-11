@@ -2,10 +2,12 @@
 @import '~antd/dist/antd.css';
 //发布活动
 .publishActivity{
-  overflow-y: auto;
+  //overflow-y: auto;
   .publishActivityWrapper{
-    height: 1090px;
-    overflow-y: hidden;
+    height: calc(100% - 220px);
+    height: -moz-calc(100vh - 220px);
+    height: -webkit-calc(100vh - 220px);
+    overflow-y: auto;
   }
   form{
     .inputs{

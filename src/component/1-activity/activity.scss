@@ -267,7 +267,7 @@ $normalFontSize24: 24px;
       display: flex;
       padding: 20px 0 12px 20px;
       >div:first-of-type{
-        width: 550px;
+        width: 450px;
         display: flex;
         flex-direction: column;
         p{
@@ -299,6 +299,21 @@ $normalFontSize24: 24px;
             margin-left: 20px;
             font-size: 22px;
             color: #9E9E9E;
+          }
+        }
+      }
+      .willPay{
+        width: 90px;
+        height: 92px;
+        margin-right: 10px;
+        .am-button-primary{
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          span{
+            font-size: 16px;
+            font-weight: 700;
           }
         }
       }

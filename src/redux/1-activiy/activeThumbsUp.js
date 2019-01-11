@@ -22,7 +22,7 @@ export function thumpsUpActive(active_id){
   let parent_user_id = window.sessionStorage.getItem('parentId')
   let data = {} 
   if( parent_user_id !== null){
-    alert(parent_user_id)
+    // alert(parent_user_id)
     data = qs.stringify({
       active_id: active_id,
       parent_user_id: parent_user_id

@@ -40,8 +40,8 @@ class PublishActivity extends React.Component{
     });
   }
   componentDidMount(){
-    const wrapper = document.querySelector('.publishActivityWrapper')
-    const scroll = new BScroll(wrapper,{click: true})
+     const wrapper = document.querySelector('.publishActivityWrapper')
+     const scroll = new BScroll(wrapper,{click: true})
 
     let navListUl = document.querySelector(".inputsMenu ul")
     let navListLis = getChildNode(navListUl)

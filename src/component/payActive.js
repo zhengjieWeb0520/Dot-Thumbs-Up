@@ -13,7 +13,7 @@ export function payActivity(active_id){
         active_id: active_id
       })
       wx.config({
-        debug: true,
+        debug: false,
         appId: res.data.result_info.appid,
         timestamp: res.data.result_info.timestamp,
         nonceStr: res.data.result_info.noncestr,
@@ -41,13 +41,10 @@ export function payActivity(active_id){
               paySign:result_info.paySign,// 支付签名
               success: function (res) {
                 console.log(res)
-                  // This.setState({
-                  //     paySuccessVisible:true
-                  // })
+                window.location.href = "https://jizanbao.com/#/index"
               },
               fail: function(res){
-                alert('pay fail');
-                alert(JSON.stringify(res));
+                alert('支付失败');
             }
           })
           }
