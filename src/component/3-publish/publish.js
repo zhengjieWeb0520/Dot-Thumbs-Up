@@ -323,11 +323,8 @@ class PublishActivity extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.publishState !== ''){
-      Toast.success(nextProps.publishState,3, this.onClose, true);
+      //Toast.success(nextProps.publishState,3, this.onClose, true);
     }
-  }
-  onClose =()=>{
-    
   }
   render(){
     const { getFieldProps, getFieldError } = this.props.form
