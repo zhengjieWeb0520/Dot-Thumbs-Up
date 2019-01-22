@@ -4,7 +4,6 @@ import { addGUN, removeGUN, addGUNAsync } from './../../redux/indexRedux'
 
 class ReactReduxStudy extends Component{
   render(){
-    console.log(this.props)
     const num = this.props.counter.counter;
     const addGUN = this.props.addGUN
     const removeGUN =  this.props.removeGUN

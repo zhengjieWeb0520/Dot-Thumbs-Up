@@ -52,7 +52,7 @@ export function publishActive(activeInfo, callBack){
     )
     .then(res => {
       if (res.data.result_code === '0') {
-        Toast.success('创建活动成功, 提醒:活动奖金分配模式不允许编辑' ,3, true);
+        Toast.success('创建活动成功, 提醒:活动奖金分配模式不允许编辑' ,3, false);
         dispatch({ type: CREATEACTIVITY, data: '创建活动成功, 提醒:活动奖金分配模式不允许编辑' })
         //res.data.result_info
         callBack()

@@ -26,7 +26,7 @@ class Participate extends React.Component {
       this.setState({
         paticipateActive: JSON.parse(paticipateCache) 
       },()=>{
-        console.log(this.state.paticipateActive)
+        // console.log(this.state.paticipateActive)
       })
     }else{
       this.getFirstPageData('first')
@@ -167,7 +167,6 @@ class Participate extends React.Component {
 		if (
 			!ObjectEquals(nextProps.paticipateInfo.participateActiveList, this.props.paticipateInfo.participateActiveList)
 		) {
-      console.log(nextProps.paticipateInfo.participateActiveList.list)
 			this.setState({
 				paticipateActive: nextProps.paticipateInfo.participateActiveList.list
 			},()=>{
@@ -240,7 +239,7 @@ class Participate extends React.Component {
 				}
         let user_status = item.user_status === 0 ? '未中奖' : '中奖'
 				column = (
-					<Link to={path} className="participateItem">
+					<Link key={`${item.id}${index}`} to={path} className="participateItem">
 						<div className="participateItemHeader">
 							<div>
 								<img className='headerImg' src={item.img_url} alt=""/>

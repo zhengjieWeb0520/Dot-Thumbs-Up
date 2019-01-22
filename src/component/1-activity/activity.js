@@ -222,8 +222,6 @@ class Activity extends React.Component{
 				bottomTip.innerText = '加载中...'
 				setTimeout(function() {
 					_this.pullUpLoadData(function(data) {
-            console.log(data.list)
-            console.log( _this.state.activeList.list)
 						if (ObjectEquals(data.list, _this.state.activeList.list)) {
 							// 恢复文本值
 							bottomTip.innerText = '没有更多数据'
@@ -261,7 +259,6 @@ class Activity extends React.Component{
   }
   //上拉加载
 	pullUpLoadData(fn) {
-    console.log(this.count)
     let activeParam = {
       dir_one: this.state.levelState,
       dir_two: this.state.level2State,
@@ -331,8 +328,6 @@ class Activity extends React.Component{
 
       })
     //}
-    console.log(prevProps)
-    console.log(this.props)
   }
   //排序选择
   onSelect(node){
@@ -411,7 +406,8 @@ class Activity extends React.Component{
           dec: item.desc,
           activeImg: item.img_url,
           distance_format: item.distance_format,
-          good_count: item.good_count
+          good_count: item.good_count,
+          isIndex: true
         }
         let path = {
           pathname: `/activityInfo`,

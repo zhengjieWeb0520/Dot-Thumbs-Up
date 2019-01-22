@@ -59,16 +59,14 @@ class ActivityInfoContent extends React.Component{
       let rankingData = this.state.rankingData
       let myRank =  this.state.myRank
       rankingData = myRank !== null ? [myRank].concat(rankingData) : rankingData
-      console.log(rankingData)
       let rankingData2 = [...new Set(rankingData)]
-      console.log(rankingData2)
       return(
         <tbody>
           {
             rankingData2.map((item, index)=>{
               if(item.index === 1 || item.index === 2 || item.index === 3){
                 return(
-                  <tr key ={`${item.user_name}_${item.index}`}>
+                  <tr key ={`${item.user_name}_${item.index}${this.randomFrom(1,900)}`}>
                     <td>{`No.${item.index}`}</td>
                     <td>{item.user_name}</td>
                     <td>{item.num}</td>
@@ -76,7 +74,7 @@ class ActivityInfoContent extends React.Component{
                 )
               }else{
                 return(
-                  <tr key ={`${item.user_name}_${item.index}`}>
+                  <tr key ={`${item.user_name}_${item.index}${this.randomFrom(1,900)}`}>
                   <td>{item.index}</td>
                   <td>{item.user_name}</td>
                   <td>{item.num}</td>
@@ -88,6 +86,9 @@ class ActivityInfoContent extends React.Component{
         </tbody>
       )
     }
+  }
+  randomFrom(lowerValue,upperValue){
+    return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
   }
   componentWillUnmount(){
     this.props.clearData()

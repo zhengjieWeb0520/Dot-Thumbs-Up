@@ -241,7 +241,6 @@ class PublishActivity extends React.Component{
           }
         ).then(res => {
           if(res.data.result_code === "0"){
-            console.log(res.data.result_info)
             _this.uploadFiles.push(res.data.result_info)
           }
         })

@@ -55,7 +55,7 @@ class ActivityContent extends React.Component{
           good_count: item.good_count
         }
         let path = {
-          pathname: `/activityInfo`,
+          pathname: `/activityInfo/activeId=${item.id}&distance_format=${item.distance_format}&good_count=${item.good_count}`,
           query: data
         }
         let distribute_Content
@@ -66,7 +66,7 @@ class ActivityContent extends React.Component{
           distribute_Content = <div className='bonusequal'></div>
         }
         column =  
-          <Link to={path} className='activityItem' key={item.id}>
+          <Link to={'/activityInfo?'+ '2'} className='activityItem' key={item.id}>
             <div>
               <img src={item.img_url} alt=""/>
             </div>

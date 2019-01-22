@@ -74,7 +74,7 @@ class ActivityInfo extends React.Component {
         this.props.getActiveInfo(selectedActive.activeId, 'active')
         this.props.getIsOrNotCollect('active', selectedActive.activeId)
       } else {
-        console.log(this.props)
+        // console.log(this.props)
         let selectActiveInfo = {
           activeId: this.props.location.query.activeId,
           distance_format: this.props.location.query.distance_format,
@@ -89,11 +89,9 @@ class ActivityInfo extends React.Component {
 			url: window.location.href.split('#')[0]
 		})
 		let _this = this
-		console.log(this.props)
 		//初始化微信sdk
 		axios.post(serverIp + '/dianzanbao/wechat/getConfig.do', url).then(res => {
 			if (res.data.result_code === '0') {
-        console.log(_this.title)
 				wx.config({
 					debug: false,
 					appId: res.data.result_info.appid,
@@ -110,7 +108,6 @@ class ActivityInfo extends React.Component {
           let name = _this.props.location.query.name
           let dec = _this.props.location.query.dec
           let activeImg = _this.props.location.query.activeImg
-          console.log(name)
 					wx.updateAppMessageShareData({
 						title: name, // 分享标题
 						desc: dec, // 分享描述
@@ -121,7 +118,6 @@ class ActivityInfo extends React.Component {
 			}
 		})
 	}
-
 	componentDidMount() {
 		let _this = this
 		let menuListUl = document.querySelector('.tabSwitch ul')
@@ -232,7 +228,6 @@ class ActivityInfo extends React.Component {
 	}
 	componentWillReceiveProps(nextProps) {
 		if (!ObjectEquals(nextProps.activeInfo.activeInfo, this.props.activeInfo.activeInfo)) {
-      console.log(nextProps)
       this.title = nextProps.activeInfo.activeInfo.name
       let selectActiveInfo = JSON.parse(window.sessionStorage.getItem('selectedActive'))
 			this.setState({
@@ -359,15 +354,22 @@ class ActivityInfo extends React.Component {
 	// 	)
 	// }
   goback =()=>{
-    this.props.history.goBack()
+    if(this.props.location.query.goto){
+      // || this.props.history.location.pathname === '/index'
+      this.props.history.push('/index')
+    }else{
+      if(this.props.location.query.isIndex){
+        this.props.history.push('/index')
+      }else{
+        this.props.history.goBack()
+      }
+      
+    }
   }
   pay = (e, val) => {
-    console.log(e)
-    console.log(val)
     payActivity(val)
   }
 	render() {
-    console.log(this.props.location.query)
 		return (
 			<div id="ActivityInfo" className="activityInfo">
 				<div className="activityInfoContainer">

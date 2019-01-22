@@ -129,7 +129,7 @@ class MoreRank extends React.Component {
 					{rankingData2.map((item, index) => {
 						if (item.index === 1 || item.index === 2 || item.index === 3) {
 							return (
-								<tr key={`${item.user_name}_${item.index}`}>
+								<tr key={`${item.user_name}_${item.index}${this.randomFrom(1,900)}`}>
 									<td>{`No.${item.index}`}</td>
 									<td>{item.user_name}</td>
 									<td>{item.num}</td>
@@ -137,7 +137,7 @@ class MoreRank extends React.Component {
 							)
 						} else {
 							return (
-								<tr key={`${item.user_name}_${item.index}`}>
+								<tr key={`${item.user_name}_${item.index}${this.randomFrom(1,900)}`}>
 									<td>{item.index}</td>
 									<td>{item.user_name}</td>
 									<td>{item.num}</td>
@@ -148,7 +148,10 @@ class MoreRank extends React.Component {
 				</tbody>
 			)
 		}
-	}
+  }
+  randomFrom(lowerValue,upperValue){
+    return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
+  }
 	render() {
 		return (
 			<div id="moreRanking" className="moreRanking">

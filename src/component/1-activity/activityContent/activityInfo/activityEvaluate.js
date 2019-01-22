@@ -98,7 +98,6 @@ class ActivityEvaluate extends React.Component{
 		})
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
     if(!ObjectEquals(nextProps.evaluateInfo.commentsStatistics, {})){
       this.setState({
         commentsStatistics: nextProps.evaluateInfo.commentsStatistics
@@ -136,12 +135,10 @@ class ActivityEvaluate extends React.Component{
 		this.props.getActiveEvaluate(data, fn)
   }
   displayImage =(e, value)=>{
-    console.log(value)
     ReactDOM.render(<ScaleImage imgurl={value}/>, document.querySelector('#zhezhao'))
     document.querySelector('.zhezhao').style.display = 'block'
   }
   createEvaluateContent(){
-    console.log(this.state.evaluateInfo)
     let content = []
     if(JSON.stringify(this.state.evaluateInfo) !== '[]'){
       this.state.evaluateInfo.map((item, index)=>{
@@ -197,8 +194,6 @@ class ActivityEvaluate extends React.Component{
     })
   }
   render(){
-    console.log(this.state.commentsStatistics)
-    console.log(this.state.evaluateInfo)
     return(
       <div className='activityEvaluate activityEvaluateWraper wraper'>
         <ul className='content'>

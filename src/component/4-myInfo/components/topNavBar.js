@@ -12,7 +12,8 @@ class TopNavBar extends React.Component {
   onLeftClick = () => {
     if(this.props.activeId){
       let data = {
-        activeId: this.props.activeId
+        activeId: this.props.activeId,
+        goto: '/index'
       }
       let path = {
         pathname : '/activityInfo',
