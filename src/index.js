@@ -6,47 +6,52 @@ import { Provider } from 'react-redux'
 //异步中间件
 import thunk from 'redux-thunk'
 import registerServiceWorker from './registerServiceWorker'
+//引入异步加载组件
+import asyncComponent from './asyncComponent'
 import Main from './component/main'
-import ChooseBankCard from './component/4-myInfo/components/moneyRelated/chooseBankCard'
-import NewBackCard from './component/4-myInfo/components/moneyRelated/newBankCard'
-import Wallet from './component/4-myInfo/components/moneyRelated/wallet'
-import WithdrawCash from './component/4-myInfo/components/moneyRelated/withdrawCash'
-import WithdrawRecord from './component/4-myInfo/components/moneyRelated/withdrawRecord'
-//引入活动相关组件
-import ActivityInfo from './component/1-activity/activityContent/activityInfo'
-import MerchantPublish from './component/5-merchant/merchantPublish'
-import MerchantActivities from './component/5-merchant/merchantActivities'
-import ReportMerchant from './component/1-activity/activityContent/activityInfo/reportMerchant'
-import PublishActivity from './component/3-publish/publish'
-import EditePublish from './component/3-publish/editePublish'
-import MechantModify from './component/5-merchant/merchantModify'
-import SelectBankCard from './component/4-myInfo/components/moneyRelated/selectBankCard'
-import MoreRank from './component/1-activity/activityContent/activityInfo/moreRank'
-//员工和商家认证
-import BussinessAuthentication from './component/4-myInfo/components/authentication/bussinessAuthentication'
-import StaffAuthentication from './component/4-myInfo/components/authentication/staffAuthentication'
-//登录注册
-import Login from './component/6-login/login'
-import VerificatLogin from './component/6-login/verificatLogin'
-import Regist from './component/6-login/regist'
-import ForgetPassword from './component/6-login/forgetPassword'
-//修改密码
-import TypeOfChangePassword from './component/4-myInfo/components/changePassword/typeOfChangePassword'
-import ChangePasswordByPassword from './component/4-myInfo/components/changePassword/changePasswordByPassword'
-import ChangePasswordByCode from './component/4-myInfo/components/changePassword/changePasswordByCode'
-import AboutUs from './component/4-myInfo/components/aboutUs'
-import UserFeedBack from './component/4-myInfo/components/userFeedBack'
-import Collection from './component/4-myInfo/components/collection'
-import RecentView from './component/4-myInfo/components/recentView'
-import Voucher from './component/4-myInfo/components/moneyRelated/voucher'
-import Setting from './component/4-myInfo/components/setting'
-import SettingInput from './component/4-myInfo/components/settingInput'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import './css/Reset.css'
 import './css/index.scss'
 //reducer整合
 import reducers from './reducers'
 import './font/iconfont.css'
+
+const ChooseBankCard = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/chooseBankCard')})
+const NewBackCard = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/newBankCard')})
+const Wallet = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/wallet')})
+const WithdrawCash = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/withdrawCash')})
+const WithdrawRecord = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/withdrawRecord')})
+//引入活动相关组件
+const ActivityInfo = asyncComponent(()=>{return import('./component/1-activity/activityContent/activityInfo')})
+const MerchantPublish = asyncComponent(()=>{return import('./component/5-merchant/merchantPublish')})
+const MerchantActivities = asyncComponent(()=>{return import('./component/5-merchant/merchantActivities')})
+const ReportMerchant = asyncComponent(()=>{return import('./component/1-activity/activityContent/activityInfo/reportMerchant')})
+const PublishActivity = asyncComponent(()=>{return import('./component/3-publish/publish')})
+const EditePublish = asyncComponent(()=>{return import('./component/3-publish/editePublish')})
+const MechantModify = asyncComponent(()=>{return import('./component/5-merchant/merchantModify')})
+const SelectBankCard = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/selectBankCard')})
+const MoreRank = asyncComponent(()=>{return import('./component/1-activity/activityContent/activityInfo/moreRank')})
+//员工和商家认证
+const BussinessAuthentication = asyncComponent(()=>{return import('./component/4-myInfo/components/authentication/bussinessAuthentication')})
+const StaffAuthentication = asyncComponent(()=>{return import('./component/4-myInfo/components/authentication/staffAuthentication')})
+//登录注册
+const Login = asyncComponent(()=>{return import('./component/6-login/login')})
+const VerificatLogin = asyncComponent(()=>{return import('./component/6-login/verificatLogin')})
+const Regist = asyncComponent(()=>{return import('./component/6-login/regist')})
+const ForgetPassword = asyncComponent(()=>{return import('./component/6-login/forgetPassword')})
+//修改密码
+const TypeOfChangePassword = asyncComponent(()=>{return import('./component/4-myInfo/components/changePassword/typeOfChangePassword')})
+const ChangePasswordByPassword = asyncComponent(()=>{return import('./component/4-myInfo/components/changePassword/changePasswordByPassword')})
+const ChangePasswordByCode = asyncComponent(()=>{return import('./component/4-myInfo/components/changePassword/changePasswordByCode')})
+const AboutUs = asyncComponent(()=>{return import('./component/4-myInfo/components/aboutUs')})
+
+const UserFeedBack = asyncComponent(()=>{return import('./component/4-myInfo/components/userFeedBack')})
+const Collection = asyncComponent(()=>{return import('./component/4-myInfo/components/collection')})
+const RecentView = asyncComponent(()=>{return import('./component/4-myInfo/components/recentView')})
+const Voucher = asyncComponent(()=>{return import('./component/4-myInfo/components/moneyRelated/voucher')})
+
+const Setting = asyncComponent(()=>{return import('./component/4-myInfo/components/setting')})
+const SettingInput = asyncComponent(()=>{return import('./component/4-myInfo/components/settingInput')})
 
 export const store = createStore(
 	reducers,

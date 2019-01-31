@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
-
+//引入异步加载组件
+import asyncComponent from './../../asyncComponent'
 //引入自定义组件
-import Activity from './../1-activity/activity'
-import Participate from './../2-participate/participate'
-import Comment from './../2-participate/component/comment'
-import MyInfo from './../4-myInfo/myInfo'
+
+const Activity = asyncComponent(()=>{return import('./../1-activity/activity')})
+const Participate = asyncComponent(()=>{return import('./../2-participate/participate')})
+const Comment = asyncComponent(()=>{return import('./../2-participate/component/comment')})
+const MyInfo = asyncComponent(()=>{return import('./../4-myInfo/myInfo')})
 
 class RouteConfig extends Component {
 	render() {
